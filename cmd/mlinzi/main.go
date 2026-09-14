@@ -17,6 +17,7 @@ import (
 
 	mlinziassets "github.com/xbuyan/mlinzi"
 	"github.com/xbuyan/mlinzi/internal/guide"
+	"github.com/xbuyan/mlinzi/internal/report"
 )
 
 const defaultJurisdiction = "KE"
@@ -52,6 +53,8 @@ func main() {
 			os.Exit(1)
 		}
 		cmdShow(s, os.Args[2])
+	case "demo-report":
+		cmdDemoReport()
 	default:
 		usage()
 		os.Exit(1)
@@ -64,7 +67,9 @@ func usage() {
 Usage:
   mlinzi list [jurisdiction]     List every guide (default: KE)
   mlinzi search <term>           Search guides by keyword, any language
-  mlinzi show <guide-id>         Show full detail for one guide`)
+  mlinzi show <guide-id>         Show full detail for one guide
+  mlinzi demo-report             Walk through Layer 2: submit, status trail,
+                                  chain verification, in one run`)
 }
 
 func cmdList(s *guide.Store, jurisdiction string) {
@@ -193,4 +198,62 @@ func flagString(c guide.Channel) string {
 		return ""
 	}
 	return "  [" + strings.Join(flags, ", ") + "]"
+}
+
+func cmdDemoReport() {
+	// A single-process walkthrough of Layer 2. There is no persistence
+	// layer yet (that is intentionally deferred, alongside encryption at
+	// rest, to Layer 3), so this demonstrates the lifecycle in one run
+	// rather than pretending a report survives between separate CLI
+	// invocations when nothing is actually saved to disk.
+	s := report.NewStore()
+
+	fmt.Println("--- Filing an anonymous report ---")
+	r, err := s.Submit("policing", "ke-police-misconduct",
+		"Officer at Kondele stage demanded KES 200 to let me pass with my motorbike, 14 Sep evening.")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "submit failed:", err)
+		os.Exit(1)
+	}
+	fmt.Printf("Report ID:          %s\n", r.ID)
+	fmt.Printf("Status:             %s\n", r.Status)
+	fmt.Printf("Verification code:  %s   (keep this — it proves what you submitted, without giving your name)\n\n", r.VerificationCode)
+
+	fmt.Println("--- IPOA acknowledges it ---")
+	if _, err := s.Advance(r.ID, report.Acknowledged, "ipoa", "Received. Case opened for investigation."); err != nil {
+		fmt.Fprintln(os.Stderr, "advance failed:", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("--- An attempt to skip straight to 'resolved' from 'submitted' would be rejected ---")
+	r2, _ := s.Submit("policing", "ke-police-misconduct", "second, unrelated report")
+	if _, err := s.Advance(r2.ID, report.Resolved, "ipoa", "closing quietly"); err != nil {
+		fmt.Printf("  rejected, as expected: %v\n\n", err)
+	}
+
+	fmt.Println("--- IPOA resolves the original case ---")
+	if _, err := s.Advance(r.ID, report.Resolved, "ipoa", "Officer identified and referred for disciplinary action."); err != nil {
+		fmt.Fprintln(os.Stderr, "advance failed:", err)
+		os.Exit(1)
+	}
+
+	final, _ := s.Get(r.ID)
+	fmt.Printf("\n--- Status trail for %s ---\n", r.ID)
+	fmt.Printf("  [submitted]    %s\n", final.SubmittedAt.Format(time.RFC3339))
+	for _, ev := range final.Events {
+		fmt.Printf("  [%-11s] %s   actor=%-6s note=%q   (ledger entry #%d, hash %s...)\n",
+			ev.Status, ev.Timestamp.Format(time.RFC3339), ev.Actor, ev.Note, ev.EntrySeq, ev.EntryHash[:10])
+	}
+
+	fmt.Println("\n--- Independent checks ---")
+	if err := s.VerifyChain(); err != nil {
+		fmt.Printf("  chain integrity: FAILED — %v\n", err)
+	} else {
+		fmt.Println("  chain integrity: OK — no entry has been altered, reordered, or backdated")
+	}
+
+	ok, _ := s.VerifyReceipt(r.ID, r.VerificationCode)
+	fmt.Printf("  receipt check with the real code:  %v\n", ok)
+	bad, _ := s.VerifyReceipt(r.ID, "0000000000")
+	fmt.Printf("  receipt check with a fabricated code: %v\n", bad)
 }

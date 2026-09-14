@@ -35,9 +35,18 @@ including whoever operates Mlinzi, can release it alone.
 
 ## Status
 
-Layer 1 complete: domain model, validating store, and a seeded Kenyan dataset
-covering three situations (bribery in public service, police misconduct,
-gender-based violence). Layers 2 and 3 in progress.
+Layer 1 complete: domain model, validating store, seeded Kenyan dataset
+(bribery, police misconduct, GBV), and a CLI browser (`list`/`search`/`show`),
+with the dataset embedded into the binary for offline, install-free use.
+
+Layer 2 complete: `internal/ledger` (generic tamper-evident hash chain) and
+`internal/report` (anonymous submission, forward-only status trail, receipt
+verification) — see `mlinzi demo-report` for a live walkthrough. Content is
+stored in plaintext in this proof of concept; encryption at rest is deferred
+to Layer 3, once the guardian key-release mechanism it depends on exists.
+
+Layer 3 in progress: check-in cadence and guardian-based escalation on
+silence.
 
 ## Design guarantees, enforced in code
 

@@ -64,6 +64,35 @@ shipped artifact is one file, works fully offline, and needs no accompanying
 data directory. Added a regression test (`assets_test.go`) documenting why the
 embedding exists, so the working-directory dependency doesn't quietly return.
 
+## Day 2 — Layer 2: anonymous reporting and the tamper-evident ledger
+
+**Design (human-directed, AI-drafted).** Split into two packages on purpose:
+`internal/ledger` is a generic, domain-agnostic hash-chain — the same
+primitive proven out in the `auditlog` work — and `internal/report` builds
+report submission and status tracking on top of it. A `Report` is a
+projection assembled by replaying the ledger, never a mutable record, so
+there is no field an institution could quietly edit.
+
+**Scope cut, stated plainly rather than hidden.** Report content is stored in
+plaintext in this proof of concept. Encrypting it without the guardian-based
+key-release mechanism behind it (Layer 3) would look more finished than it
+is; the honest version is to build the encryption once the release mechanism
+that makes it meaningful actually exists.
+
+**Testing (AI-drafted, human-reviewed).** White-box tests in `ledger_test.go`
+directly mutate stored entries after the fact — content edit, broken
+prev-hash link, backdated timestamp — to prove `Verify()` catches each one;
+nothing in the ledger's public API allows this, so proving detection requires
+reaching into the unexported state on purpose. `report_test.go` asserts the
+one invariant that matters most for the accountability story: a status
+transition from `submitted` straight to `resolved`, skipping acknowledgement,
+is rejected outright rather than silently applied.
+
+**CLI (`demo-report`).** A single-run walkthrough — submit, an attempted
+shortcut correctly rejected, proper resolution, then independent
+chain-integrity and receipt verification — run live from outside the repo to
+confirm it. No new logic, presentation only.
+
 ## Honest limits
 
 - Kiswahili translations are unreviewed as of day 1.
