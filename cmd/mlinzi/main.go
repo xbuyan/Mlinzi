@@ -16,6 +16,7 @@ import (
 	"time"
 
 	mlinziassets "github.com/xbuyan/mlinzi"
+	"github.com/xbuyan/mlinzi/internal/guardian"
 	"github.com/xbuyan/mlinzi/internal/guide"
 	"github.com/xbuyan/mlinzi/internal/report"
 )
@@ -55,6 +56,8 @@ func main() {
 		cmdShow(s, os.Args[2])
 	case "demo-report":
 		cmdDemoReport()
+	case "demo-escalation":
+		cmdDemoEscalation()
 	default:
 		usage()
 		os.Exit(1)
@@ -69,7 +72,9 @@ Usage:
   mlinzi search <term>           Search guides by keyword, any language
   mlinzi show <guide-id>         Show full detail for one guide
   mlinzi demo-report             Walk through Layer 2: submit, status trail,
-                                  chain verification, in one run`)
+                                  chain verification, in one run
+  mlinzi demo-escalation         Walk through Layer 3: check-ins, a missed
+                                  check-in, and guardian-triggered release`)
 }
 
 func cmdList(s *guide.Store, jurisdiction string) {
@@ -256,4 +261,74 @@ func cmdDemoReport() {
 	fmt.Printf("  receipt check with the real code:  %v\n", ok)
 	bad, _ := s.VerifyReceipt(r.ID, "0000000000")
 	fmt.Printf("  receipt check with a fabricated code: %v\n", bad)
+}
+
+func cmdDemoEscalation() {
+	// A single-process walkthrough of Layer 3: check-ins, a missed
+	// check-in, and guardian-triggered release. As with demo-report, there
+	// is no persistence layer yet, so this runs the whole lifecycle in one
+	// process rather than pretending state survives between invocations
+	// when nothing is saved to disk.
+	s := guardian.NewStore()
+
+	fmt.Println("--- A reporter opens a case, naming three guardians (2-of-3 threshold) ---")
+	key, err := guardian.ReleaseKey()
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "key generation failed:", err)
+		os.Exit(1)
+	}
+	c, shares, err := s.NewCase("rpt_23f0714766d1765d", key,
+		[]string{"lawyer", "journalist", "family"}, 2, 48*time.Hour)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "case creation failed:", err)
+		os.Exit(1)
+	}
+	fmt.Printf("Case ID:    %s\n", c.ID)
+	fmt.Printf("Guardians:  %s\n", strings.Join(c.GuardianIDs, ", "))
+	fmt.Printf("Threshold:  %d of %d\n", c.Threshold, len(c.GuardianIDs))
+	fmt.Println("Shares generated and handed to each guardian out of band — the case itself now holds none of them.")
+	fmt.Println()
+
+	fmt.Println("--- The reporter checks in normally, on schedule ---")
+	if err := s.CheckIn(c.ID); err != nil {
+		fmt.Fprintln(os.Stderr, "check-in failed:", err)
+		os.Exit(1)
+	}
+	fmt.Println("Check-in recorded and logged to the ledger.")
+	fmt.Println()
+
+	fmt.Println("--- Time passes. The reporter goes silent past the check-in window ---")
+	overdueAt := time.Now().Add(72 * time.Hour) // past the 48h interval
+	if err := s.Escalate(c.ID, overdueAt); err != nil {
+		fmt.Fprintln(os.Stderr, "escalation failed:", err)
+		os.Exit(1)
+	}
+	fmt.Println("Case escalated. Guardians are now able to submit their shares.")
+	fmt.Println()
+
+	fmt.Println("--- A single guardian alone cannot release anything ---")
+	_, err = s.SubmitShare(c.ID, "lawyer", shares[0])
+	fmt.Printf("Lawyer submits their share: %v\n\n", err)
+
+	fmt.Println("--- A second guardian submits independently, crossing the 2-of-3 threshold ---")
+	recovered, err := s.SubmitShare(c.ID, "journalist", shares[1])
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "reconstruction failed:", err)
+		os.Exit(1)
+	}
+	match := "does not match"
+	if string(recovered) == string(key) {
+		match = "matches exactly"
+	}
+	fmt.Printf("Release key reconstructed from 2 independent shares — %s the original.\n\n", match)
+
+	final, _ := s.Get(c.ID)
+	fmt.Printf("Final case status: %s\n\n", final.Status)
+
+	fmt.Println("--- Independent check ---")
+	if err := s.VerifyChain(); err != nil {
+		fmt.Printf("chain integrity: FAILED — %v\n", err)
+	} else {
+		fmt.Println("chain integrity: OK — every check-in, escalation, and release step is verifiable and untampered")
+	}
 }

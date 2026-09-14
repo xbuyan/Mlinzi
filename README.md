@@ -41,12 +41,17 @@ with the dataset embedded into the binary for offline, install-free use.
 
 Layer 2 complete: `internal/ledger` (generic tamper-evident hash chain) and
 `internal/report` (anonymous submission, forward-only status trail, receipt
-verification) — see `mlinzi demo-report` for a live walkthrough. Content is
-stored in plaintext in this proof of concept; encryption at rest is deferred
-to Layer 3, once the guardian key-release mechanism it depends on exists.
+verification) — see `mlinzi demo-report`.
 
-Layer 3 in progress: check-in cadence and guardian-based escalation on
-silence.
+Layer 3 complete: `internal/shamir` (Shamir's Secret Sharing over GF(256))
+and `internal/guardian` (check-in cadence, escalation on a missed check-in,
+threshold-based release — no single party, including whoever operates
+Mlinzi, can release evidence alone) — see `mlinzi demo-escalation`.
+
+All three layers are logically wired (a case links to a report ID) but not
+yet joined behind one interface — that plus a web UI is next. Content is
+stored in plaintext in this proof of concept; using the Layer 3 release key
+to actually encrypt Layer 2 report content is the next integration step.
 
 ## Design guarantees, enforced in code
 

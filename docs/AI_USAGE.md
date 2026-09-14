@@ -93,6 +93,40 @@ shortcut correctly rejected, proper resolution, then independent
 chain-integrity and receipt verification — run live from outside the repo to
 confirm it. No new logic, presentation only.
 
+## Day 3 — Layer 3: Shamir splitting and guardian escalation
+
+**Design (human-directed, AI-drafted).** Split into `internal/shamir`
+(domain-agnostic GF(256) Shamir splitting, rewritten fresh for this repo
+rather than imported, so it could be tested on its own terms) and
+`internal/guardian` (the dead-man's-switch built on it). The load-bearing
+rule, stated up front before any code: a `Case` must never store enough to
+reconstruct the release key by itself. Split happens once, at creation, and
+the shares leave the process immediately for out-of-band distribution —
+`Case` only ever tracks metadata afterward.
+
+**A concrete threat modelled and tested against, not just assumed.** Once a
+case escalates, a late check-in is rejected rather than silently cancelling
+the escalation — otherwise, anyone who gained control of a reporter's phone
+after they went missing could suppress a legitimate escalation by checking in
+on their behalf. `TestCheckInRejectedAfterEscalation` exists specifically to
+keep this behaviour from regressing.
+
+**Testing (AI-drafted, human-reviewed).** The Shamir package carries an
+exhaustive test of GF(256) multiplicative inverses across all 255 nonzero
+field elements — the same style of check used on the Kinga project, kept here
+because a subtly wrong field operation only breaks reconstruction for
+certain byte values, which a handful of spot checks would not catch. The
+guardian package's most important test, `TestNoSinglePartyCanReleaseAlone`,
+asserts the one property the whole layer exists to guarantee: with a 2-of-3
+threshold, one guardian's share is never sufficient, even when submitted
+correctly by a legitimately named guardian.
+
+**CLI (`demo-escalation`).** A full lifecycle in one run — case creation,
+normal check-in, a missed check-in, a single guardian's share correctly
+refused, a second guardian's share crossing threshold and reconstructing the
+exact original key, then independent chain verification. Every claim made in
+the pitch deck about this layer has a runnable command behind it.
+
 ## Honest limits
 
 - Kiswahili translations are unreviewed as of day 1.

@@ -214,7 +214,7 @@ type Step struct {
 	Detail      Text   `json:"detail,omitempty"`
 	Institution string `json:"institution,omitempty"` // Institution.ID
 	Deadline    Text   `json:"deadline,omitempty"`
-	Critical    bool   `json:"critical,omitempty"`    // time-bound; missing it costs the user
+	Critical    bool   `json:"critical,omitempty"` // time-bound; missing it costs the user
 }
 
 func (s Step) validate() error {
