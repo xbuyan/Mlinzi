@@ -58,6 +58,8 @@ func main() {
 		cmdDemoReport()
 	case "demo-escalation":
 		cmdDemoEscalation()
+	case "demo-full":
+		cmdDemoFull()
 	default:
 		usage()
 		os.Exit(1)
@@ -74,7 +76,8 @@ Usage:
   mlinzi demo-report             Walk through Layer 2: submit, status trail,
                                   chain verification, in one run
   mlinzi demo-escalation         Walk through Layer 3: check-ins, a missed
-                                  check-in, and guardian-triggered release`)
+                                  check-in, and guardian-triggered release
+  mlinzi demo-full               The complete story: know, report, protect`)
 }
 
 func cmdList(s *guide.Store, jurisdiction string) {
@@ -330,5 +333,87 @@ func cmdDemoEscalation() {
 		fmt.Printf("chain integrity: FAILED — %v\n", err)
 	} else {
 		fmt.Println("chain integrity: OK — every check-in, escalation, and release step is verifiable and untampered")
+	}
+}
+
+func cmdDemoFull() {
+	// The full story in one run: a person finds their situation (Layer 1),
+	// reports it anonymously (Layer 2), and is protected if reporting puts
+	// them at risk (Layer 3). This is the walkthrough the demo video follows
+	// shot for shot.
+	guides, err := guide.Load(mlinziassets.DataFS, "data")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "failed to load guide data:", err)
+		os.Exit(1)
+	}
+	reports := report.NewStore()
+	cases := guardian.NewStore()
+
+	fmt.Println("========================================")
+	fmt.Println(" MLINZI — full walkthrough")
+	fmt.Println("========================================")
+	fmt.Println()
+
+	fmt.Println("STEP 1 — Know")
+	fmt.Println("A person searches for what happened to them.")
+	fmt.Println()
+	g, err := guides.Get("ke-police-misconduct")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	fmt.Printf("  %q\n", g.Title.In("en"))
+	fmt.Printf("  Route: %s (toll-free, works with no data)\n", g.Institutions[0].Name)
+	fmt.Printf("  Last verified: %s\n\n", g.LastVerified)
+
+	fmt.Println("STEP 2 — Report")
+	fmt.Println("They file anonymously, linked to that guide.")
+	fmt.Println()
+	r, err := reports.Submit("policing", g.ID,
+		"Officer at Kondele stage demanded KES 200 to let me pass with my motorbike, 14 Sep evening.")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	fmt.Printf("  Report %s filed against guide %q\n", r.ID, r.GuideID)
+	fmt.Printf("  Verification code: %s (theirs to keep — no name required)\n\n", r.VerificationCode)
+
+	fmt.Println("STEP 3 — Protect")
+	fmt.Println("Because this is a safety report, they set a dead-man's switch.")
+	fmt.Println()
+	key, _ := guardian.ReleaseKey()
+	c, shares, err := cases.NewCase(r.ID, key, []string{"lawyer", "journalist", "family"}, 2, 48*time.Hour)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	fmt.Printf("  Case %s protects report %s\n", c.ID, c.ReportID)
+	fmt.Printf("  Guardians: %s (2-of-3 must act together to release)\n\n", strings.Join(c.GuardianIDs, ", "))
+
+	fmt.Println("--- Time passes. They go silent. ---")
+	fmt.Println()
+	overdueAt := time.Now().Add(72 * time.Hour)
+	cases.Escalate(c.ID, overdueAt)
+	cases.SubmitShare(c.ID, "lawyer", shares[0])
+	recovered, err := cases.SubmitShare(c.ID, "journalist", shares[1])
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	match := string(recovered) == string(key)
+	fmt.Printf("Two guardians combine independently. Key reconstructed: %v.\n", match)
+	fmt.Println("The report — and who was responsible for it going unresolved — reaches the guardians.")
+	fmt.Println()
+
+	fmt.Println("--- Every step above is independently checkable ---")
+	if err := reports.VerifyChain(); err != nil {
+		fmt.Println("report chain: FAILED")
+	} else {
+		fmt.Println("report chain:   OK")
+	}
+	if err := cases.VerifyChain(); err != nil {
+		fmt.Println("guardian chain: FAILED")
+	} else {
+		fmt.Println("guardian chain: OK")
 	}
 }
