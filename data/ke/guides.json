@@ -1,0 +1,679 @@
+[
+  {
+    "id": "ke-bribery-public-service",
+    "jurisdiction": "KE",
+    "tracks": ["transparency-accountability"],
+    "category": "corruption",
+    "title": {
+      "en": "A public officer asked me for a bribe",
+      "sw": "Afisa wa umma amenidai rushwa"
+    },
+    "summary": {
+      "en": "You were asked to pay for a government service that should be free, or asked to pay extra to get it faster. You can report this, and you can report it without giving your name.",
+      "sw": "Umedaiwa malipo kwa huduma ya serikali inayopaswa kuwa bure, au umedaiwa zaidi ili upate huduma haraka. Unaweza kuripoti, na unaweza kuripoti bila kutoa jina lako."
+    },
+    "rights": [
+      {
+        "en": "You can report anonymously. EACC operates an anonymous whistleblower system and does not require you to identify yourself to submit information.",
+        "sw": "Unaweza kuripoti bila kujitambulisha. EACC ina mfumo wa siri wa kutoa taarifa."
+      },
+      {
+        "en": "Reporting is free through every official channel, including the toll-free line and Huduma Centres.",
+        "sw": "Kuripoti ni bure kupitia njia zote rasmi, ikiwemo namba ya bure na Huduma Centre."
+      }
+    ],
+    "evidence": [
+      {
+        "en": "Where and when it happened, and which office or service was involved.",
+        "sw": "Mahali na wakati ilipotokea, na ofisi au huduma iliyohusika."
+      },
+      {
+        "en": "The name, rank or desk of the officer if you know it. You can still report without it.",
+        "sw": "Jina, cheo au dawati la afisa kama unalijua. Bado unaweza kuripoti bila hilo."
+      },
+      {
+        "en": "How much was demanded, and whether you paid.",
+        "sw": "Kiasi kilichodaiwa, na kama ulilipa."
+      },
+      {
+        "en": "Any receipt, message, photo or recording. Do not put yourself at risk to collect evidence.",
+        "sw": "Risiti, ujumbe, picha au rekodi yoyote. Usijiweke hatarini ili kupata ushahidi."
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "en": "Write down what happened while it is fresh",
+          "sw": "Andika kilichotokea ukiwa bado unakumbuka"
+        },
+        "detail": {
+          "en": "Date, time, place, office, officer, amount. This is what every channel will ask you for.",
+          "sw": "Tarehe, saa, mahali, ofisi, afisa, kiasi. Hivi ndivyo utakavyoulizwa kwenye kila njia."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "Report to EACC on the toll-free line",
+          "sw": "Ripoti kwa EACC kupitia namba ya bure"
+        },
+        "detail": {
+          "en": "The fastest route, and it works from any phone with no data.",
+          "sw": "Njia ya haraka zaidi, na inafanya kazi kwa simu yoyote bila data."
+        },
+        "institution": "eacc"
+      },
+      {
+        "action": {
+          "en": "Or report in person at a Huduma Centre or EACC regional office",
+          "sw": "Au ripoti ana kwa ana katika Huduma Centre au ofisi ya EACC"
+        },
+        "detail": {
+          "en": "EACC accepts reports at its headquarters, its regional offices, and Huduma Centres countrywide. Kisumu is among the regional offices.",
+          "sw": "EACC inapokea ripoti katika makao makuu, ofisi za mikoa, na Huduma Centre nchini kote. Kisumu ni miongoni mwa ofisi za mikoa."
+        },
+        "institution": "eacc"
+      },
+      {
+        "action": {
+          "en": "Keep your reference number",
+          "sw": "Hifadhi namba yako ya kumbukumbu"
+        },
+        "detail": {
+          "en": "EACC issues a reference number you can use to follow up on the matter.",
+          "sw": "EACC hutoa namba ya kumbukumbu unayoweza kutumia kufuatilia."
+        },
+        "critical": true
+      }
+    ],
+    "institutions": [
+      {
+        "id": "eacc",
+        "name": "Ethics and Anti-Corruption Commission (EACC)",
+        "role": {
+          "en": "The national body that receives and investigates reports of corruption in government and the public sector.",
+          "sw": "Taasisi ya kitaifa inayopokea na kuchunguza ripoti za ufisadi serikalini na katika sekta ya umma."
+        },
+        "mandate": {
+          "en": "Established under Section 3(1) of the Ethics and Anti-Corruption Commission Act, 2011. It acts where public funds or the public interest are at stake; purely private disputes are referred to the police or the courts.",
+          "sw": "Ilianzishwa chini ya Kifungu 3(1) cha Sheria ya EACC, 2011. Inachukua hatua pale fedha za umma au maslahi ya umma yanapohusika."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "1551",
+            "toll_free": true,
+            "anonymous": true,
+            "note": {
+              "en": "Toll-free reporting line.",
+              "sw": "Namba ya bure ya kuripoti."
+            },
+            "sources": [
+              {
+                "publisher": "Ethics and Anti-Corruption Commission",
+                "url": "https://beta.eacc.go.ke/",
+                "retrieved": "2026-09-15",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "email",
+            "value": "report@integrity.go.ke",
+            "toll_free": false,
+            "anonymous": true,
+            "sources": [
+              {
+                "publisher": "Ethics and Anti-Corruption Commission",
+                "url": "https://beta.eacc.go.ke/",
+                "retrieved": "2026-09-15",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "web",
+            "value": "https://eacc.go.ke/en/default/report-corruption/",
+            "toll_free": false,
+            "anonymous": true,
+            "note": {
+              "en": "Includes an anonymous whistleblower system.",
+              "sw": "Ina mfumo wa kuripoti kwa siri."
+            },
+            "sources": [
+              {
+                "publisher": "Ethics and Anti-Corruption Commission",
+                "url": "https://eacc.go.ke/en/default/report-corruption/",
+                "retrieved": "2026-09-15",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "in_person",
+            "value": "Integrity Centre, Nairobi; regional offices including Kisumu, Mombasa, Eldoret, Nakuru, Kisii, Bungoma, Nyeri, Garissa, Isiolo, Machakos, Malindi; and Huduma Centres countrywide",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Ethics and Anti-Corruption Commission",
+                "url": "https://eacc.go.ke/en/default/report-corruption/",
+                "retrieved": "2026-09-15",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "post",
+            "value": "The Secretary/CEO, EACC, P.O. Box 61130-00200, Nairobi",
+            "toll_free": false,
+            "anonymous": true,
+            "sources": [
+              {
+                "publisher": "Ethics and Anti-Corruption Commission",
+                "url": "https://eacc.go.ke/default/faqs/",
+                "retrieved": "2026-09-15",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "en": "EACC does not publish a fixed turnaround for investigations. Keep your reference number and follow up. If you are dissatisfied with how EACC handles your report, you can raise it with the EACC Chairperson, the Commission on Administrative Justice, or the courts.",
+      "sw": "EACC haijatangaza muda maalum wa uchunguzi. Hifadhi namba yako ya kumbukumbu na fuatilia. Usiporidhika, unaweza kupeleka suala kwa Mwenyekiti wa EACC, Tume ya Haki za Kiutawala, au mahakamani."
+    },
+    "sources": [
+      {
+        "publisher": "Ethics and Anti-Corruption Commission",
+        "url": "https://eacc.go.ke/en/default/report-corruption/",
+        "retrieved": "2026-09-15",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Ethics and Anti-Corruption Commission (FAQs)",
+        "url": "https://eacc.go.ke/default/faqs/",
+        "retrieved": "2026-09-15",
+        "confidence": "official"
+      }
+    ],
+    "last_verified": "2026-09-15"
+  },
+  {
+    "id": "ke-police-misconduct",
+    "jurisdiction": "KE",
+    "tracks": ["safety-reporting-protection", "transparency-accountability"],
+    "category": "policing",
+    "title": {
+      "en": "A police officer harmed, threatened or extorted me",
+      "sw": "Afisa wa polisi amenidhuru, amenitisha au amenidai rushwa"
+    },
+    "summary": {
+      "en": "Complaints about police conduct go to IPOA, a civilian body independent of the police. Filing is free and confidential, and you can file on behalf of someone who cannot file for themselves.",
+      "sw": "Malalamiko kuhusu mwenendo wa polisi hupelekwa IPOA, taasisi ya kiraia isiyo chini ya polisi. Kuwasilisha ni bure na kwa siri, na unaweza kuwasilisha kwa niaba ya mtu asiyeweza."
+    },
+    "rights": [
+      {
+        "en": "The IPOA Act allows a complaint to be made orally or in writing. If you complain orally, an IPOA employee must write it down for you and assist you.",
+        "sw": "Sheria ya IPOA inaruhusu malalamiko kwa mdomo au maandishi. Ukilalamika kwa mdomo, mfanyakazi wa IPOA lazima aandike na akusaidie."
+      },
+      {
+        "en": "Complaining directly at a police station does not stop you from also filing with IPOA.",
+        "sw": "Kulalamika moja kwa moja kituoni hakukuzuii kuwasilisha pia IPOA."
+      },
+      {
+        "en": "It is an offence to punish, demote or disadvantage a police officer for filing a complaint or giving evidence to IPOA.",
+        "sw": "Ni kosa kumwadhibu au kumshusha cheo afisa wa polisi kwa kuwasilisha malalamiko au kutoa ushahidi IPOA."
+      }
+    ],
+    "evidence": [
+      {
+        "en": "Your name and contact details, unless you are filing anonymously through another route.",
+        "sw": "Jina lako na mawasiliano, isipokuwa unawasilisha kwa siri kupitia njia nyingine."
+      },
+      {
+        "en": "When it happened, what happened, and who was involved.",
+        "sw": "Ilipotokea, kilichotokea, na waliohusika."
+      },
+      {
+        "en": "The officer's name, service number or any identifying detail, and the station if you know it.",
+        "sw": "Jina la afisa, namba ya utumishi au kitambulisho chochote, na kituo kama unakijua."
+      },
+      {
+        "en": "Names and contacts of any witnesses.",
+        "sw": "Majina na mawasiliano ya mashahidi."
+      },
+      {
+        "en": "Photographs and medical records. A completed P3 form is recognised in court as primary medical evidence.",
+        "sw": "Picha na nyaraka za matibabu. Fomu ya P3 iliyojazwa inatambuliwa mahakamani kama ushahidi wa msingi wa kitabibu."
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "en": "Get medical attention and a P3 form if you were injured",
+          "sw": "Pata matibabu na fomu ya P3 kama ulijeruhiwa"
+        },
+        "detail": {
+          "en": "Medical documentation is the evidence that most often decides these cases, and it gets harder to obtain as injuries heal. The P3 form records date, time, nature of injuries and state of clothing.",
+          "sw": "Nyaraka za matibabu ndizo ushahidi unaoamua kesi hizi mara nyingi, na ni vigumu kupata majeraha yakipona. Fomu ya P3 hurekodi tarehe, saa, aina ya majeraha na hali ya mavazi."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "File your complaint with IPOA",
+          "sw": "Wasilisha malalamiko yako IPOA"
+        },
+        "detail": {
+          "en": "By phone, online, by email, by post, or in person at a regional office. Filing is free.",
+          "sw": "Kwa simu, mtandaoni, barua pepe, posta, au ana kwa ana katika ofisi ya mkoa. Ni bure."
+        },
+        "institution": "ipoa"
+      },
+      {
+        "action": {
+          "en": "Also report to KNCHR so there is a second formal record",
+          "sw": "Ripoti pia KNCHR ili kuwe na kumbukumbu rasmi ya pili"
+        },
+        "detail": {
+          "en": "A record held by more than one body is harder to lose and easier to corroborate later.",
+          "sw": "Kumbukumbu inayoshikiliwa na taasisi zaidi ya moja ni vigumu kupotea na rahisi kuthibitisha baadaye."
+        },
+        "institution": "knchr"
+      },
+      {
+        "action": {
+          "en": "Consider legal support",
+          "sw": "Fikiria msaada wa kisheria"
+        },
+        "detail": {
+          "en": "A human rights lawyer can advise on a civil suit for damages or public interest litigation alongside the IPOA process.",
+          "sw": "Wakili wa haki za binadamu anaweza kukushauri kuhusu kesi ya madai au kesi ya maslahi ya umma sambamba na mchakato wa IPOA."
+        }
+      }
+    ],
+    "institutions": [
+      {
+        "id": "ipoa",
+        "name": "Independent Policing Oversight Authority (IPOA)",
+        "role": {
+          "en": "The civilian body that receives, investigates and reports on complaints of police misconduct.",
+          "sw": "Taasisi ya kiraia inayopokea, kuchunguza na kutoa ripoti kuhusu malalamiko dhidi ya polisi."
+        },
+        "mandate": {
+          "en": "Section 4 of the IPOA Act, 2011. IPOA does not arrest; it investigates and recommends prosecution to the Director of Public Prosecutions and disciplinary action to the Inspector General.",
+          "sw": "Kifungu 4 cha Sheria ya IPOA, 2011. IPOA haikamati; huchunguza na kupendekeza mashtaka."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "0800 720 434",
+            "toll_free": true,
+            "anonymous": false,
+            "note": {
+              "en": "Sources disagree on IPOA's toll-free number: 0800 720 434 and 1559 are both published. Try 1559 first as it is the shorter national short code, and fall back to 0800 720 434.",
+              "sw": "Vyanzo havikubaliani kuhusu namba ya bure ya IPOA: 0800 720 434 na 1559 zote zimechapishwa. Jaribu 1559 kwanza, kisha 0800 720 434."
+            },
+            "sources": [
+              {
+                "publisher": "The Advocate (legal glossary)",
+                "url": "https://theadvocate.co.za/glossary/ipoa",
+                "retrieved": "2026-09-15",
+                "confidence": "conflicting"
+              }
+            ]
+          },
+          {
+            "kind": "phone",
+            "value": "1559",
+            "toll_free": true,
+            "anonymous": false,
+            "note": {
+              "en": "Published as IPOA's toll-free line for complaints against or compliments for a police officer. See the note on 0800 720 434.",
+              "sw": "Imechapishwa kama namba ya bure ya IPOA kwa malalamiko dhidi ya afisa wa polisi."
+            },
+            "sources": [
+              {
+                "publisher": "GovServ listing for IPOA Kenya",
+                "url": "https://www.govserv.org/KE/Unknown/216217745216109/Independent-Policing-Oversight-Authority---IPOA-KENYA",
+                "retrieved": "2026-09-15",
+                "confidence": "conflicting"
+              }
+            ]
+          },
+          {
+            "kind": "web",
+            "value": "https://www.ipoa.go.ke/ipoa/complaints",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Independent Policing Oversight Authority",
+                "url": "https://www.ipoa.go.ke/ipoa/complaints",
+                "retrieved": "2026-09-15",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "email",
+            "value": "complaints@ipoa.go.ke",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Pulse Kenya",
+                "url": "https://www.pulse.co.ke/story/how-to-lodge-a-complaint-with-ipoa-for-issues-regarding-police-brutality-2024072918182757883",
+                "retrieved": "2026-09-15",
+                "confidence": "secondary"
+              }
+            ]
+          },
+          {
+            "kind": "post",
+            "value": "IPOA, 1st Ngong Avenue, ACK Garden Annex, P.O. Box 23035-00100, Nairobi",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Independent Policing Oversight Authority",
+                "url": "https://www.ipoa.go.ke/ipoa/complaints",
+                "retrieved": "2026-09-15",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "in_person",
+            "value": "IPOA head office or any IPOA regional office",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Independent Policing Oversight Authority",
+                "url": "https://www.ipoa.go.ke/ipoa/complaints",
+                "retrieved": "2026-09-15",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "knchr",
+        "name": "Kenya National Commission on Human Rights (KNCHR)",
+        "role": {
+          "en": "National human rights body. Reporting here creates a second formal record of the incident.",
+          "sw": "Taasisi ya kitaifa ya haki za binadamu. Kuripoti hapa huunda kumbukumbu rasmi ya pili."
+        },
+        "channels": [
+          {
+            "kind": "web",
+            "value": "https://www.knchr.org",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "The Star (explainer on filing police brutality complaints)",
+                "url": "https://www.the-star.co.ke/news/2025-06-25-explainer-how-to-file-a-police-brutality-complaint",
+                "retrieved": "2026-09-15",
+                "confidence": "secondary"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "en": "IPOA does not publish a fixed investigation timeline. Complaints are screened for admissibility, then investigated, and IPOA may recommend prosecution to the DPP. Keep any reference you are given and follow up.",
+      "sw": "IPOA haijatangaza muda maalum wa uchunguzi. Malalamiko huchujwa, kisha kuchunguzwa. Hifadhi kumbukumbu yoyote unayopewa na ufuatilie."
+    },
+    "sources": [
+      {
+        "publisher": "Independent Policing Oversight Authority",
+        "url": "https://www.ipoa.go.ke/ipoa/complaints",
+        "retrieved": "2026-09-15",
+        "confidence": "official"
+      },
+      {
+        "publisher": "The Star (explainer on filing police brutality complaints)",
+        "url": "https://www.the-star.co.ke/news/2025-06-25-explainer-how-to-file-a-police-brutality-complaint",
+        "retrieved": "2026-09-15",
+        "confidence": "secondary"
+      }
+    ],
+    "last_verified": "2026-09-15"
+  },
+  {
+    "id": "ke-gender-based-violence",
+    "jurisdiction": "KE",
+    "tracks": ["safety-reporting-protection"],
+    "category": "gbv",
+    "title": {
+      "en": "I or someone I know is experiencing violence or abuse",
+      "sw": "Mimi au mtu ninayemjua anakabiliwa na ukatili au unyanyasaji"
+    },
+    "summary": {
+      "en": "A free 24-hour national helpline connects survivors to medical care, counselling, legal aid, shelter and police. You can call on someone else's behalf. Medical care works best within 72 hours.",
+      "sw": "Nambari ya bure ya saa 24 huunganisha waathirika na matibabu, ushauri, msaada wa kisheria, hifadhi na polisi. Unaweza kupiga kwa niaba ya mtu mwingine. Matibabu hufanya kazi vizuri ndani ya saa 72."
+    },
+    "rights": [
+      {
+        "en": "The helpline is confidential and free, and is open to a survivor, a family member, a friend, or any concerned member of the community.",
+        "sw": "Nambari hii ni ya siri na bure, na iko wazi kwa mwathirika, mwanafamilia, rafiki, au mwanajamii yeyote."
+      },
+      {
+        "en": "You do not have to go to the police first to get medical care.",
+        "sw": "Si lazima uende polisi kwanza ili kupata matibabu."
+      }
+    ],
+    "evidence": [
+      {
+        "en": "Your county and area, so the counsellor can refer you to the nearest service.",
+        "sw": "Kaunti na eneo lako, ili mshauri akuelekeze huduma iliyo karibu."
+      },
+      {
+        "en": "If it is safe to do so, preserve clothing unwashed and seek medical attention before bathing.",
+        "sw": "Ikiwa ni salama, hifadhi mavazi bila kuyafua na tafuta matibabu kabla ya kuoga."
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "en": "Get to safety first",
+          "sw": "Jiweke mahali salama kwanza"
+        },
+        "detail": {
+          "en": "Nothing else on this page matters more than being somewhere the harm cannot continue.",
+          "sw": "Hakuna kitu kingine muhimu zaidi kuliko kuwa mahali ambapo madhara hayawezi kuendelea."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "Call 1195, free, any time",
+          "sw": "Piga 1195, bure, wakati wowote"
+        },
+        "detail": {
+          "en": "A tele-counsellor will talk with you and connect you to services near you. It works from any phone with no data.",
+          "sw": "Mshauri atazungumza nawe na kukuunganisha na huduma zilizo karibu. Inafanya kazi kwa simu yoyote bila data."
+        },
+        "institution": "hak-1195"
+      },
+      {
+        "action": {
+          "en": "Seek medical care within 72 hours if there was sexual violence",
+          "sw": "Tafuta matibabu ndani ya saa 72 ikiwa kulikuwa na ukatili wa kingono"
+        },
+        "detail": {
+          "en": "Treatment that prevents HIV and other infections is time-limited. Care is available regardless of whether you report to the police.",
+          "sw": "Matibabu ya kuzuia VVU na maambukizi mengine yana muda maalum. Huduma ipo bila kujali kama umeripoti polisi."
+        },
+        "institution": "gvrc",
+        "deadline": {
+          "en": "Within 72 hours of the incident",
+          "sw": "Ndani ya saa 72 baada ya tukio"
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "If the survivor is a child, call 116",
+          "sw": "Ikiwa mwathirika ni mtoto, piga 116"
+        },
+        "detail": {
+          "en": "Childline Kenya operates the free national child helpline.",
+          "sw": "Childline Kenya inaendesha nambari ya bure ya kitaifa ya watoto."
+        },
+        "institution": "childline"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "hak-1195",
+        "name": "Healthcare Assistance Kenya (HAK) — National GBV Helpline 1195",
+        "role": {
+          "en": "Free 24-hour national helpline for sexual and gender-based violence. Provides tele-counselling, referrals to shelters, legal aid, healthcare and police, and can coordinate emergency rescue.",
+          "sw": "Nambari ya bure ya saa 24 kwa ukatili wa kingono na kijinsia. Hutoa ushauri, rufaa kwa hifadhi, msaada wa kisheria, matibabu na polisi."
+        },
+        "mandate": {
+          "en": "Operated by Healthcare Assistance Kenya in partnership with the State Department of Gender Affairs.",
+          "sw": "Inaendeshwa na Healthcare Assistance Kenya kwa ushirikiano na Idara ya Jinsia."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "1195",
+            "toll_free": true,
+            "anonymous": true,
+            "note": {
+              "en": "Free, 24 hours, confidential. Open to survivors and to anyone calling on their behalf.",
+              "sw": "Bure, saa 24, ya siri. Iko wazi kwa waathirika na yeyote anayepiga kwa niaba yao."
+            },
+            "sources": [
+              {
+                "publisher": "UN Women Africa",
+                "url": "https://africa.unwomen.org/en/stories/news/2024/10/kenyas-national-toll-free-helpline-1195-a-lifeline-for-gender-based-violence-survivors",
+                "retrieved": "2026-09-15",
+                "confidence": "secondary"
+              },
+              {
+                "publisher": "Healthcare Assistance Kenya",
+                "url": "https://hakgbv1195.org/",
+                "retrieved": "2026-09-15",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "ussd",
+            "value": "*483*306#",
+            "toll_free": true,
+            "anonymous": true,
+            "note": {
+              "en": "Komesha Dhuluma service, run by the National Police Service Directorate of Community Policing, Gender and Child Protection. Works on a basic handset with no data.",
+              "sw": "Huduma ya Komesha Dhuluma. Inafanya kazi kwa simu ya kawaida bila data."
+            },
+            "sources": [
+              {
+                "publisher": "Daily Nation",
+                "url": "https://nation.africa/kenya/news/gender/here-s-where-to-seek-help-if-you-experience-sgbv-during-election-3907194",
+                "retrieved": "2026-09-15",
+                "confidence": "secondary"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "gvrc",
+        "name": "Gender Violence Recovery Centre (GVRC)",
+        "role": {
+          "en": "Provides free medical response for survivors of sexual violence within the 72-hour window, alongside counselling and support.",
+          "sw": "Hutoa matibabu bure kwa waathirika wa ukatili wa kingono ndani ya saa 72, pamoja na ushauri na msaada."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "0709 667 000",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Commonwealth Says No More",
+                "url": "https://commonwealthsaysnomore.org/kenya/",
+                "retrieved": "2026-09-15",
+                "confidence": "secondary"
+              }
+            ]
+          },
+          {
+            "kind": "phone",
+            "value": "0719 638 006",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Commonwealth Says No More",
+                "url": "https://commonwealthsaysnomore.org/kenya/",
+                "retrieved": "2026-09-15",
+                "confidence": "secondary"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "childline",
+        "name": "Childline Kenya",
+        "role": {
+          "en": "Free national helpline for children and for anyone reporting harm to a child.",
+          "sw": "Nambari ya bure ya kitaifa kwa watoto na kwa yeyote anayeripoti madhara kwa mtoto."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "116",
+            "toll_free": true,
+            "anonymous": true,
+            "sources": [
+              {
+                "publisher": "Malaica (GBV support directory for Kenya)",
+                "url": "https://malaica.com/gender-based-violence-where-to-get-help-and-support-in-kenya/",
+                "retrieved": "2026-09-15",
+                "confidence": "secondary"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "en": "Medical care for sexual violence is most effective within 72 hours. The helpline operates 24 hours and can mobilise emergency response where there is immediate danger.",
+      "sw": "Matibabu ya ukatili wa kingono yanafaa zaidi ndani ya saa 72. Nambari inafanya kazi saa 24 na inaweza kuratibu msaada wa dharura."
+    },
+    "sources": [
+      {
+        "publisher": "Healthcare Assistance Kenya",
+        "url": "https://hakgbv1195.org/",
+        "retrieved": "2026-09-15",
+        "confidence": "official"
+      },
+      {
+        "publisher": "UN Women Africa",
+        "url": "https://africa.unwomen.org/en/stories/news/2024/10/kenyas-national-toll-free-helpline-1195-a-lifeline-for-gender-based-violence-survivors",
+        "retrieved": "2026-09-15",
+        "confidence": "secondary"
+      },
+      {
+        "publisher": "Daily Nation",
+        "url": "https://nation.africa/kenya/news/gender/here-s-where-to-seek-help-if-you-experience-sgbv-during-election-3907194",
+        "retrieved": "2026-09-15",
+        "confidence": "secondary"
+      }
+    ],
+    "last_verified": "2026-09-15"
+  }
+]
