@@ -45,6 +45,25 @@ through both routes — so the expectation was corrected, not the behaviour.
 first-language speaker before submission. Flagged here rather than presented as
 verified.
 
+## CLI browser and a real bug (AI-drafted, human-caught)
+
+Built a thin CLI (`cmd/mlinzi`) wrapping the already-tested `guide.Store` —
+`list`, `search`, `show` — as a fast, demoable presentation layer with no new
+domain logic.
+
+First version located the data directory via `go env GOMOD` at runtime. It
+passed every test because tests run inside the module. It failed the first
+time the compiled binary was run from outside the repository, with no Go
+toolchain in the invoking shell — precisely the "basic device, no
+installation step" scenario the brief asks for. Caught by manually running the
+built binary from `/tmp` and then from `/`, not by the test suite.
+
+Fixed by embedding the dataset into the binary at compile time
+(`go:embed`), which also directly serves the low-bandwidth constraint: the
+shipped artifact is one file, works fully offline, and needs no accompanying
+data directory. Added a regression test (`assets_test.go`) documenting why the
+embedding exists, so the working-directory dependency doesn't quietly return.
+
 ## Honest limits
 
 - Kiswahili translations are unreviewed as of day 1.
