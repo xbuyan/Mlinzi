@@ -127,6 +127,48 @@ refused, a second guardian's share crossing threshold and reconstructing the
 exact original key, then independent chain verification. Every claim made in
 the pitch deck about this layer has a runnable command behind it.
 
+## Day 4 — Web UI and deployment scaffolding
+
+**Design (human-directed, AI-drafted).** The web layer (`cmd/mlinziweb`)
+wraps the exact same `guide`, `report`, and `guardian` packages the CLI
+uses — no new domain logic, only an HTTP presentation layer. Plain
+server-rendered templates and full-page form submissions were chosen over a
+JS framework or htmx, deliberately, to minimize moving parts that could go
+wrong under time pressure while still meeting the brief's low-bandwidth
+constraint.
+
+**A real bug caught before it ran, not after.** The initial plan was to
+parse every template file into one shared `*template.Template` and dispatch
+by name. Go's `html/template` shares one namespace of named templates across
+every file parsed together — so multiple page files each defining
+`{{define "content"}}` would have silently overwritten each other, with only
+the last-parsed page's content ever rendering, for every route. Caught during
+design, before writing the page templates, by working through how
+`html/template`'s associated-template model actually behaves rather than
+assuming a per-file scope. Fixed by pairing `layout.html` with exactly one
+page template at a time, each combination its own isolated `*template.Template`.
+
+**The core security invariant was re-verified at the layer users actually
+touch.** `internal/guardian` already proves a single guardian's share can
+never trigger release. `TestWebSingleGuardianCannotRelease` proves the same
+thing again, through the real HTTP handlers via `httptest` — because a
+correct package underneath a buggy handler would still leave a real user
+unprotected. Passing at the package level is necessary; it isn't sufficient.
+
+**Testing.** 9 `httptest`-based tests, run entirely in-process against the
+real routing table `main()` uses (no mocked router) — home and search
+rendering, the disputed-source flag actually reaching the page, 404s for
+unknown guides and cases, and a full report-to-protection-to-release flow
+exercised exactly as a browser would drive it.
+
+**Deployment.** `Dockerfile` (multi-stage, `CGO_ENABLED=0`, distroless
+runtime — no shell, minimal attack surface) and `fly.toml`, matching an
+existing Fly.io workflow from a prior project. Not deployed or build-tested
+from within this environment (Fly and Docker Hub are outside its network
+allowlist); the Dockerfile follows an established, standard pattern but
+hasn't been run end-to-end here, and is stated as such rather than implied
+verified.
+
 ## Honest limits
 
 - Kiswahili translations are unreviewed as of day 1.

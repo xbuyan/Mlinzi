@@ -1,0 +1,33 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="{{.Lang}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mlinzi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+  <header class="bg-[#0A2E36] text-white">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-tight">Mlinzi</a>
+      <nav class="flex items-center gap-4 text-sm">
+        <a href="/report/status" class="text-[#8FE3D0] hover:text-white">Check a report</a>
+        <form method="get" action="" class="flex items-center gap-1">
+          <select name="lang" onchange="this.form.submit()" class="bg-[#0A2E36] border border-[#1C7293] rounded px-2 py-1 text-xs">
+            <option value="en" {{if eq .Lang "en"}}selected{{end}}>English</option>
+            <option value="sw" {{if eq .Lang "sw"}}selected{{end}}>Kiswahili</option>
+          </select>
+        </form>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    {{template "content" .}}
+  </main>
+  <footer class="max-w-4xl mx-auto px-4 py-8 text-xs text-slate-400">
+    Mlinzi — a proof of concept built for the OSF × Andela hackathon. No persistence layer yet: data lives only for this server's uptime.
+  </footer>
+</body>
+</html>
+{{end}}

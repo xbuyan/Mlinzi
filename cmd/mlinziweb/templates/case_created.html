@@ -1,0 +1,29 @@
+{{define "content"}}
+{{$lang := .Lang}}
+{{with .Case}}
+<h1 class="text-2xl font-bold text-[#0A2E36]">Protection set up</h1>
+<p class="mt-2 text-slate-600">Case <span class="font-mono">{{.ID}}</span> — {{.Threshold}} of {{len .GuardianIDs}} guardians must act together to release this report.</p>
+
+<div class="mt-4 bg-amber-50 border border-amber-300 rounded-lg p-4 text-sm text-amber-900">
+  <strong>Shown once, right now.</strong> Copy each share and deliver it to that guardian separately —
+  by hand, by a different channel than this one, however you'd actually reach them. Mlinzi does not
+  store these anywhere after this page. If you lose one, it cannot be recovered or re-issued — only
+  the remaining guardians' shares, still combinable at your threshold, protect the report.
+</div>
+
+<div class="mt-4 space-y-3">
+  {{range $.ShareRows}}
+  <div class="bg-white border border-slate-200 rounded-lg p-4">
+    <div class="font-semibold text-[#0A2E36]">{{.Guardian}}</div>
+    <div class="mt-1 font-mono text-xs break-all bg-slate-100 rounded px-3 py-2">{{.Share}}</div>
+  </div>
+  {{end}}
+</div>
+
+<p class="mt-4 text-sm text-slate-600">
+  Check-in window: every {{$.IntervalHr}} hours. Return to
+  <a href="/cases/{{.ID}}?lang={{$lang}}" class="text-[#028090] font-semibold">this case's dashboard</a>
+  to check in, or — for this demo — to simulate a missed check-in and watch guardians release it.
+</p>
+{{end}}
+{{end}}

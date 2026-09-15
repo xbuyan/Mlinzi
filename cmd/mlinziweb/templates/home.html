@@ -1,0 +1,24 @@
+{{define "content"}}
+<h1 class="text-3xl font-bold text-[#0A2E36]">Know your rights. Report safely.</h1>
+<p class="mt-2 text-slate-600">Search for what happened to you — every guide is sourced, dated, and tells you what to do next.</p>
+
+<form method="get" action="/" class="mt-6 flex gap-2">
+  <input type="hidden" name="lang" value="{{.Lang}}">
+  <input type="text" name="q" value="{{.Query}}" placeholder="e.g. bribe, police, GBV, rushwa..."
+         class="flex-1 border border-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#028090]">
+  <button type="submit" class="bg-[#028090] text-white px-5 py-2 rounded-lg font-medium hover:bg-[#026e78]">Search</button>
+</form>
+
+<div class="mt-8 space-y-4">
+  {{if not .Guides}}
+    <p class="text-slate-500">No guides match that search.</p>
+  {{end}}
+  {{range .Guides}}
+    <a href="/guides/{{.ID}}?lang={{$.Lang}}" class="block bg-white border border-slate-200 rounded-xl p-5 hover:border-[#02C39A] transition">
+      <div class="text-xs uppercase tracking-wide text-[#028090] font-semibold">{{.Category}}</div>
+      <div class="mt-1 text-lg font-bold text-[#0A2E36]">{{.Title}}</div>
+      <p class="mt-1 text-sm text-slate-600">{{.Summary}}</p>
+    </a>
+  {{end}}
+</div>
+{{end}}

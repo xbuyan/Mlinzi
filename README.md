@@ -48,10 +48,40 @@ and `internal/guardian` (check-in cadence, escalation on a missed check-in,
 threshold-based release — no single party, including whoever operates
 Mlinzi, can release evidence alone) — see `mlinzi demo-escalation`.
 
-All three layers are logically wired (a case links to a report ID) but not
-yet joined behind one interface — that plus a web UI is next. Content is
-stored in plaintext in this proof of concept; using the Layer 3 release key
-to actually encrypt Layer 2 report content is the next integration step.
+All three layers wired into one story via `mlinzi demo-full`, and into a
+**web UI** (`cmd/mlinziweb`) covering the same flow: search and read a guide,
+file a report, optionally protect it with guardians, check in, and — for
+this demo — trigger an escalation and watch guardian release actually
+reconstruct the key.
+
+**Known, stated gap:** there is no persistence layer. Reports and guardian
+cases live in server memory for the process's lifetime; a restart clears
+them. Report content is stored in plaintext, since encrypting it meaningfully
+depends on Layer 3's key-release mechanism, which the web UI now uses for
+the release key but not yet for the report content itself — that wiring is
+the next step.
+
+## Run the web UI locally
+
+```
+go run ./cmd/mlinziweb
+```
+
+Then open http://localhost:8080.
+
+## Deploy (Fly.io)
+
+A `Dockerfile` and `fly.toml` are included.
+
+```
+flyctl launch    # first time — creates the app, uses fly.toml as-is
+flyctl deploy    # subsequent deploys
+```
+
+The Fly region defaults to Johannesburg (closest to East Africa). The app is
+kept at `min_machines_running = 1` so it stays warm through the hackathon's
+judging window rather than cold-starting on a judge's first click — safe to
+scale back to 0 afterward.
 
 ## Design guarantees, enforced in code
 

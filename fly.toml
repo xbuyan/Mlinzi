@@ -1,0 +1,26 @@
+# Fly.io configuration for Mlinzi's web UI.
+# Deploy with: flyctl launch (first time) or flyctl deploy (subsequent)
+#
+# Note: there is no persistence layer yet (see README — a deliberate,
+# stated scope cut). Every report and guardian case lives in the process's
+# memory, so a restart or redeploy clears all data. Fine for demo purposes;
+# not a production data store.
+
+app = "mlinzi"
+primary_region = "jnb"  # Johannesburg — closest Fly region to East Africa
+
+[build]
+
+[env]
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "suspend"
+  auto_start_machines = true
+  min_machines_running = 1  # keep it warm during judging (Sept 22-24) so a judge's first click isn't a cold start
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
