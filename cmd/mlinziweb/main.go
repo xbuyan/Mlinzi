@@ -48,6 +48,7 @@ type app struct {
 var pageNames = []string{
 	"home.html", "guide.html", "report_new.html", "report_result.html",
 	"case_created.html", "case.html", "status_form.html", "status_result.html",
+	"institution.html",
 }
 
 var templateFuncs = template.FuncMap{
@@ -123,6 +124,8 @@ func main() {
 	mux.HandleFunc("POST /cases/{id}/checkin", a.handleCaseCheckIn)
 	mux.HandleFunc("POST /cases/{id}/escalate", a.handleCaseEscalate)
 	mux.HandleFunc("POST /cases/{id}/submit-share", a.handleCaseSubmitShare)
+	mux.HandleFunc("GET /institution", a.handleInstitutionList)
+	mux.HandleFunc("POST /institution/{id}/advance", a.handleInstitutionAdvance)
 
 	port := os.Getenv("PORT")
 	if port == "" {

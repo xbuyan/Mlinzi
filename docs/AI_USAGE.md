@@ -169,6 +169,39 @@ allowlist); the Dockerfile follows an established, standard pattern but
 hasn't been run end-to-end here, and is stated as such rather than implied
 verified.
 
+## Day 4b — Institution portal
+
+**Prompted by a direct, good question**: once a report is filed, how does
+it actually reach a real institution? Honest answer: it doesn't, yet — no
+institution exposes a public API to integrate with, so any claim of live
+delivery would have been false. Rather than leave that gap implicit, it's
+now stated in the README and demonstrated as a stand-in: an institution
+portal (`/institution`) where a reviewer can acknowledge and resolve filed
+reports, proving the accountability mechanism (`Advance`, the forward-only
+status trail) genuinely works from the institution's side, not only shown
+via hardcoded calls in a CLI demo.
+
+**Reused, not rebuilt.** `report.Store` gained exactly two additions:
+`All()` (enumerate every report, needed for a list view that never existed
+before — the store only supported lookup by a specific ID) and
+`Status.NextOptions()` (exposes which transitions are currently legal, so
+the UI renders only real actions instead of guessing which buttons should
+appear). Both are thin wrappers around logic already fully tested; no
+domain rule changed.
+
+**Re-verified the core invariant a third time, at a third layer.** The
+"status can't skip acknowledgement" rule is now tested at the package level
+(`internal/report`), the reporter-facing HTTP layer (Day 4), and now the
+institution-facing HTTP layer (`TestInstitutionCannotSkipAcknowledgement`) —
+because each layer is a place the rule could theoretically be bypassed, and
+each was checked rather than assumed safe by association with the layer
+below it.
+
+**Stated plainly, not glossed over:** this page has zero authentication.
+Anyone with the URL can act as any institution. That's flagged directly in
+the page itself, not just in developer docs, since a judge clicking around
+should not mistake a demo affordance for a finished access-control model.
+
 ## Honest limits
 
 - Kiswahili translations are unreviewed as of day 1.

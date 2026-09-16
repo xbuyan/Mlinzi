@@ -16,6 +16,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"sort"
 	"sync"
 	"time"
 
@@ -49,6 +50,14 @@ func (s Status) canTransitionTo(next Status) bool {
 		}
 	}
 	return false
+}
+
+// NextOptions returns the statuses this status can legally move to next, in
+// the order they're defined. An institution-facing UI uses this to render
+// only the actions that are actually valid — never to offer a button whose
+// click would just be rejected by Advance.
+func (s Status) NextOptions() []Status {
+	return append([]Status{}, validNext[s]...)
 }
 
 // submittedRecord is what enters the ledger when a report is first filed.
@@ -257,6 +266,34 @@ func (s *Store) VerifyReceipt(reportID, code string) (bool, error) {
 		return false, err
 	}
 	return r.VerificationCode == code, nil
+}
+
+// All returns every report in the store, ordered by submission sequence
+// (oldest first). This is what an institution-facing view lists — the
+// report layer otherwise only supports lookup by a specific ID, which is
+// the right shape for a reporter checking on their own report but not for
+// an institution reviewing everything routed to it.
+func (s *Store) All() []Report {
+	s.mu.RLock()
+	type idSeq struct {
+		id  string
+		seq int
+	}
+	ordered := make([]idSeq, 0, len(s.byID))
+	for id, seq := range s.byID {
+		ordered = append(ordered, idSeq{id, seq})
+	}
+	s.mu.RUnlock()
+
+	sort.Slice(ordered, func(i, j int) bool { return ordered[i].seq < ordered[j].seq })
+
+	out := make([]Report, 0, len(ordered))
+	for _, e := range ordered {
+		if r, err := s.Get(e.id); err == nil {
+			out = append(out, r)
+		}
+	}
+	return out
 }
 
 func newID() (string, error) {

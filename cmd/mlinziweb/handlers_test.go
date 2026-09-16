@@ -31,6 +31,8 @@ func newTestApp(t *testing.T) http.Handler {
 	mux.HandleFunc("POST /cases/{id}/checkin", a.handleCaseCheckIn)
 	mux.HandleFunc("POST /cases/{id}/escalate", a.handleCaseEscalate)
 	mux.HandleFunc("POST /cases/{id}/submit-share", a.handleCaseSubmitShare)
+	mux.HandleFunc("GET /institution", a.handleInstitutionList)
+	mux.HandleFunc("POST /institution/{id}/advance", a.handleInstitutionAdvance)
 	return mux
 }
 
@@ -239,5 +241,65 @@ func TestStatusFormRendersWithoutQuery(t *testing.T) {
 	rec := get(t, h, "/report/status")
 	if rec.Code != http.StatusOK {
 		t.Fatalf("expected 200, got %d", rec.Code)
+	}
+}
+
+func TestInstitutionListShowsFiledReports(t *testing.T) {
+	h := newTestApp(t)
+	submitRec := postForm(t, h, "/report", url.Values{
+		"category": {"bribery"}, "guide_id": {"ke-bribery-public-service"},
+		"content": {"Asked to pay for a birth certificate."},
+	})
+	reportID := reportIDPattern.FindString(submitRec.Body.String())
+
+	listRec := get(t, h, "/institution")
+	if listRec.Code != http.StatusOK {
+		t.Fatalf("expected 200, got %d", listRec.Code)
+	}
+	if !strings.Contains(listRec.Body.String(), reportID) {
+		t.Error("expected the newly filed report to appear in the institution list")
+	}
+}
+
+func TestInstitutionCanAcknowledgeAndResolve(t *testing.T) {
+	h := newTestApp(t)
+	submitRec := postForm(t, h, "/report", url.Values{
+		"category": {"policing"}, "guide_id": {"ke-police-misconduct"}, "content": {"content"},
+	})
+	reportID := reportIDPattern.FindString(submitRec.Body.String())
+
+	ackRec := postForm(t, h, "/institution/"+reportID+"/advance", url.Values{
+		"next_status": {"acknowledged"}, "actor": {"ipoa"}, "note": {"Case opened."},
+	})
+	if ackRec.Code != http.StatusOK {
+		t.Fatalf("acknowledge: expected 200, got %d", ackRec.Code)
+	}
+	if !strings.Contains(ackRec.Body.String(), "acknowledged") {
+		t.Error("expected the report to show as acknowledged after advancing")
+	}
+
+	resolveRec := postForm(t, h, "/institution/"+reportID+"/advance", url.Values{
+		"next_status": {"resolved"}, "actor": {"ipoa"}, "note": {"Officer disciplined."},
+	})
+	if !strings.Contains(resolveRec.Body.String(), "resolved") {
+		t.Error("expected the report to show as resolved after the second advance")
+	}
+}
+
+// TestInstitutionCannotSkipAcknowledgement re-verifies, at the HTTP layer,
+// the invariant internal/report already tests at the package level: an
+// institution cannot jump a report straight from submitted to resolved.
+func TestInstitutionCannotSkipAcknowledgement(t *testing.T) {
+	h := newTestApp(t)
+	submitRec := postForm(t, h, "/report", url.Values{
+		"category": {"bribery"}, "guide_id": {"ke-bribery-public-service"}, "content": {"content"},
+	})
+	reportID := reportIDPattern.FindString(submitRec.Body.String())
+
+	rec := postForm(t, h, "/institution/"+reportID+"/advance", url.Values{
+		"next_status": {"resolved"}, "actor": {"eacc"}, "note": {"closing quietly"},
+	})
+	if !strings.Contains(rec.Body.String(), "cannot move from") {
+		t.Errorf("expected the illegal transition to be rejected and shown as an error, got:\n%s", rec.Body.String())
 	}
 }

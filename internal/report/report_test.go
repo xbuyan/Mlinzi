@@ -176,3 +176,72 @@ func TestReportsDoNotInterleaveIncorrectly(t *testing.T) {
 		t.Fatalf("report two: expected 1 event, got %d", len(got2.Events))
 	}
 }
+
+func TestAllReturnsEveryReportInSubmissionOrder(t *testing.T) {
+	s := NewStore()
+	r1, _ := s.Submit("bribery", "ke-bribery-public-service", "first")
+	r2, _ := s.Submit("policing", "ke-police-misconduct", "second")
+	r3, _ := s.Submit("gbv", "ke-gender-based-violence", "third")
+
+	all := s.All()
+	if len(all) != 3 {
+		t.Fatalf("expected 3 reports, got %d", len(all))
+	}
+	if all[0].ID != r1.ID || all[1].ID != r2.ID || all[2].ID != r3.ID {
+		t.Fatalf("expected submission order %s,%s,%s — got %s,%s,%s",
+			r1.ID, r2.ID, r3.ID, all[0].ID, all[1].ID, all[2].ID)
+	}
+}
+
+func TestAllReflectsStatusChanges(t *testing.T) {
+	s := NewStore()
+	r, _ := s.Submit("bribery", "ke-bribery-public-service", "content")
+	s.Advance(r.ID, Acknowledged, "eacc", "")
+
+	all := s.All()
+	if len(all) != 1 || all[0].Status != Acknowledged {
+		t.Fatalf("expected the listed report to reflect its current status, got %+v", all)
+	}
+}
+
+func TestAllOnEmptyStore(t *testing.T) {
+	s := NewStore()
+	if all := s.All(); len(all) != 0 {
+		t.Fatalf("expected no reports, got %d", len(all))
+	}
+}
+
+func TestNextOptionsMatchesLegalTransitions(t *testing.T) {
+	cases := []struct {
+		from Status
+		want []Status
+	}{
+		{Submitted, []Status{Acknowledged, Rejected}},
+		{Acknowledged, []Status{Resolved, Rejected}},
+		{Resolved, nil},
+		{Rejected, nil},
+	}
+	for _, c := range cases {
+		got := c.from.NextOptions()
+		if len(got) != len(c.want) {
+			t.Fatalf("%s: expected %v, got %v", c.from, c.want, got)
+		}
+		for i := range got {
+			if got[i] != c.want[i] {
+				t.Fatalf("%s: expected %v, got %v", c.from, c.want, got)
+			}
+		}
+	}
+}
+
+func TestNextOptionsIsNotAliasedToInternalState(t *testing.T) {
+	// NextOptions returns a copy; mutating it must not corrupt the package's
+	// own transition table for every subsequent call.
+	got := Submitted.NextOptions()
+	got[0] = Resolved
+
+	fresh := Submitted.NextOptions()
+	if fresh[0] != Acknowledged {
+		t.Fatal("mutating a returned NextOptions slice corrupted the shared transition table")
+	}
+}

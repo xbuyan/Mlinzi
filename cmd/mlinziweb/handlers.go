@@ -341,3 +341,50 @@ func (a *app) handleStatusResult(w http.ResponseWriter, r *http.Request) {
 		"CaseID": caseID,
 	})
 }
+
+// --- Institution portal ---
+//
+// DEMO ONLY: this has no authentication. Anyone who finds the URL can
+// acknowledge or resolve any report. A real deployment would put this
+// behind institution login before any of it is usable. It exists here to
+// demonstrate that the accountability mechanism genuinely works from both
+// sides — reporter and institution — not just the reporter's.
+
+func (a *app) handleInstitutionList(w http.ResponseWriter, r *http.Request) {
+	lang := langFrom(r)
+
+	a.mu.Lock()
+	reports := a.reports.All()
+	a.mu.Unlock()
+
+	a.render(w, http.StatusOK, "institution.html", map[string]any{
+		"Lang":    lang,
+		"Reports": reports,
+	})
+}
+
+func (a *app) handleInstitutionAdvance(w http.ResponseWriter, r *http.Request) {
+	lang := langFrom(r)
+	id := r.PathValue("id")
+	if err := r.ParseForm(); err != nil {
+		http.Error(w, "bad form", http.StatusBadRequest)
+		return
+	}
+	next := report.Status(r.FormValue("next_status"))
+	actor := strings.TrimSpace(r.FormValue("actor"))
+	note := strings.TrimSpace(r.FormValue("note"))
+	if actor == "" {
+		actor = "institution"
+	}
+
+	a.mu.Lock()
+	_, err := a.reports.Advance(id, next, actor, note)
+	reports := a.reports.All()
+	a.mu.Unlock()
+
+	data := map[string]any{"Lang": lang, "Reports": reports}
+	if err != nil {
+		data["Error"] = err.Error()
+	}
+	a.render(w, http.StatusOK, "institution.html", data)
+}

@@ -52,14 +52,25 @@ All three layers wired into one story via `mlinzi demo-full`, and into a
 **web UI** (`cmd/mlinziweb`) covering the same flow: search and read a guide,
 file a report, optionally protect it with guardians, check in, and — for
 this demo — trigger an escalation and watch guardian release actually
-reconstruct the key.
+reconstruct the key. An **institution portal** (`/institution`) lets a
+reviewer acknowledge and resolve filed reports, proving the accountability
+mechanism works from both sides.
 
-**Known, stated gap:** there is no persistence layer. Reports and guardian
-cases live in server memory for the process's lifetime; a restart clears
-them. Report content is stored in plaintext, since encrypting it meaningfully
-depends on Layer 3's key-release mechanism, which the web UI now uses for
-the release key but not yet for the report content itself — that wiring is
-the next step.
+**How a report reaches a real institution — stated honestly:** Mlinzi does
+not have a live integration with EACC's, IPOA's, or any institution's actual
+case-management systems — none expose a public API to integrate with. The
+institution portal is a stand-in for what a real partner institution or NGO
+relay would use, not a live pipe. Two realistic models for a next iteration:
+(1) Mlinzi verifies and directs the person to the institution's own real
+channel, and the person logs the outcome back into Mlinzi as their permanent
+record; (2) a partner NGO relays reports into the institution's existing
+channel on the reporter's behalf and updates status here. Neither is built;
+both are honest next steps, not claimed capabilities.
+
+**Known, stated gap:** there is no persistence layer and no authentication
+on the institution portal — anyone with the URL can currently advance any
+report's status. Both are fine for a hackathon proof of concept and would
+need to be fixed before any real deployment.
 
 ## Run the web UI locally
 
