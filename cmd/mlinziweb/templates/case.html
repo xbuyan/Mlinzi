@@ -1,51 +1,52 @@
 {{define "content"}}
 {{$lang := .Lang}}
+{{$T := .T}}
 {{with .Case}}
-<h1 class="text-2xl font-bold text-[#0A2E36]">Case {{.ID}}</h1>
-<p class="mt-1 text-slate-600">Status: <span class="font-semibold uppercase">{{.Status}}</span> · {{.Threshold}} of {{len .GuardianIDs}} guardians required</p>
+<h1 class="text-2xl font-bold text-[#0A2E36]">{{$T.case_title}} {{.ID}}</h1>
+<p class="mt-1 text-slate-600">{{$T.case_status}}: <span class="font-semibold uppercase">{{index $T (printf "status_%s" .Status)}}</span> · {{printf $T.case_threshold_of .Threshold (len .GuardianIDs)}}</p>
 
 {{if $.Message}}
 <div class="mt-4 bg-[#E6F7F5] border border-[#02C39A] rounded-lg p-4 text-sm text-[#0A2E36]">{{$.Message}}</div>
 {{end}}
 
 <div class="mt-6 bg-white border border-slate-200 rounded-xl p-5">
-  <h2 class="font-bold text-[#0A2E36]">Reporter: check in</h2>
-  <p class="text-sm text-slate-600 mt-1">Confirms you're still in control. Resets the clock.</p>
+  <h2 class="font-bold text-[#0A2E36]">{{$T.case_checkin_title}}</h2>
+  <p class="text-sm text-slate-600 mt-1">{{$T.case_checkin_desc}}</p>
   <form method="post" action="/cases/{{.ID}}/checkin" class="mt-3">
     <input type="hidden" name="lang" value="{{$lang}}">
     <button type="submit" class="bg-[#028090] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#026e78]"
       {{if ne .Status "active"}}disabled{{end}}>
-      I'm here — check in
+      {{$T.case_checkin_button}}
     </button>
   </form>
 </div>
 
 <div class="mt-4 bg-white border border-slate-200 rounded-xl p-5">
-  <h2 class="font-bold text-[#0A2E36]">Demo: simulate going silent</h2>
-  <p class="text-sm text-slate-600 mt-1">In a real deployment this happens automatically once the check-in window passes. For this demo, trigger it directly against the real clock.</p>
+  <h2 class="font-bold text-[#0A2E36]">{{$T.case_demo_title}}</h2>
+  <p class="text-sm text-slate-600 mt-1">{{$T.case_demo_desc}}</p>
   <form method="post" action="/cases/{{.ID}}/escalate" class="mt-3">
     <input type="hidden" name="lang" value="{{$lang}}">
     <button type="submit" class="bg-amber-500 text-white px-5 py-2 rounded-lg font-semibold hover:bg-amber-600"
       {{if eq .Status "released"}}disabled{{end}}>
-      Simulate missed check-in
+      {{$T.case_demo_button}}
     </button>
   </form>
 </div>
 
 <div class="mt-4 bg-[#0A2E36] text-white rounded-xl p-5">
-  <h2 class="font-bold">Guardian portal</h2>
+  <h2 class="font-bold">{{$T.case_guardian_portal}}</h2>
   <p class="text-sm text-[#BFDDDF] mt-1">
-    Guardians: {{range $i, $g := .GuardianIDs}}{{if $i}}, {{end}}{{$g}}{{end}}.
-    Act as one of them and submit their share below. One alone will never be enough.
+    {{range $i, $g := .GuardianIDs}}{{if $i}}, {{end}}{{$g}}{{end}}.
+    {{$T.case_guardian_desc}}
   </p>
   <form method="post" action="/cases/{{.ID}}/submit-share" class="mt-3 space-y-2">
     <input type="hidden" name="lang" value="{{$lang}}">
     <select name="guardian_id" class="w-full rounded-lg px-3 py-2 text-slate-900">
       {{range .GuardianIDs}}<option value="{{.}}">{{.}}</option>{{end}}
     </select>
-    <input name="share" placeholder="Paste this guardian's share (hex)" class="w-full rounded-lg px-3 py-2 text-slate-900 font-mono text-xs">
+    <input name="share" placeholder="{{$T.case_share_placeholder}}" class="w-full rounded-lg px-3 py-2 text-slate-900 font-mono text-xs">
     <button type="submit" class="bg-[#02C39A] text-[#0A2E36] px-5 py-2 rounded-lg font-semibold hover:bg-[#02b08a]">
-      Submit share
+      {{$T.case_submit_share}}
     </button>
   </form>
 </div>

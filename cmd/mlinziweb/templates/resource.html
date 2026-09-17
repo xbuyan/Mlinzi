@@ -1,14 +1,15 @@
 {{define "content"}}
 {{$lang := .Lang}}
+{{$T := .T}}
 {{with .Document}}
-<a href="/resources?lang={{$lang}}" class="text-sm text-[#028090]">&larr; Back to the Resources Center</a>
+<a href="/resources?lang={{$lang}}" class="text-sm text-[#028090]">&larr; {{$T.resource_back}}</a>
 
 <h1 class="mt-2 text-3xl font-bold text-[#0A2E36]">{{.Title}}</h1>
 <p class="mt-2 text-slate-600">{{.Summary}}</p>
 
 <div class="mt-3 text-xs text-slate-400">
-  {{.Jurisdiction}} &middot; {{.Kind}} &middot; adopted {{.Adopted}} &middot; last verified {{.LastVerified}}
-  {{if .Stale}}<span class="text-amber-600 font-semibold">— older than 90 days, verify before relying on this</span>{{end}}
+  {{.Jurisdiction}} &middot; {{index $T (printf "kind_%s" .Kind)}} &middot; {{$T.resources_adopted}} {{.Adopted}} &middot; {{$T.guide_last_verified}} {{.LastVerified}}
+  {{if .Stale}}<span class="text-amber-600 font-semibold">— {{$T.guide_older_than_90}}</span>{{end}}
 </div>
 
 {{if .Caveat}}
@@ -19,14 +20,24 @@
 
 <a href="{{.FullTextURL}}" target="_blank" rel="noopener"
    class="mt-4 inline-block border border-[#028090] text-[#028090] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#E6F7F5]">
-  Read the full authoritative text &mdash; {{.Publisher}}
+  {{$T.resource_full_text}} &mdash; {{.Publisher}}
 </a>
 
+{{/* Stated plainly rather than left to be assumed: the surrounding page is
+     translated, the law is not. A reader should never have to wonder whether
+     the Kiswahili or French they are looking at is the version with legal
+     force. Shown only when the page is not already in English, because in
+     English the note would be telling the reader what they can see. */}}
+{{if ne $lang "en"}}
+<div class="mt-4 bg-slate-100 border border-slate-200 text-slate-700 text-sm rounded-xl p-4">
+  {{$T.resource_english_law_note}}
+</div>
+{{end}}
+
 <section class="mt-8">
-  <h2 class="text-lg font-bold text-[#0A2E36]">Provisions ({{len .Provisions}})</h2>
+  <h2 class="text-lg font-bold text-[#0A2E36]">{{$T.resource_provisions_heading}} ({{len .Provisions}})</h2>
   <p class="mt-1 text-xs text-slate-400">
-    Each provision carries the source it was checked against, separately from
-    the document as a whole.
+    {{$T.resource_provisions_note}}
   </p>
   <div class="mt-3 space-y-4">
     {{range .Provisions}}
@@ -37,7 +48,7 @@
       </div>
       {{range .Paragraphs}}<p class="mt-2 text-slate-700">{{.}}</p>{{end}}
       {{if .Disputed}}
-        <div class="mt-2 text-xs bg-amber-100 text-amber-800 rounded px-2 py-1 inline-block font-semibold">sources disagree about this provision</div>
+        <div class="mt-2 text-xs bg-amber-100 text-amber-800 rounded px-2 py-1 inline-block font-semibold">{{$T.resource_sources_disagree}}</div>
       {{end}}
       <div class="mt-3 space-y-0.5 text-xs text-slate-400">
         {{range .Sources}}<div>{{.Publisher}} ({{.Confidence}}) &mdash; {{.URL}}</div>{{end}}
@@ -48,7 +59,7 @@
 </section>
 
 <section class="mt-8">
-  <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wide">Sources for this document</h2>
+  <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wide">{{$T.resource_sources_for_document}}</h2>
   <ul class="mt-2 space-y-1 text-xs text-slate-500">
     {{range .Sources}}<li>{{.Publisher}} ({{.Confidence}}) &mdash; {{.URL}}</li>{{end}}
   </ul>

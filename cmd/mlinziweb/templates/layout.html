@@ -22,7 +22,7 @@
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen">
   <div id="offline-banner" class="hidden bg-amber-500 text-white text-sm text-center py-1.5">
-    You're offline. Guides you've viewed before still work. Filing a report or updating a case needs a connection.
+    {{.T.offline_banner}}
   </div>
   <script>
     const banner = document.getElementById("offline-banner");
@@ -32,19 +32,30 @@
     updateOfflineBanner();
   </script>
   <header class="bg-[#0A2E36] text-white">
-    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="/" class="text-xl font-bold tracking-tight">Mlinzi</a>
-      <nav class="flex items-center gap-4 text-sm">
-        <a href="/resources" class="text-[#8FE3D0] hover:text-white">Resources Center</a>
-        <a href="/report/status" class="text-[#8FE3D0] hover:text-white">Check a report</a>
-        <a href="/institution" class="text-[#8FE3D0] hover:text-white">Institution portal (demo)</a>
-        <form method="get" action="" class="flex items-center gap-1">
-          <select name="lang" onchange="this.form.submit()" class="bg-[#0A2E36] border border-[#1C7293] rounded px-2 py-1 text-xs">
-            <option value="en" {{if eq .Lang "en"}}selected{{end}}>English</option>
-            <option value="sw" {{if eq .Lang "sw"}}selected{{end}}>Kiswahili</option>
-            <option value="fr" {{if eq .Lang "fr"}}selected{{end}}>Français</option>
-          </select>
-        </form>
+    <div class="max-w-4xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-y-3">
+      <a href="/?lang={{.Lang}}" class="text-xl font-bold tracking-tight">Mlinzi</a>
+      <nav class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm" aria-label="{{.T.nav_language}}">
+        <a href="/resources?lang={{.Lang}}" class="text-[#8FE3D0] hover:text-white">{{.T.nav_resources}}</a>
+        <a href="/report/status?lang={{.Lang}}" class="text-[#8FE3D0] hover:text-white">{{.T.nav_check_report}}</a>
+        <a href="/institution?lang={{.Lang}}" class="text-[#8FE3D0] hover:text-white">{{.T.nav_institution}}</a>
+
+        {{/* Language switcher.
+             Links, each pointing at this same URL with only ?lang= changed,
+             so the chosen country and search term survive a language change.
+             The form-and-select this replaced submitted to action="" — which
+             drops the whole query string — so switching language on the home
+             page silently reset you to the default country with no search.
+             Links also need no JavaScript, keeping the control usable
+             offline and on the simplest browser. */}}
+        <div class="flex items-center gap-1">
+          {{range .LangLinks}}
+            {{if .Current}}
+              <span class="px-2 py-1 rounded border border-[#02C39A] text-[#8FE3D0] font-semibold" aria-current="true">{{.Name}}</span>
+            {{else}}
+              <a href="{{.URL}}" hreflang="{{.Code}}" lang="{{.Code}}" class="px-2 py-1 rounded border border-[#1C7293] text-[#8FE3D0] hover:text-white">{{.Name}}</a>
+            {{end}}
+          {{end}}
+        </div>
       </nav>
     </div>
   </header>
@@ -52,7 +63,7 @@
     {{template "content" .}}
   </main>
   <footer class="max-w-4xl mx-auto px-4 py-8 text-xs text-slate-400">
-    Mlinzi — a proof of concept built for the OSF × Andela hackathon. No persistence layer yet: data lives only for this server's uptime.
+    {{.T.footer_text}}
   </footer>
 </body>
 </html>

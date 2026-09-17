@@ -1,19 +1,17 @@
 {{define "content"}}
 {{$lang := .Lang}}
-<h1 class="text-2xl font-bold text-[#0A2E36]">Institution portal</h1>
+{{$T := .T}}
+<h1 class="text-2xl font-bold text-[#0A2E36]">{{$T.institution_title}}</h1>
 
 <div class="mt-3 bg-amber-50 border border-amber-300 rounded-lg p-4 text-sm text-amber-900">
-  <strong>Demo only — no authentication.</strong> This page has no login. Anyone with the
-  URL can acknowledge or resolve any report below. A real deployment would put this behind
-  institution sign-in before any action here is usable. Shown here to prove the accountability
-  mechanism genuinely works from the institution's side, not only the reporter's.
+  {{$T.institution_warning}}
 </div>
 
 {{if .Error}}<div class="mt-4 bg-red-50 text-red-700 text-sm rounded-lg px-4 py-2">{{.Error}}</div>{{end}}
 
 <div class="mt-6 space-y-4">
   {{if not .Reports}}
-    <p class="text-slate-500">No reports have been filed yet.</p>
+    <p class="text-slate-500">{{$T.institution_empty}}</p>
   {{end}}
   {{range .Reports}}
   <div class="bg-white border border-slate-200 rounded-xl p-5">
@@ -23,21 +21,21 @@
         {{if eq .Status "submitted"}}bg-slate-100 text-slate-700
         {{else if eq .Status "acknowledged"}}bg-amber-100 text-amber-800
         {{else if eq .Status "resolved"}}bg-[#E6F7F5] text-[#028090]
-        {{else}}bg-red-100 text-red-700{{end}}">{{.Status}}</div>
+        {{else}}bg-red-100 text-red-700{{end}}">{{index $T (printf "status_%s" .Status)}}</div>
     </div>
     <div class="mt-2 text-sm text-slate-700">
-      <span class="font-semibold">{{.Category}}</span>
+      <span class="font-semibold">{{index $T (printf "category_%s" .Category)}}</span>
       {{if .GuideID}}<span class="text-slate-400"> · {{.GuideID}}</span>{{end}}
     </div>
     <p class="mt-1 text-sm text-slate-600">{{.Content}}</p>
-    <div class="mt-2 text-xs text-slate-400">Filed {{.SubmittedAt.Format "Jan 2, 2006 15:04"}}</div>
+    <div class="mt-2 text-xs text-slate-400">{{$T.institution_filed}} {{.SubmittedAt.Format "Jan 2, 2006 15:04"}}</div>
 
     {{if .Events}}
     <div class="mt-3 border-t border-slate-100 pt-3 space-y-1">
       {{range .Events}}
       <div class="text-xs text-slate-500">
-        {{.Status}} — {{.Timestamp.Format "Jan 2, 2006 15:04"}}
-        {{if .Actor}}by {{.Actor}}{{end}}
+        {{index $T (printf "status_%s" .Status)}} — {{.Timestamp.Format "Jan 2, 2006 15:04"}}
+        {{if .Actor}}{{$T.timeline_by}} {{.Actor}}{{end}}
         {{if .Note}} — {{.Note}}{{end}}
       </div>
       {{end}}
@@ -49,14 +47,14 @@
     <form method="post" action="/institution/{{.ID}}/advance" class="mt-3 flex flex-wrap gap-2 items-center border-t border-slate-100 pt-3">
       <input type="hidden" name="lang" value="{{$lang}}">
       <select name="next_status" class="border border-slate-300 rounded px-2 py-1 text-sm">
-        {{range $opts}}<option value="{{.}}">{{.}}</option>{{end}}
+        {{range $opts}}<option value="{{.}}">{{index $T (printf "status_%s" .)}}</option>{{end}}
       </select>
-      <input name="actor" placeholder="Your institution (e.g. eacc, ipoa)" class="border border-slate-300 rounded px-2 py-1 text-sm">
-      <input name="note" placeholder="Note (optional)" class="border border-slate-300 rounded px-2 py-1 text-sm flex-1 min-w-[10rem]">
-      <button type="submit" class="bg-[#028090] text-white px-4 py-1.5 rounded text-sm font-semibold hover:bg-[#026e78]">Update status</button>
+      <input name="actor" placeholder="{{$T.institution_actor_placeholder}}" class="border border-slate-300 rounded px-2 py-1 text-sm">
+      <input name="note" placeholder="{{$T.institution_note_placeholder}}" class="border border-slate-300 rounded px-2 py-1 text-sm flex-1 min-w-[10rem]">
+      <button type="submit" class="bg-[#028090] text-white px-4 py-1.5 rounded text-sm font-semibold hover:bg-[#026e78]">{{$T.institution_update_status}}</button>
     </form>
     {{else}}
-    <div class="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-400">No further status changes — this report is closed.</div>
+    <div class="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-400">{{$T.institution_closed}}</div>
     {{end}}
   </div>
   {{end}}

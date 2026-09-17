@@ -29,8 +29,7 @@ func (a *app) handleHome(w http.ResponseWriter, r *http.Request) {
 		guides = append(guides, newGuideSummaryView(g, lang))
 	}
 
-	a.render(w, http.StatusOK, "home.html", map[string]any{
-		"Lang":         lang,
+	a.render(w, r, http.StatusOK, "home.html", map[string]any{
 		"Query":        q,
 		"Jurisdiction": jurisdiction,
 		"Guides":       guides,
@@ -48,9 +47,13 @@ func (a *app) handleGuideDetail(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	a.render(w, http.StatusOK, "guide.html", map[string]any{
-		"Lang":  lang,
+	a.render(w, r, http.StatusOK, "guide.html", map[string]any{
 		"Guide": newGuideView(g, lang),
+		// A guide with no translation in the requested language would
+		// otherwise silently render in English with nothing to say so. The
+		// page says so instead — the same honesty the data model applies to
+		// a source it could not verify.
+		"LangMissing": !hasLang(g.Langs(), lang),
 	})
 }
 
@@ -67,8 +70,7 @@ func (a *app) handleResources(w http.ResponseWriter, r *http.Request) {
 	for _, d := range a.resources.All() {
 		docs = append(docs, newResourceSummaryView(d, lang))
 	}
-	a.render(w, http.StatusOK, "resources.html", map[string]any{
-		"Lang":      lang,
+	a.render(w, r, http.StatusOK, "resources.html", map[string]any{
 		"Documents": docs,
 	})
 }
@@ -80,8 +82,7 @@ func (a *app) handleResourceDetail(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	a.render(w, http.StatusOK, "resource.html", map[string]any{
-		"Lang":     lang,
+	a.render(w, r, http.StatusOK, "resource.html", map[string]any{
 		"Document": newResourceView(d, lang),
 	})
 }
@@ -98,8 +99,7 @@ func (a *app) handleReportNew(w http.ResponseWriter, r *http.Request) {
 			title = g.Title.In(lang)
 		}
 	}
-	a.render(w, http.StatusOK, "report_new.html", map[string]any{
-		"Lang":      lang,
+	a.render(w, r, http.StatusOK, "report_new.html", map[string]any{
 		"GuideID":   guideID,
 		"GuideName": title,
 	})
@@ -116,8 +116,8 @@ func (a *app) handleReportCreate(w http.ResponseWriter, r *http.Request) {
 	content := strings.TrimSpace(r.FormValue("content"))
 
 	if content == "" {
-		a.render(w, http.StatusBadRequest, "report_new.html", map[string]any{
-			"Lang": lang, "GuideID": guideID, "Error": "Please describe what happened before submitting.",
+		a.render(w, r, http.StatusBadRequest, "report_new.html", map[string]any{
+			"GuideID": guideID, "Error": a.strings.Get(lang, "report_error_describe"),
 		})
 		return
 	}
@@ -130,8 +130,7 @@ func (a *app) handleReportCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	a.render(w, http.StatusOK, "report_result.html", map[string]any{
-		"Lang":   lang,
+	a.render(w, r, http.StatusOK, "report_result.html", map[string]any{
 		"Report": rep,
 	})
 }
@@ -139,7 +138,6 @@ func (a *app) handleReportCreate(w http.ResponseWriter, r *http.Request) {
 // --- Protection: create a guardian case for a report ---
 
 func (a *app) handleProtectCreate(w http.ResponseWriter, r *http.Request) {
-	lang := langFrom(r)
 	reportID := r.PathValue("id")
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, "bad form", http.StatusBadRequest)
@@ -200,8 +198,7 @@ func (a *app) handleProtectCreate(w http.ResponseWriter, r *http.Request) {
 	delete(a.pendingShares, c.ID)
 	a.mu.Unlock()
 
-	a.render(w, http.StatusOK, "case_created.html", map[string]any{
-		"Lang":       lang,
+	a.render(w, r, http.StatusOK, "case_created.html", map[string]any{
 		"Case":       c,
 		"ShareRows":  rows,
 		"IntervalHr": hours,
@@ -222,7 +219,6 @@ func defaultGuardianLabel(i int) string {
 // --- Case dashboard ---
 
 func (a *app) handleCaseDashboard(w http.ResponseWriter, r *http.Request) {
-	lang := langFrom(r)
 	id := r.PathValue("id")
 
 	a.mu.Lock()
@@ -232,13 +228,12 @@ func (a *app) handleCaseDashboard(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	a.renderCase(w, lang, c, "")
+	a.renderCase(w, r, c, "")
 }
 
-func (a *app) renderCase(w http.ResponseWriter, lang string, c guardian.Case, message string) {
+func (a *app) renderCase(w http.ResponseWriter, r *http.Request, c guardian.Case, message string) {
 	overdue := c.IsOverdue(time.Now())
-	a.render(w, http.StatusOK, "case.html", map[string]any{
-		"Lang":    lang,
+	a.render(w, r, http.StatusOK, "case.html", map[string]any{
 		"Case":    c,
 		"Overdue": overdue,
 		"Message": message,
@@ -257,15 +252,15 @@ func (a *app) handleCaseCheckIn(w http.ResponseWriter, r *http.Request) {
 	}
 	a.mu.Unlock()
 
-	msg := "Checked in — the clock has been reset."
+	msg := a.strings.Get(lang, "case_msg_checked_in")
 	if err != nil {
-		msg = "Could not check in: " + err.Error()
+		msg = a.strings.Get(lang, "case_msg_checkin_failed") + ": " + err.Error()
 	}
 	if c.ID == "" {
 		http.NotFound(w, r)
 		return
 	}
-	a.renderCase(w, lang, c, msg)
+	a.renderCase(w, r, c, msg)
 }
 
 // handleCaseEscalate exists for demo purposes: in a real deployment,
@@ -293,15 +288,15 @@ func (a *app) handleCaseEscalate(w http.ResponseWriter, r *http.Request) {
 	}
 	a.mu.Unlock()
 
-	msg := "Case escalated — guardians may now submit their shares."
+	msg := a.strings.Get(lang, "case_msg_escalated")
 	if err != nil {
-		msg = "Could not escalate: " + err.Error()
+		msg = a.strings.Get(lang, "case_msg_escalate_failed") + ": " + err.Error()
 	}
 	if c.ID == "" {
 		http.NotFound(w, r)
 		return
 	}
-	a.renderCase(w, lang, c, msg)
+	a.renderCase(w, r, c, msg)
 }
 
 func (a *app) handleCaseSubmitShare(w http.ResponseWriter, r *http.Request) {
@@ -319,16 +314,16 @@ func (a *app) handleCaseSubmitShare(w http.ResponseWriter, r *http.Request) {
 	a.mu.Lock()
 	var msg string
 	if decodeErr != nil {
-		msg = "That share could not be read — check it was copied in full."
+		msg = a.strings.Get(lang, "case_msg_share_unreadable")
 	} else {
 		key, err := a.cases.SubmitShare(id, guardianID, share)
 		switch {
 		case err == guardian.ErrInsufficientCount:
-			msg = "Share accepted. Waiting on more guardians to reach the threshold."
+			msg = a.strings.Get(lang, "case_msg_share_accepted")
 		case err != nil:
-			msg = "Share rejected: " + err.Error()
+			msg = a.strings.Get(lang, "case_msg_share_rejected") + ": " + err.Error()
 		default:
-			msg = "Threshold reached. Release key reconstructed: " + hex.EncodeToString(key)[:16] + "…"
+			msg = a.strings.Get(lang, "case_msg_threshold_reached") + ": " + hex.EncodeToString(key)[:16] + "…"
 		}
 	}
 	c, _ := a.cases.Get(id)
@@ -338,13 +333,13 @@ func (a *app) handleCaseSubmitShare(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	a.renderCase(w, lang, c, msg)
+	a.renderCase(w, r, c, msg)
 }
 
 // --- Report status lookup, by ID + verification code, no identity required ---
 
 func (a *app) handleStatusForm(w http.ResponseWriter, r *http.Request) {
-	a.render(w, http.StatusOK, "status_form.html", map[string]any{"Lang": langFrom(r)})
+	a.render(w, r, http.StatusOK, "status_form.html", nil)
 }
 
 func (a *app) handleStatusResult(w http.ResponseWriter, r *http.Request) {
@@ -366,14 +361,13 @@ func (a *app) handleStatusResult(w http.ResponseWriter, r *http.Request) {
 	a.mu.Unlock()
 
 	if err != nil || !ok {
-		a.render(w, http.StatusOK, "status_form.html", map[string]any{
-			"Lang": lang, "Error": "No report matches that ID and code.",
+		a.render(w, r, http.StatusOK, "status_form.html", map[string]any{
+			"Error": a.strings.Get(lang, "lookup_error_no_match"),
 		})
 		return
 	}
 
-	a.render(w, http.StatusOK, "status_result.html", map[string]any{
-		"Lang":   lang,
+	a.render(w, r, http.StatusOK, "status_result.html", map[string]any{
 		"Report": rep,
 		"CaseID": caseID,
 	})
@@ -388,20 +382,16 @@ func (a *app) handleStatusResult(w http.ResponseWriter, r *http.Request) {
 // sides — reporter and institution — not just the reporter's.
 
 func (a *app) handleInstitutionList(w http.ResponseWriter, r *http.Request) {
-	lang := langFrom(r)
-
 	a.mu.Lock()
 	reports := a.reports.All()
 	a.mu.Unlock()
 
-	a.render(w, http.StatusOK, "institution.html", map[string]any{
-		"Lang":    lang,
+	a.render(w, r, http.StatusOK, "institution.html", map[string]any{
 		"Reports": reports,
 	})
 }
 
 func (a *app) handleInstitutionAdvance(w http.ResponseWriter, r *http.Request) {
-	lang := langFrom(r)
 	id := r.PathValue("id")
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, "bad form", http.StatusBadRequest)
@@ -419,9 +409,9 @@ func (a *app) handleInstitutionAdvance(w http.ResponseWriter, r *http.Request) {
 	reports := a.reports.All()
 	a.mu.Unlock()
 
-	data := map[string]any{"Lang": lang, "Reports": reports}
+	data := map[string]any{"Reports": reports}
 	if err != nil {
 		data["Error"] = err.Error()
 	}
-	a.render(w, http.StatusOK, "institution.html", data)
+	a.render(w, r, http.StatusOK, "institution.html", data)
 }

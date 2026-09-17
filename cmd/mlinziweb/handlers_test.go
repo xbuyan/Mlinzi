@@ -15,11 +15,27 @@ import (
 // simplified stand-in for it.
 func newTestApp(t *testing.T) http.Handler {
 	t.Helper()
+	_, h := newTestAppWithStore(t)
+	return h
+}
+
+// newTestAppWithStore also hands back the app itself, for tests that need to
+// enumerate the loaded data — every channel kind, every category, every
+// document kind — rather than only make requests against it. That matters for
+// the localization tests: the labels a page looks up dynamically are driven by
+// whatever the data actually contains, so a test can only check them against
+// the real dataset, not against a list someone remembered to update.
+func newTestAppWithStore(t *testing.T) (*app, http.Handler) {
+	t.Helper()
 	a, err := newApp()
 	if err != nil {
 		t.Fatalf("newApp: %v", err)
 	}
+	return a, muxForTest(t, a)
+}
 
+func muxForTest(t *testing.T, a *app) http.Handler {
+	t.Helper()
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /{$}", a.handleHome)
 	mux.HandleFunc("GET /guides/{id}", a.handleGuideDetail)

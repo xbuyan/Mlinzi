@@ -1,7 +1,8 @@
 {{define "content"}}
-<h1 class="text-2xl font-bold text-[#0A2E36]">File a report</h1>
-{{if .GuideName}}<p class="mt-1 text-slate-600">About: <span class="font-semibold">{{.GuideName}}</span></p>{{end}}
-<p class="mt-3 text-sm text-slate-500">You do not need to give your name. Once submitted, this report is hash-chained — it cannot be quietly edited or deleted afterward.</p>
+{{$T := .T}}
+<h1 class="text-2xl font-bold text-[#0A2E36]">{{$T.report_title}}</h1>
+{{if .GuideName}}<p class="mt-1 text-slate-600">{{$T.report_about}}: <span class="font-semibold">{{.GuideName}}</span></p>{{end}}
+<p class="mt-3 text-sm text-slate-500">{{$T.report_privacy_note}}</p>
 
 {{if .Error}}<div class="mt-4 bg-red-50 text-red-700 text-sm rounded-lg px-4 py-2">{{.Error}}</div>{{end}}
 
@@ -9,22 +10,22 @@
   <input type="hidden" name="lang" value="{{.Lang}}">
   <input type="hidden" name="guide_id" value="{{.GuideID}}">
   <div>
-    <label class="block text-sm font-medium text-slate-700">Category</label>
+    <label class="block text-sm font-medium text-slate-700">{{$T.report_category}}</label>
     <select name="category" class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2">
-      <option value="bribery">Bribery / corruption</option>
-      <option value="policing">Police misconduct</option>
-      <option value="gbv">Gender-based violence</option>
-      <option value="other">Other</option>
+      <option value="bribery">{{$T.category_bribery}}</option>
+      <option value="policing">{{$T.category_policing}}</option>
+      <option value="gbv">{{$T.category_gbv}}</option>
+      <option value="other">{{$T.category_other}}</option>
     </select>
   </div>
   <div>
-    <label class="block text-sm font-medium text-slate-700">What happened?</label>
+    <label class="block text-sm font-medium text-slate-700">{{$T.report_what_happened}}</label>
     <textarea name="content" rows="6" required
       class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#028090]"
-      placeholder="Date, place, what happened, who was involved..."></textarea>
+      placeholder="{{$T.report_what_happened_placeholder}}"></textarea>
   </div>
   <button type="submit" class="bg-[#028090] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#026e78]">
-    Submit anonymously
+    {{$T.report_submit_anon}}
   </button>
 </form>
 {{end}}

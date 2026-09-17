@@ -58,6 +58,17 @@ type guideView struct {
 	Langs        []string
 }
 
+// hasLang reports whether a content item actually carries a translation for
+// lang, so a page can say so rather than quietly showing English.
+func hasLang(langs []string, lang string) bool {
+	for _, l := range langs {
+		if l == lang {
+			return true
+		}
+	}
+	return false
+}
+
 // sourceViews flattens sources the same way everywhere they are shown, so a
 // claimed source looks identical whether it backs a guide's hotline or a
 // constitution's article.

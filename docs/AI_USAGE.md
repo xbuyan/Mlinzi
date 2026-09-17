@@ -395,11 +395,86 @@ Completeness was the goal and was achieved, but on those two pages
 completeness is now in tension with low bandwidth, and that tension is real;
 it is recorded here rather than presented as solved.
 
+## Day 9 — Localization that actually reaches the page
+
+**A vague bug report, taken seriously rather than guessed at.** "The French
+and Swahili translations aren't working well" could have meant anything, so
+the first move was to reproduce it rather than assume. Four separate defects
+turned up, and none of them was a translation problem:
+
+1. Header links carried no `?lang=`, so the language was lost on the first
+   click anywhere.
+2. The switcher was a form posting to `action=""`, which replaces the entire
+   query string — changing language on the home page silently discarded the
+   chosen country and the search term.
+3. All interface chrome was literal English in the templates: a French guide
+   rendered inside an English frame.
+4. The Resources Center was English-only, and every form submitted a hidden
+   `lang` field that the server never read — so each POST result page came
+   back in English.
+
+The fourth was only visible because a test failed on a message the page was
+supposed to have translated. The hidden field had been sent all along; nothing
+read it.
+
+**Chrome as data, not as templates.** Interface strings moved into a
+catalogue (`internal/ui`) with the same language-keyed shape as the civic
+data, deliberately kept out of `data/` and `resources/`: those folders are
+validated as sourced civic facts, and UI labels have no publisher, URL or
+retrieval date. Put them together and one of two bad things happens — the
+validation has to be loosened for everything, or chrome borrows the
+credibility of a file that was verified. The catalogue validates on its own
+terms instead (a key with no English text fails the load, because a blank
+button is worse than a refused start).
+
+**Three tripwires, because templates are text.** Nothing compiles a template's
+string lookup, so a typo, a renamed key, or a label for a value that only
+exists in the data silently renders as an empty string — a heading or button
+that simply vanishes. So: every key a template names must exist; every label
+looked up from data (channel kinds, categories, statuses, document kinds) must
+exist, enumerated from the real dataset rather than from a list someone
+remembered to update; and every string in a translated jurisdiction must
+resolve in every language. I confirmed the first two actually fail — by
+typo-ing a key and by deleting a category label — because a completeness check
+that cannot fail proves nothing.
+
+**The fix that broke something else, caught by verifying rather than
+assuming.** The offline copy is keyed by exact URL and language lives in the
+URL, so precaching only the bare paths meant a reader in Kiswahili who lost
+their connection got the browser's offline error: the offline claim held in
+English only. Adding the `?lang=` variants then broke the installed app's
+offline launch, because the manifest's `start_url` is `/` — a bare URL that no
+longer matched anything in the cache. Both forms are now precached, and a test
+compares the precache list against the manifest's `start_url` so it cannot
+regress a third time.
+
+**A verification harness that had to be fixed before it could be trusted.**
+The earlier offline check used `--dump-dom`, which exits as soon as the DOM is
+produced and can cut the service worker's install short. It no longer
+reproduced, and rather than report a failure that might not exist — or, worse,
+report a success by accident — the check was rewritten to drive Chrome over
+the DevTools protocol and wait for `navigator.serviceWorker.ready`, then
+confirm the specific French URL was really in the cache before killing the
+server. With the server genuinely dead, the French and Kiswahili guides and
+the French home page render from the cache with no English chrome left on
+them. Two failed attempts, one of them producing a stream of confidently
+irrelevant numbers, were discarded rather than reported.
+
+**The legal text stays in English, and the page says so.** Translating a
+constitution's articles would produce a version that looks authoritative and
+is not, so the provisions keep their original wording and a visible notice
+explains that the translation covers the page around them and not the law
+itself. A guide with no translation says that too, rather than quietly
+presenting English.
+
 ## Honest limits
 
 - Kiswahili translations are unreviewed by a first-language speaker, as of day
   1, and both the Kiswahili and French additions since then are AI-drafted in
-  a single pass with no separate reviewer.
+  a single pass with no separate reviewer — including the interface strings
+  added on day 9, which are the most visible of the lot.
+- The CLI remains English-only: it reads the translated data, but its own
+  labels have no language switch.
 - Some contact details rest on secondary sources (news outlets, NGO
   directories) where an official page could not be reached. Each is marked
   `secondary` in the data rather than presented as official.

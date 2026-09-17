@@ -153,14 +153,48 @@ run through every guide (67 strings for Kenya, 70 for Uganda, each verified
 to resolve). Nigeria remains English-only, and its data says so rather than
 half-translating it.
 
-That completeness is now a tested property rather than a convention:
-`TestTranslatedJurisdictionsCoverEveryString` walks the domain type — not the
-JSON — and fails naming the exact guide, field and language if any string in
-a translated jurisdiction is missing a translation. Adding a field without a
-translation, or a country claiming full coverage without it, fails the build.
+**The interface is translated too**, not just the content. Navigation,
+buttons, field labels, headings, statuses, the offline banner and the footer
+all come from a string catalogue (`internal/ui/strings.json`) with the same
+language-keyed shape as the civic data, so adding a language stays a data
+change. Chrome used to be literal English in the templates, which meant a
+French guide rendered inside an English frame.
 
-As with Kiswahili, French is AI-drafted and not yet reviewed by a native
-speaker — stated here rather than implied verified.
+Four separate mechanisms carry a language through the app, and each of them
+was a place it could be dropped — all four are now covered by tests:
+
+- **Links** keep it: every header link carries `?lang=`, so clicking away no
+  longer resets you to English.
+- **The switcher** preserves the rest of the query. It was a form posting to
+  `action=""`, which replaces the whole query string — so changing language on
+  the home page silently threw away the chosen country and the search term.
+  It is now plain links, which also means it needs no JavaScript.
+- **Forms** submit it and the server reads it. The hidden `lang` field was
+  being sent all along and never read, so every POST result page — a filed
+  report, a status lookup, a case action — came back in English however the
+  person had set the language.
+- **Offline copies** exist per language, because offline caching is keyed by
+  exact URL and language lives in the URL. Precaching only the bare paths
+  meant someone reading in Kiswahili who lost their connection got the
+  browser's offline error; the offline claim held in English only.
+
+Completeness is a tested property rather than a convention. Three tripwires
+cover the ways a translated page can quietly go wrong: every string in a
+translated jurisdiction must resolve
+(`TestTranslatedJurisdictionsCoverEveryString`), every catalogue key a
+template names must exist (`TestEveryTemplateStringKeyExistsInCatalog` — a typo
+otherwise renders a blank heading, since templates are text and no compiler
+sees it), and every label looked up from data — channel kinds, categories,
+statuses, document kinds — must exist too (`TestDynamicLabelKeysExist`, which
+enumerates them from the real dataset).
+
+**Two things are deliberately not translated, and the pages say so.** The law
+itself stays in its authoritative English wording, with a visible notice on
+the page explaining that the surrounding translation does not extend to the
+articles; and a guide with no translation in the requested language says so
+instead of silently presenting English. As with Kiswahili, the French is
+AI-drafted and not yet reviewed by a native speaker — stated here rather than
+implied verified.
 
 ## Accessibility: read-aloud
 
@@ -178,6 +212,20 @@ at install time, so they render with zero connectivity — including on a
 first-ever visit with no prior connection. This is a genuine, low-bandwidth
 capability, not a claim: try it — load the site once, then disable your
 network and reload.
+
+The precache covers every supported language, and the bare paths alongside
+the `?lang=` variants, because a cache key is an exact URL: the manifest's
+`start_url` is `/`, and a bookmark or typed address is the bare path too.
+Precaching language variants without the bare paths is a mistake this repo
+actually made, and the installed app could not open offline until a test
+pinned both forms.
+
+The Resources Center documents are precached once, in English, rather than
+in three languages each: they render to about 450 KB apiece, so the variants
+would put several megabytes in the cache of the basic phones this is built
+for, to duplicate a body of legal text that does not change between them.
+The guides — what someone actually needs in the moment — are offline in every
+language.
 
 **Reporting and protection are not offline-capable, by design.** A report's
 value depends on reaching a shared, tamper-evident ledger the moment it's
@@ -232,6 +280,15 @@ scale back to 0 afterward.
 ```
 go test ./... -cover
 ```
+
+## A limit worth stating
+
+The web UI is fully translated. The CLI (`cmd/mlinzi`) is not: its output
+labels are English, and it has no language switch. It reads the same
+translated data, so guide content in Kiswahili or French is reachable there,
+but the surrounding presentation is English. On the basic-device story the
+CLI is meant to serve, adding a language flag is the obvious next step rather
+than something done here.
 
 ## Data sources
 

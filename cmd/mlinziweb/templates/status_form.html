@@ -1,13 +1,14 @@
 {{define "content"}}
-<h1 class="text-2xl font-bold text-[#0A2E36]">Check on a report</h1>
-<p class="mt-2 text-slate-600">Enter the report ID and verification code you were given when you filed. No name or login needed.</p>
+{{$T := .T}}
+<h1 class="text-2xl font-bold text-[#0A2E36]">{{$T.lookup_title}}</h1>
+<p class="mt-2 text-slate-600">{{$T.lookup_desc}}</p>
 
 {{if .Error}}<div class="mt-4 bg-red-50 text-red-700 text-sm rounded-lg px-4 py-2">{{.Error}}</div>{{end}}
 
 <form method="post" action="/report/status" class="mt-6 space-y-3 max-w-md">
   <input type="hidden" name="lang" value="{{.Lang}}">
-  <input name="report_id" placeholder="Report ID (rpt_...)" class="w-full border border-slate-300 rounded-lg px-3 py-2 font-mono text-sm">
-  <input name="code" placeholder="Verification code" class="w-full border border-slate-300 rounded-lg px-3 py-2 font-mono text-sm">
-  <button type="submit" class="bg-[#028090] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#026e78]">Check status</button>
+  <input name="report_id" placeholder="{{$T.lookup_report_id_placeholder}}" class="w-full border border-slate-300 rounded-lg px-3 py-2 font-mono text-sm">
+  <input name="code" placeholder="{{$T.lookup_code_placeholder}}" class="w-full border border-slate-300 rounded-lg px-3 py-2 font-mono text-sm">
+  <button type="submit" class="bg-[#028090] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#026e78]">{{$T.lookup_button}}</button>
 </form>
 {{end}}

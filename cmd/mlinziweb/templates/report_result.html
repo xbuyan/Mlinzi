@@ -1,49 +1,50 @@
 {{define "content"}}
 {{$lang := .Lang}}
+{{$T := .T}}
 {{with .Report}}
 <div class="bg-white border border-[#02C39A] rounded-xl p-6">
-  <h1 class="text-2xl font-bold text-[#0A2E36]">Report filed</h1>
-  <p class="mt-2 text-slate-600">Your report has been recorded and cryptographically chained. Keep the details below — they are the only way to check on this report later.</p>
+  <h1 class="text-2xl font-bold text-[#0A2E36]">{{$T.result_title}}</h1>
+  <p class="mt-2 text-slate-600">{{$T.result_recorded}}</p>
 
   <dl class="mt-4 space-y-2 text-sm">
-    <div><dt class="inline font-semibold text-slate-500">Report ID:</dt> <dd class="inline font-mono">{{.ID}}</dd></div>
-    <div><dt class="inline font-semibold text-slate-500">Verification code:</dt> <dd class="inline font-mono text-lg font-bold text-[#028090]">{{.VerificationCode}}</dd></div>
+    <div><dt class="inline font-semibold text-slate-500">{{$T.result_report_id}}</dt> <dd class="inline font-mono">{{.ID}}</dd></div>
+    <div><dt class="inline font-semibold text-slate-500">{{$T.result_verification_code}}</dt> <dd class="inline font-mono text-lg font-bold text-[#028090]">{{.VerificationCode}}</dd></div>
   </dl>
-  <p class="mt-3 text-xs text-slate-500">No name was collected. Write this ID and code down now — Mlinzi does not email or text them to you.</p>
+  <p class="mt-3 text-xs text-slate-500">{{$T.result_write_down}}</p>
 </div>
 
 <div class="mt-8 bg-[#0A2E36] text-white rounded-xl p-6">
-  <h2 class="text-lg font-bold">Optional: protect this report</h2>
-  <p class="mt-2 text-sm text-[#BFDDDF]">If reporting puts you at risk, set a check-in schedule. If you go silent, guardians you choose can act together to release this report — no single one of them, and not Mlinzi either, can act alone.</p>
+  <h2 class="text-lg font-bold">{{$T.result_protect_title}}</h2>
+  <p class="mt-2 text-sm text-[#BFDDDF]">{{$T.result_protect_desc}}</p>
 
   <form method="post" action="/report/{{.ID}}/protect" class="mt-4 space-y-3">
     <input type="hidden" name="lang" value="{{$lang}}">
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      <input name="guardian1" placeholder="Guardian 1 (e.g. Lawyer)" class="rounded-lg px-3 py-2 text-slate-900">
-      <input name="guardian2" placeholder="Guardian 2 (e.g. Journalist)" class="rounded-lg px-3 py-2 text-slate-900">
-      <input name="guardian3" placeholder="Guardian 3 (e.g. Family)" class="rounded-lg px-3 py-2 text-slate-900">
+      <input name="guardian1" placeholder="{{$T.result_guardian_1}}" class="rounded-lg px-3 py-2 text-slate-900">
+      <input name="guardian2" placeholder="{{$T.result_guardian_2}}" class="rounded-lg px-3 py-2 text-slate-900">
+      <input name="guardian3" placeholder="{{$T.result_guardian_3}}" class="rounded-lg px-3 py-2 text-slate-900">
     </div>
     <div class="flex flex-wrap gap-3 items-center text-sm">
-      <label class="text-[#BFDDDF]">Guardians needed to release:
+      <label class="text-[#BFDDDF]">{{$T.result_threshold_label}}
         <select name="threshold" class="ml-1 rounded px-2 py-1 text-slate-900">
-          <option value="2" selected>2 of 3</option>
-          <option value="3">3 of 3</option>
+          <option value="2" selected>{{$T.result_threshold_2of3}}</option>
+          <option value="3">{{$T.result_threshold_3of3}}</option>
         </select>
       </label>
-      <label class="text-[#BFDDDF]">Check in every:
+      <label class="text-[#BFDDDF]">{{$T.result_interval_label}}
         <select name="interval_hours" class="ml-1 rounded px-2 py-1 text-slate-900">
-          <option value="24">24 hours</option>
-          <option value="48" selected>48 hours</option>
-          <option value="72">72 hours</option>
+          <option value="24">{{$T.result_hours_24}}</option>
+          <option value="48" selected>{{$T.result_hours_48}}</option>
+          <option value="72">{{$T.result_hours_72}}</option>
         </select>
       </label>
     </div>
     <button type="submit" class="bg-[#02C39A] text-[#0A2E36] px-5 py-2 rounded-lg font-semibold hover:bg-[#02b08a]">
-      Set up protection
+      {{$T.result_setup}}
     </button>
   </form>
 </div>
 
-<a href="/?lang={{$lang}}" class="mt-6 inline-block text-sm text-[#028090]">Skip — return to search</a>
+<a href="/?lang={{$lang}}" class="mt-6 inline-block text-sm text-[#028090]">{{$T.result_skip}}</a>
 {{end}}
 {{end}}

@@ -1,0 +1,712 @@
+{
+  "nav_resources": {
+    "en": "Resources Center",
+    "sw": "Kituo cha Nyenzo",
+    "fr": "Centre de ressources"
+  },
+  "nav_check_report": {
+    "en": "Check a report",
+    "sw": "Angalia ripoti",
+    "fr": "Suivre un signalement"
+  },
+  "nav_institution": {
+    "en": "Institution portal (demo)",
+    "sw": "Lango la taasisi (demo)",
+    "fr": "Portail institutionnel (démo)"
+  },
+  "nav_language": {
+    "en": "Language",
+    "sw": "Lugha",
+    "fr": "Langue"
+  },
+  "offline_banner": {
+    "en": "You are offline. Guides you have viewed before still work. Filing a report or updating a case needs a connection.",
+    "sw": "Huna muunganisho. Miongozo uliyoiangalia awali inafanya kazi. Kuwasilisha ripoti au kusasisha kesi kunahitaji muunganisho.",
+    "fr": "Vous êtes hors ligne. Les guides déjà consultés restent disponibles. Déposer un signalement ou mettre à jour un dossier nécessite une connexion."
+  },
+  "footer_text": {
+    "en": "Mlinzi — a proof of concept built for the OSF × Andela hackathon. No persistence layer yet: data lives only for this server's uptime.",
+    "sw": "Mlinzi — mfano wa dhana uliojengwa kwa mashindano ya OSF × Andela. Hakuna hifadhi ya kudumu bado: data inadumu tu wakati seva inafanya kazi.",
+    "fr": "Mlinzi — une preuve de concept réalisée pour le hackathon OSF × Andela. Pas encore de persistance : les données ne vivent que le temps de fonctionnement du serveur."
+  },
+  "home_title": {
+    "en": "Know your rights. Report safely.",
+    "sw": "Jua haki zako. Ripoti kwa usalama.",
+    "fr": "Connaissez vos droits. Signalez en sécurité."
+  },
+  "home_subtitle": {
+    "en": "Search for what happened to you — every guide is sourced, dated, and tells you what to do next.",
+    "sw": "Tafuta kile kilichokupata — kila mwongozo una vyanzo, una tarehe, na unakuambia cha kufanya baadaye.",
+    "fr": "Recherchez ce qui vous est arrivé — chaque guide est sourcé, daté, et indique l'étape suivante."
+  },
+  "home_search_placeholder": {
+    "en": "e.g. bribe, police, GBV, rushwa...",
+    "sw": "mf. rushwa, polisi, ukatili, bribe...",
+    "fr": "ex. pot-de-vin, police, VBG, rushwa..."
+  },
+  "home_search": {
+    "en": "Search",
+    "sw": "Tafuta",
+    "fr": "Rechercher"
+  },
+  "country_ke": {
+    "en": "Kenya",
+    "sw": "Kenya",
+    "fr": "Kenya"
+  },
+  "country_ng": {
+    "en": "Nigeria",
+    "sw": "Nigeria",
+    "fr": "Nigéria"
+  },
+  "country_ug": {
+    "en": "Uganda",
+    "sw": "Uganda",
+    "fr": "Ouganda"
+  },
+  "home_no_results": {
+    "en": "No guides match that search.",
+    "sw": "Hakuna mwongozo unaolingana na utafutaji huo.",
+    "fr": "Aucun guide ne correspond à cette recherche."
+  },
+  "guide_back_to_search": {
+    "en": "Back to search",
+    "sw": "Rudi kwenye utafutaji",
+    "fr": "Retour à la recherche"
+  },
+  "guide_read_aloud": {
+    "en": "Read this guide aloud",
+    "sw": "Soma mwongozo huu kwa sauti",
+    "fr": "Lire ce guide à voix haute"
+  },
+  "guide_stop_reading": {
+    "en": "Stop reading",
+    "sw": "Acha kusoma",
+    "fr": "Arrêter la lecture"
+  },
+  "guide_read_aloud_unsupported": {
+    "en": "Read-aloud is not supported on this browser",
+    "sw": "Kusoma kwa sauti hakuungwa mkono kwenye kivinjari hiki",
+    "fr": "La lecture à voix haute n'est pas prise en charge par ce navigateur"
+  },
+  "guide_last_verified": {
+    "en": "Last verified",
+    "sw": "Ilithibitishwa mwisho",
+    "fr": "Dernière vérification"
+  },
+  "guide_older_than_90": {
+    "en": "older than 90 days, verify before relying on this",
+    "sw": "zaidi ya siku 90, thibitisha kabla ya kutegemea hii",
+    "fr": "plus de 90 jours, à vérifier avant de s'y fier"
+  },
+  "guide_rights": {
+    "en": "Your rights",
+    "sw": "Haki zako",
+    "fr": "Vos droits"
+  },
+  "guide_bring": {
+    "en": "Bring, if you can",
+    "sw": "Lete, ikiwezekana",
+    "fr": "À apporter, si possible"
+  },
+  "guide_next_steps": {
+    "en": "Next steps",
+    "sw": "Hatua zinazofuata",
+    "fr": "Étapes suivantes"
+  },
+  "guide_time_sensitive": {
+    "en": "time-sensitive",
+    "sw": "ya haraka",
+    "fr": "urgent"
+  },
+  "guide_deadline": {
+    "en": "Deadline",
+    "sw": "Tarehe ya mwisho",
+    "fr": "Délai"
+  },
+  "guide_where_to_go": {
+    "en": "Where to go",
+    "sw": "Mahali pa kwenda",
+    "fr": "Où s'adresser"
+  },
+  "guide_toll_free": {
+    "en": "toll-free",
+    "sw": "bila malipo",
+    "fr": "gratuit"
+  },
+  "guide_no_data_needed": {
+    "en": "no data needed",
+    "sw": "haitaji data",
+    "fr": "sans données"
+  },
+  "guide_anonymous": {
+    "en": "anonymous",
+    "sw": "bila jina",
+    "fr": "anonyme"
+  },
+  "guide_sources_disagree": {
+    "en": "sources disagree",
+    "sw": "vyanzo havikubaliani",
+    "fr": "sources divergentes"
+  },
+  "guide_what_to_expect": {
+    "en": "What to expect next",
+    "sw": "Nini cha kutarajia baadaye",
+    "fr": "Ce qui suit ensuite"
+  },
+  "guide_sources": {
+    "en": "Sources",
+    "sw": "Vyanzo",
+    "fr": "Sources"
+  },
+  "guide_file_report": {
+    "en": "File a report about this",
+    "sw": "Wasilisha ripoti kuhusu hii",
+    "fr": "Signaler ce cas"
+  },
+  "guide_english_only": {
+    "en": "This guide is not yet available in your language — showing English.",
+    "sw": "Mwongozo huu haupatikani bado kwa lugha yako — unaonyeshwa kwa Kiingereza.",
+    "fr": "Ce guide n'est pas encore disponible dans votre langue — affichage en anglais."
+  },
+  "channel_phone": {
+    "en": "phone",
+    "sw": "simu",
+    "fr": "téléphone"
+  },
+  "channel_ussd": {
+    "en": "USSD",
+    "sw": "USSD",
+    "fr": "USSD"
+  },
+  "channel_sms": {
+    "en": "SMS",
+    "sw": "SMS",
+    "fr": "SMS"
+  },
+  "channel_email": {
+    "en": "email",
+    "sw": "barua pepe",
+    "fr": "courriel"
+  },
+  "channel_web": {
+    "en": "web",
+    "sw": "tovuti",
+    "fr": "web"
+  },
+  "channel_in_person": {
+    "en": "in person",
+    "sw": "ana kwa ana",
+    "fr": "en personne"
+  },
+  "channel_post": {
+    "en": "post",
+    "sw": "barua",
+    "fr": "courrier"
+  },
+  "resources_title": {
+    "en": "Resources Center",
+    "sw": "Kituo cha Nyenzo",
+    "fr": "Centre de ressources"
+  },
+  "resources_intro": {
+    "en": "The primary documents themselves, so that a claim about your rights can point at the instrument that actually says so. Every provision below is quoted with the source it was checked against — and each document links out to its custodian's authoritative full text, which is the copy that counts.",
+    "sw": "Nyaraka za msingi zenyewe, ili madai kuhusu haki zako yaweze kuelekeza kwenye chombo kinachosema hivyo. Kila kifungu hapa chini kimenukuliwa pamoja na chanzo kilichothibitishwa — na kila hati ina kiungo kwa nakala kamili ya mamlaka inayoisimamia, ambayo ndiyo nakala inayohesabika.",
+    "fr": "Les documents eux-mêmes, afin qu'une affirmation sur vos droits puisse renvoyer à l'instrument qui l'énonce. Chaque disposition ci-dessous est citée avec la source à laquelle elle a été vérifiée — et chaque document renvoie au texte intégral faisant foi de son dépositaire, la copie qui compte."
+  },
+  "resources_empty": {
+    "en": "No documents are loaded.",
+    "sw": "Hakuna hati iliyopakiwa.",
+    "fr": "Aucun document n'est chargé."
+  },
+  "resources_provisions_unit": {
+    "en": "provision(s)",
+    "sw": "kifungu/vifungu",
+    "fr": "disposition(s)"
+  },
+  "resources_adopted": {
+    "en": "adopted",
+    "sw": "ilipitishwa",
+    "fr": "adopté le"
+  },
+  "resources_footnote": {
+    "en": "These documents are listed together, side by side, but each one is stored and checked on its own — nothing here depends on any other document.",
+    "sw": "Hati hizi zimeorodheshwa pamoja, kando kwa kando, lakini kila moja imehifadhiwa na kuthibitishwa yenyewe — hakuna kinachotegemea hati nyingine.",
+    "fr": "Ces documents sont présentés ensemble, côte à côte, mais chacun est stocké et vérifié séparément — rien ici ne dépend d'un autre document."
+  },
+  "kind_constitution": {
+    "en": "constitution",
+    "sw": "katiba",
+    "fr": "constitution"
+  },
+  "kind_statute": {
+    "en": "statute",
+    "sw": "sheria",
+    "fr": "loi"
+  },
+  "resource_back": {
+    "en": "Back to the Resources Center",
+    "sw": "Rudi kwenye Kituo cha Nyenzo",
+    "fr": "Retour au Centre de ressources"
+  },
+  "resource_full_text": {
+    "en": "Read the full authoritative text",
+    "sw": "Soma nakala kamili ya mamlaka",
+    "fr": "Lire le texte intégral faisant foi"
+  },
+  "resource_provisions_heading": {
+    "en": "Provisions",
+    "sw": "Vifungu",
+    "fr": "Dispositions"
+  },
+  "resource_provisions_note": {
+    "en": "Each provision carries the source it was checked against, separately from the document as a whole.",
+    "sw": "Kila kifungu kinabeba chanzo kilichothibitishwa, tofauti na hati kwa ujumla wake.",
+    "fr": "Chaque disposition porte la source à laquelle elle a été vérifiée, indépendamment du document dans son ensemble."
+  },
+  "resource_sources_disagree": {
+    "en": "sources disagree about this provision",
+    "sw": "vyanzo havikubaliani kuhusu kifungu hiki",
+    "fr": "les sources divergent sur cette disposition"
+  },
+  "resource_sources_for_document": {
+    "en": "Sources for this document",
+    "sw": "Vyanzo vya hati hii",
+    "fr": "Sources de ce document"
+  },
+  "resource_english_law_note": {
+    "en": "The law below is quoted in its original English wording, which is the version that has legal force. This page's headings and labels are translated for readability, but the provisions are not, and no translation of them should be treated as authoritative.",
+    "sw": "Sheria hapa chini imenukuliwa kwa maneno yake ya asili ya Kiingereza, ambayo ndiyo toleo lenye nguvu ya kisheria. Vichwa na lebo za ukurasa huu zimetafsiriwa kwa urahisi wa kusoma, lakini vifungu havikutafsiriwa, na tafsiri yoyote yao haipaswi kuchukuliwa kama yenye mamlaka.",
+    "fr": "Le texte de loi ci-dessous est cité dans sa rédaction originale en anglais, qui est la version ayant force de loi. Les titres et libellés de cette page sont traduits pour la lisibilité, mais les dispositions ne le sont pas, et aucune traduction de celles-ci ne doit être considérée comme faisant foi."
+  },
+  "report_title": {
+    "en": "File a report",
+    "sw": "Wasilisha ripoti",
+    "fr": "Déposer un signalement"
+  },
+  "report_about": {
+    "en": "About",
+    "sw": "Kuhusu",
+    "fr": "À propos de"
+  },
+  "report_privacy_note": {
+    "en": "You do not need to give your name. Once submitted, this report is hash-chained — it cannot be quietly edited or deleted afterward.",
+    "sw": "Huhitaji kutoa jina lako. Baada ya kuwasilishwa, ripoti hii inaungwa kwa mnyororo wa kriptografia — haiwezi kuhaririwa au kufutwa kwa siri baadaye.",
+    "fr": "Vous n'avez pas à donner votre nom. Une fois déposé, ce signalement est chaîné par empreinte — il ne peut plus être modifié ni supprimé en silence."
+  },
+  "report_error_describe": {
+    "en": "Please describe what happened before submitting.",
+    "sw": "Tafadhali eleza kilichotokea kabla ya kuwasilisha.",
+    "fr": "Veuillez décrire ce qui s'est passé avant de déposer."
+  },
+  "report_category": {
+    "en": "Category",
+    "sw": "Aina",
+    "fr": "Catégorie"
+  },
+  "category_bribery": {
+    "en": "Bribery / corruption",
+    "sw": "Rushwa / ufisadi",
+    "fr": "Pot-de-vin / corruption"
+  },
+  "category_corruption": {
+    "en": "Corruption",
+    "sw": "Rushwa",
+    "fr": "Corruption"
+  },
+  "category_policing": {
+    "en": "Police misconduct",
+    "sw": "Ukiukaji wa polisi",
+    "fr": "Faute policière"
+  },
+  "category_gbv": {
+    "en": "Gender-based violence",
+    "sw": "Ukatili wa kijinsia",
+    "fr": "Violence fondée sur le genre"
+  },
+  "category_other": {
+    "en": "Other",
+    "sw": "Nyingine",
+    "fr": "Autre"
+  },
+  "report_what_happened": {
+    "en": "What happened?",
+    "sw": "Nini kilitokea?",
+    "fr": "Que s'est-il passé ?"
+  },
+  "report_what_happened_placeholder": {
+    "en": "Date, place, what happened, who was involved...",
+    "sw": "Tarehe, mahali, kilichotokea, waliohusika...",
+    "fr": "Date, lieu, ce qui s'est passé, personnes impliquées..."
+  },
+  "report_submit_anon": {
+    "en": "Submit anonymously",
+    "sw": "Wasilisha bila jina",
+    "fr": "Déposer anonymement"
+  },
+  "result_title": {
+    "en": "Report filed",
+    "sw": "Ripoti imewasilishwa",
+    "fr": "Signalement déposé"
+  },
+  "result_recorded": {
+    "en": "Your report has been recorded and cryptographically chained. Keep the details below — they are the only way to check on this report later.",
+    "sw": "Ripoti yako imerekodiwa na kuungwa kwa mnyororo wa kriptografia. Hifadhi taarifa hapa chini — ndiyo njia pekee ya kuangalia ripoti hii baadaye.",
+    "fr": "Votre signalement a été enregistré et chaîné cryptographiquement. Conservez les éléments ci-dessous — c'est le seul moyen de le suivre plus tard."
+  },
+  "result_report_id": {
+    "en": "Report ID",
+    "sw": "Kitambulisho cha ripoti",
+    "fr": "Identifiant du signalement"
+  },
+  "result_verification_code": {
+    "en": "Verification code",
+    "sw": "Msimbo wa uthibitisho",
+    "fr": "Code de vérification"
+  },
+  "result_write_down": {
+    "en": "No name was collected. Write this ID and code down now — Mlinzi does not email or text them to you.",
+    "sw": "Hakuna jina lililokusanywa. Andika kitambulisho na msimbo huu sasa — Mlinzi hayakutumii kwa barua pepe au ujumbe mfupi.",
+    "fr": "Aucun nom n'a été recueilli. Notez cet identifiant et ce code maintenant — Mlinzi ne vous les envoie ni par courriel ni par SMS."
+  },
+  "result_protect_title": {
+    "en": "Optional: protect this report",
+    "sw": "Hiari: linda ripoti hii",
+    "fr": "Facultatif : protéger ce signalement"
+  },
+  "result_protect_desc": {
+    "en": "If reporting puts you at risk, set a check-in schedule. If you go silent, guardians you choose can act together to release this report — no single one of them, and not Mlinzi either, can act alone.",
+    "sw": "Ikiwa kuwasilisha kunaweka hatarini, weka ratiba ya utambuzi. Ukiweka kimya, walinzi unaowachagua wanaweza kutenda pamoja ili kuachilia ripoti hii — hakuna hata mmoja wao, wala Mlinzi, anayeweza kutenda peke yake.",
+    "fr": "Si signaler vous met en danger, fixez un rythme de pointage. Si vous devenez silencieux, les gardiens que vous choisissez peuvent agir ensemble pour libérer ce signalement — aucun d'eux, ni Mlinzi, ne peut agir seul."
+  },
+  "result_guardian_1": {
+    "en": "Guardian 1 (e.g. Lawyer)",
+    "sw": "Mlinzi 1 (mf. Wakili)",
+    "fr": "Gardien 1 (ex. avocat)"
+  },
+  "result_guardian_2": {
+    "en": "Guardian 2 (e.g. Journalist)",
+    "sw": "Mlinzi 2 (mf. Mwandishi wa habari)",
+    "fr": "Gardien 2 (ex. journaliste)"
+  },
+  "result_guardian_3": {
+    "en": "Guardian 3 (e.g. Family)",
+    "sw": "Mlinzi 3 (mf. Familia)",
+    "fr": "Gardien 3 (ex. famille)"
+  },
+  "result_threshold_label": {
+    "en": "Guardians needed to release",
+    "sw": "Walinzi wanaohitajika kuachilia",
+    "fr": "Gardiens nécessaires pour libérer"
+  },
+  "result_threshold_2of3": {
+    "en": "2 of 3",
+    "sw": "2 kati ya 3",
+    "fr": "2 sur 3"
+  },
+  "result_threshold_3of3": {
+    "en": "3 of 3",
+    "sw": "3 kati ya 3",
+    "fr": "3 sur 3"
+  },
+  "result_interval_label": {
+    "en": "Check in every",
+    "sw": "Wasilisha utambuzi kila",
+    "fr": "Pointer toutes les"
+  },
+  "result_hours_24": {
+    "en": "24 hours",
+    "sw": "saa 24",
+    "fr": "24 heures"
+  },
+  "result_hours_48": {
+    "en": "48 hours",
+    "sw": "saa 48",
+    "fr": "48 heures"
+  },
+  "result_hours_72": {
+    "en": "72 hours",
+    "sw": "saa 72",
+    "fr": "72 heures"
+  },
+  "result_setup": {
+    "en": "Set up protection",
+    "sw": "Weka ulinzi",
+    "fr": "Activer la protection"
+  },
+  "result_skip": {
+    "en": "Skip — return to search",
+    "sw": "Ruka — rudi kwenye utafutaji",
+    "fr": "Passer — retour à la recherche"
+  },
+  "case_title": {
+    "en": "Case",
+    "sw": "Kesi",
+    "fr": "Dossier"
+  },
+  "case_status": {
+    "en": "Status",
+    "sw": "Hali",
+    "fr": "Statut"
+  },
+  "case_threshold_of": {
+    "en": "%d of %d guardians required",
+    "sw": "%d kati ya %d walinzi wanahitajika",
+    "fr": "%d gardiens sur %d requis"
+  },
+  "case_checkin_title": {
+    "en": "Reporter: check in",
+    "sw": "Mwasilishaji: wasilisha utambuzi",
+    "fr": "Signalant : pointer"
+  },
+  "case_checkin_desc": {
+    "en": "Confirms you are still in control. Resets the clock.",
+    "sw": "Inathibitisha kwamba bado una udhibiti. Inaanzisha saa upya.",
+    "fr": "Confirme que vous gardez le contrôle. Réinitialise le compteur."
+  },
+  "case_checkin_button": {
+    "en": "I am here — check in",
+    "sw": "Nipo hapa — wasilisha utambuzi",
+    "fr": "Je suis là — pointer"
+  },
+  "case_demo_title": {
+    "en": "Demo: simulate going silent",
+    "sw": "Demo: onyesha kukaa kimya",
+    "fr": "Démo : simuler un silence"
+  },
+  "case_demo_desc": {
+    "en": "In a real deployment this happens automatically once the check-in window passes. For this demo, trigger it directly against the real clock.",
+    "sw": "Katika matumizi ya kweli hii hutokea yenyewe mara muda wa utambuzi unapopita. Kwa demo hii, iwashe moja kwa moja dhidi ya saa halisi.",
+    "fr": "En déploiement réel, cela se produit automatiquement une fois le délai de pointage écoulé. Pour cette démo, déclenchez-le directement sur l'horloge réelle."
+  },
+  "case_demo_button": {
+    "en": "Simulate missed check-in",
+    "sw": "Onyesha utambuzi uliokosekana",
+    "fr": "Simuler un pointage manqué"
+  },
+  "case_guardian_portal": {
+    "en": "Guardian portal",
+    "sw": "Lango la walinzi",
+    "fr": "Portail des gardiens"
+  },
+  "case_guardian_desc": {
+    "en": "Act as one of them and submit their share below. One alone will never be enough.",
+    "sw": "Tenda kama mmoja wao na wasilisha sehemu yake hapa chini. Mmoja peke yake hatatosha kamwe.",
+    "fr": "Agissez comme l'un d'eux et soumettez sa part ci-dessous. Un seul ne suffira jamais."
+  },
+  "case_share_placeholder": {
+    "en": "Paste this guardian's share (hex)",
+    "sw": "Bandika sehemu ya mlinzi huyu (hex)",
+    "fr": "Collez la part de ce gardien (hex)"
+  },
+  "case_submit_share": {
+    "en": "Submit share",
+    "sw": "Wasilisha sehemu",
+    "fr": "Soumettre la part"
+  },
+  "case_msg_checked_in": {
+    "en": "Checked in — the clock has been reset.",
+    "sw": "Utambuzi umewasilishwa — saa imeanzishwa upya.",
+    "fr": "Pointage effectué — le compteur a été réinitialisé."
+  },
+  "case_msg_checkin_failed": {
+    "en": "Could not check in",
+    "sw": "Imeshindikana kuwasilisha utambuzi",
+    "fr": "Impossible de pointer"
+  },
+  "case_msg_escalated": {
+    "en": "Case escalated — guardians may now submit their shares.",
+    "sw": "Kesi imepandishwa — walinzi wanaweza sasa kuwasilisha sehemu zao.",
+    "fr": "Dossier escaladé — les gardiens peuvent maintenant soumettre leurs parts."
+  },
+  "case_msg_escalate_failed": {
+    "en": "Could not escalate",
+    "sw": "Imeshindikana kupandisha",
+    "fr": "Impossible d'escalader"
+  },
+  "case_msg_share_unreadable": {
+    "en": "That share could not be read — check it was copied in full.",
+    "sw": "Sehemu hiyo haikuweza kusomwa — hakikisha ilinakiliwa kikamilifu.",
+    "fr": "Cette part n'a pas pu être lue — vérifiez qu'elle a été copiée en entier."
+  },
+  "case_msg_share_accepted": {
+    "en": "Share accepted. Waiting on more guardians to reach the threshold.",
+    "sw": "Sehemu imekubaliwa. Inasubiri walinzi zaidi kufikia kiwango.",
+    "fr": "Part acceptée. En attente d'autres gardiens pour atteindre le seuil."
+  },
+  "case_msg_share_rejected": {
+    "en": "Share rejected",
+    "sw": "Sehemu imekataliwa",
+    "fr": "Part rejetée"
+  },
+  "case_msg_threshold_reached": {
+    "en": "Threshold reached. Release key reconstructed",
+    "sw": "Kiwango kimefikiwa. Ufunguo wa kuachilia umeundwa upya",
+    "fr": "Seuil atteint. Clé de libération reconstituée"
+  },
+  "created_title": {
+    "en": "Protection set up",
+    "sw": "Ulinzi umewekwa",
+    "fr": "Protection activée"
+  },
+  "created_desc": {
+    "en": "%d of %d guardians must act together to release this report.",
+    "sw": "%d kati ya %d walinzi wanapaswa kutenda pamoja ili kuachilia ripoti hii.",
+    "fr": "%d gardiens sur %d doivent agir ensemble pour libérer ce signalement."
+  },
+  "created_warning": {
+    "en": "Shown once, right now. Copy each share and deliver it to that guardian separately — by hand, by a different channel than this one, however you would actually reach them. Mlinzi does not store these anywhere after this page. If you lose one, it cannot be recovered or re-issued — only the remaining guardians' shares, still combinable at your threshold, protect the report.",
+    "sw": "Inaonyeshwa mara moja, sasa. Nakili kila sehemu na uifikishe kwa mlinzi husika kwa njia tofauti — kwa mkono, kwa njia nyingine isiyo hii, jinsi unavyoweza kuwafikia kwa kweli. Mlinzi hazihifadhi sehemu hizi mahali popote baada ya ukurasa huu. Ukipoteza moja, haiwezi kurejeshwa wala kutolewa tena — ni sehemu za walinzi waliobaki, zinazoweza kuunganishwa katika kiwango chako, zinazolinda ripoti.",
+    "fr": "Affiché une seule fois, maintenant. Copiez chaque part et remettez-la à ce gardien séparément — de la main à la main, par un autre canal que celui-ci, comme vous les joindriez réellement. Mlinzi ne les conserve nulle part après cette page. Si vous en perdez une, elle ne peut être ni récupérée ni réémise — seules les parts des gardiens restants, encore combinables à votre seuil, protègent le signalement."
+  },
+  "created_window": {
+    "en": "Check-in window: every %d hours.",
+    "sw": "Muda wa utambuzi: kila saa %d.",
+    "fr": "Délai de pointage : toutes les %d heures."
+  },
+  "created_return_to": {
+    "en": "Return to",
+    "sw": "Rudi kwenye",
+    "fr": "Retournez à"
+  },
+  "created_dashboard_link": {
+    "en": "this case's dashboard",
+    "sw": "dashibodi ya kesi hii",
+    "fr": "tableau de bord de ce dossier"
+  },
+  "created_checkin_suffix": {
+    "en": "to check in, or — for this demo — to simulate a missed check-in and watch guardians release it.",
+    "sw": "ili kuwasilisha utambuzi, au — kwa demo hii — kuonyesha utambuzi uliokosekana na kuona walinzi wakiiachia.",
+    "fr": "pour pointer, ou — pour cette démo — pour simuler un pointage manqué et voir les gardiens le libérer."
+  },
+  "institution_title": {
+    "en": "Institution portal",
+    "sw": "Lango la taasisi",
+    "fr": "Portail institutionnel"
+  },
+  "institution_warning": {
+    "en": "Demo only — no authentication. This page has no login. Anyone with the URL can acknowledge or resolve any report below. A real deployment would put this behind institution sign-in before any action here is usable. Shown here to prove the accountability mechanism genuinely works from the institution's side, not only the reporter's.",
+    "sw": "Demo pekee — hakuna uthibitisho wa utambulisho. Ukurasa huu hauna kuingia. Yeyote aliye na kiungo anaweza kutambua au kutatua ripoti yoyote hapa chini. Matumizi ya kweli yangeweka ukurasa huu nyuma ya kuingia kwa taasisi. Umeonyeshwa hapa kuthibitisha kwamba mfumo wa uwajibikaji unafanya kazi kutoka upande wa taasisi, si kwa mwasilishaji pekee.",
+    "fr": "Démo uniquement — aucune authentification. Cette page n'a pas de connexion. Quiconque a l'URL peut accuser réception ou résoudre n'importe quel signalement ci-dessous. Un déploiement réel placerait ceci derrière une connexion institutionnelle. Présenté ici pour prouver que le mécanisme de responsabilité fonctionne réellement du côté de l'institution, et pas seulement du signalant."
+  },
+  "institution_empty": {
+    "en": "No reports have been filed yet.",
+    "sw": "Hakuna ripoti iliyowasilishwa bado.",
+    "fr": "Aucun signalement n'a encore été déposé."
+  },
+  "institution_filed": {
+    "en": "Filed",
+    "sw": "Ilivasilishwa",
+    "fr": "Déposé le"
+  },
+  "institution_update_status": {
+    "en": "Update status",
+    "sw": "Sasisha hali",
+    "fr": "Mettre à jour le statut"
+  },
+  "institution_actor_placeholder": {
+    "en": "Your institution (e.g. eacc, ipoa)",
+    "sw": "Taasisi yako (mf. eacc, ipoa)",
+    "fr": "Votre institution (ex. eacc, ipoa)"
+  },
+  "institution_note_placeholder": {
+    "en": "Note (optional)",
+    "sw": "Maelezo (hiari)",
+    "fr": "Note (facultatif)"
+  },
+  "institution_closed": {
+    "en": "No further status changes — this report is closed.",
+    "sw": "Hakuna mabadiliko zaidi ya hali — ripoti hii imefungwa.",
+    "fr": "Plus aucun changement de statut — ce signalement est clos."
+  },
+  "status_submitted": {
+    "en": "submitted",
+    "sw": "imewasilishwa",
+    "fr": "déposé"
+  },
+  "status_acknowledged": {
+    "en": "acknowledged",
+    "sw": "imetambuliwa",
+    "fr": "accusé de réception"
+  },
+  "status_resolved": {
+    "en": "resolved",
+    "sw": "imetatuliwa",
+    "fr": "résolu"
+  },
+  "status_rejected": {
+    "en": "rejected",
+    "sw": "imekataliwa",
+    "fr": "rejeté"
+  },
+  "status_active": {
+    "en": "active",
+    "sw": "hai",
+    "fr": "actif"
+  },
+  "status_escalated": {
+    "en": "escalated",
+    "sw": "imepandishwa",
+    "fr": "escaladé"
+  },
+  "status_released": {
+    "en": "released",
+    "sw": "imeachiliwa",
+    "fr": "libéré"
+  },
+  "lookup_title": {
+    "en": "Check on a report",
+    "sw": "Angalia ripoti",
+    "fr": "Suivre un signalement"
+  },
+  "lookup_desc": {
+    "en": "Enter the report ID and verification code you were given when you filed. No name or login needed.",
+    "sw": "Weka kitambulisho cha ripoti na msimbo wa uthibitisho uliopewa ulipowasilisha. Huhitaji jina wala kuingia.",
+    "fr": "Saisissez l'identifiant et le code de vérification remis lors du dépôt. Aucun nom ni connexion requis."
+  },
+  "lookup_report_id_placeholder": {
+    "en": "Report ID (rpt_...)",
+    "sw": "Kitambulisho cha ripoti (rpt_...)",
+    "fr": "Identifiant du signalement (rpt_...)"
+  },
+  "lookup_code_placeholder": {
+    "en": "Verification code",
+    "sw": "Msimbo wa uthibitisho",
+    "fr": "Code de vérification"
+  },
+  "lookup_button": {
+    "en": "Check status",
+    "sw": "Angalia hali",
+    "fr": "Vérifier le statut"
+  },
+  "lookup_error_no_match": {
+    "en": "No report matches that ID and code.",
+    "sw": "Hakuna ripoti inayolingana na kitambulisho na msimbo huo.",
+    "fr": "Aucun signalement ne correspond à cet identifiant et ce code."
+  },
+  "lookup_result_title": {
+    "en": "Report %s",
+    "sw": "Ripoti %s",
+    "fr": "Signalement %s"
+  },
+  "lookup_current_status": {
+    "en": "Current status",
+    "sw": "Hali ya sasa",
+    "fr": "Statut actuel"
+  },
+  "lookup_protected_prefix": {
+    "en": "This report is protected. View its",
+    "sw": "Ripoti hii inalindwa. Angalia",
+    "fr": "Ce signalement est protégé. Voir son"
+  },
+  "lookup_dashboard_link": {
+    "en": "guardian case dashboard",
+    "sw": "dashibodi ya kesi ya walinzi",
+    "fr": "tableau de bord des gardiens"
+  },
+  "timeline_by": {
+    "en": "by",
+    "sw": "na",
+    "fr": "par"
+  }
+}

@@ -15,16 +15,27 @@
 // intercepted here and simply fail with the browser's normal offline error
 // if there's no connection — which is the honest behavior, not a bug.
 
-const CACHE_NAME = "mlinzi-v2";
+const CACHE_NAME = "mlinzi-v3";
+
+// Every language the interface is available in. TestServiceWorkerSpeaksEveryLanguage
+// checks this against the string catalogue, so adding a language there and
+// forgetting it here fails the build rather than quietly leaving that language
+// without an offline copy.
+const LANGUAGES = ["en", "sw", "fr"];
 
 // Precached at install time so offline access works even if this is the
-// very first thing the person opens with no connectivity yet. This list is
-// small and static — every seeded guide and every Resources Center document,
-// not a dynamically discovered crawl — which is a deliberate simplicity
-// trade-off: correct today, needs updating if the seed dataset changes.
-// TestServiceWorkerPrecachesOnlyRealGuides and
+// very first thing the person opens with no connectivity yet. The list is
+// static rather than a crawl — correct today, needs updating if the seed
+// dataset changes; TestServiceWorkerPrecachesOnlyRealGuides and
 // TestServiceWorkerPrecachesEveryDocument are the tripwires for that drift.
-const PRECACHE_URLS = [
+//
+// Why language is part of the URL here: language is a query parameter, so the
+// cached copy of "/guides/x" is not the copy a Kiswahili reader asked for.
+// Precaching only the bare paths meant that someone reading in Kiswahili who
+// then lost their connection was served the browser's offline error — the
+// offline claim held in English only, which is the same silent-English
+// problem the interface strings had.
+const SMALL_PAGES = [
   "/",
   "/guides/ke-bribery-public-service",
   "/guides/ke-police-misconduct",
@@ -34,10 +45,33 @@ const PRECACHE_URLS = [
   "/guides/ug-police-misconduct",
   "/guides/ug-gender-based-violence",
   "/resources",
+];
+
+// The Resources Center documents are precached once, in English, and the
+// pages say so in their own wording. The three constitutions render to about
+// 450 KB each; precaching three language variants of each would put several
+// megabytes in the cache of exactly the basic phones this is built for, to
+// duplicate a body of legal text that does not change between the variants —
+// only the chrome around it does. The trade is stated rather than hidden: the
+// guides, which are what someone needs in the moment, are offline in every
+// language; the reference documents are offline in the wording that has legal
+// force.
+const DOCUMENT_PAGES = [
   "/resources/kenya-constitution",
   "/resources/uganda-constitution",
   "/resources/nigeria-constitution",
   "/resources/nigeria-icpc-act",
+];
+
+const PRECACHE_URLS = [
+  // Both forms are needed, and the bare one is not redundant with ?lang=en.
+  // A cache key is an exact URL: the web app manifest's start_url is "/",
+  // and a bookmark or typed address is the bare path too, so precaching only
+  // the ?lang= variants would leave the installed app unable to open with no
+  // connection — the single most likely way someone offline launches it.
+  ...SMALL_PAGES,
+  ...LANGUAGES.flatMap((lang) => SMALL_PAGES.map((path) => path + "?lang=" + lang)),
+  ...DOCUMENT_PAGES,
   "/static/manifest.json",
   "/static/icon.svg",
   "https://cdn.tailwindcss.com",
