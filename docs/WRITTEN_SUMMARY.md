@@ -83,10 +83,13 @@ reconstructed at submission time (`docs/AI_USAGE.md` in the repo). In brief:
   "basic device, no install step" case this hackathon calls out. Caught by
   manually running the built binary outside the repo, fixed by embedding the
   dataset into the binary, which also made the shipped tool fully offline.
-- **50+ tests across five packages** were AI-drafted and human-reviewed,
-  including white-box tests that directly mutate a stored ledger entry to
-  prove tampering is detected, and an exhaustive test of GF(256) field
-  arithmetic across all 255 nonzero elements.
+- **136 test functions across nine packages** were AI-drafted and
+  human-reviewed, including white-box tests that directly mutate a stored
+  ledger entry to prove tampering is detected, an exhaustive test of GF(256)
+  field arithmetic across all 255 nonzero elements, and — after the Resources
+  Center was expanded to whole constitutions — a coverage report the extractor
+  prints on every run, so "this document is complete" and "this one is not"
+  are measured claims rather than hand-written caveats.
 - **Known limits are stated, not hidden**: Kiswahili translations are
   AI-drafted and unreviewed by a first-language speaker as of submission;
   report content is stored in plaintext in this proof of concept, with
@@ -111,9 +114,14 @@ own right that wasn't attempted rather than faked.
 
 The three-layer pattern (verified information → tamper-evident reporting →
 guardian-based protection) is not specific to Kenya or to these three
-situations. Jurisdiction-scoped data directories mean a new country's civic
-information is a data change, not a rebuild; the cryptographic layers
-underneath are already country-agnostic. The same architecture could extend
+situations. Three countries (Kenya, Nigeria, Uganda) now load from the same
+code path, and the Resources Center carries the Kenyan, Ugandan and Nigerian
+constitutions plus Nigeria's ICPC Act as primary documents a guide can cite
+directly — every article of the first two, which the page states as a measured
+count rather than a claim. Jurisdiction-scoped data directories
+mean a new country's civic information is a data change, not a rebuild; the cryptographic layers
+underneath are already country-agnostic, and a document is a file in one flat
+folder the same way a country is. The same architecture could extend
 to land disputes, election-related violence reporting, or labor rights —
 anywhere information trust and reporting safety are the two things standing
 between a person and protection.

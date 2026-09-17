@@ -54,6 +54,38 @@ func (a *app) handleGuideDetail(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// --- Resources Center: primary legal documents ---
+//
+// Read-only and jurisdiction-independent: unlike guides, documents are not
+// filtered by the ?j= country switcher, because a person reading Uganda's
+// constitution may well be in Kenya and the folder is deliberately one list.
+
+func (a *app) handleResources(w http.ResponseWriter, r *http.Request) {
+	lang := langFrom(r)
+
+	var docs []resourceSummaryView
+	for _, d := range a.resources.All() {
+		docs = append(docs, newResourceSummaryView(d, lang))
+	}
+	a.render(w, http.StatusOK, "resources.html", map[string]any{
+		"Lang":      lang,
+		"Documents": docs,
+	})
+}
+
+func (a *app) handleResourceDetail(w http.ResponseWriter, r *http.Request) {
+	lang := langFrom(r)
+	d, err := a.resources.Get(r.PathValue("id"))
+	if err != nil {
+		http.NotFound(w, r)
+		return
+	}
+	a.render(w, http.StatusOK, "resource.html", map[string]any{
+		"Lang":     lang,
+		"Document": newResourceView(d, lang),
+	})
+}
+
 // --- Report: new / create ---
 
 func (a *app) handleReportNew(w http.ResponseWriter, r *http.Request) {

@@ -15,18 +15,29 @@
 // intercepted here and simply fail with the browser's normal offline error
 // if there's no connection — which is the honest behavior, not a bug.
 
-const CACHE_NAME = "mlinzi-v1";
+const CACHE_NAME = "mlinzi-v2";
 
 // Precached at install time so offline access works even if this is the
 // very first thing the person opens with no connectivity yet. This list is
-// small and static (three guides) rather than dynamically discovered,
-// which is a deliberate simplicity trade-off: correct today, needs updating
-// if the seed dataset changes.
+// small and static — every seeded guide and every Resources Center document,
+// not a dynamically discovered crawl — which is a deliberate simplicity
+// trade-off: correct today, needs updating if the seed dataset changes.
+// TestServiceWorkerPrecachesOnlyRealGuides and
+// TestServiceWorkerPrecachesEveryDocument are the tripwires for that drift.
 const PRECACHE_URLS = [
   "/",
   "/guides/ke-bribery-public-service",
   "/guides/ke-police-misconduct",
   "/guides/ke-gender-based-violence",
+  "/guides/ng-bribery-public-service",
+  "/guides/ug-bribery-public-service",
+  "/guides/ug-police-misconduct",
+  "/guides/ug-gender-based-violence",
+  "/resources",
+  "/resources/kenya-constitution",
+  "/resources/uganda-constitution",
+  "/resources/nigeria-constitution",
+  "/resources/nigeria-icpc-act",
   "/static/manifest.json",
   "/static/icon.svg",
   "https://cdn.tailwindcss.com",

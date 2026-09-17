@@ -1,12 +1,20 @@
-// Command mlinzi is a terminal browser for the civic guide store.
+// Command mlinzi is a terminal browser for the civic guide store and the
+// Resources Center.
 //
 //	mlinzi list [jurisdiction]
 //	mlinzi search <term>
 //	mlinzi show <guide-id>
+//	mlinzi resources
+//	mlinzi resource <document-id>
 //
 // This is a presentation layer only: every guarantee (sourcing, validation,
-// search) already lives in internal/guide and is already tested there. This
-// file just renders it.
+// search) already lives in internal/guide and internal/resource and is
+// already tested there. This file just renders it.
+//
+// The Resources Center is here rather than web-only on purpose: the whole
+// point of embedding the documents in the binary is that someone on a basic
+// device with no connection can still read the provision they were told
+// about.
 package main
 
 import (
@@ -19,6 +27,7 @@ import (
 	"github.com/xbuyan/mlinzi/internal/guardian"
 	"github.com/xbuyan/mlinzi/internal/guide"
 	"github.com/xbuyan/mlinzi/internal/report"
+	"github.com/xbuyan/mlinzi/internal/resource"
 )
 
 const defaultJurisdiction = "KE"
@@ -27,6 +36,12 @@ func main() {
 	s, err := guide.Load(mlinziassets.DataFS, "data")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "failed to load guide data:", err)
+		os.Exit(1)
+	}
+
+	resources, err := resource.Load(mlinziassets.ResourceFS, "resources")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "failed to load resources:", err)
 		os.Exit(1)
 	}
 
@@ -54,6 +69,14 @@ func main() {
 			os.Exit(1)
 		}
 		cmdShow(s, os.Args[2])
+	case "resources":
+		cmdResources(resources)
+	case "resource":
+		if len(os.Args) < 3 {
+			fmt.Fprintln(os.Stderr, "usage: mlinzi resource <document-id>")
+			os.Exit(1)
+		}
+		cmdResource(resources, os.Args[2])
 	case "demo-report":
 		cmdDemoReport()
 	case "demo-escalation":
@@ -73,6 +96,9 @@ Usage:
   mlinzi list [jurisdiction]     List every guide (default: KE)
   mlinzi search <term>           Search guides by keyword, any language
   mlinzi show <guide-id>         Show full detail for one guide
+  mlinzi resources               List the Resources Center's legal documents
+  mlinzi resource <document-id>  Show one document: its provisions, and the
+                                  source each provision was checked against
   mlinzi demo-report             Walk through Layer 2: submit, status trail,
                                   chain verification, in one run
   mlinzi demo-escalation         Walk through Layer 3: check-ins, a missed
@@ -206,6 +232,62 @@ func flagString(c guide.Channel) string {
 		return ""
 	}
 	return "  [" + strings.Join(flags, ", ") + "]"
+}
+
+func cmdResources(s *resource.Store) {
+	docs := s.All()
+	if len(docs) == 0 {
+		fmt.Println("No documents loaded.")
+		return
+	}
+	fmt.Printf("%d document(s) in the Resources Center:\n\n", len(docs))
+	for _, d := range docs {
+		fmt.Printf("  %-22s [%s] %s\n", d.ID, d.Jurisdiction, d.Title.In("en"))
+		fmt.Printf("  %-22s %d provision(s), adopted %s, last verified %s\n\n",
+			"", len(d.Provisions), d.Adopted, d.LastVerified)
+	}
+}
+
+func cmdResource(s *resource.Store, id string) {
+	d, err := s.Get(id)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
+	fmt.Println(strings.Repeat("=", 60))
+	fmt.Printf("%s  [%s]\n", d.Title.In("en"), d.ID)
+	fmt.Println(strings.Repeat("=", 60))
+	fmt.Printf("%s \u00b7 %s \u00b7 adopted %s \u00b7 last verified %s",
+		d.Jurisdiction, d.Kind, d.Adopted, d.LastVerified)
+	if d.StaleAfter(90*24*time.Hour, time.Now()) {
+		fmt.Print("  [older than 90 days \u2014 verify before relying on this]")
+	}
+	fmt.Println()
+	fmt.Println()
+
+	fmt.Println(d.Summary.In("en"))
+	fmt.Println()
+	if c := d.Caveat.In("en"); c != "" {
+		fmt.Println(c)
+		fmt.Println()
+	}
+	fmt.Printf("Full text: %s (%s)\n\n", d.FullTextURL, d.Publisher)
+
+	fmt.Println("Provisions:")
+	for _, p := range d.Provisions {
+		fmt.Printf("  %s \u2014 %s\n", p.Ref, p.Heading.In("en"))
+		fmt.Printf("      %s\n", p.Text.In("en"))
+		for _, src := range p.Sources {
+			fmt.Printf("      source: %s (%s) \u2014 %s\n", src.Publisher, src.Confidence, src.URL)
+		}
+		fmt.Println()
+	}
+
+	fmt.Println("Sources:")
+	for _, src := range d.Sources {
+		fmt.Printf("  - %s (%s) \u2014 %s\n", src.Publisher, src.Confidence, src.URL)
+	}
 }
 
 func cmdDemoReport() {

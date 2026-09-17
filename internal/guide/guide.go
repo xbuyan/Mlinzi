@@ -82,7 +82,11 @@ type Source struct {
 	Confidence Confidence `json:"confidence"`
 }
 
-func (s Source) validate() error {
+// Validate enforces the rules every sourced claim must satisfy. It is
+// exported because the resource layer records the same kind of sourced fact
+// and must not grow a second, weaker validator beside it: one provenance
+// model, one check, wherever a claim is published from.
+func (s Source) Validate() error {
 	if strings.TrimSpace(s.Publisher) == "" {
 		return fmt.Errorf("source has no publisher")
 	}
@@ -150,7 +154,7 @@ func (c Channel) validate() error {
 		return fmt.Errorf("channel %q (%s) has no sources", c.Kind, c.Value)
 	}
 	for _, s := range c.Sources {
-		if err := s.validate(); err != nil {
+		if err := s.Validate(); err != nil {
 			return fmt.Errorf("channel %q (%s): %w", c.Kind, c.Value, err)
 		}
 	}
@@ -310,7 +314,7 @@ func (g Guide) Validate() error {
 		return fmt.Errorf("guide %q has no sources", g.ID)
 	}
 	for _, s := range g.Sources {
-		if err := s.validate(); err != nil {
+		if err := s.Validate(); err != nil {
 			return fmt.Errorf("guide %q: %w", g.ID, err)
 		}
 	}

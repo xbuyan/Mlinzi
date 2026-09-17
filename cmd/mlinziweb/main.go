@@ -21,6 +21,7 @@ import (
 	"github.com/xbuyan/mlinzi/internal/guardian"
 	"github.com/xbuyan/mlinzi/internal/guide"
 	"github.com/xbuyan/mlinzi/internal/report"
+	"github.com/xbuyan/mlinzi/internal/resource"
 )
 
 //go:embed templates/*.html
@@ -29,11 +30,12 @@ var templateFS embed.FS
 //go:embed static/*
 var staticFS embed.FS
 
-// app holds every piece of shared server state. All fields except pages and
-// guides are mutated by handlers, so access goes through mu.
+// app holds every piece of shared server state. All fields except pages,
+// guides and resources are mutated by handlers, so access goes through mu.
 type app struct {
-	guides *guide.Store
-	pages  map[string]*template.Template
+	guides    *guide.Store
+	resources *resource.Store
+	pages     map[string]*template.Template
 
 	mu            sync.Mutex
 	reports       *report.Store
@@ -52,7 +54,7 @@ type app struct {
 var pageNames = []string{
 	"home.html", "guide.html", "report_new.html", "report_result.html",
 	"case_created.html", "case.html", "status_form.html", "status_result.html",
-	"institution.html",
+	"institution.html", "resources.html", "resource.html",
 }
 
 var templateFuncs = template.FuncMap{
@@ -61,6 +63,14 @@ var templateFuncs = template.FuncMap{
 
 func newApp() (*app, error) {
 	guides, err := guide.Load(mlinziassets.DataFS, "data")
+	if err != nil {
+		return nil, err
+	}
+
+	// A separate store, over a separate folder, in the same binary. Adding a
+	// constitution is a new file in resources/, exactly as adding a country is
+	// a new folder in data/.
+	resources, err := resource.Load(mlinziassets.ResourceFS, "resources")
 	if err != nil {
 		return nil, err
 	}
@@ -77,6 +87,7 @@ func newApp() (*app, error) {
 
 	return &app{
 		guides:        guides,
+		resources:     resources,
 		pages:         pages,
 		reports:       report.NewStore(),
 		cases:         guardian.NewStore(),
@@ -119,6 +130,8 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /{$}", a.handleHome)
 	mux.HandleFunc("GET /guides/{id}", a.handleGuideDetail)
+	mux.HandleFunc("GET /resources", a.handleResources)
+	mux.HandleFunc("GET /resources/{id}", a.handleResourceDetail)
 	mux.HandleFunc("GET /report/new", a.handleReportNew)
 	mux.HandleFunc("POST /report", a.handleReportCreate)
 	mux.HandleFunc("GET /report/status", a.handleStatusForm)

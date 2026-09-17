@@ -1,0 +1,34 @@
+{{define "content"}}
+<h1 class="text-3xl font-bold text-[#0A2E36]">Resources Center</h1>
+<p class="mt-2 text-slate-600">
+  The primary documents themselves, so that "you have a right to X" can point at
+  the instrument that actually says so. Every provision below is quoted with the
+  source it was checked against — and each document links out to its custodian's
+  authoritative full text, which is the copy that counts.
+</p>
+
+<div class="mt-8 space-y-4">
+  {{if not .Documents}}
+    <p class="text-slate-500">No documents are loaded.</p>
+  {{end}}
+  {{range .Documents}}
+    <a href="/resources/{{.ID}}?lang={{$.Lang}}"
+       class="block bg-white border border-slate-200 rounded-xl p-5 hover:border-[#02C39A] transition">
+      <div class="text-xs uppercase tracking-wide text-[#028090] font-semibold">
+        {{.Jurisdiction}} &middot; {{.Kind}}
+      </div>
+      <div class="mt-1 text-lg font-bold text-[#0A2E36]">{{.Title}}</div>
+      <p class="mt-1 text-sm text-slate-600">{{.Summary}}</p>
+      <div class="mt-2 text-xs text-slate-400">
+        {{.Provisions}} provision(s) &middot; adopted {{.Adopted}} &middot; last verified {{.LastVerified}}
+        {{if .Stale}}<span class="text-amber-600 font-semibold">— older than 90 days, verify before relying on this</span>{{end}}
+      </div>
+    </a>
+  {{end}}
+</div>
+
+<p class="mt-8 text-xs text-slate-400">
+  Constituent documents are listed together, side by side, but each one is
+  stored and checked on its own — nothing here depends on any other document.
+</p>
+{{end}}

@@ -1,0 +1,172 @@
+{
+  "id": "nigeria-icpc-act",
+  "kind": "statute",
+  "jurisdiction": "NG",
+  "title": {
+    "en": "Corrupt Practices and Other Related Offences Act, 2000 (Nigeria)"
+  },
+  "summary": {
+    "en": "The Act that establishes Nigeria's Independent Corrupt Practices and Other Related Offences Commission (ICPC), defines the offences it investigates, and — directly relevant to anyone who has been asked for a bribe — obliges public officers to report gifts and offers and gives informers statutory protection. Act No. 5 of 2000, enacted on 13 June 2000. This is a selection of its key sections, not all seventy-one."
+  },
+  "adopted": "2000-06-13",
+  "publisher": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+  "full_text_url": "https://icpc.gov.ng/wp-content/uploads/2024/09/ICPC-Act-2000.pdf",
+  "caveat": {
+    "en": "A selection of key sections, not the whole Act, and not legal advice. Section wording is taken from the copy of the Act published by the Commission itself; the Act's own text prints the commencement day as blanks, so no commencement date is asserted here. Confirm any wording you rely on against the Commission's copy."
+  },
+  "provisions": [
+    {
+      "ref": "Section 3",
+      "heading": {
+        "en": "Establishment of the Commission"
+      },
+      "text": {
+        "en": "There is hereby established a Commission to be known as the Independent Corrupt Practices and Other Related Offences Commission. The Commission is a body corporate, and consists of a chairman and twelve other members, two of whom come from each of the six geo-political zones."
+      },
+      "topic": "accountability",
+      "sources": [
+        {
+          "publisher": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+          "url": "https://icpc.gov.ng/wp-content/uploads/2024/09/ICPC-Act-2000.pdf",
+          "retrieved": "2026-09-17",
+          "confidence": "official"
+        }
+      ]
+    },
+    {
+      "ref": "Section 8",
+      "heading": {
+        "en": "Offence of accepting gratification"
+      },
+      "text": {
+        "en": "Any person who corruptly asks for, receives or obtains any property or benefit of any kind for himself or for any other person, or agrees or attempts to receive or obtain it, on account of anything already done or omitted to be done, or anything to be afterwards done or omitted to be done, in the discharge of his official duties, is guilty of an offence of official corruption and is liable to imprisonment for seven years."
+      },
+      "topic": "corruption",
+      "sources": [
+        {
+          "publisher": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+          "url": "https://icpc.gov.ng/wp-content/uploads/2024/09/ICPC-Act-2000.pdf",
+          "retrieved": "2026-09-17",
+          "confidence": "official"
+        }
+      ]
+    },
+    {
+      "ref": "Section 19",
+      "heading": {
+        "en": "Offence of using office or position for gratification"
+      },
+      "text": {
+        "en": "Any public officer who uses his office or position to gratify or confer any corrupt or unfair advantage upon himself or any relation or associate of the public officer or any other public officer shall be guilty of an offence and shall on conviction be liable to imprisonment for five years without option of fine."
+      },
+      "topic": "corruption",
+      "sources": [
+        {
+          "publisher": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+          "url": "https://icpc.gov.ng/wp-content/uploads/2024/09/ICPC-Act-2000.pdf",
+          "retrieved": "2026-09-17",
+          "confidence": "official"
+        }
+      ]
+    },
+    {
+      "ref": "Section 23",
+      "heading": {
+        "en": "Duty to report bribery transactions"
+      },
+      "text": {
+        "en": "Any public officer to whom any gratification is given, promised or offered in contravention of this Act shall report the gift, promise or offer, together with the name, if known, of the person who made it, to the nearest officer of the Commission or police officer. Any person from whom gratification has been solicited or obtained, or from whom an attempt has been made to obtain it, shall at the earliest opportunity report it, with the name or a true and full description of the person involved. Failing to comply, without reasonable excuse, is itself an offence carrying a fine of up to one hundred thousand naira or up to two years' imprisonment, or both."
+      },
+      "topic": "reporting duty",
+      "sources": [
+        {
+          "publisher": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+          "url": "https://icpc.gov.ng/wp-content/uploads/2024/09/ICPC-Act-2000.pdf",
+          "retrieved": "2026-09-17",
+          "confidence": "official"
+        }
+      ]
+    },
+    {
+      "ref": "Section 25",
+      "heading": {
+        "en": "Making false or misleading statements to the Commission"
+      },
+      "text": {
+        "en": "Any person who makes, or causes another person to make, to an officer of the Commission or to any other public officer any statement which to the knowledge of the person making it is false, or intended to mislead, or untrue in any material particular, commits an offence."
+      },
+      "topic": "accountability",
+      "sources": [
+        {
+          "publisher": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+          "url": "https://icpc.gov.ng/wp-content/uploads/2024/09/ICPC-Act-2000.pdf",
+          "retrieved": "2026-09-17",
+          "confidence": "official"
+        }
+      ]
+    },
+    {
+      "ref": "Section 26",
+      "heading": {
+        "en": "Attempt, conspiracy punishable as offences"
+      },
+      "text": {
+        "en": "Any person who attempts to commit any offence under this Act, does any act preparatory to or in furtherance of such an offence, or abets or engages in a criminal conspiracy to commit it, is guilty of an offence and is liable on conviction to the punishment provided for that offence."
+      },
+      "topic": "corruption",
+      "sources": [
+        {
+          "publisher": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+          "url": "https://icpc.gov.ng/wp-content/uploads/2024/09/ICPC-Act-2000.pdf",
+          "retrieved": "2026-09-17",
+          "confidence": "official"
+        }
+      ]
+    },
+    {
+      "ref": "Section 27",
+      "heading": {
+        "en": "Power to investigate reports and enquire into"
+      },
+      "text": {
+        "en": "Every report relating to the commission of an offence under this Act may be made orally or in writing to an officer of the Commission. If made orally it shall be reduced into writing and read over to the person making the report, and the report shall be signed or thumb-printed by that person; where the person making the report is illiterate, the officer taking it must endorse that fact and record that it was read over and interpreted to the maker. A report made under this section shall not be disclosed to anyone other than officers of the Commission or the Attorney-General until the accused person has been arrested or charged to court."
+      },
+      "topic": "reporting duty",
+      "sources": [
+        {
+          "publisher": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+          "url": "https://icpc.gov.ng/wp-content/uploads/2024/09/ICPC-Act-2000.pdf",
+          "retrieved": "2026-09-17",
+          "confidence": "official"
+        }
+      ]
+    },
+    {
+      "ref": "Section 64",
+      "heading": {
+        "en": "Protection of informers and information"
+      },
+      "text": {
+        "en": "Where a complaint made by an officer of the Commission states that it is made in consequence of information received, the information and the identity of the person who gave it shall be secret between the officer who made the complaint and that person. Everything contained in the information, the identity of the person who gave it and all other circumstances relating to it, including the place where it was given, shall not be disclosed, or be ordered or required to be disclosed, in public — only to the trial judge and the defence lawyer in attendance in any proceedings in any court or tribunal. Where any document, recording or other material given in evidence contains an entry naming or describing the informer, or which might lead to his discovery, the court shall cause those parts to be concealed or removed so far as is necessary to protect that person from discovery."
+      },
+      "topic": "protection",
+      "sources": [
+        {
+          "publisher": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+          "url": "https://icpc.gov.ng/wp-content/uploads/2024/09/ICPC-Act-2000.pdf",
+          "retrieved": "2026-09-17",
+          "confidence": "official"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "publisher": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+      "url": "https://icpc.gov.ng/wp-content/uploads/2024/09/ICPC-Act-2000.pdf",
+      "retrieved": "2026-09-17",
+      "confidence": "official"
+    }
+  ],
+  "last_verified": "2026-09-17"
+}

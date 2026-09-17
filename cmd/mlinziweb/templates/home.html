@@ -7,6 +7,7 @@
   <select name="j" onchange="this.form.submit()" class="border border-slate-300 rounded-lg px-3 py-2 text-sm">
     <option value="KE" {{if eq .Jurisdiction "KE"}}selected{{end}}>🇰🇪 Kenya</option>
     <option value="NG" {{if eq .Jurisdiction "NG"}}selected{{end}}>🇳🇬 Nigeria</option>
+    <option value="UG" {{if eq .Jurisdiction "UG"}}selected{{end}}>🇺🇬 Uganda</option>
   </select>
   <input type="text" name="q" value="{{.Query}}" placeholder="e.g. bribe, police, GBV, rushwa..."
          class="flex-1 border border-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#028090]">

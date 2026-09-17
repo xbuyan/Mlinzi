@@ -1,6 +1,7 @@
 package guide
 
 import (
+	"fmt"
 	"os"
 	"strings"
 	"testing"
@@ -207,6 +208,30 @@ func TestNigerianGuideIsReachableAndScoped(t *testing.T) {
 	}
 }
 
+func TestUgandanGuidesAreReachableAndScoped(t *testing.T) {
+	s := testStore(t)
+	g, err := s.Get("ug-bribery-public-service")
+	if err != nil {
+		t.Fatalf("expected the Uganda bribery guide to be reachable, got %v", err)
+	}
+	if g.Jurisdiction != "UG" {
+		t.Fatalf("expected jurisdiction UG, got %q", g.Jurisdiction)
+	}
+
+	// Isolation has to hold as the set grows, not just with two countries:
+	// the Inspectorate of Government is a Ugandan body and must not surface
+	// inside the Kenyan or Nigerian scopes.
+	if got := s.Search("KE", "IGG"); len(got) != 0 {
+		t.Fatalf("expected no IGG results within KE scope, got %v", ids(got))
+	}
+	if got := s.Search("NG", "IGG"); len(got) != 0 {
+		t.Fatalf("expected no IGG results within NG scope, got %v", ids(got))
+	}
+	if got := s.Search("UG", "IGG"); len(got) != 1 {
+		t.Fatalf("expected exactly 1 IGG result within UG scope, got %v", ids(got))
+	}
+}
+
 func TestAddingASecondJurisdictionDidNotBreakTheFirst(t *testing.T) {
 	// The whole scalability claim is that adding a country is additive.
 	// This is the regression test for that claim: Kenya's guide count and
@@ -231,12 +256,21 @@ func TestFrenchTranslationResolves(t *testing.T) {
 }
 
 func TestSeededDataHasMultipleJurisdictions(t *testing.T) {
-	// Proves the scalability claim rather than asserting it: a second
-	// country is a genuinely loaded, validated dataset, not a slide.
+	// Proves the scalability claim rather than asserting it: each country is a
+	// genuinely loaded, validated dataset, not a slide. Uganda arrived the
+	// same way Nigeria did — a new data folder and nothing else — which is why
+	// this test only had to widen its expectation rather than a new mechanism
+	// appear for it.
 	s := testStore(t)
 	js := s.Jurisdictions()
-	if len(js) != 2 || js[0] != "KE" || js[1] != "NG" {
-		t.Fatalf("expected KE and NG loaded, got %v", js)
+	want := []string{"KE", "NG", "UG"}
+	if len(js) != len(want) {
+		t.Fatalf("expected %v loaded, got %v", want, js)
+	}
+	for i := range want {
+		if js[i] != want[i] {
+			t.Fatalf("expected %v loaded, got %v", want, js)
+		}
 	}
 }
 
@@ -320,19 +354,24 @@ func TestSearchUnknownJurisdictionIsEmpty(t *testing.T) {
 }
 
 func TestEveryGuideOffersALowBandwidthRoute(t *testing.T) {
-	// The brief's low-bandwidth constraint, enforced as a test: every guide
-	// must be actionable from a basic handset with no mobile data.
+	// The brief's low-bandwidth constraint, enforced as a test: every guide in
+	// every country must be actionable from a basic handset with no mobile
+	// data. Scoped across all loaded jurisdictions deliberately — a new
+	// country must clear the same bar as the original one, rather than
+	// inheriting an exemption by not being listed here.
 	s := testStore(t)
-	for _, g := range s.ByJurisdiction("KE") {
-		found := false
-		for _, i := range g.Institutions {
-			if len(i.LowBandwidthChannels()) > 0 {
-				found = true
-				break
+	for _, j := range s.Jurisdictions() {
+		for _, g := range s.ByJurisdiction(j) {
+			found := false
+			for _, i := range g.Institutions {
+				if len(i.LowBandwidthChannels()) > 0 {
+					found = true
+					break
+				}
 			}
-		}
-		if !found {
-			t.Errorf("guide %q has no low-bandwidth channel", g.ID)
+			if !found {
+				t.Errorf("guide %q has no low-bandwidth channel", g.ID)
+			}
 		}
 	}
 }
@@ -357,6 +396,80 @@ func TestDisputedChannelsSurviveLoading(t *testing.T) {
 	}
 	if disputed < 2 {
 		t.Fatalf("expected both candidate hotlines flagged as disputed, got %d", disputed)
+	}
+}
+
+// translatedJurisdictions names the countries whose data is expected to be
+// complete in every supported language. Nigeria is deliberately absent: it is
+// English-only, and saying so here is more honest than an empty expectation.
+var translatedJurisdictions = map[string][]string{
+	"KE": {"en", "sw", "fr"},
+	"UG": {"en", "sw", "fr"},
+}
+
+func TestTranslatedJurisdictionsCoverEveryString(t *testing.T) {
+	// Kenya set the standard: every human-readable string carries English,
+	// Kiswahili and French. Uganda was brought to the same standard, and this
+	// tripwire keeps it there — a translation added later that skips a field,
+	// or a new field added without one, fails here instead of silently
+	// rendering English in the middle of a translated page. It walks the
+	// domain type rather than the JSON so a new Text field cannot escape it.
+	s := testStore(t)
+	for jur, langs := range translatedJurisdictions {
+		for _, g := range s.ByJurisdiction(jur) {
+			check := func(field string, txt Text) {
+				t.Helper()
+				if len(txt.Langs()) == 0 {
+					return // optional field, absent for this guide
+				}
+				for _, lang := range langs {
+					if strings.TrimSpace(txt[lang]) == "" {
+						t.Errorf("guide %q: %s has no %q translation", g.ID, field, lang)
+					}
+				}
+			}
+
+			check("title", g.Title)
+			check("summary", g.Summary)
+			check("timeline", g.Timeline)
+			for i, r := range g.Rights {
+				check(fmt.Sprintf("rights[%d]", i), r)
+			}
+			for i, e := range g.Evidence {
+				check(fmt.Sprintf("evidence[%d]", i), e)
+			}
+			for i, st := range g.Steps {
+				check(fmt.Sprintf("steps[%d].action", i), st.Action)
+				check(fmt.Sprintf("steps[%d].detail", i), st.Detail)
+				check(fmt.Sprintf("steps[%d].deadline", i), st.Deadline)
+			}
+			for _, inst := range g.Institutions {
+				check("institution "+inst.ID+" role", inst.Role)
+				check("institution "+inst.ID+" mandate", inst.Mandate)
+				for i, c := range inst.Channels {
+					check(fmt.Sprintf("institution %s channel[%d] note", inst.ID, i), c.Note)
+				}
+			}
+		}
+	}
+}
+
+func TestUgandaTranslationsResolve(t *testing.T) {
+	// End to end rather than by inspection: the freshly translated Ugandan
+	// guides must actually resolve to Kiswahili and French, not just carry the
+	// keys. A stale cache or a fallback bug would show English here.
+	s := testStore(t)
+	for _, id := range []string{"ug-bribery-public-service", "ug-police-misconduct", "ug-gender-based-violence"} {
+		g, err := s.Get(id)
+		if err != nil {
+			t.Fatalf("expected %s to be reachable, got %v", id, err)
+		}
+		for _, lang := range []string{"sw", "fr"} {
+			got := g.Summary.In(lang)
+			if got == "" || got == g.Summary.In("en") {
+				t.Errorf("guide %q: summary did not resolve to %q", id, lang)
+			}
+		}
 	}
 }
 

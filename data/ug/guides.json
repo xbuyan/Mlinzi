@@ -1,0 +1,729 @@
+[
+  {
+    "id": "ug-bribery-public-service",
+    "jurisdiction": "UG",
+    "tracks": ["transparency-accountability"],
+    "category": "corruption",
+    "title": {
+      "en": "A public officer asked me for a bribe",
+      "sw": "Afisa wa umma amenidai rushwa",
+      "fr": "Un agent public m'a demandé un pot-de-vin"
+    },
+    "summary": {
+      "en": "You were asked to pay for a government service that should be free, or to pay extra to get it faster. In Uganda the Inspectorate of Government (IGG) receives and investigates complaints of corruption, abuse of authority and abuse of public office, and it publishes a toll-free line you can call from a basic phone.",
+      "sw": "Umedaiwa malipo kwa huduma ya serikali inayopaswa kuwa bure, au umedaiwa zaidi ili upate huduma haraka. Nchini Uganda, Inspectorate of Government (IGG) hupokea na kuchunguza malalamiko ya rushwa, matumizi mabaya ya mamlaka na ya ofisi ya umma, na inatangaza namba ya simu ya bure unayoweza kupiga kwa simu ya kawaida.",
+      "fr": "On vous a demandé de payer pour un service public qui devrait être gratuit, ou de payer davantage pour l'obtenir plus vite. En Ouganda, l'Inspectorate of Government (IGG) reçoit et instruit les plaintes pour corruption, abus d'autorité et abus de fonction publique, et publie un numéro gratuit que vous pouvez appeler depuis un téléphone ordinaire."
+    },
+    "rights": [
+      {
+        "en": "Eliminating corruption, abuse of authority and abuse of public office is a constitutional function of the Inspectorate of Government — it is not a favour it may decline. Article 225 of the Constitution lists that duty among the Inspectorate's functions, and Article 223 establishes the office.",
+        "sw": "Kuondoa rushwa, matumizi mabaya ya mamlaka na ya ofisi ya umma ni kazi ya kikatiba ya Inspectorate of Government — si fadhila inayoweza kukataliwa. Kifungu cha 225 cha Katiba kinaorodhesha wajibu huo kati ya kazi za Inspectorate, na Kifungu cha 223 kinaanzisha ofisi hiyo.",
+        "fr": "Éliminer la corruption, les abus d'autorité et les abus de fonction publique est une fonction constitutionnelle de l'Inspectorate of Government : ce n'est pas une faveur qu'il peut refuser. L'article 225 de la Constitution inscrit ce devoir parmi ses fonctions, et l'article 223 crée cette institution."
+      },
+      {
+        "en": "You are entitled to be treated justly and fairly by any administrative official or body, and to apply to a court about an administrative decision taken against you. That is Article 42 of the Constitution.",
+        "sw": "Una haki ya kutendewa kwa haki na usawa na afisa au chombo chochote cha utawala, na kuomba mahakama kuhusu uamuzi wa kiutawala uliochukuliwa dhidi yako. Hiyo ni Kifungu cha 42 cha Katiba.",
+        "fr": "Vous avez le droit d'être traité avec justice et équité par tout agent ou organe administratif, et de saisir un tribunal au sujet d'une décision administrative prise contre vous. C'est l'article 42 de la Constitution."
+      },
+      {
+        "en": "Reporting to the Inspectorate is free on its toll-free line. The IGG publishes 0800111777 as a toll-free number.",
+        "sw": "Kuripoti kwa Inspectorate ni bure kwa namba yake ya bure. IGG inatangaza 0800111777 kama namba ya bure.",
+        "fr": "Signaler à l'Inspectorate est gratuit sur sa ligne gratuite. L'IGG publie le 0800111777 comme numéro d'appel gratuit."
+      }
+    ],
+    "evidence": [
+      {
+        "en": "Where and when it happened, and which office or service was involved.",
+        "sw": "Mahali na wakati ilipotokea, na ofisi au huduma iliyohusika.",
+        "fr": "Où et quand cela s'est produit, et quel bureau ou service était concerné."
+      },
+      {
+        "en": "The name, rank or office of the officer if you know it. You can still complain without it.",
+        "sw": "Jina, cheo au ofisi ya afisa ikiwa unajua. Unaweza kulalamika bila hayo.",
+        "fr": "Le nom, le grade ou le service de l'agent si vous le connaissez. Vous pouvez déposer plainte sans cela."
+      },
+      {
+        "en": "How much was demanded, and whether you paid.",
+        "sw": "Kiasi kilichodaiwa, na kama ulilipa.",
+        "fr": "Le montant demandé, et si vous avez payé."
+      },
+      {
+        "en": "Any receipt, message, photo or recording. Do not put yourself at risk to collect evidence.",
+        "sw": "Risiti, ujumbe, picha au rekodi yoyote. Usijitie hatarini kukusanya ushahidi.",
+        "fr": "Tout reçu, message, photo ou enregistrement. Ne prenez pas de risques pour recueillir des preuves."
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "en": "Write down what happened while it is fresh",
+          "sw": "Andika kilichotokea mapema iwezekanavyo",
+          "fr": "Notez ce qui s'est passé pendant que c'est encore frais"
+        },
+        "detail": {
+          "en": "Date, time, place, office, officer, amount. This is what your complaint will rest on.",
+          "sw": "Tarehe, saa, mahali, ofisi, afisa, kiasi. Hiki ndicho msingi wa malalamiko yako.",
+          "fr": "Date, heure, lieu, bureau, agent, montant. C'est sur cela que reposera votre plainte."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "Complain to the Inspectorate of Government",
+          "sw": "Lalamika kwa Inspectorate of Government",
+          "fr": "Déposez plainte auprès de l'Inspectorate of Government"
+        },
+        "detail": {
+          "en": "Call the toll-free line 0800111777, or the published hotlines 0414-347387 or 0312-101346, email complaints@igg.go.ug, or use the 'Report a Case' form on the Inspectorate's website.",
+          "sw": "Piga namba ya bure 0800111777, au namba zilizotangazwa 0414-347387 au 0312-101346, tuma barua pepe kwa complaints@igg.go.ug, au tumia fomu ya 'Report a Case' kwenye tovuti ya Inspectorate.",
+          "fr": "Appelez la ligne gratuite 0800111777, ou les lignes publiées 0414-347387 ou 0312-101346, écrivez à complaints@igg.go.ug, ou utilisez le formulaire « Report a Case » sur le site de l'Inspectorate."
+        },
+        "institution": "igg"
+      },
+      {
+        "action": {
+          "en": "Keep a record of your complaint",
+          "sw": "Weka kumbukumbu ya malalamiko yako",
+          "fr": "Conservez une trace de votre plainte"
+        },
+        "detail": {
+          "en": "Note the date you complained, which office took it, and any reference you were given, so you can follow up.",
+          "sw": "Andika tarehe uliyolalamika, ofisi iliyopokea, na kumbukumbu yoyote uliyopewa, ili uweze kufuatilia.",
+          "fr": "Notez la date de votre plainte, le service qui l'a reçue et toute référence donnée, afin de pouvoir faire un suivi."
+        },
+        "critical": true
+      }
+    ],
+    "institutions": [
+      {
+        "id": "igg",
+        "name": "Inspectorate of Government (IGG)",
+        "role": {
+          "en": "Uganda's constitutional anti-corruption body. It receives and investigates complaints of corruption, abuse of authority and abuse of public office, and can take or refer cases for prosecution.",
+          "sw": "Chombo cha kikatiba cha Uganda dhidi ya rushwa. Hupokea na kuchunguza malalamiko ya rushwa, matumizi mabaya ya mamlaka na ya ofisi ya umma, na kinaweza kuchukua au kupeleka kesi kwa mwendesha mashtaka.",
+          "fr": "L'organe constitutionnel ougandais de lutte contre la corruption. Il reçoit et instruit les plaintes pour corruption, abus d'autorité et abus de fonction publique, et peut poursuivre ou transmettre les affaires au ministère public."
+        },
+        "mandate": {
+          "en": "Article 223 of the Constitution establishes the Inspectorate of Government. Article 225 provides that its functions are prescribed by Parliament and include promoting and fostering strict adherence to the rule of law and the principles of natural justice in administration, and eliminating and fostering the elimination of corruption, abuse of authority and of public office.",
+          "sw": "Kifungu cha 223 cha Katiba kinaanzisha Inspectorate of Government. Kifungu cha 225 kinasema kwamba kazi zake zinaainishwa na Bunge na zinajumuisha kukuza na kuimarisha ufuataji wa sheria na kanuni za haki ya asili katika utawala, na kuondoa na kuhimiza kuondolewa kwa rushwa, matumizi mabaya ya mamlaka na ya ofisi ya umma.",
+          "fr": "L'article 223 de la Constitution crée l'Inspectorate of Government. L'article 225 dispose que ses fonctions sont fixées par le Parlement et comprennent la promotion et le renforcement du respect de l'État de droit et des principes de justice naturelle dans l'administration, ainsi que l'élimination de la corruption, des abus d'autorité et des abus de fonction publique."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "0800111777",
+            "toll_free": true,
+            "anonymous": false,
+            "note": {
+              "en": "Published by the Inspectorate as its toll-free line, so it works on a basic phone with no data and no credit.",
+              "sw": "Inatangazwa na Inspectorate kama namba yake ya bure, hivyo inafanya kazi kwa simu ya kawaida bila data na bila salio.",
+              "fr": "Publié par l'Inspectorate comme sa ligne gratuite : elle fonctionne depuis un téléphone ordinaire, sans données ni crédit."
+            },
+            "sources": [
+              {
+                "publisher": "Inspectorate of Government (Uganda)",
+                "url": "https://www.igg.go.ug/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "phone",
+            "value": "0414-347387 / 0312-101346",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "The Inspectorate's published hotlines. Standard network rates apply, unlike the toll-free line above.",
+              "sw": "Namba zilizotangazwa za Inspectorate. Gharama za kawaida za mtandao zinatumika, tofauti na namba ya bure iliyo juu.",
+              "fr": "Les lignes publiées de l'Inspectorate. Les tarifs normaux du réseau s'appliquent, contrairement à la ligne gratuite ci-dessus."
+            },
+            "sources": [
+              {
+                "publisher": "Inspectorate of Government (Uganda)",
+                "url": "https://www.igg.go.ug/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "email",
+            "value": "complaints@igg.go.ug",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Inspectorate of Government (Uganda)",
+                "url": "https://www.igg.go.ug/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "web",
+            "value": "https://www.igg.go.ug/report-a-case",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "The Inspectorate's own 'Report a Case' page. Needs data or a connection, so it is the slowest of these routes on a basic phone.",
+              "sw": "Ukurasa wa 'Report a Case' wa Inspectorate yenyewe. Unahitaji data au muunganisho, hivyo ni njia ya polepole zaidi kati ya hizi kwa simu ya kawaida.",
+              "fr": "La page « Report a Case » de l'Inspectorate elle-même. Nécessite des données ou une connexion : c'est la plus lente de ces voies sur un téléphone ordinaire."
+            },
+            "sources": [
+              {
+                "publisher": "Inspectorate of Government (Uganda)",
+                "url": "https://www.igg.go.ug/report-a-case",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "en": "The Inspectorate of Government does not publish a fixed investigation timeline. Keep your record of the complaint and follow up with the office that received it.",
+      "sw": "Inspectorate of Government haitangazi muda maalum wa uchunguzi. Weka kumbukumbu ya malalamiko yako na ufuatilie na ofisi iliyoyapokea.",
+      "fr": "L'Inspectorate of Government ne publie pas de délai d'enquête fixe. Conservez la trace de votre plainte et faites un suivi auprès du service qui l'a reçue."
+    },
+    "sources": [
+      {
+        "publisher": "Inspectorate of Government (Uganda)",
+        "url": "https://www.igg.go.ug/",
+        "retrieved": "2026-09-17",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Inspectorate of Government (Uganda) — Report a Case",
+        "url": "https://www.igg.go.ug/report-a-case",
+        "retrieved": "2026-09-17",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Wikisource — Constitution of the Republic of Uganda, 1995 (Articles 223 and 225)",
+        "url": "https://en.wikisource.org/wiki/Constitution_of_the_Republic_of_Uganda",
+        "retrieved": "2026-09-17",
+        "confidence": "secondary"
+      }
+    ],
+    "last_verified": "2026-09-17"
+  },
+  {
+    "id": "ug-police-misconduct",
+    "jurisdiction": "UG",
+    "tracks": ["safety-reporting-protection", "transparency-accountability"],
+    "category": "policing",
+    "title": {
+      "en": "A police officer harmed, threatened or extorted me",
+      "sw": "Afisa wa polisi amenidhuru, amenitisha au amenidai rushwa",
+      "fr": "Un policier m'a blessé, menacé ou extorqué"
+    },
+    "summary": {
+      "en": "You were beaten, threatened, detained without a reason you were told, or made to pay to be released. The Constitution forbids torture and cruel, inhuman or degrading treatment outright, the Uganda Human Rights Commission receives complaints about it, and the police force has its own unit that investigates officers.",
+      "sw": "Ulipigwa, kutishiwa, kufungwa bila sababu uliyoambiwa, au kulazimishwa kulipa ili uachiliwe. Katiba inakataza kabisa mateso na unyanyasaji wa kikatili, usio wa kibinadamu au wa kudhalilisha; Komisheni ya Haki za Kibinadamu ya Uganda hupokea malalamiko kuhusu hilo, na jeshi la polisi lina kitengo chake cha kuchunguza maafisa.",
+      "fr": "Vous avez été frappé, menacé, détenu sans motif qui vous ait été communiqué, ou contraint de payer pour être libéré. La Constitution interdit catégoriquement la torture et les traitements cruels, inhumains ou dégradants, la Commission ougandaise des droits de l'homme reçoit les plaintes à ce sujet, et la police dispose de sa propre unité chargée d'enquêter sur ses agents."
+    },
+    "rights": [
+      {
+        "en": "No person shall be subjected to any form of torture or cruel, inhuman or degrading treatment or punishment. That is Article 24 of the Constitution, stated without qualification.",
+        "sw": "Hakuna mtu atakayefanyiwa aina yoyote ya mateso au unyanyasaji wa kikatili, usio wa kibinadamu au wa kudhalilisha, au adhabu ya namna hiyo. Hiyo ni Kifungu cha 24 cha Katiba, kisichoweka sharti lolote.",
+        "fr": "Nul ne peut être soumis à une forme quelconque de torture ni à des peines ou traitements cruels, inhumains ou dégradants. C'est l'article 24 de la Constitution, énoncé sans réserve."
+      },
+      {
+        "en": "Freedom from torture and freedom from slavery or servitude cannot be suspended even in a state of emergency — Article 44 says there shall be no derogation from them.",
+        "sw": "Uhuru kutokana na mateso na uhuru kutokana na utumwa hauwezi kusimamishwa hata wakati wa hali ya hatari — Kifungu cha 44 kinasema hakutakuwa na ubatilishaji wa haki hizo.",
+        "fr": "La liberté de ne pas subir la torture et la liberté de ne pas être réduit en esclavage ne peuvent être suspendues, même en état d'urgence — l'article 44 prévoit qu'il ne peut y être dérogé."
+      },
+      {
+        "en": "If a right or freedom has been infringed or threatened, you are entitled to apply to a competent court for redress, which may include compensation. Any person or organisation may also bring an action about the violation of someone else's rights, so you do not have to be the person harmed to act. That is Article 50.",
+        "sw": "Ikiwa haki au uhuru umevunjwa au unatishiwa, una haki ya kuomba mahakama ipasavyo fidia, ambayo inaweza kujumuisha malipo. Mtu au taasisi yoyote inaweza pia kupeleka kesi kuhusu ukiukaji wa haki za mtu mwingine, hivyo si lazima uwe wewe mtu aliyeathiriwa. Hiyo ni Kifungu cha 50.",
+        "fr": "Si un droit ou une liberté a été violé ou menacé, vous pouvez saisir un tribunal compétent pour obtenir réparation, y compris une indemnisation. Toute personne ou organisation peut aussi agir pour la violation des droits d'autrui : il n'est pas nécessaire d'être la victime. C'est l'article 50."
+      }
+    ],
+    "evidence": [
+      {
+        "en": "Where and when it happened, which unit or station the officer was from, and any badge, name or rank you saw.",
+        "sw": "Mahali na wakati ilipotokea, kitengo au kituo cha afisa, na namba ya beji, jina au cheo ulichokiona.",
+        "fr": "Où et quand cela s'est produit, l'unité ou le poste de l'agent, et tout badge, nom ou grade que vous avez vu."
+      },
+      {
+        "en": "Names and contacts of anyone who saw it.",
+        "sw": "Majina na anwani za mtu yeyote aliyeona.",
+        "fr": "Les noms et contacts de toute personne qui a vu les faits."
+      },
+      {
+        "en": "A medical report or notes of any injury, made as soon as you can get them.",
+        "sw": "Ripoti ya daktari au maelezo ya majeraha, yaliyoandikwa mapema iwezekanavyo.",
+        "fr": "Un rapport médical ou des notes sur toute blessure, établis dès que possible."
+      },
+      {
+        "en": "Photos, messages or recordings. Do not put yourself at risk to collect evidence.",
+        "sw": "Picha, ujumbe au rekodi. Usijitie hatarini kukusanya ushahidi.",
+        "fr": "Photos, messages ou enregistrements. Ne prenez pas de risques pour recueillir des preuves."
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "en": "Get medical attention first if you were hurt",
+          "sw": "Tafuta matibabu kwanza ikiwa ulijeruhiwa",
+          "fr": "Faites-vous soigner d'abord si vous avez été blessé"
+        },
+        "detail": {
+          "en": "Ask for a written record of your injuries and the date you were seen. It becomes evidence of what happened to you.",
+          "sw": "Omba kumbukumbu iliyoandikwa ya majeraha yako na tarehe uliyoonekana. Inakuwa ushahidi wa kile kilichokupata.",
+          "fr": "Demandez un document écrit de vos blessures et la date de l'examen. Cela devient une preuve de ce qui vous est arrivé."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "Write down what happened while it is fresh",
+          "sw": "Andika kilichotokea mapema iwezekanavyo",
+          "fr": "Notez ce qui s'est passé pendant que c'est encore frais"
+        },
+        "detail": {
+          "en": "Date, time, place, station or unit, the officer, and exactly what was said and done.",
+          "sw": "Tarehe, saa, mahali, kituo au kitengo, afisa, na hasa kile kilichosemwa na kufanywa.",
+          "fr": "Date, heure, lieu, poste ou unité, l'agent, et exactement ce qui a été dit et fait."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "Complain to the Uganda Human Rights Commission",
+          "sw": "Lalamika kwa Komisheni ya Haki za Kibinadamu ya Uganda",
+          "fr": "Déposez plainte auprès de la Commission ougandaise des droits de l'homme"
+        },
+        "detail": {
+          "en": "Call the toll-free line 0800122444 or 0414232190, or file the complaint form on the Commission's website. The Commission is a standing body that investigates abuses by state officials, including the police.",
+          "sw": "Piga namba ya bure 0800122444 au 0414232190, au tumia fomu ya malalamiko kwenye tovuti ya Komisheni. Komisheni ni chombo cha kudumu kinachochunguza unyanyasaji wa maafisa wa serikali, ikiwemo polisi.",
+          "fr": "Appelez la ligne gratuite 0800122444 ou le 0414232190, ou remplissez le formulaire de plainte sur le site de la Commission. La Commission est un organe permanent qui enquête sur les abus commis par des agents de l'État, y compris la police."
+        },
+        "institution": "uhrc"
+      },
+      {
+        "action": {
+          "en": "Report the officer to the police force itself",
+          "sw": "Ripoti afisa kwa jeshi la polisi lenyewe",
+          "fr": "Signalez l'agent à la police elle-même"
+        },
+        "detail": {
+          "en": "The Uganda Police Force's Professional Standards Unit is the force's own body for investigating misconduct by officers. If you are in immediate danger, call 999 or 112.",
+          "sw": "Kitengo cha Professional Standards Unit cha Jeshi la Polisi la Uganda ni chombo cha jeshi lenyewe cha kuchunguza ukiukaji wa maafisa. Ikiwa uko hatarini mara moja, piga 999 au 112.",
+          "fr": "La Professional Standards Unit de la police ougandaise est l'organe interne chargé d'enquêter sur les manquements des agents. Si vous êtes en danger immédiat, appelez le 999 ou le 112."
+        },
+        "institution": "upf"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "uhrc",
+        "name": "Uganda Human Rights Commission (UHRC)",
+        "role": {
+          "en": "Uganda's constitutional human rights body. It receives and investigates complaints that a right or freedom has been violated by the State or its officials, including the police, and can award compensation and refer cases for prosecution.",
+          "sw": "Chombo cha kikatiba cha haki za kibinadamu cha Uganda. Hupokea na kuchunguza malalamiko kwamba haki au uhuru umevunjwa na Serikali au maafisa wake, ikiwemo polisi, na kinaweza kutoa fidia na kupeleka kesi kwa mwendesha mashtaka.",
+          "fr": "L'organe constitutionnel ougandais des droits de l'homme. Il reçoit et instruit les plaintes selon lesquelles un droit ou une liberté a été violé par l'État ou ses agents, y compris la police, et peut accorder une indemnisation et transmettre les affaires au ministère public."
+        },
+        "mandate": {
+          "en": "A standing body established after Uganda's history of arbitrary arrest, detention without trial, torture and impunity by security forces, with a mandate to monitor the country's human rights situation and to receive complaints about it.",
+          "sw": "Chombo cha kudumu kilichoanzishwa kufuatia historia ya Uganda ya kukamatwa ovyo, kufungwa bila kesi, mateso na kutokuwepo kwa adhabu kwa vikosi vya usalama, chenye jukumu la kufuatilia hali ya haki za kibinadamu nchini na kupokea malalamiko kuhusu hilo.",
+          "fr": "Un organe permanent créé après l'histoire ougandaise d'arrestations arbitraires, de détentions sans procès, de torture et d'impunité des forces de sécurité, chargé de surveiller la situation des droits de l'homme dans le pays et de recevoir les plaintes à ce sujet."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "0800122444",
+            "toll_free": true,
+            "anonymous": false,
+            "note": {
+              "en": "The Commission publishes this as its toll-free line, so it works on a basic phone with no data and no credit.",
+              "sw": "Komisheni inatangaza hii kama namba yake ya bure, hivyo inafanya kazi kwa simu ya kawaida bila data na bila salio.",
+              "fr": "La Commission publie ce numéro comme sa ligne gratuite : elle fonctionne depuis un téléphone ordinaire, sans données ni crédit."
+            },
+            "sources": [
+              {
+                "publisher": "Uganda Human Rights Commission",
+                "url": "https://uhrc.ug/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "phone",
+            "value": "0414232190",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "The Commission's published landline. Standard network rates apply.",
+              "sw": "Simu ya mezani iliyotangazwa na Komisheni. Gharama za kawaida za mtandao zinatumika.",
+              "fr": "La ligne fixe publiée par la Commission. Les tarifs normaux du réseau s'appliquent."
+            },
+            "sources": [
+              {
+                "publisher": "Uganda Human Rights Commission",
+                "url": "https://uhrc.ug/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "web",
+            "value": "https://uhrc.ug/page/complaint-form",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "The Commission's own complaint form, linked from its home page. Needs a connection.",
+              "sw": "Fomu ya malalamiko ya Komisheni yenyewe, iliyounganishwa kutoka ukurasa wake wa mwanzo. Unahitaji muunganisho.",
+              "fr": "Le formulaire de plainte de la Commission, accessible depuis sa page d'accueil. Nécessite une connexion."
+            },
+            "sources": [
+              {
+                "publisher": "Uganda Human Rights Commission",
+                "url": "https://uhrc.ug/page/complaint-form",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "upf",
+        "name": "Uganda Police Force — Professional Standards Unit",
+        "role": {
+          "en": "The national police service. Its Professional Standards Unit is the force's own internal body for investigating misconduct by officers and recommending disciplinary action.",
+          "sw": "Jeshi la polisi la kitaifa. Kitengo chake cha Professional Standards Unit ni chombo cha ndani cha jeshi cha kuchunguza ukiukaji wa maafisa na kupendekeza hatua za kinidhamu.",
+          "fr": "La police nationale. Sa Professional Standards Unit est l'organe interne de la police chargé d'enquêter sur les manquements des agents et de recommander des mesures disciplinaires."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "999 / 112",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "The emergency numbers published by the Uganda Police Force, for immediate danger. They put you through to the police response, not to an oversight body — for a complaint about an officer, the Commission and the Professional Standards Unit routes above are the ones that investigate.",
+              "sw": "Namba za dharura zilizotangazwa na Jeshi la Polisi la Uganda, kwa hatari ya haraka. Zinakuunganisha na mwitikio wa polisi, si chombo cha uangalizi — kwa malalamiko kuhusu afisa, njia za Komisheni na Professional Standards Unit zilizo juu ndizo zinazochunguza.",
+              "fr": "Les numéros d'urgence publiés par la police ougandaise, pour un danger immédiat. Ils vous mettent en relation avec l'intervention policière, non avec un organe de contrôle : pour une plainte visant un agent, ce sont les voies de la Commission et de la Professional Standards Unit ci-dessus qui enquêtent."
+            },
+            "sources": [
+              {
+                "publisher": "Uganda Police Force",
+                "url": "https://upf.go.ug/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "en": "Neither the Commission nor the police publish a fixed timeline for complaints about officers. Keep your record and follow up with the body you complained to.",
+      "sw": "Komisheni wala polisi hawatangazi muda maalum wa malalamiko kuhusu maafisa. Weka kumbukumbu yako na ufuatilie na chombo ulicholalamikia.",
+      "fr": "Ni la Commission ni la police ne publient de délai fixe pour les plaintes visant des agents. Conservez votre trace et faites un suivi auprès de l'organe saisi."
+    },
+    "sources": [
+      {
+        "publisher": "Uganda Human Rights Commission",
+        "url": "https://uhrc.ug/",
+        "retrieved": "2026-09-17",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Uganda Police Force",
+        "url": "https://upf.go.ug/",
+        "retrieved": "2026-09-17",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Wikisource — Constitution of the Republic of Uganda, 1995 (Articles 24, 44 and 50)",
+        "url": "https://en.wikisource.org/wiki/Constitution_of_the_Republic_of_Uganda",
+        "retrieved": "2026-09-17",
+        "confidence": "secondary"
+      }
+    ],
+    "last_verified": "2026-09-17"
+  },
+  {
+    "id": "ug-gender-based-violence",
+    "jurisdiction": "UG",
+    "tracks": ["safety-reporting-protection"],
+    "category": "gbv",
+    "title": {
+      "en": "I or someone I know is experiencing violence or abuse",
+      "sw": "Mimi au mtu ninayemjua anakabiliwa na ukatili au unyanyasaji",
+      "fr": "Je subis de la violence ou des abus, ou quelqu'un que je connais en subit"
+    },
+    "summary": {
+      "en": "Violence at home, or by someone you know, is not a private matter the law ignores. Uganda runs a national helpline — Sauti 116 — for children, survivors of gender-based violence and migrant workers, and the Constitution forbids torture and inhuman treatment with no exceptions.",
+      "sw": "Ukatili nyumbani, au unaofanywa na mtu unayemjua, si jambo la faragha ambalo sheria inalipuuza. Uganda ina namba ya kitaifa — Sauti 116 — kwa watoto, waathiriwa wa ukatili wa kijinsia na wafanyakazi wahamiaji, na Katiba inakataza mateso na unyanyasaji wa kinyama bila msamaha.",
+      "fr": "La violence au foyer, ou commise par une personne que vous connaissez, n'est pas une affaire privée que la loi ignore. L'Ouganda dispose d'une ligne nationale — Sauti 116 — pour les enfants, les survivantes de violences fondées sur le genre et les travailleurs migrants, et la Constitution interdit la torture et les traitements inhumains sans exception."
+    },
+    "rights": [
+      {
+        "en": "No person shall be subjected to any form of torture or cruel, inhuman or degrading treatment or punishment. Article 24 of the Constitution applies whoever the person is and wherever the harm happens, including in the home.",
+        "sw": "Hakuna mtu atakayefanyiwa aina yoyote ya mateso au unyanyasaji wa kikatili, usio wa kibinadamu au wa kudhalilisha, au adhabu ya namna hiyo. Kifungu cha 24 cha Katiba kinatumika kwa mtu yeyote na mahali popote ukatili unapotokea, ikiwemo nyumbani.",
+        "fr": "Nul ne peut être soumis à une forme quelconque de torture ni à des peines ou traitements cruels, inhumains ou dégradants. L'article 24 de la Constitution s'applique quelle que soit la personne et où que le mal soit causé, y compris au foyer."
+      },
+      {
+        "en": "That protection cannot be suspended. Article 44 lists freedom from torture and cruel, inhuman or degrading treatment among the rights from which there shall be no derogation, even in an emergency.",
+        "sw": "Ulinzi huo hauwezi kusimamishwa. Kifungu cha 44 kinaorodhesha uhuru kutokana na mateso na unyanyasaji wa kikatili, usio wa kibinadamu au wa kudhalilisha kati ya haki zisizoweza kubatilishwa, hata wakati wa hali ya hatari.",
+        "fr": "Cette protection ne peut être suspendue. L'article 44 classe la liberté de ne pas subir la torture et les traitements cruels, inhumains ou dégradants parmi les droits auxquels il ne peut être dérogé, même en cas d'urgence."
+      },
+      {
+        "en": "You can ask a court for redress, including compensation, and any person or organisation may bring an action about the violation of someone else's rights — so a friend, relative or organisation can act for you. That is Article 50.",
+        "sw": "Unaweza kuomba mahakama fidia, ikiwemo malipo, na mtu au taasisi yoyote inaweza kupeleka kesi kuhusu ukiukaji wa haki za mtu mwingine — hivyo rafiki, ndugu au taasisi inaweza kuchukua hatua kwa niaba yako. Hiyo ni Kifungu cha 50.",
+        "fr": "Vous pouvez demander réparation à un tribunal, y compris une indemnisation, et toute personne ou organisation peut agir pour la violation des droits d'autrui : un ami, un proche ou une organisation peut donc agir pour vous. C'est l'article 50."
+      }
+    ],
+    "evidence": [
+      {
+        "en": "A written note of what happened, with dates — kept somewhere the other person cannot find it.",
+        "sw": "Maelezo yaliyoandikwa ya kilichotokea, pamoja na tarehe — yaliyowekwa mahali mtu mwingine hawezi kuyapata.",
+        "fr": "Une note écrite de ce qui s'est passé, avec les dates — conservée là où l'autre personne ne peut pas la trouver."
+      },
+      {
+        "en": "A medical report or notes if you were hurt or assaulted, made as soon as you can.",
+        "sw": "Ripoti ya daktari au maelezo ikiwa ulijeruhiwa au ulishambuliwa, yaliyoandikwa haraka iwezekanavyo.",
+        "fr": "Un rapport médical ou des notes si vous avez été blessée ou agressée, établis dès que possible."
+      },
+      {
+        "en": "Messages, call logs or photos.",
+        "sw": "Ujumbe, kumbukumbu za simu au picha.",
+        "fr": "Messages, journaux d'appels ou photos."
+      },
+      {
+        "en": "The name of one person you can stay with, or a place you can go, if you need to leave quickly.",
+        "sw": "Jina la mtu mmoja unayeweza kukaa naye, au mahali unayoweza kwenda, ikiwa unahitaji kuondoka haraka.",
+        "fr": "Le nom d'une personne chez qui vous pouvez rester, ou d'un lieu où aller, si vous devez partir rapidement."
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "en": "Call Sauti 116, or get to somewhere safe first",
+          "sw": "Piga Sauti 116, au fika mahali salama kwanza",
+          "fr": "Appelez Sauti 116, ou mettez-vous d'abord en sécurité"
+        },
+        "detail": {
+          "en": "Sauti 116 is the national helpline for children, survivors of gender-based violence and migrant workers. Call 116 for help — including when the person who is hurting you is still in the house.",
+          "sw": "Sauti 116 ni namba ya kitaifa kwa watoto, waathiriwa wa ukatili wa kijinsia na wafanyakazi wahamiaji. Piga 116 kupata msaada — ikiwemo wakati mtu anayekudhuru bado yuko nyumbani.",
+          "fr": "Sauti 116 est la ligne nationale pour les enfants, les survivantes de violences fondées sur le genre et les travailleurs migrants. Appelez le 116 pour obtenir de l'aide — y compris lorsque la personne qui vous fait du mal est encore dans la maison."
+        },
+        "institution": "sauti",
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "If you are in immediate danger, call the police on 999 or 112",
+          "sw": "Ikiwa uko hatarini mara moja, piga polisi kwa 999 au 112",
+          "fr": "Si vous êtes en danger immédiat, appelez la police au 999 ou au 112"
+        },
+        "detail": {
+          "en": "These are the emergency numbers published by the Uganda Police Force.",
+          "sw": "Hizi ni namba za dharura zilizotangazwa na Jeshi la Polisi la Uganda.",
+          "fr": "Ce sont les numéros d'urgence publiés par la police ougandaise."
+        },
+        "institution": "upf"
+      },
+      {
+        "action": {
+          "en": "Tell one person you trust, and keep a written record",
+          "sw": "Mwambie mtu mmoja unayemwamini, na weka kumbukumbu iliyoandikwa",
+          "fr": "Parlez-en à une personne de confiance et tenez un écrit"
+        },
+        "detail": {
+          "en": "A relative, friend, health worker or counsellor. The record of dates and what happened becomes the basis of any later complaint.",
+          "sw": "Ndugu, rafiki, mhudumu wa afya au mshauri. Kumbukumbu ya tarehe na kilichotokea inakuwa msingi wa malalamiko yoyote ya baadaye.",
+          "fr": "Un proche, un ami, un agent de santé ou un conseiller. La trace des dates et des faits devient la base de toute plainte ultérieure."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "Make a formal complaint to the Uganda Human Rights Commission",
+          "sw": "Toa malalamiko rasmi kwa Komisheni ya Haki za Kibinadamu ya Uganda",
+          "fr": "Déposez une plainte formelle auprès de la Commission ougandaise des droits de l'homme"
+        },
+        "detail": {
+          "en": "Call 0800122444 toll free or 0414232190, or use the complaint form on the Commission's website. It investigates violations by state officials and can award compensation; where the harm is by a private person, it can still record and refer your complaint.",
+          "sw": "Piga 0800122444 bure au 0414232190, au tumia fomu ya malalamiko kwenye tovuti ya Komisheni. Inachunguza ukiukaji wa maafisa wa serikali na inaweza kutoa fidia; ikiwa ukatili umefanywa na mtu binafsi, bado inaweza kurekodi na kupeleka malalamiko yako.",
+          "fr": "Appelez gratuitement le 0800122444 ou le 0414232190, ou utilisez le formulaire de plainte sur le site de la Commission. Elle enquête sur les violations commises par des agents de l'État et peut accorder une indemnisation ; lorsque le mal est le fait d'un particulier, elle peut toujours enregistrer et transmettre votre plainte."
+        },
+        "institution": "uhrc"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "sauti",
+        "name": "Sauti 116 — national helpline (Ministry of Gender, Labour and Social Development)",
+        "role": {
+          "en": "The Government of Uganda's national helpline, run by the Ministry of Gender, Labour and Social Development, offering support for children, survivors of gender-based violence and migrant workers.",
+          "sw": "Namba ya kitaifa ya Serikali ya Uganda, inayoendeshwa na Wizara ya Jinsia, Kazi na Maendeleo ya Jamii, ikitoa msaada kwa watoto, waathiriwa wa ukatili wa kijinsia na wafanyakazi wahamiaji.",
+          "fr": "La ligne nationale du gouvernement ougandais, gérée par le ministère du Genre, du Travail et du Développement social, offrant un soutien aux enfants, aux survivantes de violences fondées sur le genre et aux travailleurs migrants."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "116",
+            "toll_free": false,
+            "anonymous": true,
+            "note": {
+              "en": "The helpline's own published instruction is simply: call 116 for help. It works from a basic phone with no data. Whether the call is free depends on your network, so it is not marked toll-free here.",
+              "sw": "Maelekezo yaliyotangazwa na namba hii ni: piga 116 kupata msaada. Inafanya kazi kwa simu ya kawaida bila data. Kama simu ni bure inategemea mtandao wako, hivyo haijawekwa kama ya bure hapa.",
+              "fr": "La consigne publiée par la ligne elle-même est simple : appelez le 116 pour obtenir de l'aide. Elle fonctionne depuis un téléphone ordinaire sans données. La gratuité de l'appel dépend de votre réseau, donc elle n'est pas indiquée comme gratuite ici."
+            },
+            "sources": [
+              {
+                "publisher": "Ministry of Gender, Labour and Social Development (Uganda) — Sauti 116",
+                "url": "https://sauti.mglsd.go.ug/sauti/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "web",
+            "value": "https://sauti.mglsd.go.ug/sauti/",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "The helpline's own page, for reading what it covers and other ways to reach it. Needs a connection.",
+              "sw": "Ukurasa wa namba hii yenyewe, kwa kusoma inachoshughulikia na njia nyingine za kuiwasiliana. Unahitaji muunganisho.",
+              "fr": "La page de la ligne elle-même, pour savoir ce qu'elle couvre et d'autres façons de la joindre. Nécessite une connexion."
+            },
+            "sources": [
+              {
+                "publisher": "Ministry of Gender, Labour and Social Development (Uganda) — Sauti 116",
+                "url": "https://sauti.mglsd.go.ug/sauti/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "uhrc",
+        "name": "Uganda Human Rights Commission (UHRC)",
+        "role": {
+          "en": "Uganda's constitutional human rights body, which receives and investigates complaints that a right or freedom has been violated, and can award compensation.",
+          "sw": "Chombo cha kikatiba cha haki za kibinadamu cha Uganda, kinachopokea na kuchunguza malalamiko kwamba haki au uhuru umevunjwa, na kinaweza kutoa fidia.",
+          "fr": "L'organe constitutionnel ougandais des droits de l'homme, qui reçoit et instruit les plaintes selon lesquelles un droit ou une liberté a été violé, et peut accorder une indemnisation."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "0800122444",
+            "toll_free": true,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Uganda Human Rights Commission",
+                "url": "https://uhrc.ug/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "phone",
+            "value": "0414232190",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Uganda Human Rights Commission",
+                "url": "https://uhrc.ug/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "web",
+            "value": "https://uhrc.ug/page/complaint-form",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Uganda Human Rights Commission",
+                "url": "https://uhrc.ug/page/complaint-form",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "upf",
+        "name": "Uganda Police Force",
+        "role": {
+          "en": "The national police service, reachable on its published emergency numbers.",
+          "sw": "Jeshi la polisi la kitaifa, linaweza kufikiwa kwa namba zake za dharura zilizotangazwa.",
+          "fr": "La police nationale, joignable sur ses numéros d'urgence publiés."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "999 / 112",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "Emergency numbers published by the Uganda Police Force, for when you are in immediate danger.",
+              "sw": "Namba za dharura zilizotangazwa na Jeshi la Polisi la Uganda, kwa wakati uko hatarini mara moja.",
+              "fr": "Numéros d'urgence publiés par la police ougandaise, lorsque vous êtes en danger immédiat."
+            },
+            "sources": [
+              {
+                "publisher": "Uganda Police Force",
+                "url": "https://upf.go.ug/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "en": "The helpline can refer you to shelter, medical care, legal aid and the police. If you make a formal complaint, keep a note of who you spoke to and when; neither the Commission nor the police publish a fixed timeline.",
+      "sw": "Namba hii inaweza kukuelekeza kwa makazi ya usalama, matibabu, msaada wa kisheria na polisi. Ikiwa utatoa malalamiko rasmi, andika uliyesema naye na lini; Komisheni wala polisi hawatangazi muda maalum.",
+      "fr": "La ligne peut vous orienter vers un hébergement, des soins médicaux, une aide juridique et la police. Si vous déposez une plainte formelle, notez à qui vous avez parlé et quand ; ni la Commission ni la police ne publient de délai fixe."
+    },
+    "sources": [
+      {
+        "publisher": "Ministry of Gender, Labour and Social Development (Uganda) — Sauti 116",
+        "url": "https://sauti.mglsd.go.ug/sauti/",
+        "retrieved": "2026-09-17",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Uganda Human Rights Commission",
+        "url": "https://uhrc.ug/",
+        "retrieved": "2026-09-17",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Uganda Police Force",
+        "url": "https://upf.go.ug/",
+        "retrieved": "2026-09-17",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Wikisource — Constitution of the Republic of Uganda, 1995 (Articles 24, 44 and 50)",
+        "url": "https://en.wikisource.org/wiki/Constitution_of_the_Republic_of_Uganda",
+        "retrieved": "2026-09-17",
+        "confidence": "secondary"
+      }
+    ],
+    "last_verified": "2026-09-17"
+  }
+]

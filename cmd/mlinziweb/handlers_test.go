@@ -23,6 +23,8 @@ func newTestApp(t *testing.T) http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /{$}", a.handleHome)
 	mux.HandleFunc("GET /guides/{id}", a.handleGuideDetail)
+	mux.HandleFunc("GET /resources", a.handleResources)
+	mux.HandleFunc("GET /resources/{id}", a.handleResourceDetail)
 	mux.HandleFunc("GET /report/new", a.handleReportNew)
 	mux.HandleFunc("POST /report", a.handleReportCreate)
 	mux.HandleFunc("GET /report/status", a.handleStatusForm)
@@ -97,6 +99,18 @@ func TestHomeDefaultsToKenya(t *testing.T) {
 	rec := get(t, h, "/")
 	if !strings.Contains(rec.Body.String(), "ke-bribery-public-service") {
 		t.Error("expected Kenya guides to show by default with no jurisdiction param")
+	}
+}
+
+func TestHomeSwitchesToUganda(t *testing.T) {
+	h := newTestApp(t)
+	rec := get(t, h, "/?j=UG")
+	body := rec.Body.String()
+	if !strings.Contains(body, "ug-bribery-public-service") {
+		t.Error("expected the Uganda guides when switching jurisdiction")
+	}
+	if strings.Contains(body, "ke-bribery-public-service") {
+		t.Error("expected Kenya guides not to leak into the Uganda view")
 	}
 }
 
@@ -341,7 +355,9 @@ func TestServiceWorkerPrecachesOnlyRealGuides(t *testing.T) {
 	// If the seed dataset ever changes, this test breaks — which is the
 	// point: the precache list in sw.js is a hand-maintained static list,
 	// not derived from the guide store, so it can silently drift from
-	// reality. This test is the tripwire for that drift.
+	// reality. This test is the tripwire for that drift, and it covers every
+	// jurisdiction rather than just the default one, so a country added as
+	// pure data cannot end up silently unreachable offline.
 	a, err := newApp()
 	if err != nil {
 		t.Fatalf("newApp: %v", err)
@@ -350,11 +366,117 @@ func TestServiceWorkerPrecachesOnlyRealGuides(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, g := range a.guides.ByJurisdiction(defaultJurisdiction) {
-		path := "/guides/" + g.ID
-		if !strings.Contains(string(swSource), path) {
-			t.Errorf("guide %q exists in the dataset but is not precached in sw.js", g.ID)
+	for _, j := range a.guides.Jurisdictions() {
+		for _, g := range a.guides.ByJurisdiction(j) {
+			path := "/guides/" + g.ID
+			if !strings.Contains(string(swSource), path) {
+				t.Errorf("guide %q exists in the dataset but is not precached in sw.js", g.ID)
+			}
 		}
+	}
+}
+
+// TestServiceWorkerPrecachesEveryDocument is the same tripwire for the
+// Resources Center: a constitution that only loads with a connection would
+// undercut the point of shipping the documents in the binary at all.
+func TestServiceWorkerPrecachesEveryDocument(t *testing.T) {
+	a, err := newApp()
+	if err != nil {
+		t.Fatalf("newApp: %v", err)
+	}
+	if a.resources.Len() == 0 {
+		t.Fatal("expected the Resources Center store to be loaded")
+	}
+	swSource, err := staticFS.ReadFile("static/sw.js")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, d := range a.resources.All() {
+		path := "/resources/" + d.ID
+		if !strings.Contains(string(swSource), path) {
+			t.Errorf("document %q exists in the dataset but is not precached in sw.js", d.ID)
+		}
+	}
+}
+
+// --- Resources Center ---
+
+func TestResourcesCenterListsEveryDocument(t *testing.T) {
+	h := newTestApp(t)
+	rec := get(t, h, "/resources")
+	if rec.Code != http.StatusOK {
+		t.Fatalf("expected 200, got %d", rec.Code)
+	}
+	body := rec.Body.String()
+	for _, want := range []string{
+		"Resources Center",
+		"The Constitution of Kenya, 2010",
+		"The Constitution of the Republic of Uganda, 1995",
+		"The Constitution of the Federal Republic of Nigeria, 1999",
+		"Corrupt Practices and Other Related Offences Act, 2000",
+		"kenya-constitution",
+		"uganda-constitution",
+		"nigeria-constitution",
+		"nigeria-icpc-act",
+	} {
+		if !strings.Contains(body, want) {
+			t.Errorf("expected %q on the Resources Center index", want)
+		}
+	}
+}
+
+func TestResourceDetailShowsProvisionsWithTheirOwnSources(t *testing.T) {
+	h := newTestApp(t)
+	rec := get(t, h, "/resources/uganda-constitution")
+	if rec.Code != http.StatusOK {
+		t.Fatalf("expected 200, got %d", rec.Code)
+	}
+	body := rec.Body.String()
+	for _, want := range []string{
+		"Article 42",
+		"Article 225",
+		"Wikisource", // the provision's own source, not just the document's
+		"ulii.org",   // the custodian's full text
+		"Read the full authoritative text",
+		"Not legal advice",
+	} {
+		if !strings.Contains(body, want) {
+			t.Errorf("expected %q on the Ugandan constitution page", want)
+		}
+	}
+	// The Kenyan document must not bleed into the Ugandan page: the two stand
+	// independently even though one page lists both.
+	if strings.Contains(body, "National Council for Law Reporting") {
+		t.Error("expected the Ugandan page not to show Kenya's custodian or provisions")
+	}
+}
+
+func TestNigeriaDocumentsRenderTheirOwnCaveats(t *testing.T) {
+	h := newTestApp(t)
+
+	// The Nigerian constitution is a partial listing and must say so on its
+	// own page, not only in a test.
+	constitution := get(t, h, "/resources/nigeria-constitution").Body.String()
+	if !strings.Contains(constitution, "NOT the whole Constitution") {
+		t.Error("expected the Nigerian constitution page to state its partial coverage")
+	}
+	if !strings.Contains(constitution, "Section 36") {
+		t.Error("expected the fundamental-rights section 36 to be present")
+	}
+
+	// The ICPC Act is a statute, sourced to the Commission's own PDF.
+	act := get(t, h, "/resources/nigeria-icpc-act").Body.String()
+	for _, want := range []string{"Section 64", "Protection of informers", "ICPC-Act-2000.pdf", "statute"} {
+		if !strings.Contains(act, want) {
+			t.Errorf("expected %q on the ICPC Act page", want)
+		}
+	}
+}
+
+func TestResourceDetailUnknownIDIs404(t *testing.T) {
+	h := newTestApp(t)
+	if rec := get(t, h, "/resources/does-not-exist"); rec.Code != http.StatusNotFound {
+		t.Fatalf("expected 404, got %d", rec.Code)
 	}
 }
 

@@ -286,9 +286,132 @@ before any manual testing, because the guide template's own test suite
 runs on every change. Fixed by using the `$lang` variable the template
 already captures earlier for exactly this scoping reason.
 
+## Day 7 — Resources Center and a third country
+
+**The Resources Center (human-directed, AI-researched).** Requested as a place
+for primary documents: the Kenyan and Ugandan constitutions, kept in one
+folder but each standing on its own. The shape of the answer came from the
+brief rather than from the AI — one file per instrument, in one flat folder,
+each with the source for *every provision* rather than one source for the
+whole document, because a document-level source must not be able to launder
+an unsourced article. That rule is enforced in code, not just followed by
+convention: an article with no source of its own fails the load, and a
+document's `id` must match its filename so no two instruments can quietly
+share a file.
+
+**Article numbers were checked against the enacted text, not recalled.** This
+caught a real error that a plausible-sounding summary would have shipped:
+Uganda's Article 25 is "Protection from slavery, servitude and forced
+labour", not the torture provision — torture is Article 24, and Article 44 is
+what makes freedom from torture non-derogable. Kenya's numbering was verified
+the same way against the gazette's arrangement of articles (the ethics and
+anti-corruption commission is Article 79, not an assumed "Chapter Six"
+reference). Where the full article text was available only from a reproduction
+rather than the custodian, the data says so, marks the source `secondary`, and
+the page still sends the reader to the custodian's own copy.
+
+**A third country (Uganda).** Researched the Inspectorate of Government,
+the Uganda Human Rights Commission, the Uganda Police Force, and the Sauti
+116 helpline (Ministry of Gender, Labour and Social Development) with the
+same sourcing discipline as Kenya and Nigeria — publisher, URL, retrieval
+date, confidence, taken from the institutions' own pages wherever they
+answered. Two custodian sites (Kenya Law and ULII) could not be read from the
+build environment, so nothing is claimed from them: they appear as the
+pointer to the authoritative text, not as a source we verified.
+
+**A tripwire caught an old gap while it was being widened.** The
+service-worker precache test had always been scoped to Kenya, so it could not
+notice that Nigeria's guide was never precached — meaning an offline user in
+Nigeria got nothing on a cold start. Widening it to every loaded jurisdiction
+made the test fail immediately, which is the outcome to want: the guarantee
+was wrong for an existing country and a test written for a new one found it.
+
+## Day 8 — Full legal texts, Uganda's translations, and a generator that had to be distrusted
+
+**Expanding the Resources Center to whole instruments, and the failure that
+produced the honest version.** The Resources Center began with a curated
+selection of provisions per constitution. Expanding that to the entire
+instrument by hand (~670 articles) was not realistic, so the first move was to
+write an extractor (`tools/extractgen`) against published sources and let it do
+the mechanical work.
+
+The first version's output looked plausible and was wrong. Article numbering
+came out scrambled, with large gaps. The cause took measuring rather than
+reading: the source page's structure conflates article headings with topic
+labels under a naive parse, and one source is genuinely partial in one form
+(Uganda's Wikisource wikitext) while complete in another (its rendered page).
+That is a worse failure mode than an error — a plausible-looking dataset of
+legal text with the wrong numbers on it, which is exactly what this project
+exists to argue against.
+
+The fix was to make coverage a measurement instead of a belief. The extractor
+now reports how many articles it found against how many it expected
+(`refs 1..288 | empty text 0 | missing []`), and nothing went into a caveat by
+hand that the report had not established. That is also what turned "Nigeria's
+constitution is partial" from something that would have been asserted into a
+specific measured fact — sections 1–111 of 320, with section 107 absent from
+the source — stated on the page rather than left for a reader to discover.
+Kenya and Uganda came out whole: 264/264 and 288/288.
+
+Two further defects were caught by reading the output rather than the summary:
+the last article of each generated document had swallowed the page's scripts,
+styles and footer, and article bodies ran past the schedules boundary into
+unrelated text. Both were found by inspecting the tail of the generated JSON.
+
+**Reproducibility as the check on all of it.** Re-running the extractor
+against unchanged sources reproduces the committed constitution files
+byte-for-byte, and leaves the hand-curated ICPC Act untouched. Committing
+generated legal text is only defensible if the generation is reproducible and
+reviewable, so that property is verified rather than asserted.
+
+**The statute (human-curated, AI-assisted).** Nigeria's ICPC Act is a
+selection of 8 key sections taken from the copy the Commission publishes
+itself — the one document in the Resources Center that is `official` rather
+than `secondary`. The Act's own text prints its commencement date as blanks,
+so no commencement date is asserted, and the caveat says why.
+
+**Uganda translated (AI-drafted, unreviewed by native speakers).** The three
+Ugandan guides were brought to Kenya's standard — English, Kiswahili and
+French, 70 strings — as a pure data change with no code touched. Rather than
+check completeness by eye, it became a test that walks the domain type (not
+the JSON) and fails naming the exact guide, field and language for any gap. I
+confirmed the test actually bites by deleting one Kiswahili string and watching
+it fail, because a completeness check that cannot fail proves nothing.
+
+**Verified in a real browser, after a check that was invalid.** An earlier
+attempt at this verification was worthless and is worth recording: killing
+`go run` leaves the compiled server alive, so the "offline" reload was still
+being served over the network and the comparison proved nothing. Re-run
+properly — build the binary, run it directly, kill it, confirm the port
+refuses connections — headless Chrome renders the Uganda guides and the
+Resources Center from the service worker cache with the server genuinely dead,
+at byte-identical sizes to the online pages. The offline claim is now
+something observed rather than inferred from HTTP status codes.
+
+**A limit this work exposed, stated rather than left to be hit.** Kenya's and
+Uganda's constitution pages are ~450 KB of server-rendered HTML each — fine on
+a decent connection, heavy for the basic handsets this project is built for.
+Completeness was the goal and was achieved, but on those two pages
+completeness is now in tension with low bandwidth, and that tension is real;
+it is recorded here rather than presented as solved.
+
 ## Honest limits
 
-- Kiswahili translations are unreviewed as of day 1.
+- Kiswahili translations are unreviewed by a first-language speaker, as of day
+  1, and both the Kiswahili and French additions since then are AI-drafted in
+  a single pass with no separate reviewer.
 - Some contact details rest on secondary sources (news outlets, NGO
   directories) where an official page could not be reached. Each is marked
   `secondary` in the data rather than presented as official.
+- Only one of the four Resources Center documents — Nigeria's ICPC Act — comes
+  from the body it is about. The three constitutions rest on reproduced texts
+  (the Comparative Constitutions Project, Wikisource) because the custodians
+  (Kenya Law, ULII) could not be read from the build environment — bot
+  filters and a broken TLS chain. Their wording should be confirmed against
+  the custodian's own copy before a specific provision is relied on, and the
+  documents say so on the page.
+- Nigeria's constitution is deliberately incomplete: sections 1–111 of 320,
+  with section 107 absent from the source used. The page states this rather
+  than padding it.
+- Kenya's and Uganda's constitution pages are ~450 KB of HTML each.
+  Complete, and heavy on a low-bandwidth handset.
