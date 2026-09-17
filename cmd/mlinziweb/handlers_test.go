@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io/fs"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -33,6 +34,22 @@ func newTestApp(t *testing.T) http.Handler {
 	mux.HandleFunc("POST /cases/{id}/submit-share", a.handleCaseSubmitShare)
 	mux.HandleFunc("GET /institution", a.handleInstitutionList)
 	mux.HandleFunc("POST /institution/{id}/advance", a.handleInstitutionAdvance)
+
+	staticSub, err := fs.Sub(staticFS, "static")
+	if err != nil {
+		t.Fatalf("static assets: %v", err)
+	}
+	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServerFS(staticSub)))
+	mux.HandleFunc("GET /sw.js", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/javascript")
+		w.Header().Set("Service-Worker-Allowed", "/")
+		data, err := staticFS.ReadFile("static/sw.js")
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+		w.Write(data)
+	})
 	return mux
 }
 
@@ -241,6 +258,63 @@ func TestStatusFormRendersWithoutQuery(t *testing.T) {
 	rec := get(t, h, "/report/status")
 	if rec.Code != http.StatusOK {
 		t.Fatalf("expected 200, got %d", rec.Code)
+	}
+}
+
+// The tests below verify what a Go test actually can about PWA support:
+// that the manifest, icon, and service worker are served correctly, with
+// the right content type and scope header, and that the service worker's
+// precache list only references guide IDs that really exist. Whether a
+// browser actually caches them and serves guides offline is not something
+// httptest can exercise — that needs a real browser (see docs/AI_USAGE.md
+// for how this was verified manually).
+
+func TestManifestServedCorrectly(t *testing.T) {
+	h := newTestApp(t)
+	rec := get(t, h, "/static/manifest.json")
+	if rec.Code != http.StatusOK {
+		t.Fatalf("expected 200, got %d", rec.Code)
+	}
+	if !strings.Contains(rec.Body.String(), `"name": "Mlinzi"`) {
+		t.Error("expected the manifest to name the app Mlinzi")
+	}
+}
+
+func TestServiceWorkerServedAtRootScope(t *testing.T) {
+	h := newTestApp(t)
+	rec := get(t, h, "/sw.js")
+	if rec.Code != http.StatusOK {
+		t.Fatalf("expected 200, got %d", rec.Code)
+	}
+	// The scope header matters: without it, the service worker would only
+	// ever be able to control /static/, never the guide pages it needs to
+	// cache for genuine offline access.
+	if got := rec.Header().Get("Service-Worker-Allowed"); got != "/" {
+		t.Errorf("expected Service-Worker-Allowed: /, got %q", got)
+	}
+	if ct := rec.Header().Get("Content-Type"); !strings.Contains(ct, "javascript") {
+		t.Errorf("expected a JavaScript content type, got %q", ct)
+	}
+}
+
+func TestServiceWorkerPrecachesOnlyRealGuides(t *testing.T) {
+	// If the seed dataset ever changes, this test breaks — which is the
+	// point: the precache list in sw.js is a hand-maintained static list,
+	// not derived from the guide store, so it can silently drift from
+	// reality. This test is the tripwire for that drift.
+	a, err := newApp()
+	if err != nil {
+		t.Fatalf("newApp: %v", err)
+	}
+	swSource, err := staticFS.ReadFile("static/sw.js")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, g := range a.guides.ByJurisdiction(defaultJurisdiction) {
+		path := "/guides/" + g.ID
+		if !strings.Contains(string(swSource), path) {
+			t.Errorf("guide %q exists in the dataset but is not precached in sw.js", g.ID)
+		}
 	}
 }
 

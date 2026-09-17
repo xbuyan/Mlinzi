@@ -5,9 +5,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mlinzi</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#0A2E36">
+  <link rel="icon" href="/static/icon.svg">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Registered from "/" (not "/static/sw.js") so the worker's scope
+    // covers the whole site, including "/guides/..." — a service worker's
+    // default scope is the directory it's served from, not files
+    // elsewhere. See cmd/mlinziweb/static/sw.js for exactly what this does
+    // and does not cover.
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js"));
+    }
+  </script>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen">
+  <div id="offline-banner" class="hidden bg-amber-500 text-white text-sm text-center py-1.5">
+    You're offline. Guides you've viewed before still work. Filing a report or updating a case needs a connection.
+  </div>
+  <script>
+    const banner = document.getElementById("offline-banner");
+    function updateOfflineBanner() { banner.classList.toggle("hidden", navigator.onLine); }
+    window.addEventListener("online", updateOfflineBanner);
+    window.addEventListener("offline", updateOfflineBanner);
+    updateOfflineBanner();
+  </script>
   <header class="bg-[#0A2E36] text-white">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="/" class="text-xl font-bold tracking-tight">Mlinzi</a>

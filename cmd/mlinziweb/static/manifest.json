@@ -1,0 +1,12 @@
+{
+  "name": "Mlinzi",
+  "short_name": "Mlinzi",
+  "description": "Know your rights, report safely, be protected.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A2E36",
+  "theme_color": "#0A2E36",
+  "icons": [
+    { "src": "/static/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

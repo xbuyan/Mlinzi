@@ -1,0 +1,4 @@
+# flyctl launch added from .gitignore
+**/demo_main.go
+**/*.zip
+fly.toml

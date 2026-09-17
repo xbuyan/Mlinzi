@@ -11,6 +11,7 @@ import (
 	"embed"
 	"fmt"
 	"html/template"
+	"io/fs"
 	"log"
 	"net/http"
 	"os"
@@ -24,6 +25,9 @@ import (
 
 //go:embed templates/*.html
 var templateFS embed.FS
+
+//go:embed static/*
+var staticFS embed.FS
 
 // app holds every piece of shared server state. All fields except pages and
 // guides are mutated by handlers, so access goes through mu.
@@ -126,6 +130,28 @@ func main() {
 	mux.HandleFunc("POST /cases/{id}/submit-share", a.handleCaseSubmitShare)
 	mux.HandleFunc("GET /institution", a.handleInstitutionList)
 	mux.HandleFunc("POST /institution/{id}/advance", a.handleInstitutionAdvance)
+
+	// Serving static assets under /static/ is straightforward via
+	// http.FileServerFS. The service worker is the one exception: a service
+	// worker's scope defaults to the directory it's served from, and it
+	// needs to control the whole site (including "/" and "/guides/...") to
+	// cache them — not just "/static/" — so it's served at the root path
+	// explicitly rather than under the static prefix.
+	staticSub, err := fs.Sub(staticFS, "static")
+	if err != nil {
+		log.Fatalf("static assets: %v", err)
+	}
+	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServerFS(staticSub)))
+	mux.HandleFunc("GET /sw.js", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/javascript")
+		w.Header().Set("Service-Worker-Allowed", "/")
+		data, err := staticFS.ReadFile("static/sw.js")
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+		w.Write(data)
+	})
 
 	port := os.Getenv("PORT")
 	if port == "" {

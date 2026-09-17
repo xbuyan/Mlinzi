@@ -72,6 +72,24 @@ on the institution portal — anyone with the URL can currently advance any
 report's status. Both are fine for a hackathon proof of concept and would
 need to be fixed before any real deployment.
 
+## Offline support (PWA)
+
+The web UI is installable and works offline for the **Know** layer: the
+home page and every guide's detail page are precached by a service worker
+at install time, so they render with zero connectivity — including on a
+first-ever visit with no prior connection. This is a genuine, low-bandwidth
+capability, not a claim: try it — load the site once, then disable your
+network and reload.
+
+**Reporting and protection are not offline-capable, by design.** A report's
+value depends on reaching a shared, tamper-evident ledger the moment it's
+submitted; a real offline-write feature (local queueing, encryption at
+rest, sync-conflict handling) is a substantial feature in its own right and
+isn't built here. The service worker deliberately does not intercept POST
+requests — filing a report while offline fails with the browser's ordinary
+network error, which is the honest behavior rather than a silently broken
+one.
+
 ## Run the web UI locally
 
 ```

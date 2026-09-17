@@ -202,6 +202,41 @@ Anyone with the URL can act as any institution. That's flagged directly in
 the page itself, not just in developer docs, since a judge clicking around
 should not mistake a demo affordance for a finished access-control model.
 
+## Day 5 — PWA support for the Know layer, scoped honestly
+
+**Prompted by a direct question**: can Mlinzi work offline as a PWA? The
+honest answer split the work in two, and the split itself is the design
+decision worth explaining. The KNOW layer (guide browsing) can genuinely
+work with zero connectivity, including on a cold start with no prior visit,
+because its data is small and static. Reporting and protection cannot
+honestly be made to work offline in the time available — a report's value
+comes from reaching a shared, verifiable ledger at submission time, and
+queuing writes locally for later sync is a real feature (local encryption,
+conflict handling) that would need to be built properly, not implied by a
+service worker that happens to intercept POST requests. So the service
+worker explicitly does not intercept writes; they fail with the browser's
+ordinary offline error, which is the honest behavior, not an oversight.
+
+**What was added (human-directed, AI-drafted).** A web app manifest, a
+brand-matched SVG icon, and a service worker that precaches the home page
+and all three guide detail pages at install time — so they work offline
+even for a first-time visitor with no connectivity yet — plus a visible
+online/offline banner so the behavior is demoable, not just architecturally
+true.
+
+**Testing, and its real limit, stated plainly.** `httptest` can verify the
+manifest, icon, and service worker are served with correct content types
+and the `Service-Worker-Allowed` header the worker's scope depends on, and
+a tripwire test (`TestServiceWorkerPrecachesOnlyRealGuides`) catches the
+precache list drifting from the actual seed dataset. What it cannot verify
+is whether a real browser actually caches these and serves them with the
+network disabled — that has no meaningful httptest equivalent, since it's
+browser cache-storage behavior, not server behavior. Verified manually
+instead: load the site once with a connection, enable airplane mode, reload
+— the home page and all three guides still render; filing a report in the
+same offline state correctly fails, showing the browser's own offline
+error, exactly as designed.
+
 ## Honest limits
 
 - Kiswahili translations are unreviewed as of day 1.
