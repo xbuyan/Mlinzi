@@ -237,6 +237,55 @@ instead: load the site once with a connection, enable airplane mode, reload
 same offline state correctly fails, showing the browser's own offline
 error, exactly as designed.
 
+## Day 6 — Three targeted enhancements, chosen for judging leverage
+
+With time remaining before submission, three additions were prioritized
+over a longer wishlist, each picked because it strengthens evidence for a
+specific judging criterion rather than adding a new feature for its own
+sake.
+
+**A second country (Nigeria, human-directed research, AI-assisted).**
+Researched Nigeria's Independent Corrupt Practices and Other Related
+Offences Commission (ICPC) — official contact channels, mandate, petition
+process — with the same sourcing discipline as the Kenya data: publisher,
+URL, retrieval date, confidence level. One genuine finding repeated the
+pattern from IPOA: news coverage claims a toll-free ICPC line, but ICPC's
+own contact page lists only standard mobile numbers, not labeled toll-free.
+Rather than repeat an unconfirmed claim, that's marked `conflicting` and
+explained in the data itself. This turns the "a new country is a data
+folder, not a rebuild" claim from a slide into something checkable — new
+tests (`TestNigerianGuideIsReachableAndScoped`,
+`TestAddingASecondJurisdictionDidNotBreakTheFirst`) prove Kenya and Nigeria
+are genuinely isolated and that adding one didn't touch the other. Zero
+application code changed to add the country; only `data/ng/guides.json` and
+a jurisdiction switcher in the web UI.
+
+**French translations (AI-drafted, human-reviewed for consistency, not yet
+reviewed by a native speaker).** Extracted all 67 unique English strings
+across the three Kenya guides programmatically, translated them, and
+applied them back via a script matched against the exact source text
+(`internal/guide` Text maps already supported this — zero code changes,
+purely a data addition, which is itself evidence for the multilingual
+architecture claim). `TestFrenchTranslationResolves` proves it end to end
+rather than just checking the data loaded. Same honest caveat as Kiswahili:
+flagged as unreviewed by a native speaker, not presented as verified.
+
+**Read-aloud accessibility (AI-drafted).** Uses the browser's built-in
+Web Speech API — no backend change, no audio files shipped, works offline
+once the page has loaded. Addresses the brief's "different literacy
+levels" constraint directly. Honest limitation stated in the code comment
+itself: voice availability and quality depend on the device, and a phone
+with no Kiswahili or French voice installed will fall back to a default
+voice that may mispronounce the text rather than failing outright.
+
+**A real bug caught by the test suite, immediately.** The read-aloud
+script initially referenced `{{.Lang}}` inside a `{{with .Guide}}` block,
+where `.` is scoped to the guide value, not the page-level data — so
+`.Lang` didn't exist there. `go test` failed the moment this was built,
+before any manual testing, because the guide template's own test suite
+runs on every change. Fixed by using the `$lang` variable the template
+already captures earlier for exactly this scoping reason.
+
 ## Honest limits
 
 - Kiswahili translations are unreviewed as of day 1.

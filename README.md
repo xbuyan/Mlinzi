@@ -72,6 +72,32 @@ on the institution portal — anyone with the URL can currently advance any
 report's status. Both are fine for a hackathon proof of concept and would
 need to be fixed before any real deployment.
 
+## Scalability, demonstrated
+
+`data/ke/` and `data/ng/` are both loaded and fully isolated — search or
+browse Nigeria's ICPC bribery-reporting guide with `mlinzi list NG` (CLI) or
+the country switcher on the web home page. Adding Nigeria required zero
+application code changes, only a new data file, which is the actual proof
+behind "a new country is a data folder, not a rebuild."
+
+## Multilingual, demonstrated
+
+Kenya's three guides are now available in English, Kiswahili, and French —
+try `?lang=fr` on any Kenya guide page, or the language switcher in the web
+UI. Adding French required zero code changes, since `guide.Text` is already
+a language-keyed map; this was a pure data addition, run through every
+existing guide (67 strings translated and verified to resolve). As with
+Kiswahili, French is AI-drafted and not yet reviewed by a native speaker —
+stated here rather than implied verified.
+
+## Accessibility: read-aloud
+
+Every guide page has a "Read this guide aloud" button using the browser's
+built-in text-to-speech (Web Speech API) — no server round-trip, no audio
+files shipped, works offline once the page has loaded. Voice availability
+and quality depend on the device; a browser with no Kiswahili or French
+voice installed falls back to its default voice rather than failing.
+
 ## Offline support (PWA)
 
 The web UI is installable and works offline for the **Know** layer: the

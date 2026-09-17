@@ -187,11 +187,56 @@ func TestSeededDataLoadsAndValidates(t *testing.T) {
 	}
 }
 
-func TestSeededDataIsKenyan(t *testing.T) {
+func TestNigerianGuideIsReachableAndScoped(t *testing.T) {
+	s := testStore(t)
+	g, err := s.Get("ng-bribery-public-service")
+	if err != nil {
+		t.Fatalf("expected the Nigeria guide to be reachable, got %v", err)
+	}
+	if g.Jurisdiction != "NG" {
+		t.Fatalf("expected jurisdiction NG, got %q", g.Jurisdiction)
+	}
+
+	// A search scoped to KE must not leak Nigerian results, and vice versa —
+	// jurisdictions are genuinely isolated, not just labeled.
+	if got := s.Search("KE", "ICPC"); len(got) != 0 {
+		t.Fatalf("expected no ICPC results within KE scope, got %v", ids(got))
+	}
+	if got := s.Search("NG", "ICPC"); len(got) != 1 {
+		t.Fatalf("expected exactly 1 ICPC result within NG scope, got %v", ids(got))
+	}
+}
+
+func TestAddingASecondJurisdictionDidNotBreakTheFirst(t *testing.T) {
+	// The whole scalability claim is that adding a country is additive.
+	// This is the regression test for that claim: Kenya's guide count and
+	// content must be unaffected by Nigeria's data existing alongside it.
+	s := testStore(t)
+	ke := s.ByJurisdiction("KE")
+	if len(ke) != 3 {
+		t.Fatalf("expected Kenya's 3 original guides untouched, got %d", len(ke))
+	}
+}
+
+func TestFrenchTranslationResolves(t *testing.T) {
+	s := testStore(t)
+	g, err := s.Get("ke-bribery-public-service")
+	if err != nil {
+		t.Fatal(err)
+	}
+	fr := g.Title.In("fr")
+	if fr == "" || fr == g.Title.In("en") {
+		t.Fatal("expected a distinct French title, adding a language should be a data change proven end to end")
+	}
+}
+
+func TestSeededDataHasMultipleJurisdictions(t *testing.T) {
+	// Proves the scalability claim rather than asserting it: a second
+	// country is a genuinely loaded, validated dataset, not a slide.
 	s := testStore(t)
 	js := s.Jurisdictions()
-	if len(js) != 1 || js[0] != "KE" {
-		t.Fatalf("expected only KE loaded, got %v", js)
+	if len(js) != 2 || js[0] != "KE" || js[1] != "NG" {
+		t.Fatalf("expected KE and NG loaded, got %v", js)
 	}
 }
 
@@ -259,8 +304,11 @@ func TestSearchIsCaseInsensitive(t *testing.T) {
 
 func TestEmptySearchReturnsAll(t *testing.T) {
 	s := testStore(t)
-	if len(s.Search("KE", "   ")) != s.Len() {
-		t.Fatal("expected blank query to return every guide")
+	// Compares against ByJurisdiction, not s.Len() — a blank query is still
+	// scoped to one jurisdiction, so it should return every guide in KE,
+	// not every guide in the whole store across every country.
+	if len(s.Search("KE", "   ")) != len(s.ByJurisdiction("KE")) {
+		t.Fatal("expected blank query to return every guide in the given jurisdiction")
 	}
 }
 

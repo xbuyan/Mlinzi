@@ -2,86 +2,104 @@
   {
     "id": "ke-bribery-public-service",
     "jurisdiction": "KE",
-    "tracks": ["transparency-accountability"],
+    "tracks": [
+      "transparency-accountability"
+    ],
     "category": "corruption",
     "title": {
       "en": "A public officer asked me for a bribe",
-      "sw": "Afisa wa umma amenidai rushwa"
+      "sw": "Afisa wa umma amenidai rushwa",
+      "fr": "Un agent public m'a demandé un pot-de-vin"
     },
     "summary": {
       "en": "You were asked to pay for a government service that should be free, or asked to pay extra to get it faster. You can report this, and you can report it without giving your name.",
-      "sw": "Umedaiwa malipo kwa huduma ya serikali inayopaswa kuwa bure, au umedaiwa zaidi ili upate huduma haraka. Unaweza kuripoti, na unaweza kuripoti bila kutoa jina lako."
+      "sw": "Umedaiwa malipo kwa huduma ya serikali inayopaswa kuwa bure, au umedaiwa zaidi ili upate huduma haraka. Unaweza kuripoti, na unaweza kuripoti bila kutoa jina lako.",
+      "fr": "On vous a demandé de payer pour un service public qui devrait être gratuit, ou de payer davantage pour l'obtenir plus rapidement. Vous pouvez signaler cela, et vous pouvez le signaler sans donner votre nom."
     },
     "rights": [
       {
         "en": "You can report anonymously. EACC operates an anonymous whistleblower system and does not require you to identify yourself to submit information.",
-        "sw": "Unaweza kuripoti bila kujitambulisha. EACC ina mfumo wa siri wa kutoa taarifa."
+        "sw": "Unaweza kuripoti bila kujitambulisha. EACC ina mfumo wa siri wa kutoa taarifa.",
+        "fr": "Vous pouvez signaler de manière anonyme. L'EACC dispose d'un système de dénonciation anonyme et ne vous oblige pas à vous identifier pour transmettre des informations."
       },
       {
         "en": "Reporting is free through every official channel, including the toll-free line and Huduma Centres.",
-        "sw": "Kuripoti ni bure kupitia njia zote rasmi, ikiwemo namba ya bure na Huduma Centre."
+        "sw": "Kuripoti ni bure kupitia njia zote rasmi, ikiwemo namba ya bure na Huduma Centre.",
+        "fr": "Le signalement est gratuit par tous les canaux officiels, y compris la ligne gratuite et les Huduma Centres."
       }
     ],
     "evidence": [
       {
         "en": "Where and when it happened, and which office or service was involved.",
-        "sw": "Mahali na wakati ilipotokea, na ofisi au huduma iliyohusika."
+        "sw": "Mahali na wakati ilipotokea, na ofisi au huduma iliyohusika.",
+        "fr": "Où et quand cela s'est produit, et quel bureau ou service était concerné."
       },
       {
         "en": "The name, rank or desk of the officer if you know it. You can still report without it.",
-        "sw": "Jina, cheo au dawati la afisa kama unalijua. Bado unaweza kuripoti bila hilo."
+        "sw": "Jina, cheo au dawati la afisa kama unalijua. Bado unaweza kuripoti bila hilo.",
+        "fr": "Le nom, le grade ou le bureau de l'agent si vous le connaissez. Vous pouvez tout de même signaler sans cette information."
       },
       {
         "en": "How much was demanded, and whether you paid.",
-        "sw": "Kiasi kilichodaiwa, na kama ulilipa."
+        "sw": "Kiasi kilichodaiwa, na kama ulilipa.",
+        "fr": "Le montant demandé, et si vous avez payé."
       },
       {
         "en": "Any receipt, message, photo or recording. Do not put yourself at risk to collect evidence.",
-        "sw": "Risiti, ujumbe, picha au rekodi yoyote. Usijiweke hatarini ili kupata ushahidi."
+        "sw": "Risiti, ujumbe, picha au rekodi yoyote. Usijiweke hatarini ili kupata ushahidi.",
+        "fr": "Tout reçu, message, photo ou enregistrement. Ne vous mettez pas en danger pour recueillir des preuves."
       }
     ],
     "steps": [
       {
         "action": {
           "en": "Write down what happened while it is fresh",
-          "sw": "Andika kilichotokea ukiwa bado unakumbuka"
+          "sw": "Andika kilichotokea ukiwa bado unakumbuka",
+          "fr": "Notez ce qui s'est passé pendant que c'est encore frais dans votre mémoire"
         },
         "detail": {
           "en": "Date, time, place, office, officer, amount. This is what every channel will ask you for.",
-          "sw": "Tarehe, saa, mahali, ofisi, afisa, kiasi. Hivi ndivyo utakavyoulizwa kwenye kila njia."
+          "sw": "Tarehe, saa, mahali, ofisi, afisa, kiasi. Hivi ndivyo utakavyoulizwa kwenye kila njia.",
+          "fr": "Date, heure, lieu, bureau, agent, montant. C'est ce que chaque canal vous demandera."
         },
         "critical": true
       },
       {
         "action": {
           "en": "Report to EACC on the toll-free line",
-          "sw": "Ripoti kwa EACC kupitia namba ya bure"
+          "sw": "Ripoti kwa EACC kupitia namba ya bure",
+          "fr": "Signalez à l'EACC via la ligne gratuite"
         },
         "detail": {
           "en": "The fastest route, and it works from any phone with no data.",
-          "sw": "Njia ya haraka zaidi, na inafanya kazi kwa simu yoyote bila data."
+          "sw": "Njia ya haraka zaidi, na inafanya kazi kwa simu yoyote bila data.",
+          "fr": "La voie la plus rapide, et elle fonctionne depuis n'importe quel téléphone sans données mobiles."
         },
         "institution": "eacc"
       },
       {
         "action": {
           "en": "Or report in person at a Huduma Centre or EACC regional office",
-          "sw": "Au ripoti ana kwa ana katika Huduma Centre au ofisi ya EACC"
+          "sw": "Au ripoti ana kwa ana katika Huduma Centre au ofisi ya EACC",
+          "fr": "Ou signalez en personne dans un Huduma Centre ou un bureau régional de l'EACC"
         },
         "detail": {
           "en": "EACC accepts reports at its headquarters, its regional offices, and Huduma Centres countrywide. Kisumu is among the regional offices.",
-          "sw": "EACC inapokea ripoti katika makao makuu, ofisi za mikoa, na Huduma Centre nchini kote. Kisumu ni miongoni mwa ofisi za mikoa."
+          "sw": "EACC inapokea ripoti katika makao makuu, ofisi za mikoa, na Huduma Centre nchini kote. Kisumu ni miongoni mwa ofisi za mikoa.",
+          "fr": "L'EACC reçoit les signalements à son siège, dans ses bureaux régionaux et dans les Huduma Centres à travers tout le pays. Kisumu fait partie des bureaux régionaux."
         },
         "institution": "eacc"
       },
       {
         "action": {
           "en": "Keep your reference number",
-          "sw": "Hifadhi namba yako ya kumbukumbu"
+          "sw": "Hifadhi namba yako ya kumbukumbu",
+          "fr": "Conservez votre numéro de référence"
         },
         "detail": {
           "en": "EACC issues a reference number you can use to follow up on the matter.",
-          "sw": "EACC hutoa namba ya kumbukumbu unayoweza kutumia kufuatilia."
+          "sw": "EACC hutoa namba ya kumbukumbu unayoweza kutumia kufuatilia.",
+          "fr": "L'EACC délivre un numéro de référence que vous pouvez utiliser pour suivre l'affaire."
         },
         "critical": true
       }
@@ -92,11 +110,13 @@
         "name": "Ethics and Anti-Corruption Commission (EACC)",
         "role": {
           "en": "The national body that receives and investigates reports of corruption in government and the public sector.",
-          "sw": "Taasisi ya kitaifa inayopokea na kuchunguza ripoti za ufisadi serikalini na katika sekta ya umma."
+          "sw": "Taasisi ya kitaifa inayopokea na kuchunguza ripoti za ufisadi serikalini na katika sekta ya umma.",
+          "fr": "L'organisme national qui reçoit et enquête sur les signalements de corruption au sein du gouvernement et du secteur public."
         },
         "mandate": {
           "en": "Established under Section 3(1) of the Ethics and Anti-Corruption Commission Act, 2011. It acts where public funds or the public interest are at stake; purely private disputes are referred to the police or the courts.",
-          "sw": "Ilianzishwa chini ya Kifungu 3(1) cha Sheria ya EACC, 2011. Inachukua hatua pale fedha za umma au maslahi ya umma yanapohusika."
+          "sw": "Ilianzishwa chini ya Kifungu 3(1) cha Sheria ya EACC, 2011. Inachukua hatua pale fedha za umma au maslahi ya umma yanapohusika.",
+          "fr": "Créée en vertu de l'article 3(1) de la loi de 2011 sur la Commission d'éthique et de lutte contre la corruption. Elle intervient lorsque des fonds publics ou l'intérêt public sont en jeu ; les litiges purement privés sont renvoyés à la police ou aux tribunaux."
         },
         "channels": [
           {
@@ -106,7 +126,8 @@
             "anonymous": true,
             "note": {
               "en": "Toll-free reporting line.",
-              "sw": "Namba ya bure ya kuripoti."
+              "sw": "Namba ya bure ya kuripoti.",
+              "fr": "Ligne de signalement gratuite."
             },
             "sources": [
               {
@@ -138,7 +159,8 @@
             "anonymous": true,
             "note": {
               "en": "Includes an anonymous whistleblower system.",
-              "sw": "Ina mfumo wa kuripoti kwa siri."
+              "sw": "Ina mfumo wa kuripoti kwa siri.",
+              "fr": "Comprend un système de dénonciation anonyme."
             },
             "sources": [
               {
@@ -182,7 +204,8 @@
     ],
     "timeline": {
       "en": "EACC does not publish a fixed turnaround for investigations. Keep your reference number and follow up. If you are dissatisfied with how EACC handles your report, you can raise it with the EACC Chairperson, the Commission on Administrative Justice, or the courts.",
-      "sw": "EACC haijatangaza muda maalum wa uchunguzi. Hifadhi namba yako ya kumbukumbu na fuatilia. Usiporidhika, unaweza kupeleka suala kwa Mwenyekiti wa EACC, Tume ya Haki za Kiutawala, au mahakamani."
+      "sw": "EACC haijatangaza muda maalum wa uchunguzi. Hifadhi namba yako ya kumbukumbu na fuatilia. Usiporidhika, unaweza kupeleka suala kwa Mwenyekiti wa EACC, Tume ya Haki za Kiutawala, au mahakamani.",
+      "fr": "L'EACC ne publie pas de délai fixe pour ses enquêtes. Conservez votre numéro de référence et assurez le suivi. Si vous n'êtes pas satisfait de la manière dont l'EACC traite votre signalement, vous pouvez en saisir le président de l'EACC, la Commission de la justice administrative, ou les tribunaux."
     },
     "sources": [
       {
@@ -203,94 +226,115 @@
   {
     "id": "ke-police-misconduct",
     "jurisdiction": "KE",
-    "tracks": ["safety-reporting-protection", "transparency-accountability"],
+    "tracks": [
+      "safety-reporting-protection",
+      "transparency-accountability"
+    ],
     "category": "policing",
     "title": {
       "en": "A police officer harmed, threatened or extorted me",
-      "sw": "Afisa wa polisi amenidhuru, amenitisha au amenidai rushwa"
+      "sw": "Afisa wa polisi amenidhuru, amenitisha au amenidai rushwa",
+      "fr": "Un policier m'a fait du mal, m'a menacé ou m'a extorqué"
     },
     "summary": {
       "en": "Complaints about police conduct go to IPOA, a civilian body independent of the police. Filing is free and confidential, and you can file on behalf of someone who cannot file for themselves.",
-      "sw": "Malalamiko kuhusu mwenendo wa polisi hupelekwa IPOA, taasisi ya kiraia isiyo chini ya polisi. Kuwasilisha ni bure na kwa siri, na unaweza kuwasilisha kwa niaba ya mtu asiyeweza."
+      "sw": "Malalamiko kuhusu mwenendo wa polisi hupelekwa IPOA, taasisi ya kiraia isiyo chini ya polisi. Kuwasilisha ni bure na kwa siri, na unaweza kuwasilisha kwa niaba ya mtu asiyeweza.",
+      "fr": "Les plaintes concernant la conduite de la police sont adressées à l'IPOA, un organisme civil indépendant de la police. Le dépôt de plainte est gratuit et confidentiel, et vous pouvez déposer plainte au nom d'une personne qui ne peut le faire elle-même."
     },
     "rights": [
       {
         "en": "The IPOA Act allows a complaint to be made orally or in writing. If you complain orally, an IPOA employee must write it down for you and assist you.",
-        "sw": "Sheria ya IPOA inaruhusu malalamiko kwa mdomo au maandishi. Ukilalamika kwa mdomo, mfanyakazi wa IPOA lazima aandike na akusaidie."
+        "sw": "Sheria ya IPOA inaruhusu malalamiko kwa mdomo au maandishi. Ukilalamika kwa mdomo, mfanyakazi wa IPOA lazima aandike na akusaidie.",
+        "fr": "La loi sur l'IPOA permet de déposer une plainte oralement ou par écrit. Si vous vous plaignez oralement, un agent de l'IPOA doit la consigner par écrit pour vous et vous assister."
       },
       {
         "en": "Complaining directly at a police station does not stop you from also filing with IPOA.",
-        "sw": "Kulalamika moja kwa moja kituoni hakukuzuii kuwasilisha pia IPOA."
+        "sw": "Kulalamika moja kwa moja kituoni hakukuzuii kuwasilisha pia IPOA.",
+        "fr": "Porter plainte directement au commissariat ne vous empêche pas de déposer également une plainte auprès de l'IPOA."
       },
       {
         "en": "It is an offence to punish, demote or disadvantage a police officer for filing a complaint or giving evidence to IPOA.",
-        "sw": "Ni kosa kumwadhibu au kumshusha cheo afisa wa polisi kwa kuwasilisha malalamiko au kutoa ushahidi IPOA."
+        "sw": "Ni kosa kumwadhibu au kumshusha cheo afisa wa polisi kwa kuwasilisha malalamiko au kutoa ushahidi IPOA.",
+        "fr": "Punir, rétrograder ou désavantager un policier pour avoir déposé une plainte ou témoigné auprès de l'IPOA constitue une infraction."
       }
     ],
     "evidence": [
       {
         "en": "Your name and contact details, unless you are filing anonymously through another route.",
-        "sw": "Jina lako na mawasiliano, isipokuwa unawasilisha kwa siri kupitia njia nyingine."
+        "sw": "Jina lako na mawasiliano, isipokuwa unawasilisha kwa siri kupitia njia nyingine.",
+        "fr": "Votre nom et vos coordonnées, sauf si vous déposez plainte de manière anonyme par une autre voie."
       },
       {
         "en": "When it happened, what happened, and who was involved.",
-        "sw": "Ilipotokea, kilichotokea, na waliohusika."
+        "sw": "Ilipotokea, kilichotokea, na waliohusika.",
+        "fr": "Quand cela s'est produit, ce qui s'est passé, et qui était impliqué."
       },
       {
         "en": "The officer's name, service number or any identifying detail, and the station if you know it.",
-        "sw": "Jina la afisa, namba ya utumishi au kitambulisho chochote, na kituo kama unakijua."
+        "sw": "Jina la afisa, namba ya utumishi au kitambulisho chochote, na kituo kama unakijua.",
+        "fr": "Le nom de l'agent, son numéro de matricule ou tout autre détail permettant de l'identifier, ainsi que le commissariat si vous le connaissez."
       },
       {
         "en": "Names and contacts of any witnesses.",
-        "sw": "Majina na mawasiliano ya mashahidi."
+        "sw": "Majina na mawasiliano ya mashahidi.",
+        "fr": "Noms et coordonnées de tout témoin."
       },
       {
         "en": "Photographs and medical records. A completed P3 form is recognised in court as primary medical evidence.",
-        "sw": "Picha na nyaraka za matibabu. Fomu ya P3 iliyojazwa inatambuliwa mahakamani kama ushahidi wa msingi wa kitabibu."
+        "sw": "Picha na nyaraka za matibabu. Fomu ya P3 iliyojazwa inatambuliwa mahakamani kama ushahidi wa msingi wa kitabibu.",
+        "fr": "Photographies et dossiers médicaux. Un formulaire P3 dûment rempli est reconnu par les tribunaux comme preuve médicale principale."
       }
     ],
     "steps": [
       {
         "action": {
           "en": "Get medical attention and a P3 form if you were injured",
-          "sw": "Pata matibabu na fomu ya P3 kama ulijeruhiwa"
+          "sw": "Pata matibabu na fomu ya P3 kama ulijeruhiwa",
+          "fr": "Obtenez des soins médicaux et un formulaire P3 si vous avez été blessé"
         },
         "detail": {
           "en": "Medical documentation is the evidence that most often decides these cases, and it gets harder to obtain as injuries heal. The P3 form records date, time, nature of injuries and state of clothing.",
-          "sw": "Nyaraka za matibabu ndizo ushahidi unaoamua kesi hizi mara nyingi, na ni vigumu kupata majeraha yakipona. Fomu ya P3 hurekodi tarehe, saa, aina ya majeraha na hali ya mavazi."
+          "sw": "Nyaraka za matibabu ndizo ushahidi unaoamua kesi hizi mara nyingi, na ni vigumu kupata majeraha yakipona. Fomu ya P3 hurekodi tarehe, saa, aina ya majeraha na hali ya mavazi.",
+          "fr": "Les documents médicaux constituent la preuve qui détermine le plus souvent l'issue de ces affaires, et ils deviennent plus difficiles à obtenir à mesure que les blessures guérissent. Le formulaire P3 consigne la date, l'heure, la nature des blessures et l'état des vêtements."
         },
         "critical": true
       },
       {
         "action": {
           "en": "File your complaint with IPOA",
-          "sw": "Wasilisha malalamiko yako IPOA"
+          "sw": "Wasilisha malalamiko yako IPOA",
+          "fr": "Déposez votre plainte auprès de l'IPOA"
         },
         "detail": {
           "en": "By phone, online, by email, by post, or in person at a regional office. Filing is free.",
-          "sw": "Kwa simu, mtandaoni, barua pepe, posta, au ana kwa ana katika ofisi ya mkoa. Ni bure."
+          "sw": "Kwa simu, mtandaoni, barua pepe, posta, au ana kwa ana katika ofisi ya mkoa. Ni bure.",
+          "fr": "Par téléphone, en ligne, par courriel, par courrier, ou en personne dans un bureau régional. Le dépôt de plainte est gratuit."
         },
         "institution": "ipoa"
       },
       {
         "action": {
           "en": "Also report to KNCHR so there is a second formal record",
-          "sw": "Ripoti pia KNCHR ili kuwe na kumbukumbu rasmi ya pili"
+          "sw": "Ripoti pia KNCHR ili kuwe na kumbukumbu rasmi ya pili",
+          "fr": "Signalez également à la KNCHR afin qu'il existe un second dossier officiel"
         },
         "detail": {
           "en": "A record held by more than one body is harder to lose and easier to corroborate later.",
-          "sw": "Kumbukumbu inayoshikiliwa na taasisi zaidi ya moja ni vigumu kupotea na rahisi kuthibitisha baadaye."
+          "sw": "Kumbukumbu inayoshikiliwa na taasisi zaidi ya moja ni vigumu kupotea na rahisi kuthibitisha baadaye.",
+          "fr": "Un dossier détenu par plusieurs organismes est plus difficile à perdre et plus facile à corroborer par la suite."
         },
         "institution": "knchr"
       },
       {
         "action": {
           "en": "Consider legal support",
-          "sw": "Fikiria msaada wa kisheria"
+          "sw": "Fikiria msaada wa kisheria",
+          "fr": "Envisagez un soutien juridique"
         },
         "detail": {
           "en": "A human rights lawyer can advise on a civil suit for damages or public interest litigation alongside the IPOA process.",
-          "sw": "Wakili wa haki za binadamu anaweza kukushauri kuhusu kesi ya madai au kesi ya maslahi ya umma sambamba na mchakato wa IPOA."
+          "sw": "Wakili wa haki za binadamu anaweza kukushauri kuhusu kesi ya madai au kesi ya maslahi ya umma sambamba na mchakato wa IPOA.",
+          "fr": "Un avocat spécialisé en droits humains peut vous conseiller sur une action civile en dommages-intérêts ou un contentieux d'intérêt public, en parallèle de la procédure devant l'IPOA."
         }
       }
     ],
@@ -300,11 +344,13 @@
         "name": "Independent Policing Oversight Authority (IPOA)",
         "role": {
           "en": "The civilian body that receives, investigates and reports on complaints of police misconduct.",
-          "sw": "Taasisi ya kiraia inayopokea, kuchunguza na kutoa ripoti kuhusu malalamiko dhidi ya polisi."
+          "sw": "Taasisi ya kiraia inayopokea, kuchunguza na kutoa ripoti kuhusu malalamiko dhidi ya polisi.",
+          "fr": "L'organisme civil qui reçoit, examine et rend compte des plaintes pour inconduite policière."
         },
         "mandate": {
           "en": "Section 4 of the IPOA Act, 2011. IPOA does not arrest; it investigates and recommends prosecution to the Director of Public Prosecutions and disciplinary action to the Inspector General.",
-          "sw": "Kifungu 4 cha Sheria ya IPOA, 2011. IPOA haikamati; huchunguza na kupendekeza mashtaka."
+          "sw": "Kifungu 4 cha Sheria ya IPOA, 2011. IPOA haikamati; huchunguza na kupendekeza mashtaka.",
+          "fr": "Article 4 de la loi de 2011 sur l'IPOA. L'IPOA ne procède pas à des arrestations ; elle enquête et recommande des poursuites au Directeur des poursuites publiques ainsi que des mesures disciplinaires à l'Inspecteur général."
         },
         "channels": [
           {
@@ -314,7 +360,8 @@
             "anonymous": false,
             "note": {
               "en": "Sources disagree on IPOA's toll-free number: 0800 720 434 and 1559 are both published. Try 1559 first as it is the shorter national short code, and fall back to 0800 720 434.",
-              "sw": "Vyanzo havikubaliani kuhusu namba ya bure ya IPOA: 0800 720 434 na 1559 zote zimechapishwa. Jaribu 1559 kwanza, kisha 0800 720 434."
+              "sw": "Vyanzo havikubaliani kuhusu namba ya bure ya IPOA: 0800 720 434 na 1559 zote zimechapishwa. Jaribu 1559 kwanza, kisha 0800 720 434.",
+              "fr": "Les sources ne s'accordent pas sur le numéro gratuit de l'IPOA : le 0800 720 434 et le 1559 sont tous deux publiés. Essayez d'abord le 1559, qui est le code court national, puis le 0800 720 434 en cas d'échec."
             },
             "sources": [
               {
@@ -332,7 +379,8 @@
             "anonymous": false,
             "note": {
               "en": "Published as IPOA's toll-free line for complaints against or compliments for a police officer. See the note on 0800 720 434.",
-              "sw": "Imechapishwa kama namba ya bure ya IPOA kwa malalamiko dhidi ya afisa wa polisi."
+              "sw": "Imechapishwa kama namba ya bure ya IPOA kwa malalamiko dhidi ya afisa wa polisi.",
+              "fr": "Publié comme étant la ligne gratuite de l'IPOA pour les plaintes contre un policier ou les compliments à son égard. Voir la remarque concernant le 0800 720 434."
             },
             "sources": [
               {
@@ -406,7 +454,8 @@
         "name": "Kenya National Commission on Human Rights (KNCHR)",
         "role": {
           "en": "National human rights body. Reporting here creates a second formal record of the incident.",
-          "sw": "Taasisi ya kitaifa ya haki za binadamu. Kuripoti hapa huunda kumbukumbu rasmi ya pili."
+          "sw": "Taasisi ya kitaifa ya haki za binadamu. Kuripoti hapa huunda kumbukumbu rasmi ya pili.",
+          "fr": "Organisme national des droits humains. Un signalement ici crée un second dossier officiel de l'incident."
         },
         "channels": [
           {
@@ -428,7 +477,8 @@
     ],
     "timeline": {
       "en": "IPOA does not publish a fixed investigation timeline. Complaints are screened for admissibility, then investigated, and IPOA may recommend prosecution to the DPP. Keep any reference you are given and follow up.",
-      "sw": "IPOA haijatangaza muda maalum wa uchunguzi. Malalamiko huchujwa, kisha kuchunguzwa. Hifadhi kumbukumbu yoyote unayopewa na ufuatilie."
+      "sw": "IPOA haijatangaza muda maalum wa uchunguzi. Malalamiko huchujwa, kisha kuchunguzwa. Hifadhi kumbukumbu yoyote unayopewa na ufuatilie.",
+      "fr": "L'IPOA ne publie pas de délai fixe d'enquête. Les plaintes sont d'abord examinées quant à leur recevabilité, puis instruites, et l'IPOA peut recommander des poursuites au Directeur des poursuites publiques. Conservez toute référence qui vous est communiquée et assurez le suivi."
     },
     "sources": [
       {
@@ -449,83 +499,100 @@
   {
     "id": "ke-gender-based-violence",
     "jurisdiction": "KE",
-    "tracks": ["safety-reporting-protection"],
+    "tracks": [
+      "safety-reporting-protection"
+    ],
     "category": "gbv",
     "title": {
       "en": "I or someone I know is experiencing violence or abuse",
-      "sw": "Mimi au mtu ninayemjua anakabiliwa na ukatili au unyanyasaji"
+      "sw": "Mimi au mtu ninayemjua anakabiliwa na ukatili au unyanyasaji",
+      "fr": "Moi-même ou une personne que je connais subit des violences ou des abus"
     },
     "summary": {
       "en": "A free 24-hour national helpline connects survivors to medical care, counselling, legal aid, shelter and police. You can call on someone else's behalf. Medical care works best within 72 hours.",
-      "sw": "Nambari ya bure ya saa 24 huunganisha waathirika na matibabu, ushauri, msaada wa kisheria, hifadhi na polisi. Unaweza kupiga kwa niaba ya mtu mwingine. Matibabu hufanya kazi vizuri ndani ya saa 72."
+      "sw": "Nambari ya bure ya saa 24 huunganisha waathirika na matibabu, ushauri, msaada wa kisheria, hifadhi na polisi. Unaweza kupiga kwa niaba ya mtu mwingine. Matibabu hufanya kazi vizuri ndani ya saa 72.",
+      "fr": "Une ligne d'assistance nationale gratuite, disponible 24h/24, met les survivant(e)s en relation avec des soins médicaux, un accompagnement psychologique, une aide juridique, un hébergement et la police. Vous pouvez appeler au nom d'une autre personne. Les soins médicaux sont plus efficaces dans les 72 heures."
     },
     "rights": [
       {
         "en": "The helpline is confidential and free, and is open to a survivor, a family member, a friend, or any concerned member of the community.",
-        "sw": "Nambari hii ni ya siri na bure, na iko wazi kwa mwathirika, mwanafamilia, rafiki, au mwanajamii yeyote."
+        "sw": "Nambari hii ni ya siri na bure, na iko wazi kwa mwathirika, mwanafamilia, rafiki, au mwanajamii yeyote.",
+        "fr": "La ligne d'assistance est confidentielle et gratuite, et elle est ouverte à la victime, à un membre de la famille, à un(e) ami(e), ou à tout membre concerné de la communauté."
       },
       {
         "en": "You do not have to go to the police first to get medical care.",
-        "sw": "Si lazima uende polisi kwanza ili kupata matibabu."
+        "sw": "Si lazima uende polisi kwanza ili kupata matibabu.",
+        "fr": "Vous n'êtes pas obligé(e) de contacter d'abord la police pour recevoir des soins médicaux."
       }
     ],
     "evidence": [
       {
         "en": "Your county and area, so the counsellor can refer you to the nearest service.",
-        "sw": "Kaunti na eneo lako, ili mshauri akuelekeze huduma iliyo karibu."
+        "sw": "Kaunti na eneo lako, ili mshauri akuelekeze huduma iliyo karibu.",
+        "fr": "Votre comté et votre secteur, afin que le conseiller puisse vous orienter vers le service le plus proche."
       },
       {
         "en": "If it is safe to do so, preserve clothing unwashed and seek medical attention before bathing.",
-        "sw": "Ikiwa ni salama, hifadhi mavazi bila kuyafua na tafuta matibabu kabla ya kuoga."
+        "sw": "Ikiwa ni salama, hifadhi mavazi bila kuyafua na tafuta matibabu kabla ya kuoga.",
+        "fr": "Si cela est possible sans danger, conservez les vêtements sans les laver et consultez un médecin avant de vous laver."
       }
     ],
     "steps": [
       {
         "action": {
           "en": "Get to safety first",
-          "sw": "Jiweke mahali salama kwanza"
+          "sw": "Jiweke mahali salama kwanza",
+          "fr": "Mettez-vous d'abord en sécurité"
         },
         "detail": {
           "en": "Nothing else on this page matters more than being somewhere the harm cannot continue.",
-          "sw": "Hakuna kitu kingine muhimu zaidi kuliko kuwa mahali ambapo madhara hayawezi kuendelea."
+          "sw": "Hakuna kitu kingine muhimu zaidi kuliko kuwa mahali ambapo madhara hayawezi kuendelea.",
+          "fr": "Rien d'autre sur cette page n'importe plus que d'être dans un endroit où le mal ne peut pas continuer."
         },
         "critical": true
       },
       {
         "action": {
           "en": "Call 1195, free, any time",
-          "sw": "Piga 1195, bure, wakati wowote"
+          "sw": "Piga 1195, bure, wakati wowote",
+          "fr": "Appelez le 1195, gratuit, à tout moment"
         },
         "detail": {
           "en": "A tele-counsellor will talk with you and connect you to services near you. It works from any phone with no data.",
-          "sw": "Mshauri atazungumza nawe na kukuunganisha na huduma zilizo karibu. Inafanya kazi kwa simu yoyote bila data."
+          "sw": "Mshauri atazungumza nawe na kukuunganisha na huduma zilizo karibu. Inafanya kazi kwa simu yoyote bila data.",
+          "fr": "Un(e) télé-conseiller(ère) s'entretiendra avec vous et vous mettra en relation avec des services proches de chez vous. Cela fonctionne depuis n'importe quel téléphone, sans données mobiles."
         },
         "institution": "hak-1195"
       },
       {
         "action": {
           "en": "Seek medical care within 72 hours if there was sexual violence",
-          "sw": "Tafuta matibabu ndani ya saa 72 ikiwa kulikuwa na ukatili wa kingono"
+          "sw": "Tafuta matibabu ndani ya saa 72 ikiwa kulikuwa na ukatili wa kingono",
+          "fr": "Consultez un médecin dans les 72 heures en cas de violence sexuelle"
         },
         "detail": {
           "en": "Treatment that prevents HIV and other infections is time-limited. Care is available regardless of whether you report to the police.",
-          "sw": "Matibabu ya kuzuia VVU na maambukizi mengine yana muda maalum. Huduma ipo bila kujali kama umeripoti polisi."
+          "sw": "Matibabu ya kuzuia VVU na maambukizi mengine yana muda maalum. Huduma ipo bila kujali kama umeripoti polisi.",
+          "fr": "Le traitement qui prévient le VIH et d'autres infections est limité dans le temps. Les soins sont disponibles que vous portiez plainte ou non auprès de la police."
         },
         "institution": "gvrc",
         "deadline": {
           "en": "Within 72 hours of the incident",
-          "sw": "Ndani ya saa 72 baada ya tukio"
+          "sw": "Ndani ya saa 72 baada ya tukio",
+          "fr": "Dans les 72 heures suivant l'incident"
         },
         "critical": true
       },
       {
         "action": {
           "en": "If the survivor is a child, call 116",
-          "sw": "Ikiwa mwathirika ni mtoto, piga 116"
+          "sw": "Ikiwa mwathirika ni mtoto, piga 116",
+          "fr": "Si la victime est un enfant, appelez le 116"
         },
         "detail": {
           "en": "Childline Kenya operates the free national child helpline.",
-          "sw": "Childline Kenya inaendesha nambari ya bure ya kitaifa ya watoto."
+          "sw": "Childline Kenya inaendesha nambari ya bure ya kitaifa ya watoto.",
+          "fr": "Childline Kenya gère la ligne d'assistance nationale gratuite pour enfants."
         },
         "institution": "childline"
       }
@@ -536,11 +603,13 @@
         "name": "Healthcare Assistance Kenya (HAK) — National GBV Helpline 1195",
         "role": {
           "en": "Free 24-hour national helpline for sexual and gender-based violence. Provides tele-counselling, referrals to shelters, legal aid, healthcare and police, and can coordinate emergency rescue.",
-          "sw": "Nambari ya bure ya saa 24 kwa ukatili wa kingono na kijinsia. Hutoa ushauri, rufaa kwa hifadhi, msaada wa kisheria, matibabu na polisi."
+          "sw": "Nambari ya bure ya saa 24 kwa ukatili wa kingono na kijinsia. Hutoa ushauri, rufaa kwa hifadhi, msaada wa kisheria, matibabu na polisi.",
+          "fr": "Ligne d'assistance nationale gratuite, disponible 24h/24, pour les violences sexuelles et basées sur le genre. Elle propose un accompagnement téléphonique, des orientations vers des hébergements, une aide juridique, des soins de santé et la police, et peut coordonner un sauvetage d'urgence."
         },
         "mandate": {
           "en": "Operated by Healthcare Assistance Kenya in partnership with the State Department of Gender Affairs.",
-          "sw": "Inaendeshwa na Healthcare Assistance Kenya kwa ushirikiano na Idara ya Jinsia."
+          "sw": "Inaendeshwa na Healthcare Assistance Kenya kwa ushirikiano na Idara ya Jinsia.",
+          "fr": "Gérée par Healthcare Assistance Kenya en partenariat avec le Département d'État aux Affaires de genre."
         },
         "channels": [
           {
@@ -550,7 +619,8 @@
             "anonymous": true,
             "note": {
               "en": "Free, 24 hours, confidential. Open to survivors and to anyone calling on their behalf.",
-              "sw": "Bure, saa 24, ya siri. Iko wazi kwa waathirika na yeyote anayepiga kwa niaba yao."
+              "sw": "Bure, saa 24, ya siri. Iko wazi kwa waathirika na yeyote anayepiga kwa niaba yao.",
+              "fr": "Gratuit, disponible 24h/24, confidentiel. Ouvert aux victimes ainsi qu'à toute personne appelant en leur nom."
             },
             "sources": [
               {
@@ -574,7 +644,8 @@
             "anonymous": true,
             "note": {
               "en": "Komesha Dhuluma service, run by the National Police Service Directorate of Community Policing, Gender and Child Protection. Works on a basic handset with no data.",
-              "sw": "Huduma ya Komesha Dhuluma. Inafanya kazi kwa simu ya kawaida bila data."
+              "sw": "Huduma ya Komesha Dhuluma. Inafanya kazi kwa simu ya kawaida bila data.",
+              "fr": "Service Komesha Dhuluma, géré par la Direction de la police de proximité, du genre et de la protection de l'enfance du Service national de police. Fonctionne sur un téléphone basique, sans données mobiles."
             },
             "sources": [
               {
@@ -592,7 +663,8 @@
         "name": "Gender Violence Recovery Centre (GVRC)",
         "role": {
           "en": "Provides free medical response for survivors of sexual violence within the 72-hour window, alongside counselling and support.",
-          "sw": "Hutoa matibabu bure kwa waathirika wa ukatili wa kingono ndani ya saa 72, pamoja na ushauri na msaada."
+          "sw": "Hutoa matibabu bure kwa waathirika wa ukatili wa kingono ndani ya saa 72, pamoja na ushauri na msaada.",
+          "fr": "Fournit une prise en charge médicale gratuite pour les victimes de violences sexuelles dans les 72 heures, ainsi qu'un accompagnement psychologique et un soutien."
         },
         "channels": [
           {
@@ -630,7 +702,8 @@
         "name": "Childline Kenya",
         "role": {
           "en": "Free national helpline for children and for anyone reporting harm to a child.",
-          "sw": "Nambari ya bure ya kitaifa kwa watoto na kwa yeyote anayeripoti madhara kwa mtoto."
+          "sw": "Nambari ya bure ya kitaifa kwa watoto na kwa yeyote anayeripoti madhara kwa mtoto.",
+          "fr": "Ligne d'assistance nationale gratuite pour les enfants et pour toute personne signalant un préjudice causé à un enfant."
         },
         "channels": [
           {
@@ -652,7 +725,8 @@
     ],
     "timeline": {
       "en": "Medical care for sexual violence is most effective within 72 hours. The helpline operates 24 hours and can mobilise emergency response where there is immediate danger.",
-      "sw": "Matibabu ya ukatili wa kingono yanafaa zaidi ndani ya saa 72. Nambari inafanya kazi saa 24 na inaweza kuratibu msaada wa dharura."
+      "sw": "Matibabu ya ukatili wa kingono yanafaa zaidi ndani ya saa 72. Nambari inafanya kazi saa 24 na inaweza kuratibu msaada wa dharura.",
+      "fr": "Les soins médicaux en cas de violence sexuelle sont les plus efficaces dans les 72 heures. La ligne d'assistance fonctionne 24h/24 et peut mobiliser une intervention d'urgence en cas de danger immédiat."
     },
     "sources": [
       {

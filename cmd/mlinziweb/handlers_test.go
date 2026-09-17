@@ -92,6 +92,46 @@ func TestHomeSearchFiltersResults(t *testing.T) {
 	}
 }
 
+func TestHomeDefaultsToKenya(t *testing.T) {
+	h := newTestApp(t)
+	rec := get(t, h, "/")
+	if !strings.Contains(rec.Body.String(), "ke-bribery-public-service") {
+		t.Error("expected Kenya guides to show by default with no jurisdiction param")
+	}
+}
+
+func TestHomeSwitchesToNigeria(t *testing.T) {
+	h := newTestApp(t)
+	rec := get(t, h, "/?j=NG")
+	body := rec.Body.String()
+	if !strings.Contains(body, "ng-bribery-public-service") {
+		t.Error("expected the Nigeria guide when switching jurisdiction")
+	}
+	if strings.Contains(body, "ke-bribery-public-service") {
+		t.Error("expected Kenya guides not to leak into the Nigeria view")
+	}
+}
+
+func TestGuideDetailOffersReadAloud(t *testing.T) {
+	h := newTestApp(t)
+	rec := get(t, h, "/guides/ke-police-misconduct")
+	body := rec.Body.String()
+	if !strings.Contains(body, "readGuideAloud") {
+		t.Error("expected the read-aloud script to be present on a guide page")
+	}
+	if !strings.Contains(body, `data-speak`) {
+		t.Error("expected content to be tagged for read-aloud")
+	}
+}
+
+func TestGuideDetailShowsFrenchWhenRequested(t *testing.T) {
+	h := newTestApp(t)
+	rec := get(t, h, "/guides/ke-bribery-public-service?lang=fr")
+	if !strings.Contains(rec.Body.String(), "pot-de-vin") {
+		t.Error("expected the French translation to render when lang=fr is requested")
+	}
+}
+
 func TestGuideDetailShowsDisputedSources(t *testing.T) {
 	h := newTestApp(t)
 	rec := get(t, h, "/guides/ke-police-misconduct")

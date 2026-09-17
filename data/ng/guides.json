@@ -1,0 +1,182 @@
+[
+  {
+    "id": "ng-bribery-public-service",
+    "jurisdiction": "NG",
+    "tracks": ["transparency-accountability"],
+    "category": "corruption",
+    "title": {
+      "en": "A public officer asked me for a bribe"
+    },
+    "summary": {
+      "en": "You were asked to pay for a government service that should be free, or asked to pay extra to get it faster. The Independent Corrupt Practices and Other Related Offences Commission (ICPC) investigates this. You can report by phone, online, by post, or in person, and even an oral or illiterate complaint must be written down for you by an ICPC officer."
+    },
+    "rights": [
+      {
+        "en": "Anyone, anywhere in the world, can file a complaint against a person or organisation in Nigeria where there are reasonable grounds to suspect a corrupt practices offence."
+      },
+      {
+        "en": "You do not need to write your complaint yourself. If you report orally, or cannot read or write, an ICPC officer must write it down and read it back to you."
+      }
+    ],
+    "evidence": [
+      {
+        "en": "Where and when it happened, and which office or service was involved."
+      },
+      {
+        "en": "The name, rank or office of the officer if you know it. You can still report without it."
+      },
+      {
+        "en": "How much was demanded, and whether you paid."
+      },
+      {
+        "en": "Any receipt, message, photo or recording. Do not put yourself at risk to collect evidence."
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "en": "Write down what happened while it is fresh"
+        },
+        "detail": {
+          "en": "Date, time, place, office, officer, amount. This is what your petition will need."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "Submit a petition to ICPC"
+        },
+        "detail": {
+          "en": "Online through ICPC's petition portal, by phone, by post, or in person at any ICPC office nationwide."
+        },
+        "institution": "icpc"
+      },
+      {
+        "action": {
+          "en": "Keep a record of your petition"
+        },
+        "detail": {
+          "en": "Note the date you submitted it and who you spoke to or corresponded with, so you can follow up."
+        },
+        "critical": true
+      }
+    ],
+    "institutions": [
+      {
+        "id": "icpc",
+        "name": "Independent Corrupt Practices and Other Related Offences Commission (ICPC)",
+        "role": {
+          "en": "Nigeria's apex body for investigating and prosecuting corruption and bribery in the public and private sectors."
+        },
+        "mandate": {
+          "en": "Established in 2000 under the Corrupt Practices and Other Related Offences Act. Receives and investigates reports of corruption, and educates the public on corruption and related offences."
+        },
+        "channels": [
+          {
+            "kind": "web",
+            "value": "https://icpc.gov.ng/petition",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Independent Corrupt Practices and Other Related Offences Commission",
+                "url": "https://icpc.gov.ng/frequently-asked-questions-faq/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "phone",
+            "value": "0803-123-0280 / 0803-123-0281 / 0803-123-0282 (MTN), 0705-699-0190 / 0705-699-0191 (Glo)",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "These are ICPC's officially listed contact numbers, standard network rates apply. Some news coverage separately refers to an ICPC 'toll-free line' for reporting wanted persons, but no toll-free number is listed on ICPC's own contact page, so it is not repeated here as confirmed."
+            },
+            "sources": [
+              {
+                "publisher": "Independent Corrupt Practices and Other Related Offences Commission",
+                "url": "https://icpc.gov.ng/contact-us/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              },
+              {
+                "publisher": "Legit.ng",
+                "url": "https://www.legit.ng/nigeria/1713152-2026-icpc-lists-wanted-persons-nigeria-releases-names-photos/",
+                "retrieved": "2026-09-17",
+                "confidence": "conflicting"
+              }
+            ]
+          },
+          {
+            "kind": "email",
+            "value": "info@icpc.gov.ng",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Independent Corrupt Practices and Other Related Offences Commission",
+                "url": "https://icpc.gov.ng/contact-us/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "post",
+            "value": "Independent Corrupt Practices and Other Related Offences Commission, PMB 535, Garki, Abuja, Nigeria",
+            "toll_free": false,
+            "anonymous": true,
+            "sources": [
+              {
+                "publisher": "Independent Corrupt Practices and Other Related Offences Commission",
+                "url": "https://icpc.gov.ng/contact-us/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "in_person",
+            "value": "Any ICPC office nationwide — headquarters in Abuja, with state offices across Nigeria",
+            "toll_free": false,
+            "anonymous": false,
+            "sources": [
+              {
+                "publisher": "Independent Corrupt Practices and Other Related Offences Commission",
+                "url": "https://icpc.gov.ng/petition-guidelines/",
+                "retrieved": "2026-09-17",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "en": "ICPC does not publish a fixed investigation timeline. Keep a record of your petition and follow up with the office that received it."
+    },
+    "sources": [
+      {
+        "publisher": "Independent Corrupt Practices and Other Related Offences Commission",
+        "url": "https://icpc.gov.ng/frequently-asked-questions-faq/",
+        "retrieved": "2026-09-17",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Independent Corrupt Practices and Other Related Offences Commission",
+        "url": "https://icpc.gov.ng/petition-guidelines/",
+        "retrieved": "2026-09-17",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Independent Corrupt Practices and Other Related Offences Commission",
+        "url": "https://icpc.gov.ng/contact-us/",
+        "retrieved": "2026-09-17",
+        "confidence": "official"
+      }
+    ],
+    "last_verified": "2026-09-17"
+  }
+]

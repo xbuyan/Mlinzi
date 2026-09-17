@@ -3,8 +3,44 @@
 {{with .Guide}}
 <a href="/?lang={{$lang}}" class="text-sm text-[#028090]">&larr; Back to search</a>
 
-<h1 class="mt-2 text-3xl font-bold text-[#0A2E36]">{{.Title}}</h1>
-<p class="mt-2 text-slate-600">{{.Summary}}</p>
+<h1 class="mt-2 text-3xl font-bold text-[#0A2E36]" data-speak>{{.Title}}</h1>
+<p class="mt-2 text-slate-600" data-speak>{{.Summary}}</p>
+
+<button id="read-aloud-btn" onclick="readGuideAloud()"
+        class="mt-3 inline-flex items-center gap-2 border border-[#028090] text-[#028090] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#E6F7F5]">
+  🔊 Read this guide aloud
+</button>
+<script>
+  // Uses the browser's built-in text-to-speech (Web Speech API) — no
+  // server round-trip, no audio files to ship, works offline once the
+  // page has loaded. Honest limitation: voice quality and language
+  // availability depend entirely on the device and browser. A phone with
+  // no Kiswahili or French voice installed will fall back to whatever
+  // default voice it has, which may mispronounce the text rather than
+  // fail outright — better than nothing, but not the same as a proper
+  // recorded narration in that language.
+  function readGuideAloud() {
+    const btn = document.getElementById("read-aloud-btn");
+    if (!("speechSynthesis" in window)) {
+      btn.textContent = "Read-aloud isn't supported on this browser";
+      return;
+    }
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+      btn.textContent = "🔊 Read this guide aloud";
+      return;
+    }
+    const parts = Array.from(document.querySelectorAll("[data-speak]"))
+      .map((el) => el.textContent.trim())
+      .filter(Boolean);
+    const utterance = new SpeechSynthesisUtterance(parts.join(". "));
+    const langMap = { en: "en-US", sw: "sw-KE", fr: "fr-FR" };
+    utterance.lang = langMap["{{$lang}}"] || "en-US";
+    utterance.onend = () => { btn.textContent = "🔊 Read this guide aloud"; };
+    btn.textContent = "⏸ Stop reading";
+    speechSynthesis.speak(utterance);
+  }
+</script>
 
 <div class="mt-2 text-xs text-slate-400">
   Last verified {{.LastVerified}}
@@ -36,7 +72,7 @@
     <li class="flex gap-3">
       <span class="flex-none w-6 h-6 rounded-full bg-[#028090] text-white text-xs flex items-center justify-center font-bold">{{inc $i}}</span>
       <div>
-        <div class="font-semibold text-[#0A2E36]">{{$s.Action}}{{if $s.Critical}} <span class="text-amber-600 text-xs">(time-sensitive)</span>{{end}}</div>
+        <div class="font-semibold text-[#0A2E36]" data-speak>{{$s.Action}}{{if $s.Critical}} <span class="text-amber-600 text-xs">(time-sensitive)</span>{{end}}</div>
         {{if $s.Detail}}<div class="text-sm text-slate-600">{{$s.Detail}}</div>{{end}}
         {{if $s.Deadline}}<div class="text-sm text-amber-700">Deadline: {{$s.Deadline}}</div>{{end}}
       </div>

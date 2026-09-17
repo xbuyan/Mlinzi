@@ -18,17 +18,22 @@ const defaultJurisdiction = "KE"
 func (a *app) handleHome(w http.ResponseWriter, r *http.Request) {
 	lang := langFrom(r)
 	q := r.URL.Query().Get("q")
+	jurisdiction := r.URL.Query().Get("j")
+	if jurisdiction == "" {
+		jurisdiction = defaultJurisdiction
+	}
 
 	var guides []guideSummaryView
-	results := a.guides.Search(defaultJurisdiction, q)
+	results := a.guides.Search(jurisdiction, q)
 	for _, g := range results {
 		guides = append(guides, newGuideSummaryView(g, lang))
 	}
 
 	a.render(w, http.StatusOK, "home.html", map[string]any{
-		"Lang":   lang,
-		"Query":  q,
-		"Guides": guides,
+		"Lang":         lang,
+		"Query":        q,
+		"Jurisdiction": jurisdiction,
+		"Guides":       guides,
 	})
 }
 
