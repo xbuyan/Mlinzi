@@ -93,6 +93,20 @@ reconstructed at submission time (`docs/AI_USAGE.md` in the repo). In brief:
   encryption at rest deferred to the Layer 3 key-release mechanism it
   depends on rather than faked ahead of it.
 
+## Accessibility and offline support
+
+The CLI runs from a single binary with zero network calls — the guide
+dataset is embedded at compile time, so looking up a guide, filing a demo
+report, and running the full guardian-escalation walkthrough all work with
+no connection at all. The web UI is installable and its Know layer (the
+home page and every guide) works fully offline via a service worker,
+including on a first visit with no prior connectivity. Reporting and
+protection are deliberately not offline-capable in the web UI: a report's
+value depends on reaching a shared, verifiable ledger at the moment it's
+submitted, and building real offline-write support (local queuing,
+encryption at rest, sync conflict handling) is a substantial feature in its
+own right that wasn't attempted rather than faked.
+
 ## Potential impact
 
 The three-layer pattern (verified information → tamper-evident reporting →

@@ -20,7 +20,8 @@ scroll behind your voice rather than pausing for each block.
 
 **[0:15 – 0:20] — Type and run `./mlinzi show ke-police-misconduct`. Let it scroll to the institutions section.**
 
-> "This is Mlinzi answering that gap. Sourced. Dated."
+> "This is Mlinzi answering that gap. Sourced. Dated. And it runs from a
+> single binary with zero network calls — no connection needed at all."
 
 **[0:20 – 0:35] — Pause on or circle back to the IPOA channel lines (the two disputed toll-free numbers).**
 
