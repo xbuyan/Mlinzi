@@ -467,6 +467,75 @@ explains that the translation covers the page around them and not the law
 itself. A guide with no translation says that too, rather than quietly
 presenting English.
 
+## Day 10 — Evidence upload, and reporting for someone who can't
+
+**Two features requested together, one line drawn between them.** The ask
+was file upload for evidence, plus "cater for the unprivileged population
+like prisoners" whose appeals go unheard. The first is a real, scoped
+engineering problem. The second, taken literally — an app that gets a
+wrongful conviction appeal processed — is not honestly buildable, and
+building something that looked like it did would be the worst possible
+thing to ship into a hackathon about trustworthy information: a system that
+implies it can get someone's case heard when it can't is actively dangerous
+to someone acting on that implication. What got built instead: an
+on-behalf-of submission flag for people with no way to file for themselves,
+and a guide connecting them to the real legal aid bodies that can act —
+recorded and sourced with the same discipline as every other guide, none of
+it claiming to do more than that.
+
+**Metadata stripping was treated as a correctness problem, not a checkbox.**
+A phone photo's GPS coordinates and device serial number are exactly the
+kind of silent risk this app's reporter-anonymity story exists to prevent,
+so every image is decoded and re-encoded before storage — Go's own JPEG and
+PNG encoders never write EXIF, so this is enough on its own. But re-encoding
+blind would also silently rotate any photo from a phone that stores pixels
+in sensor orientation and relies on the EXIF orientation tag to display
+correctly — stripping the tag without reading it first would trade one
+silent corruption for another. Go's standard library has no EXIF support at
+all, so a minimal from-scratch reader was written for the one tag that
+matters, and the pixel transform for all 8 EXIF orientation values was
+verified against hand-derived expected positions on a synthetic image,
+independent of JPEG compression noise.
+
+**A test failure that was the fixture, not the code — caught before it
+became false confidence.** The first orientation test used a single marked
+pixel in a 4x2 image; it failed, and the instinct to "fix the rotation
+math" was wrong. The math was already independently verified by hand for
+all 8 cases; a single pixel simply doesn't survive JPEG's block-based
+compression at that image size. Rebuilding the fixture with larger,
+block-aligned color regions made the same test pass for the right reason,
+and a separate table-driven test against synthetic (uncompressed) images
+now checks all 8 orientation values directly, so compression artifacts
+can't hide a real regression in either direction again.
+
+**A real regression, caught by running the full suite, not just the new
+code.** Switching the report handler from `ParseForm` to
+`ParseMultipartForm` — necessary for file uploads — broke every existing
+plain-text report submission, because a non-multipart request makes that
+call return `ErrNotMultipart` even though it has already populated the form
+fields correctly. Treating that as a hard failure rejected every report
+with no evidence attached, which is still the overwhelming majority of
+submissions. Fixed by explicitly tolerating that one error value; caught
+only because the pre-existing report tests were run again after the change,
+not assumed still-passing because the new tests passed.
+
+**A second regression, in the test harness itself.** The new
+`GET /evidence/{hash}` route was registered in `cmd/mlinziweb/main.go` but
+not in the separate route table the test suite builds in
+`handlers_test.go` — an existing duplication in this codebase, not
+something introduced here. The upload-path test failed with a 404 that
+looked like a broken store lookup; it was a missing route in the test
+double. Worth naming because the fix (add the route to both places) is
+easy, but assuming the simpler explanation without checking would have
+sent the debugging in the wrong direction entirely.
+
+**Same access-control posture as before, not a new one.** Evidence is
+served from `/evidence/{hash}` with no authentication, exactly like the
+institution portal already reads report text with none. That is not a new
+risk introduced by this feature; it is the existing, already-stated one
+extended to a new content type, and the handler and the upload form both
+say so rather than implying a protection that isn't there.
+
 ## Honest limits
 
 - Kiswahili translations are unreviewed by a first-language speaker, as of day
@@ -490,3 +559,15 @@ presenting English.
   than padding it.
 - Kenya's and Uganda's constitution pages are ~450 KB of HTML each.
   Complete, and heavy on a low-bandwidth handset.
+- Evidence files are stored in memory only, like every other store in this
+  app — gone on restart, not encrypted at rest, and served with no
+  authentication (the same stated gap the institution portal already has).
+  Video and PDF metadata is not stripped; only JPEG and PNG are, because
+  Go's standard library gives no way to parse the other two formats'
+  metadata in the time available. The upload form states this rather than
+  implying a guarantee for file types it doesn't cover.
+- The on-behalf-of guides connect someone to a real legal aid body and
+  create a timestamped record that a claim was raised. They do not, and
+  cannot, get an appeal filed or a case heard — that would require a live
+  integration with each country's legal aid and court systems that does not
+  exist and was not built here.

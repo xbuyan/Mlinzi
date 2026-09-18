@@ -143,6 +143,71 @@ PDF.
 Adding a constitution is adding a file there, the same way adding a country
 is adding a folder to `data/`.
 
+## Evidence upload
+
+A reporter can attach photos, video, or documents to a report. The two
+guarantees the rest of the app makes for text carry over rather than being
+reinvented for files: integrity (a file's hash enters the same ledger entry
+as the report text, so a file swapped after submission is exactly as
+detectable as edited report text already is) and zero trust in the client
+(declared filename and declared content type are both discarded; the actual
+bytes are sniffed against an allowlist — JPEG, PNG, PDF, MP4, WebM,
+QuickTime — and anything else, including a file that merely claims to be an
+allowed type but doesn't decode as one, is rejected outright).
+
+One risk is treated as stricter than the rest of the app's accepted
+plaintext-storage posture: a phone photo routinely carries the GPS
+coordinates and device identifiers of whoever took it. That is silent in a
+way exposed report text is not, so every image is decoded and re-encoded
+before storage, which drops EXIF/XMP/ICC metadata entirely — verified
+against a real GPS- and device-ID-bearing JPEG fixture, not assumed. Blindly
+re-encoding would also silently rotate photos from phones that store pixels
+in sensor orientation and rely on the EXIF orientation tag to display them
+upright, so orientation is read (via a small from-scratch parser — Go's
+standard library has no EXIF support) and applied to the pixels before the
+tag carrying it is discarded. All 8 EXIF orientation values are checked
+against hand-derived pixel positions in `internal/evidence`.
+
+**Known, stated limits:** storage is in-memory, matching every other store
+in this app (see "Status" above — no persistence layer exists for anything
+yet) — evidence disappears on restart exactly like reports do, not because that was overlooked here but
+because giving files a persistence guarantee the rest of the data doesn't
+have would be inconsistent, not more honest. Files are capped at 8MB each,
+20MB and 4 files per report, 150MB across the whole process, sized for a
+small single-instance deployment rather than for what someone might
+reasonably want to upload. Video and PDF metadata is not stripped — Go's
+standard library has no video or PDF parsing to build that on in the time
+available, and the upload form says so plainly rather than implying a
+guarantee that isn't there. Evidence is served back at `/evidence/{hash}`
+with the same lack of authentication the institution portal already has and
+states — not a new risk, the existing one extended to a new content type.
+
+## Reporting for someone who can't
+
+Not everyone affected by corruption, abuse, or wrongful detention can file
+their own report — no phone, no literacy, no network access, most
+concretely someone already in custody. A checkbox on the report form lets a
+trusted third party (a family member, a paralegal, a visitor) file on that
+person's behalf, recorded openly rather than the proxy silently posing as
+the person affected — an institution reading the report afterward can see
+it arrived this way, which matters for how much weight to give a
+first-person claim relayed by someone else.
+
+New guides for exactly this — "I, or someone I know, was wrongly arrested or
+imprisoned and cannot afford a lawyer" — exist for Kenya, Uganda, and
+Nigeria. This is scoped deliberately narrowly: Mlinzi cannot get anyone's
+appeal filed or heard, and nothing in the guide text claims otherwise. What
+it can honestly do is connect someone to the real body that can act, with a
+timestamped record that a claim was raised on a given date. Every
+institution listed is sourced from its own current official contact page —
+Kenya's National Legal Aid Service and KNCHR, Uganda's LASPNET and Human
+Rights Commission, Nigeria's Legal Aid Council — and the constitutional
+rights cited are quoted from this repo's own `resources/*-constitution.json`
+rather than asserted from memory. Kenya's 14-day appeal-notice deadline is
+cited to the actual Criminal Procedure Code section, since an unsourced
+deadline in a guide meant to help someone not miss one would be worse than
+not stating it at all.
+
 ## Multilingual, demonstrated
 
 Kenya's **and Uganda's** guides are available in English, Kiswahili and

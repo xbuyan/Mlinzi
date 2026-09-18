@@ -64,6 +64,29 @@ security: a reporter's release key is split via Shamir's Secret Sharing
 enough to reconstruct it alone. This is directly tested
 (`TestNoSinglePartyCanReleaseAlone`) rather than asserted in prose.
 
+## Evidence upload and reaching people who can't reach us
+
+A reporter can attach photos, video, or documents to a report; a file's hash
+enters the same tamper-evident ledger entry as the report text, so it is
+exactly as provable and exactly as tamper-evident as the report itself.
+Every image is decoded and re-encoded before storage specifically to strip
+EXIF metadata — a phone photo routinely carries the GPS coordinates and
+device identifiers of whoever took it, which is a materially worse leak than
+the report text itself for a reporter under threat. Orientation is read and
+corrected before that metadata is discarded, so stripping it doesn't
+silently rotate the photo.
+
+A second addition targets people the brief's "help people improve how they
+engage with governments" goal doesn't reach by default: someone with no
+phone, no literacy, or no network access — most concretely, someone already
+in detention. An on-behalf-of flag lets a trusted third party file for them,
+recorded openly rather than posed as a first-person account. New guides for
+Kenya, Uganda, and Nigeria connect a wrongful-arrest or wrongful-imprisonment
+claim to the real national legal aid body in each country, sourced from each
+body's own current contact page — deliberately scoped as a directory and a
+timestamped record, not a claim that Mlinzi can get an appeal filed or heard,
+which it cannot and does not pretend to.
+
 ## How AI tools were used
 
 Used throughout the build, with a running log kept from day one rather than
@@ -83,6 +106,13 @@ reconstructed at submission time (`docs/AI_USAGE.md` in the repo). In brief:
   "basic device, no install step" case this hackathon calls out. Caught by
   manually running the built binary outside the repo, fixed by embedding the
   dataset into the binary, which also made the shipped tool fully offline.
+- **A second real bug, later in the build:** switching the report handler to
+  support file uploads required parsing multipart form data, which broke
+  every existing plain-text report submission — a non-multipart POST makes
+  Go's `ParseMultipartForm` return an error even though it has already
+  parsed the form fields correctly, and that error was initially treated as
+  fatal. Caught only because the full pre-existing test suite was re-run
+  after the change, not assumed still-passing because the new tests passed.
 - **136 test functions across nine packages** were AI-drafted and
   human-reviewed, including white-box tests that directly mutate a stored
   ledger entry to prove tampering is detected, an exhaustive test of GF(256)
@@ -124,4 +154,7 @@ underneath are already country-agnostic, and a document is a file in one flat
 folder the same way a country is. The same architecture could extend
 to land disputes, election-related violence reporting, or labor rights —
 anywhere information trust and reporting safety are the two things standing
-between a person and protection.
+between a person and protection. The wrongful-detention guides are one
+concrete step in that direction already taken: the same guide/institution
+pattern that serves a bribery report today serves someone who cannot file
+for themselves tomorrow, with no new architecture required.
