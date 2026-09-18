@@ -2,7 +2,9 @@
   {
     "id": "ug-bribery-public-service",
     "jurisdiction": "UG",
-    "tracks": ["transparency-accountability"],
+    "tracks": [
+      "transparency-accountability"
+    ],
     "category": "corruption",
     "title": {
       "en": "A public officer asked me for a bribe",
@@ -213,7 +215,10 @@
   {
     "id": "ug-police-misconduct",
     "jurisdiction": "UG",
-    "tracks": ["safety-reporting-protection", "transparency-accountability"],
+    "tracks": [
+      "safety-reporting-protection",
+      "transparency-accountability"
+    ],
     "category": "policing",
     "title": {
       "en": "A police officer harmed, threatened or extorted me",
@@ -453,7 +458,9 @@
   {
     "id": "ug-gender-based-violence",
     "jurisdiction": "UG",
-    "tracks": ["safety-reporting-protection"],
+    "tracks": [
+      "safety-reporting-protection"
+    ],
     "category": "gbv",
     "title": {
       "en": "I or someone I know is experiencing violence or abuse",
@@ -725,5 +732,200 @@
       }
     ],
     "last_verified": "2026-09-17"
+  },
+  {
+    "id": "ug-wrongful-detention",
+    "jurisdiction": "UG",
+    "tracks": [
+      "safety-reporting-protection",
+      "transparency-accountability"
+    ],
+    "category": "detention",
+    "title": {
+      "en": "I, or someone I know, was wrongly arrested or imprisoned and cannot afford a lawyer",
+      "sw": "Mimi, au mtu ninayemjua, nimekamatwa au kufungwa kimakosa na sina uwezo wa kulipia wakili",
+      "fr": "Moi, ou quelqu'un que je connais, avons été arrêté ou emprisonné à tort et n'avons pas les moyens de payer un avocat"
+    },
+    "summary": {
+      "en": "An arrest, charge, or conviction feels wrong, or someone is being held without a lawyer or without being brought to court properly. Free legal aid exists in Uganda for exactly this. This can be filed by the person affected, or by someone filing on their behalf if they cannot reach a phone or the internet themselves — including someone currently in custody.",
+      "sw": "Kukamatwa, mashtaka, au hukumu inaonekana si sahihi, au mtu anazuiliwa bila wakili au bila kupelekwa mahakamani ipasavyo. Msaada wa kisheria wa bure upo Uganda kwa hali kama hii. Hii inaweza kuwasilishwa na mhusika mwenyewe, au na mtu mwingine kwa niaba yake ikiwa hawezi kufikia simu au mtandao mwenyewe — ikiwemo mtu aliye kizuizini kwa sasa.",
+      "fr": "Une arrestation, une inculpation ou une condamnation vous semble injuste, ou une personne est détenue sans avocat ou sans avoir été présentée correctement devant un tribunal. Une aide juridique gratuite existe en Ouganda précisément pour cela. Ce signalement peut être déposé par la personne concernée, ou par quelqu'un en son nom si elle ne peut pas elle-même accéder à un téléphone ou à internet — y compris une personne actuellement détenue."
+    },
+    "rights": [
+      {
+        "en": "Article 23 of the Constitution protects personal liberty and limits the grounds on which anyone may be deprived of it, including strict conditions on pre-trial detention.",
+        "sw": "Kifungu cha 23 cha Katiba kinalinda uhuru wa kibinafsi na kinaweka mipaka kuhusu sababu za kumnyima mtu uhuru huo, ikiwemo masharti magumu kuhusu kizuizini kabla ya kesi.",
+        "fr": "L'article 23 de la Constitution protège la liberté individuelle et limite les motifs pour lesquels une personne peut en être privée, y compris des conditions strictes sur la détention provisoire."
+      },
+      {
+        "en": "Article 28 guarantees a fair, speedy and public hearing before an independent court for any criminal charge.",
+        "sw": "Kifungu cha 28 kinahakikisha usikilizwaji wa haki, wa haraka na wa hadharani mbele ya mahakama huru kwa shtaka lolote la jinai.",
+        "fr": "L'article 28 garantit une audience équitable, rapide et publique devant un tribunal indépendant pour toute accusation pénale."
+      }
+    ],
+    "evidence": [
+      {
+        "en": "The court case number, the court's name, and the date of arrest, charge, or sentencing.",
+        "sw": "Namba ya kesi mahakamani, jina la mahakama, na tarehe ya kukamatwa, mashtaka, au hukumu.",
+        "fr": "Le numéro de l'affaire, le nom du tribunal, et la date de l'arrestation, de l'inculpation ou de la condamnation."
+      },
+      {
+        "en": "Which prison or police station is holding the person now, if known.",
+        "sw": "Ni gereza au kituo gani cha polisi kinamzuia mtu huyo sasa, kama inajulikana.",
+        "fr": "Le lieu de détention actuel de la personne — prison ou poste de police — si connu."
+      },
+      {
+        "en": "What stage the case is at: awaiting trial, convicted and not yet appealed, or an appeal already filed.",
+        "sw": "Kesi iko hatua gani: inasubiri kesi, imehukumiwa lakini bado haijakatiwa rufaa, au rufaa tayari imewasilishwa.",
+        "fr": "L'état actuel de l'affaire : en attente de procès, condamnée sans appel déposé, ou appel déjà déposé."
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "en": "Write down the case number, court, and key dates now",
+          "sw": "Andika namba ya kesi, mahakama, na tarehe muhimu sasa",
+          "fr": "Notez dès maintenant le numéro de l'affaire, le tribunal et les dates clés"
+        },
+        "detail": {
+          "en": "Every legal aid provider will ask for these first.",
+          "sw": "Kila mtoa msaada wa kisheria atauliza hivi kwanza.",
+          "fr": "Tout prestataire d'aide juridique demandera cela en premier."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "Contact the Legal Aid Service Providers Network (LASPNET)",
+          "sw": "Wasiliana na Legal Aid Service Providers Network (LASPNET)",
+          "fr": "Contactez le Legal Aid Service Providers Network (LASPNET)"
+        },
+        "detail": {
+          "en": "LASPNET coordinates over 40 free legal aid organisations across Uganda, including ones that specifically work inside prisons. Its own member directory includes an organisation whose stated purpose is legal aid for prisoners and other indigent persons.",
+          "sw": "LASPNET inaratibu zaidi ya mashirika 40 ya msaada wa bure wa kisheria kote Uganda, ikiwemo yanayofanya kazi ndani ya magereza. Orodha yake ya wanachama inajumuisha shirika lenye lengo la moja kwa moja la msaada wa kisheria kwa wafungwa na watu wengine wasio na uwezo.",
+          "fr": "LASPNET coordonne plus de 40 organisations d'aide juridique gratuite en Ouganda, dont certaines travaillent spécifiquement en milieu carcéral. Son propre répertoire de membres inclut une organisation dont l'objectif déclaré est l'aide juridique aux prisonniers et autres personnes indigentes."
+        },
+        "institution": "laspnet"
+      },
+      {
+        "action": {
+          "en": "If the concern is how someone is being treated in custody, also contact the Uganda Human Rights Commission",
+          "sw": "Ikiwa wasiwasi ni jinsi mtu anavyotendewa akiwa kizuizini, pia wasiliana na Tume ya Haki za Binadamu Uganda",
+          "fr": "Si la préoccupation porte sur le traitement d'une personne en détention, contactez aussi la Commission ougandaise des droits de l'homme"
+        },
+        "detail": {
+          "en": "The UHRC investigates human rights violations by the State, including in places of detention, separately from whether the underlying case is being appealed.",
+          "sw": "UHRC huchunguza ukiukaji wa haki za binadamu unaofanywa na Serikali, ikiwemo mahali pa kizuizini, tofauti na suala la kama kesi ya msingi inakatiwa rufaa.",
+          "fr": "La UHRC enquête sur les violations des droits humains commises par l'État, y compris dans les lieux de détention, indépendamment de la question de savoir si l'affaire de fond fait l'objet d'un appel."
+        },
+        "institution": "uhrc"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "laspnet",
+        "name": "Legal Aid Service Providers Network (LASPNET)",
+        "role": {
+          "en": "A national NGO network coordinating over 40 legal aid organisations across Uganda, connecting people to free legal aid providers appropriate to their situation, including providers working inside prisons.",
+          "sw": "Mtandao wa kitaifa wa NGO unaoratibu mashirika zaidi ya 40 ya msaada wa kisheria kote Uganda, ukiwaunganisha watu na watoa msaada wa bure wa kisheria unaofaa hali yao, ikiwemo watoa huduma wanaofanya kazi ndani ya magereza.",
+          "fr": "Un réseau national d'ONG coordonnant plus de 40 organisations d'aide juridique à travers l'Ouganda, mettant en relation les personnes avec des prestataires d'aide juridique gratuite adaptés à leur situation, y compris ceux travaillant en milieu carcéral."
+        },
+        "mandate": {
+          "en": "A member-based NGO established in 2004 to coordinate legal aid service delivery and access to justice for vulnerable and marginalised people in Uganda.",
+          "sw": "NGO ya wanachama iliyoanzishwa mwaka 2004 kuratibu utoaji wa huduma za msaada wa kisheria na upatikanaji wa haki kwa watu walio hatarini na waliotengwa Uganda.",
+          "fr": "Une ONG à adhésion créée en 2004 pour coordonner la fourniture de services d'aide juridique et l'accès à la justice pour les personnes vulnérables et marginalisées en Ouganda."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "+256 393 513 733",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "LASPNET's own published contact line. Standard network rates apply.",
+              "sw": "Namba ya mawasiliano iliyotangazwa na LASPNET yenyewe. Gharama za kawaida za mtandao zinatumika.",
+              "fr": "La ligne de contact publiée par LASPNET elle-même. Les tarifs normaux du réseau s'appliquent."
+            },
+            "sources": [
+              {
+                "publisher": "Legal Aid Service Providers Network",
+                "url": "https://www.laspnet.org/contact-us",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "web",
+            "value": "https://www.laspnet.org/",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "LASPNET's site lists its member directory (LASPS Directory) of legal aid organisations by area of work, including prisoner-focused providers.",
+              "sw": "Tovuti ya LASPNET inaorodhesha wanachama wake (LASPS Directory) wa mashirika ya msaada wa kisheria kwa eneo la kazi, ikiwemo watoa huduma wanaolenga wafungwa.",
+              "fr": "Le site de LASPNET répertorie ses membres (LASPS Directory), les organisations d'aide juridique classées par domaine d'action, y compris celles axées sur les prisonniers."
+            },
+            "sources": [
+              {
+                "publisher": "Legal Aid Service Providers Network",
+                "url": "https://www.laspnet.org/membership/member-organizations",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "uhrc",
+        "name": "Uganda Human Rights Commission (UHRC)",
+        "role": {
+          "en": "Uganda's constitutional human rights body. It receives and investigates complaints that a right or freedom has been violated by the State or its officials, including in places of detention, and can award compensation and refer cases for prosecution.",
+          "sw": "Chombo cha kikatiba cha haki za kibinadamu cha Uganda. Hupokea na kuchunguza malalamiko kwamba haki au uhuru umevunjwa na Serikali au maafisa wake, ikiwemo mahali pa kizuizini, na kinaweza kutoa fidia na kupeleka kesi kwa mwendesha mashtaka.",
+          "fr": "L'organe constitutionnel ougandais des droits de l'homme. Il reçoit et instruit les plaintes selon lesquelles un droit ou une liberté a été violé par l'État ou ses agents, y compris dans les lieux de détention, et peut accorder une indemnisation et transmettre les affaires au ministère public."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "0800122444",
+            "toll_free": true,
+            "anonymous": false,
+            "note": {
+              "en": "The Commission publishes this as its toll-free line, so it works on a basic phone with no data and no credit.",
+              "sw": "Komisheni inatangaza hii kama namba yake ya bure, hivyo inafanya kazi kwa simu ya kawaida bila data na bila salio.",
+              "fr": "La Commission publie ce numéro comme sa ligne gratuite : elle fonctionne depuis un téléphone ordinaire, sans données ni crédit."
+            },
+            "sources": [
+              {
+                "publisher": "Uganda Human Rights Commission",
+                "url": "https://uhrc.ug/",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "en": "Contacting LASPNET or the UHRC takes minutes. Being connected to a specific legal aid lawyer and getting an appeal filed can take longer depending on caseloads — ask about any appeal deadline the moment you speak to someone.",
+      "sw": "Kuwasiliana na LASPNET au UHRC huchukua dakika. Kuunganishwa na wakili maalum wa msaada wa kisheria na kuwasilisha rufaa kunaweza kuchukua muda mrefu zaidi kutegemea idadi ya kesi — uliza kuhusu muda wowote wa mwisho wa rufaa mara tu unapozungumza na mtu.",
+      "fr": "Contacter LASPNET ou la UHRC prend quelques minutes. Être mis en relation avec un avocat d'aide juridique spécifique et déposer un appel peut prendre plus de temps selon la charge de travail — renseignez-vous sur tout délai d'appel dès que vous parlez à quelqu'un."
+    },
+    "sources": [
+      {
+        "publisher": "Legal Aid Service Providers Network",
+        "url": "https://www.laspnet.org/contact-us",
+        "retrieved": "2026-09-18",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Uganda Human Rights Commission",
+        "url": "https://uhrc.ug/",
+        "retrieved": "2026-09-18",
+        "confidence": "official"
+      }
+    ],
+    "last_verified": "2026-09-18"
   }
 ]

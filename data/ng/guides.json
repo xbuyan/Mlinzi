@@ -2,7 +2,9 @@
   {
     "id": "ng-bribery-public-service",
     "jurisdiction": "NG",
-    "tracks": ["transparency-accountability"],
+    "tracks": [
+      "transparency-accountability"
+    ],
     "category": "corruption",
     "title": {
       "en": "A public officer asked me for a bribe"
@@ -178,5 +180,175 @@
       }
     ],
     "last_verified": "2026-09-17"
+  },
+  {
+    "id": "ng-wrongful-detention",
+    "jurisdiction": "NG",
+    "tracks": [
+      "safety-reporting-protection",
+      "transparency-accountability"
+    ],
+    "category": "detention",
+    "title": {
+      "en": "I, or someone I know, was wrongly arrested or imprisoned and cannot afford a lawyer",
+      "sw": "Mimi, au mtu ninayemjua, nimekamatwa au kufungwa kimakosa na sina uwezo wa kulipia wakili",
+      "fr": "Moi, ou quelqu'un que je connais, avons été arrêté ou emprisonné à tort et n'avons pas les moyens de payer un avocat"
+    },
+    "summary": {
+      "en": "An arrest, charge, or conviction feels wrong, or someone is being held without a lawyer or without being brought to court properly. Free legal aid exists in Nigeria for exactly this. This can be filed by the person affected, or by someone filing on their behalf if they cannot reach a phone or the internet themselves — including someone currently in custody.",
+      "sw": "Kukamatwa, mashtaka, au hukumu inaonekana si sahihi, au mtu anazuiliwa bila wakili au bila kupelekwa mahakamani ipasavyo. Msaada wa kisheria wa bure upo Nigeria kwa hali kama hii. Hii inaweza kuwasilishwa na mhusika mwenyewe, au na mtu mwingine kwa niaba yake ikiwa hawezi kufikia simu au mtandao mwenyewe — ikiwemo mtu aliye kizuizini kwa sasa.",
+      "fr": "Une arrestation, une inculpation ou une condamnation vous semble injuste, ou une personne est détenue sans avocat ou sans avoir été présentée correctement devant un tribunal. Une aide juridique gratuite existe au Nigéria précisément pour cela. Ce signalement peut être déposé par la personne concernée, ou par quelqu'un en son nom si elle ne peut pas elle-même accéder à un téléphone ou à internet — y compris une personne actuellement détenue."
+    },
+    "rights": [
+      {
+        "en": "Section 35 of the Constitution entitles every person to personal liberty and strictly limits the grounds on which anyone may be deprived of it.",
+        "sw": "Kifungu cha 35 cha Katiba kinampa kila mtu haki ya uhuru wa kibinafsi na kinaweka mipaka mikali kuhusu sababu za kumnyima mtu uhuru huo.",
+        "fr": "L'article 35 de la Constitution garantit à toute personne le droit à la liberté individuelle et limite strictement les motifs pour lesquels elle peut en être privée."
+      },
+      {
+        "en": "Section 36 guarantees a fair hearing within a reasonable time before an independent and impartial court or tribunal.",
+        "sw": "Kifungu cha 36 kinahakikisha usikilizwaji wa haki ndani ya muda unaofaa mbele ya mahakama huru na isiyo na upendeleo.",
+        "fr": "L'article 36 garantit une audience équitable dans un délai raisonnable devant un tribunal indépendant et impartial."
+      },
+      {
+        "en": "The Legal Aid Act, 2011 entitles anyone who cannot afford a lawyer to apply to the Legal Aid Council for free legal representation, including in criminal matters.",
+        "sw": "Sheria ya Msaada wa Kisheria, 2011 inampa haki mtu yeyote asiyeweza kumudu wakili kuomba uwakilishi wa bure wa kisheria kutoka Baraza la Msaada wa Kisheria, ikiwemo mashauri ya jinai.",
+        "fr": "La loi de 2011 sur l'aide juridique donne à toute personne n'ayant pas les moyens de payer un avocat le droit de demander une représentation juridique gratuite au Conseil de l'aide juridique, y compris dans les affaires pénales."
+      }
+    ],
+    "evidence": [
+      {
+        "en": "The court case number, the court's name, and the date of arrest, charge, or sentencing.",
+        "sw": "Namba ya kesi mahakamani, jina la mahakama, na tarehe ya kukamatwa, mashtaka, au hukumu.",
+        "fr": "Le numéro de l'affaire, le nom du tribunal, et la date de l'arrestation, de l'inculpation ou de la condamnation."
+      },
+      {
+        "en": "Which prison or police station is holding the person now, if known.",
+        "sw": "Ni gereza au kituo gani cha polisi kinamzuia mtu huyo sasa, kama inajulikana.",
+        "fr": "Le lieu de détention actuel de la personne — prison ou poste de police — si connu."
+      },
+      {
+        "en": "What stage the case is at: awaiting trial, convicted and not yet appealed, or an appeal already filed.",
+        "sw": "Kesi iko hatua gani: inasubiri kesi, imehukumiwa lakini bado haijakatiwa rufaa, au rufaa tayari imewasilishwa.",
+        "fr": "L'état actuel de l'affaire : en attente de procès, condamnée sans appel déposé, ou appel déjà déposé."
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "en": "Write down the case number, court, and key dates now",
+          "sw": "Andika namba ya kesi, mahakama, na tarehe muhimu sasa",
+          "fr": "Notez dès maintenant le numéro de l'affaire, le tribunal et les dates clés"
+        },
+        "detail": {
+          "en": "Every legal aid provider will ask for these first.",
+          "sw": "Kila mtoa msaada wa kisheria atauliza hivi kwanza.",
+          "fr": "Tout prestataire d'aide juridique demandera cela en premier."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "Contact the Legal Aid Council of Nigeria (LACON)",
+          "sw": "Wasiliana na Baraza la Msaada wa Kisheria la Nigeria (LACON)",
+          "fr": "Contactez le Conseil de l'aide juridique du Nigéria (LACON)"
+        },
+        "detail": {
+          "en": "LACON is the federal body created to provide free legal aid and representation, including for indigent persons facing criminal charges or already convicted, through its Call-in Centre and state offices.",
+          "sw": "LACON ni taasisi ya shirikisho iliyoanzishwa kutoa msaada wa bure wa kisheria na uwakilishi, ikiwemo kwa watu wasio na uwezo wanaokabiliwa na mashtaka ya jinai au walioshahukumiwa, kupitia Kituo chake cha Simu na ofisi za majimbo.",
+          "fr": "LACON est l'organisme fédéral créé pour fournir une aide juridique et une représentation gratuites, y compris aux personnes indigentes faisant face à des accusations pénales ou déjà condamnées, via son centre d'appel et ses bureaux d'État."
+        },
+        "institution": "lacon"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "lacon",
+        "name": "Legal Aid Council of Nigeria (LACON)",
+        "role": {
+          "en": "The federal agency that provides free legal advice, assistance, and representation to indigent Nigerians, including in criminal appeals, through offices across the states.",
+          "sw": "Taasisi ya shirikisho inayotoa ushauri wa bure wa kisheria, msaada, na uwakilishi kwa Wanigeria wasio na uwezo, ikiwemo katika rufaa za jinai, kupitia ofisi kote majimboni.",
+          "fr": "L'organisme fédéral qui fournit conseils juridiques, assistance et représentation gratuits aux Nigérians indigents, y compris pour les appels pénaux, via des bureaux répartis dans les États."
+        },
+        "mandate": {
+          "en": "Established under the Legal Aid Act, 2011.",
+          "sw": "Ilianzishwa chini ya Sheria ya Msaada wa Kisheria, 2011.",
+          "fr": "Créé en vertu de la loi de 2011 sur l'aide juridique."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "+234 703 191 5990",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "LACON's published Call-in Centre line, from its own official contact page.",
+              "sw": "Namba ya Kituo cha Simu cha LACON iliyotangazwa, kutoka ukurasa wake rasmi wa mawasiliano.",
+              "fr": "La ligne du centre d'appel de LACON, publiée sur sa propre page de contact officielle."
+            },
+            "sources": [
+              {
+                "publisher": "Legal Aid Council of Nigeria",
+                "url": "https://legalaidcouncil.gov.ng/contact-us/",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "email",
+            "value": "info@legalaidcouncil.gov.ng",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "General enquiries email, published on LACON's own site.",
+              "sw": "Barua pepe ya maswali ya jumla, iliyochapishwa kwenye tovuti ya LACON.",
+              "fr": "Adresse e-mail pour demandes générales, publiée sur le site de LACON."
+            },
+            "sources": [
+              {
+                "publisher": "Legal Aid Council of Nigeria",
+                "url": "https://legalaidcouncil.gov.ng/contact-us/",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "web",
+            "value": "https://www.legalaidcouncil.gov.ng/",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "LACON's site lists state office contacts across Nigeria.",
+              "sw": "Tovuti ya LACON inaorodhesha mawasiliano ya ofisi za majimbo kote Nigeria.",
+              "fr": "Le site de LACON répertorie les contacts des bureaux d'État à travers le Nigéria."
+            },
+            "sources": [
+              {
+                "publisher": "Legal Aid Council of Nigeria",
+                "url": "https://www.legalaidcouncil.gov.ng/",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "en": "Contacting LACON's Call-in Centre takes minutes. Being assigned a lawyer and getting an appeal filed can take longer depending on caseloads and the state office involved — ask about any appeal deadline the moment you speak to someone.",
+      "sw": "Kuwasiliana na Kituo cha Simu cha LACON huchukua dakika. Kupangiwa wakili na kuwasilisha rufaa kunaweza kuchukua muda mrefu zaidi kutegemea idadi ya kesi na ofisi ya jimbo inayohusika — uliza kuhusu muda wowote wa mwisho wa rufaa mara tu unapozungumza na mtu.",
+      "fr": "Contacter le centre d'appel de LACON prend quelques minutes. L'attribution d'un avocat et le dépôt d'un appel peuvent prendre plus de temps selon la charge de travail et le bureau d'État concerné — renseignez-vous sur tout délai d'appel dès que vous parlez à quelqu'un."
+    },
+    "sources": [
+      {
+        "publisher": "Legal Aid Council of Nigeria",
+        "url": "https://legalaidcouncil.gov.ng/contact-us/",
+        "retrieved": "2026-09-18",
+        "confidence": "official"
+      }
+    ],
+    "last_verified": "2026-09-18"
   }
 ]

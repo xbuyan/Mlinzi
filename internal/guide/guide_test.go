@@ -233,13 +233,21 @@ func TestUgandanGuidesAreReachableAndScoped(t *testing.T) {
 }
 
 func TestAddingASecondJurisdictionDidNotBreakTheFirst(t *testing.T) {
-	// The whole scalability claim is that adding a country is additive.
-	// This is the regression test for that claim: Kenya's guide count and
-	// content must be unaffected by Nigeria's data existing alongside it.
+	// The whole scalability claim is that adding a country, or a guide, is
+	// additive. This is the regression test for that claim: Kenya's original
+	// guides must still all be present and unchanged by Nigeria's data
+	// existing alongside them, or by later Kenya guides being added. Checked
+	// by presence of the known original IDs rather than a total count, so
+	// this test doesn't need editing every time Kenya gains another guide.
 	s := testStore(t)
 	ke := s.ByJurisdiction("KE")
-	if len(ke) != 3 {
-		t.Fatalf("expected Kenya's 3 original guides untouched, got %d", len(ke))
+	if len(ke) < 3 {
+		t.Fatalf("expected at least Kenya's 3 original guides, got %d", len(ke))
+	}
+	for _, id := range []string{"ke-bribery-public-service", "ke-police-misconduct", "ke-gender-based-violence"} {
+		if _, err := s.Get(id); err != nil {
+			t.Errorf("original guide %q missing or broken: %v", id, err)
+		}
 	}
 }
 

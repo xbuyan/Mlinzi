@@ -749,5 +749,291 @@
       }
     ],
     "last_verified": "2026-09-15"
+  },
+  {
+    "id": "ke-wrongful-detention",
+    "jurisdiction": "KE",
+    "tracks": [
+      "safety-reporting-protection",
+      "transparency-accountability"
+    ],
+    "category": "detention",
+    "title": {
+      "en": "I, or someone I know, was wrongly arrested or imprisoned and cannot afford a lawyer",
+      "sw": "Mimi, au mtu ninayemjua, nimekamatwa au kufungwa kimakosa na sina uwezo wa kulipia wakili",
+      "fr": "Moi, ou quelqu'un que je connais, avons été arrêté ou emprisonné à tort et n'avons pas les moyens de payer un avocat"
+    },
+    "summary": {
+      "en": "An arrest, charge, or conviction feels wrong, or someone is being held without a lawyer or without being brought to court properly. Free legal aid exists in Kenya for exactly this, and money is not required to ask for it. This can be filed by the person affected, or by someone filing on their behalf if they cannot reach a phone or the internet themselves — including someone currently in custody.",
+      "sw": "Kukamatwa, mashtaka, au hukumu inaonekana si sahihi, au mtu anazuiliwa bila wakili au bila kupelekwa mahakamani ipasavyo. Msaada wa kisheria wa bure upo Kenya kwa hali kama hii, na hauhitaji pesa kuuomba. Hii inaweza kuwasilishwa na mhusika mwenyewe, au na mtu mwingine kwa niaba yake ikiwa hawezi kufikia simu au mtandao mwenyewe — ikiwemo mtu aliye kizuizini kwa sasa.",
+      "fr": "Une arrestation, une inculpation ou une condamnation vous semble injuste, ou une personne est détenue sans avocat ou sans avoir été présentée correctement devant un tribunal. Une aide juridique gratuite existe au Kenya précisément pour cela, et aucun argent n'est requis pour la demander. Ce signalement peut être déposé par la personne concernée, ou par quelqu'un en son nom si elle ne peut pas elle-même accéder à un téléphone ou à internet — y compris une personne actuellement détenue."
+    },
+    "rights": [
+      {
+        "en": "Article 49 of the Constitution gives anyone arrested the right to be told promptly why, the right to remain silent, the right to contact a lawyer, and the right to be brought before a court as soon as reasonably possible — within 24 hours in most cases.",
+        "sw": "Kifungu cha 49 cha Katiba kinampa mtu yeyote aliyekamatwa haki ya kuambiwa mara moja sababu, haki ya kunyamaza kimya, haki ya kuwasiliana na wakili, na haki ya kupelekwa mahakamani haraka iwezekanavyo — ndani ya masaa 24 kwa hali nyingi.",
+        "fr": "L'article 49 de la Constitution donne à toute personne arrêtée le droit d'être informée rapidement du motif, le droit de garder le silence, le droit de contacter un avocat, et le droit d'être présentée devant un tribunal aussitôt que raisonnablement possible — dans les 24 heures dans la plupart des cas."
+      },
+      {
+        "en": "Article 50 guarantees a fair trial, including the right to be presumed innocent and the right of appeal. None of this depends on being able to pay.",
+        "sw": "Kifungu cha 50 kinahakikisha kesi ya haki, ikiwemo haki ya kuchukuliwa kuwa hana hatia mpaka ithibitishwe, na haki ya kukata rufaa. Hakuna kati ya hivi kinachotegemea uwezo wa kulipa.",
+        "fr": "L'article 50 garantit un procès équitable, y compris le droit à la présomption d'innocence et le droit de faire appel. Rien de tout cela ne dépend de la capacité à payer."
+      },
+      {
+        "en": "The Legal Aid Act, 2016 entitles anyone who cannot afford a lawyer to apply for free legal aid from the state, including for a criminal appeal.",
+        "sw": "Sheria ya Msaada wa Kisheria, 2016 inampa haki mtu yeyote asiyeweza kumudu wakili kuomba msaada wa bure wa kisheria kutoka serikalini, ikiwemo kwa kukata rufaa ya jinai.",
+        "fr": "La loi de 2016 sur l'aide juridique donne à toute personne n'ayant pas les moyens de payer un avocat le droit de demander une aide juridique gratuite à l'État, y compris pour un appel pénal."
+      }
+    ],
+    "evidence": [
+      {
+        "en": "The court case number, the court's name, and the date of arrest, charge, or sentencing.",
+        "sw": "Namba ya kesi mahakamani, jina la mahakama, na tarehe ya kukamatwa, mashtaka, au hukumu.",
+        "fr": "Le numéro de l'affaire, le nom du tribunal, et la date de l'arrestation, de l'inculpation ou de la condamnation."
+      },
+      {
+        "en": "Which prison or police station is holding the person now, if known.",
+        "sw": "Ni gereza au kituo gani cha polisi kinamzuia mtu huyo sasa, kama inajulikana.",
+        "fr": "Le lieu de détention actuel de la personne — prison ou poste de police — si connu."
+      },
+      {
+        "en": "What stage the case is at: awaiting trial, convicted and not yet appealed, or an appeal already filed.",
+        "sw": "Kesi iko hatua gani: inasubiri kesi, imehukumiwa lakini bado haijakatiwa rufaa, au rufaa tayari imewasilishwa.",
+        "fr": "L'état actuel de l'affaire : en attente de procès, condamnée sans appel déposé, ou appel déjà déposé."
+      },
+      {
+        "en": "Any court documents, charge sheet, or judgment already in hand.",
+        "sw": "Hati zozote za mahakama, karatasi ya mashtaka, au hukumu iliyopo tayari.",
+        "fr": "Tout document judiciaire, chef d'accusation ou jugement déjà en votre possession."
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "en": "Write down the case number, court, and key dates now",
+          "sw": "Andika namba ya kesi, mahakama, na tarehe muhimu sasa",
+          "fr": "Notez dès maintenant le numéro de l'affaire, le tribunal et les dates clés"
+        },
+        "detail": {
+          "en": "Every legal aid provider will ask for these first. Without a case number they can still help, but it takes longer to locate the file.",
+          "sw": "Kila mtoa msaada wa kisheria atauliza hivi kwanza. Bila namba ya kesi bado wanaweza kusaidia, lakini itachukua muda mrefu zaidi kupata faili.",
+          "fr": "Tout prestataire d'aide juridique demandera cela en premier. Sans numéro d'affaire, une aide reste possible, mais localiser le dossier prendra plus de temps."
+        },
+        "critical": true
+      },
+      {
+        "action": {
+          "en": "Contact the National Legal Aid Service on its toll-free line",
+          "sw": "Wasiliana na Huduma ya Kitaifa ya Msaada wa Kisheria kupitia namba yake ya bure",
+          "fr": "Contactez le Service national d'aide juridique via sa ligne gratuite"
+        },
+        "detail": {
+          "en": "NLAS is the state body created to provide free legal aid, including for criminal appeals and cases involving people in custody. It works from any phone with no data or airtime needed.",
+          "sw": "NLAS ni taasisi ya serikali iliyoanzishwa kutoa msaada wa bure wa kisheria, ikiwemo kwa rufaa za jinai na kesi za watu waliozuiliwa. Inafanya kazi kwa simu yoyote bila kuhitaji data au salio.",
+          "fr": "Le NLAS est l'organisme public créé pour fournir une aide juridique gratuite, y compris pour les appels pénaux et les affaires concernant des personnes détenues. Il fonctionne depuis n'importe quel téléphone, sans données ni crédit nécessaires."
+        },
+        "institution": "nlas"
+      },
+      {
+        "action": {
+          "en": "If the concern is how someone is being treated in custody, also contact KNCHR",
+          "sw": "Ikiwa wasiwasi ni jinsi mtu anavyotendewa akiwa kizuizini, pia wasiliana na KNCHR",
+          "fr": "Si la préoccupation porte sur le traitement d'une personne en détention, contactez aussi la KNCHR"
+        },
+        "detail": {
+          "en": "KNCHR investigates human rights violations, including in prisons and police cells, separately from whether the underlying case or conviction is being appealed.",
+          "sw": "KNCHR huchunguza ukiukaji wa haki za binadamu, ikiwemo magerezani na seli za polisi, tofauti na suala la kama kesi au hukumu ya msingi inakatiwa rufaa.",
+          "fr": "La KNCHR enquête sur les violations des droits humains, y compris dans les prisons et les cellules de police, indépendamment de la question de savoir si l'affaire ou la condamnation fait l'objet d'un appel."
+        },
+        "institution": "knchr"
+      },
+      {
+        "action": {
+          "en": "Ask immediately about the appeal deadline",
+          "sw": "Uliza mara moja kuhusu muda wa mwisho wa kukata rufaa",
+          "fr": "Renseignez-vous immédiatement sur le délai d'appel"
+        },
+        "detail": {
+          "en": "Kenyan law generally requires a notice of appeal within 14 days of a sentence or order, though a court can allow a late appeal for good cause. This window is short and the single easiest way to lose the right to appeal — ask about it before anything else, even before all the facts above are gathered.",
+          "sw": "Sheria ya Kenya kwa kawaida inahitaji notisi ya rufaa ndani ya siku 14 tangu hukumu au amri, ingawa mahakama inaweza kuruhusu rufaa ya kuchelewa kwa sababu za msingi. Muda huu ni mfupi na ndiyo njia rahisi zaidi ya kupoteza haki ya kukata rufaa — uliza kuhusu hili kabla ya kitu kingine chochote, hata kabla ya kukusanya mambo yote hapo juu.",
+          "fr": "La loi kényane exige généralement un avis d'appel dans les 14 jours suivant la peine ou l'ordonnance, bien qu'un tribunal puisse autoriser un appel tardif pour motif valable. Ce délai est court et constitue le moyen le plus simple de perdre le droit d'appel — renseignez-vous à ce sujet avant toute autre chose, même avant de rassembler tous les éléments ci-dessus."
+        },
+        "critical": true
+      }
+    ],
+    "institutions": [
+      {
+        "id": "nlas",
+        "name": "National Legal Aid Service (NLAS)",
+        "role": {
+          "en": "The state agency that provides free legal aid — advice, representation, and help with court documents — to anyone who cannot afford a lawyer.",
+          "sw": "Taasisi ya serikali inayotoa msaada wa bure wa kisheria — ushauri, uwakilishi, na msaada wa hati za mahakama — kwa yeyote asiyeweza kumudu wakili.",
+          "fr": "L'organisme public qui fournit une aide juridique gratuite — conseils, représentation et aide pour les documents judiciaires — à toute personne n'ayant pas les moyens de payer un avocat."
+        },
+        "mandate": {
+          "en": "Established under the Legal Aid Act, 2016, giving effect to Articles 19(2), 48, and 50(2)(g)-(h) of the Constitution on access to justice.",
+          "sw": "Ilianzishwa chini ya Sheria ya Msaada wa Kisheria, 2016, ikitekeleza Vifungu 19(2), 48, na 50(2)(g)-(h) vya Katiba kuhusu upatikanaji wa haki.",
+          "fr": "Créé en vertu de la loi de 2016 sur l'aide juridique, donnant effet aux articles 19(2), 48 et 50(2)(g)-(h) de la Constitution relatifs à l'accès à la justice."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "0800 720 640",
+            "toll_free": true,
+            "anonymous": false,
+            "note": {
+              "en": "NLAS's published toll-free line, working from any phone with no airtime.",
+              "sw": "Namba ya bure ya NLAS iliyotangazwa, inafanya kazi kwa simu yoyote bila salio.",
+              "fr": "La ligne gratuite publiée par le NLAS, accessible depuis n'importe quel téléphone sans crédit."
+            },
+            "sources": [
+              {
+                "publisher": "National Legal Aid Service",
+                "url": "https://nlas.go.ke/contact-us",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "email",
+            "value": "info@nlas.go.ke",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "General enquiries email, published on NLAS's own site.",
+              "sw": "Barua pepe ya maswali ya jumla, iliyochapishwa kwenye tovuti ya NLAS.",
+              "fr": "Adresse e-mail pour demandes générales, publiée sur le site du NLAS."
+            },
+            "sources": [
+              {
+                "publisher": "National Legal Aid Service",
+                "url": "https://nlas.go.ke/contact-us",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "web",
+            "value": "https://www.nlas.go.ke/",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "NLAS has physical offices in Nairobi, Mombasa, Kisumu, Nakuru and Eldoret; the site lists each office's own line.",
+              "sw": "NLAS ina ofisi halisi Nairobi, Mombasa, Kisumu, Nakuru na Eldoret; tovuti inaorodhesha namba ya kila ofisi.",
+              "fr": "Le NLAS dispose de bureaux physiques à Nairobi, Mombasa, Kisumu, Nakuru et Eldoret ; le site répertorie la ligne de chaque bureau."
+            },
+            "sources": [
+              {
+                "publisher": "National Legal Aid Service",
+                "url": "https://www.nlas.go.ke/",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "knchr",
+        "name": "Kenya National Commission on Human Rights (KNCHR)",
+        "role": {
+          "en": "An independent constitutional watchdog that investigates human rights violations, including treatment in custody, and can recommend redress.",
+          "sw": "Chombo huru cha kikatiba cha uangalizi kinachochunguza ukiukaji wa haki za binadamu, ikiwemo utendewaji wa watu wakiwa kizuizini, na kinaweza kupendekeza fidia.",
+          "fr": "Un organe constitutionnel indépendant de contrôle qui enquête sur les violations des droits humains, y compris le traitement des personnes en détention, et peut recommander réparation."
+        },
+        "mandate": {
+          "en": "Established under Article 59 of the Constitution and the KNCHR Act No. 14 of 2011.",
+          "sw": "Ilianzishwa chini ya Kifungu cha 59 cha Katiba na Sheria ya KNCHR Na. 14 ya 2011.",
+          "fr": "Créée en vertu de l'article 59 de la Constitution et de la loi n° 14 de 2011 sur la KNCHR."
+        },
+        "channels": [
+          {
+            "kind": "phone",
+            "value": "0726 610 159",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "KNCHR's published mobile line for the head office in Nairobi.",
+              "sw": "Namba ya simu ya mkononi ya KNCHR kwa ofisi kuu Nairobi.",
+              "fr": "La ligne mobile publiée par la KNCHR pour son siège à Nairobi."
+            },
+            "sources": [
+              {
+                "publisher": "Kenya National Commission on Human Rights",
+                "url": "https://www.knchr.org/Contact-Us",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "sms",
+            "value": "22359",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "KNCHR's published SMS short code for complaints.",
+              "sw": "Namba fupi ya ujumbe mfupi ya KNCHR kwa malalamiko.",
+              "fr": "Le numéro court SMS publié par la KNCHR pour les plaintes."
+            },
+            "sources": [
+              {
+                "publisher": "Kenya National Commission on Human Rights",
+                "url": "https://www.knchr.org/Contact-Us",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          },
+          {
+            "kind": "email",
+            "value": "complaint@knchr.org",
+            "toll_free": false,
+            "anonymous": false,
+            "note": {
+              "en": "KNCHR's dedicated complaints email, separate from its general enquiries address.",
+              "sw": "Barua pepe maalum ya malalamiko ya KNCHR, tofauti na anwani yake ya maswali ya jumla.",
+              "fr": "L'adresse e-mail dédiée aux plaintes de la KNCHR, distincte de son adresse de demandes générales."
+            },
+            "sources": [
+              {
+                "publisher": "Kenya National Commission on Human Rights",
+                "url": "https://www.knchr.org/Contact-Us",
+                "retrieved": "2026-09-18",
+                "confidence": "official"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "en": "Contacting a legal aid provider takes minutes. Getting an appeal formally filed can take days to weeks depending on the court and how quickly documents can be gathered — which is exactly why asking about the appeal deadline comes before gathering every last document.",
+      "sw": "Kuwasiliana na mtoa msaada wa kisheria huchukua dakika. Kuwasilisha rufaa rasmi kunaweza kuchukua siku hadi wiki kutegemea mahakama na jinsi hati zinavyoweza kukusanywa haraka — ndiyo maana kuuliza kuhusu muda wa mwisho wa rufaa kunakuja kabla ya kukusanya kila hati.",
+      "fr": "Contacter un prestataire d'aide juridique prend quelques minutes. Le dépôt formel d'un appel peut prendre de quelques jours à quelques semaines selon le tribunal et la rapidité avec laquelle les documents peuvent être rassemblés — c'est précisément pourquoi il faut se renseigner sur le délai d'appel avant de rassembler chaque document."
+    },
+    "sources": [
+      {
+        "publisher": "National Legal Aid Service",
+        "url": "https://nlas.go.ke/contact-us",
+        "retrieved": "2026-09-18",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Kenya National Commission on Human Rights",
+        "url": "https://www.knchr.org/Contact-Us",
+        "retrieved": "2026-09-18",
+        "confidence": "official"
+      },
+      {
+        "publisher": "Kenya Law — Criminal Procedure Code, Cap 75, Section 349",
+        "url": "https://kenyalaw.org/kl/fileadmin/pdfdownloads/Acts/CriminalProcedureCode_Cap.75.pdf",
+        "retrieved": "2026-09-18",
+        "confidence": "official"
+      }
+    ],
+    "last_verified": "2026-09-18"
   }
 ]

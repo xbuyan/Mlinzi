@@ -40,10 +40,13 @@ const SMALL_PAGES = [
   "/guides/ke-bribery-public-service",
   "/guides/ke-police-misconduct",
   "/guides/ke-gender-based-violence",
+  "/guides/ke-wrongful-detention",
   "/guides/ng-bribery-public-service",
+  "/guides/ng-wrongful-detention",
   "/guides/ug-bribery-public-service",
   "/guides/ug-police-misconduct",
   "/guides/ug-gender-based-violence",
+  "/guides/ug-wrongful-detention",
   "/resources",
 ];
 
