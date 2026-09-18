@@ -45,6 +45,7 @@ func muxForTest(t *testing.T, a *app) http.Handler {
 	mux.HandleFunc("POST /report", a.handleReportCreate)
 	mux.HandleFunc("GET /report/status", a.handleStatusForm)
 	mux.HandleFunc("POST /report/status", a.handleStatusResult)
+	mux.HandleFunc("GET /evidence/{hash}", a.handleEvidence)
 	mux.HandleFunc("POST /report/{id}/protect", a.handleProtectCreate)
 	mux.HandleFunc("GET /cases/{id}", a.handleCaseDashboard)
 	mux.HandleFunc("POST /cases/{id}/checkin", a.handleCaseCheckIn)

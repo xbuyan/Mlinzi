@@ -23,6 +23,20 @@
   {{end}}
 </div>
 
+{{if .HasEvidence}}
+<div class="mt-4 border-t border-slate-200 pt-3">
+  <p class="text-sm font-semibold text-slate-600">{{$T.report_evidence_count}} ({{len .Evidence}})</p>
+  <ul class="mt-2 space-y-1 text-sm">
+    {{range .Evidence}}
+    <li class="flex items-center gap-2">
+      <span class="font-mono text-xs text-slate-400">{{.Kind}}</span>
+      <a href="/evidence/{{.SHA256}}" target="_blank" class="text-[#028090] underline">{{$T.evidence_view}}</a>
+    </li>
+    {{end}}
+  </ul>
+</div>
+{{end}}
+
 {{if $caseID}}
 <p class="mt-6 text-sm">
   {{$T.lookup_protected_prefix}}

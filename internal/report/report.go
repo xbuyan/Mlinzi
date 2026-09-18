@@ -20,6 +20,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/xbuyan/mlinzi/internal/evidence"
 	"github.com/xbuyan/mlinzi/internal/ledger"
 )
 
@@ -64,10 +65,13 @@ func (s Status) NextOptions() []Status {
 // GuideID links back to the Layer 1 civic guide the reporter came from (e.g.
 // "ke-police-misconduct"), connecting the two layers of Mlinzi.
 type submittedRecord struct {
-	ReportID string `json:"report_id"`
-	Category string `json:"category"`
-	GuideID  string `json:"guide_id,omitempty"`
-	Content  string `json:"content"`
+	ReportID       string         `json:"report_id"`
+	Category       string         `json:"category"`
+	GuideID        string         `json:"guide_id,omitempty"`
+	Content        string         `json:"content"`
+	Evidence       []evidence.Ref `json:"evidence,omitempty"`
+	OnBehalfOf     bool           `json:"on_behalf_of,omitempty"`
+	OnBehalfOfNote string         `json:"on_behalf_of_note,omitempty"`
 }
 
 // statusRecord is what enters the ledger on every status change.
@@ -95,11 +99,18 @@ type Report struct {
 	Category         string
 	GuideID          string
 	Content          string
+	Evidence         []evidence.Ref
+	OnBehalfOf       bool
+	OnBehalfOfNote   string
 	Status           Status
 	SubmittedAt      time.Time
 	Events           []StatusEvent
 	VerificationCode string
 }
+
+// HasEvidence reports whether any files are attached. Templates use this
+// rather than checking len(Evidence) directly so the meaning stays named.
+func (r Report) HasEvidence() bool { return len(r.Evidence) > 0 }
 
 // ErrNotFound is returned when a report ID is not in the store.
 type ErrNotFound struct{ ID string }
@@ -122,13 +133,40 @@ func NewStore() *Store {
 	}
 }
 
-// Submit files a new anonymous report. No identity is collected or required.
+// Submit files a new anonymous report with no evidence and no proxy
+// submitter. It is a thin call to SubmitWithEvidence kept for every existing
+// caller (the CLI demos, most tests) that has no reason to touch either of
+// those newer fields.
 //
 // It returns a verification code the reporter should keep. Presenting that
 // code later proves exactly what was submitted and when — to themselves, to
 // a journalist, to an NGO — without the reporter having given a name at
 // submission time.
 func (s *Store) Submit(category, guideID, content string) (Report, error) {
+	return s.SubmitWithEvidence(category, guideID, content, nil, false, "")
+}
+
+// SubmitWithEvidence is Submit, plus two things a reporter may need that a
+// bare text report doesn't cover.
+//
+// evidenceRefs are files already validated and stored by an evidence.Store
+// (see internal/evidence) — this package deliberately never touches raw
+// file bytes itself, only the Refs describing what was already processed,
+// the same way it never touches raw ledger bytes beyond what Append hands
+// back. Their hashes become part of the same ledger entry as the report
+// text, so a file swapped out after submission is exactly as detectable as
+// edited report text already is.
+//
+// onBehalfOf and onBehalfOfNote exist for a person who cannot file their own
+// report — no device, no literacy, no ability to reach a network, most
+// concretely someone in pre-trial detention with no phone access at all —
+// where a trusted third party (a family member, a paralegal, a fellow
+// inmate's visitor) files on their behalf. This is recorded openly rather
+// than the proxy silently posing as the person affected: an institution
+// reading the report afterward can see it arrived this way, which matters
+// for how much weight to give a first-person claim ("I was beaten") relayed
+// by someone else.
+func (s *Store) SubmitWithEvidence(category, guideID, content string, evidenceRefs []evidence.Ref, onBehalfOf bool, onBehalfOfNote string) (Report, error) {
 	if content == "" {
 		return Report{}, errors.New("report content is empty")
 	}
@@ -138,10 +176,13 @@ func (s *Store) Submit(category, guideID, content string) (Report, error) {
 	}
 
 	e, err := s.ledger.Append("report.submitted", submittedRecord{
-		ReportID: id,
-		Category: category,
-		GuideID:  guideID,
-		Content:  content,
+		ReportID:       id,
+		Category:       category,
+		GuideID:        guideID,
+		Content:        content,
+		Evidence:       evidenceRefs,
+		OnBehalfOf:     onBehalfOf,
+		OnBehalfOfNote: onBehalfOfNote,
 	})
 	if err != nil {
 		return Report{}, err
@@ -156,6 +197,9 @@ func (s *Store) Submit(category, guideID, content string) (Report, error) {
 		Category:         category,
 		GuideID:          guideID,
 		Content:          content,
+		Evidence:         evidenceRefs,
+		OnBehalfOf:       onBehalfOf,
+		OnBehalfOfNote:   onBehalfOfNote,
 		Status:           Submitted,
 		SubmittedAt:      e.Timestamp,
 		VerificationCode: verificationCode(e),
@@ -222,6 +266,9 @@ func (s *Store) Get(reportID string) (Report, error) {
 		Category:         sub.Category,
 		GuideID:          sub.GuideID,
 		Content:          sub.Content,
+		Evidence:         sub.Evidence,
+		OnBehalfOf:       sub.OnBehalfOf,
+		OnBehalfOfNote:   sub.OnBehalfOfNote,
 		Status:           Submitted,
 		SubmittedAt:      base.Timestamp,
 		VerificationCode: verificationCode(base),

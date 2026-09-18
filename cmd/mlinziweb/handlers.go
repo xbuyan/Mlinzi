@@ -2,14 +2,24 @@ package main
 
 import (
 	"encoding/hex"
+	"io"
+	"mime/multipart"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 
+	"github.com/xbuyan/mlinzi/internal/evidence"
 	"github.com/xbuyan/mlinzi/internal/guardian"
 	"github.com/xbuyan/mlinzi/internal/report"
 )
+
+// maxUploadMemory bounds how much of a multipart request ParseMultipartForm
+// buffers in memory before spilling to temp files; kept comfortably above
+// evidence.MaxTotalBytesPerReport so a report at the size limit never spills
+// to disk (this process has no disk-backed persistence to spill to that
+// would survive anyway — see evidence.Store's doc comment).
+const maxUploadMemory = 32 << 20 // 32MB
 
 const defaultJurisdiction = "KE"
 
@@ -89,6 +99,32 @@ func (a *app) handleResourceDetail(w http.ResponseWriter, r *http.Request) {
 
 // --- Report: new / create ---
 
+// handleEvidence serves back a stored evidence file by its content hash so
+// report/status/institution pages can show or link to it.
+//
+// This has exactly the same access-control posture as the rest of the app
+// today: no login, no check that the requester is the reporter or an
+// authorised institution — anyone who knows or guesses a report's evidence
+// hash can fetch the file, the same way anyone who knows a report ID can
+// already read that report's text through the institution portal. That is a
+// stated, existing limitation (see docs/AI_USAGE.md), not a new one
+// introduced here; evidence access does not get held to a stricter standard
+// than the report text sitting next to it. What evidence upload adds beyond
+// that accepted risk is handled earlier, at Save time: metadata that would
+// leak beyond what's already visible (GPS, device identifiers) is stripped
+// before a file is ever stored, regardless of who can later view it.
+func (a *app) handleEvidence(w http.ResponseWriter, r *http.Request) {
+	hash := r.PathValue("hash")
+	data, contentType, ok := a.evidence.OpenByHash(hash)
+	if !ok {
+		http.NotFound(w, r)
+		return
+	}
+	w.Header().Set("Content-Type", contentType)
+	w.Header().Set("Cache-Control", "private, max-age=3600")
+	w.Write(data)
+}
+
 func (a *app) handleReportNew(w http.ResponseWriter, r *http.Request) {
 	lang := langFrom(r)
 	guideID := r.URL.Query().Get("guide_id")
@@ -107,13 +143,21 @@ func (a *app) handleReportNew(w http.ResponseWriter, r *http.Request) {
 
 func (a *app) handleReportCreate(w http.ResponseWriter, r *http.Request) {
 	lang := langFrom(r)
-	if err := r.ParseForm(); err != nil {
+	// ParseMultipartForm calls ParseForm internally regardless of content
+	// type, so a plain application/x-www-form-urlencoded post (no files —
+	// every existing caller before this feature, and still the common case)
+	// ends up with its fields populated in r.Form even though the
+	// multipart-specific parse itself reports ErrNotMultipart. Only a
+	// different error means the request body was actually malformed.
+	if err := r.ParseMultipartForm(maxUploadMemory); err != nil && err != http.ErrNotMultipart {
 		http.Error(w, "bad form", http.StatusBadRequest)
 		return
 	}
 	category := r.FormValue("category")
 	guideID := r.FormValue("guide_id")
 	content := strings.TrimSpace(r.FormValue("content"))
+	onBehalfOf := r.FormValue("on_behalf_of") == "on"
+	onBehalfOfNote := strings.TrimSpace(r.FormValue("on_behalf_of_note"))
 
 	if content == "" {
 		a.render(w, r, http.StatusBadRequest, "report_new.html", map[string]any{
@@ -122,8 +166,31 @@ func (a *app) handleReportCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var fileHeaders []*multipart.FileHeader
+	if r.MultipartForm != nil {
+		fileHeaders = r.MultipartForm.File["evidence"]
+	}
+	fileBytes, err := readUploadedFiles(fileHeaders)
+	if err != nil {
+		a.render(w, r, http.StatusBadRequest, "report_new.html", map[string]any{
+			"GuideID": guideID, "Content": content, "Error": evidenceErrorMessage(a, lang, err),
+		})
+		return
+	}
+
+	var evidenceRefs []evidence.Ref
+	if len(fileBytes) > 0 {
+		evidenceRefs, err = a.evidence.SaveAll(fileBytes)
+		if err != nil {
+			a.render(w, r, http.StatusBadRequest, "report_new.html", map[string]any{
+				"GuideID": guideID, "Content": content, "Error": evidenceErrorMessage(a, lang, err),
+			})
+			return
+		}
+	}
+
 	a.mu.Lock()
-	rep, err := a.reports.Submit(category, guideID, content)
+	rep, err := a.reports.SubmitWithEvidence(category, guideID, content, evidenceRefs, onBehalfOf, onBehalfOfNote)
 	a.mu.Unlock()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -133,6 +200,58 @@ func (a *app) handleReportCreate(w http.ResponseWriter, r *http.Request) {
 	a.render(w, r, http.StatusOK, "report_result.html", map[string]any{
 		"Report": rep,
 	})
+}
+
+// readUploadedFiles reads every "evidence" multipart part fully into memory
+// and returns their raw bytes, capping the count before reading any bytes at
+// all — evidence.SaveAll re-checks the same limits (it does not trust every
+// caller to have checked first), but failing fast here avoids reading, say,
+// a fifth 8MB file into memory just to reject the batch a moment later.
+func readUploadedFiles(headers []*multipart.FileHeader) ([][]byte, error) {
+	if len(headers) > evidence.MaxFilesPerReport {
+		return nil, evidence.ErrTooLarge
+	}
+	out := make([][]byte, 0, len(headers))
+	for _, fh := range headers {
+		f, err := fh.Open()
+		if err != nil {
+			return nil, err
+		}
+		b, err := io.ReadAll(io.LimitReader(f, evidence.MaxFileBytes+1))
+		f.Close()
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, b)
+	}
+	return out, nil
+}
+
+// evidenceErrorMessage prefers a translated, reporter-facing string for the
+// error cases a reporter can actually act on (wrong file type, too large,
+// too many files); anything else falls back to the raw error rather than
+// inventing a translation key for a case that shouldn't normally be user
+// visible.
+func evidenceErrorMessage(a *app, lang string, err error) string {
+	switch {
+	case err == evidence.ErrStoreFull:
+		return a.strings.Get(lang, "evidence_error_store_full")
+	case isUnsupportedType(err):
+		return a.strings.Get(lang, "evidence_error_unsupported_type")
+	case isTooLarge(err):
+		return a.strings.Get(lang, "evidence_error_too_large")
+	default:
+		return err.Error()
+	}
+}
+
+func isUnsupportedType(err error) bool {
+	_, ok := err.(evidence.ErrUnsupportedType)
+	return ok
+}
+
+func isTooLarge(err error) bool {
+	return err == evidence.ErrTooLarge || strings.Contains(err.Error(), "exceeds the")
 }
 
 // --- Protection: create a guardian case for a report ---

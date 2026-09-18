@@ -28,6 +28,24 @@
       {{if .GuideID}}<span class="text-slate-400"> · {{.GuideID}}</span>{{end}}
     </div>
     <p class="mt-1 text-sm text-slate-600">{{.Content}}</p>
+    {{if .OnBehalfOf}}
+    <p class="mt-1 text-xs bg-amber-50 text-amber-800 rounded px-2 py-1 inline-block">
+      {{$T.report_on_behalf_flag}}{{if .OnBehalfOfNote}} — {{.OnBehalfOfNote}}{{end}}
+    </p>
+    {{end}}
+    {{if .HasEvidence}}
+    <div class="mt-2 flex flex-wrap gap-2">
+      {{range .Evidence}}
+        {{if eq .Kind "image"}}
+        <a href="/evidence/{{.SHA256}}" target="_blank">
+          <img src="/evidence/{{.SHA256}}" alt="{{$T.evidence_view}}" class="h-20 w-20 object-cover rounded border border-slate-200">
+        </a>
+        {{else}}
+        <a href="/evidence/{{.SHA256}}" target="_blank" class="text-xs text-[#028090] underline border border-slate-200 rounded px-2 py-1">{{.Kind}} · {{$T.evidence_view}}</a>
+        {{end}}
+      {{end}}
+    </div>
+    {{end}}
     <div class="mt-2 text-xs text-slate-400">{{$T.institution_filed}} {{.SubmittedAt.Format "Jan 2, 2006 15:04"}}</div>
 
     {{if .Events}}

@@ -708,5 +708,65 @@
     "en": "by",
     "sw": "na",
     "fr": "par"
+  },
+  "category_detention": {
+    "en": "Wrongful arrest or imprisonment",
+    "sw": "Kukamatwa au kufungwa kimakosa",
+    "fr": "Arrestation ou emprisonnement injustifié"
+  },
+  "report_evidence_label": {
+    "en": "Attach evidence (optional)",
+    "sw": "Ambatisha ushahidi (hiari)",
+    "fr": "Joindre des preuves (facultatif)"
+  },
+  "report_evidence_hint": {
+    "en": "Photos, video, or documents. Accepted: JPG, PNG, MP4, WebM, MOV, PDF. Up to 4 files, 8MB each. Photos have their location and device data removed automatically before anything is stored — but the file itself is not encrypted, and can be seen by anyone who reviews this report. Do not upload anything you would not want seen by someone other than the reviewer.",
+    "sw": "Picha, video, au hati. Zinazokubalika: JPG, PNG, MP4, WebM, MOV, PDF. Hadi faili 4, kila moja 8MB. Data ya mahali na kifaa cha picha huondolewa kiotomatiki kabla ya kuhifadhiwa — lakini faili yenyewe haijasimbwa, na inaweza kuonwa na yeyote anayekagua ripoti hii. Usipakie kitu ambacho hutaki kionekane na mtu mwingine zaidi ya mkaguzi.",
+    "fr": "Photos, vidéos ou documents. Formats acceptés : JPG, PNG, MP4, WebM, MOV, PDF. Jusqu'à 4 fichiers, 8 Mo chacun. La localisation et les données de l'appareil des photos sont retirées automatiquement avant tout stockage — mais le fichier lui-même n'est pas chiffré et peut être vu par quiconque examine ce signalement. Ne téléversez rien que vous ne voudriez pas voir vu par une autre personne que l'examinateur."
+  },
+  "report_on_behalf_label": {
+    "en": "I am filing this for someone who cannot file it themselves",
+    "sw": "Ninawasilisha hii kwa niaba ya mtu asiyeweza kuwasilisha mwenyewe",
+    "fr": "Je dépose ce signalement pour quelqu'un qui ne peut pas le faire lui-même"
+  },
+  "report_on_behalf_hint": {
+    "en": "For someone with no phone, no internet access, or who cannot read or write — including someone in detention. Say who you are to them and why they can't file this themselves; you don't need to give either of your names.",
+    "sw": "Kwa mtu asiye na simu, asiye na mtandao, au asiyeweza kusoma au kuandika — ikiwemo mtu aliye kizuizini. Eleza uhusiano wako naye na kwa nini hawezi kuwasilisha hii mwenyewe; hauhitaji kutoa jina lako au lake.",
+    "fr": "Pour une personne sans téléphone, sans accès à internet, ou qui ne sait ni lire ni écrire — y compris une personne détenue. Indiquez votre lien avec elle et pourquoi elle ne peut pas déposer ce signalement elle-même ; vous n'avez besoin de donner ni votre nom ni le sien."
+  },
+  "report_on_behalf_note_placeholder": {
+    "en": "e.g. \"His sister — he has been held for 3 weeks with no lawyer.\"",
+    "sw": "mfano \"Dada yake — amewekwa kizuizini kwa wiki 3 bila wakili.\"",
+    "fr": "p. ex. « Sa sœur — il est détenu depuis 3 semaines sans avocat. »"
+  },
+  "evidence_error_unsupported_type": {
+    "en": "That file type isn't supported. Please attach JPG, PNG, MP4, WebM, MOV, or PDF files only.",
+    "sw": "Aina hiyo ya faili haikubaliki. Tafadhali ambatisha faili za JPG, PNG, MP4, WebM, MOV, au PDF pekee.",
+    "fr": "Ce type de fichier n'est pas pris en charge. Veuillez joindre uniquement des fichiers JPG, PNG, MP4, WebM, MOV ou PDF."
+  },
+  "evidence_error_too_large": {
+    "en": "One or more files are too large. Each file must be under 8MB, and 4 files under 20MB total.",
+    "sw": "Faili moja au zaidi ni kubwa mno. Kila faili lazima iwe chini ya 8MB, na jumla ya faili 4 chini ya 20MB.",
+    "fr": "Un ou plusieurs fichiers sont trop volumineux. Chaque fichier doit faire moins de 8 Mo, et l'ensemble des 4 fichiers moins de 20 Mo."
+  },
+  "evidence_error_store_full": {
+    "en": "Evidence storage is temporarily full. Please try again shortly, or submit without attachments.",
+    "sw": "Hifadhi ya ushahidi imejaa kwa muda. Tafadhali jaribu tena baadaye, au wasilisha bila viambatisho.",
+    "fr": "Le stockage des preuves est temporairement saturé. Veuillez réessayer sous peu, ou déposer sans pièces jointes."
+  },
+  "report_evidence_count": {
+    "en": "Evidence attached",
+    "sw": "Ushahidi ulioambatishwa",
+    "fr": "Preuves jointes"
+  },
+  "report_on_behalf_flag": {
+    "en": "Filed on behalf of someone else",
+    "sw": "Imewasilishwa kwa niaba ya mtu mwingine",
+    "fr": "Déposé au nom d'une autre personne"
+  },
+  "evidence_view": {
+    "en": "View file",
+    "sw": "Ona faili",
+    "fr": "Voir le fichier"
   }
 }

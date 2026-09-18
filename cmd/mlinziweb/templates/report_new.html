@@ -6,7 +6,7 @@
 
 {{if .Error}}<div class="mt-4 bg-red-50 text-red-700 text-sm rounded-lg px-4 py-2">{{.Error}}</div>{{end}}
 
-<form method="post" action="/report" class="mt-6 space-y-4">
+<form method="post" action="/report" enctype="multipart/form-data" class="mt-6 space-y-4">
   <input type="hidden" name="lang" value="{{.Lang}}">
   <input type="hidden" name="guide_id" value="{{.GuideID}}">
   <div>
@@ -15,6 +15,7 @@
       <option value="bribery">{{$T.category_bribery}}</option>
       <option value="policing">{{$T.category_policing}}</option>
       <option value="gbv">{{$T.category_gbv}}</option>
+      <option value="detention">{{$T.category_detention}}</option>
       <option value="other">{{$T.category_other}}</option>
     </select>
   </div>
@@ -22,7 +23,27 @@
     <label class="block text-sm font-medium text-slate-700">{{$T.report_what_happened}}</label>
     <textarea name="content" rows="6" required
       class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#028090]"
-      placeholder="{{$T.report_what_happened_placeholder}}"></textarea>
+      placeholder="{{$T.report_what_happened_placeholder}}">{{.Content}}</textarea>
+  </div>
+  <div>
+    <label class="block text-sm font-medium text-slate-700">{{$T.report_evidence_label}}</label>
+    <input type="file" name="evidence" multiple accept="image/jpeg,image/png,application/pdf,video/mp4,video/webm,video/quicktime"
+      class="mt-1 w-full text-sm text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#028090] file:text-white file:font-medium">
+    <p class="mt-1 text-xs text-slate-500">{{$T.report_evidence_hint}}</p>
+  </div>
+  <div class="border-t border-slate-200 pt-4">
+    <label class="flex items-start gap-2 text-sm font-medium text-slate-700">
+      <input type="checkbox" name="on_behalf_of" value="on" id="on_behalf_of"
+        onchange="document.getElementById('on_behalf_of_note_wrap').classList.toggle('hidden', !this.checked)"
+        class="mt-1">
+      <span>{{$T.report_on_behalf_label}}</span>
+    </label>
+    <p class="mt-1 text-xs text-slate-500">{{$T.report_on_behalf_hint}}</p>
+    <div id="on_behalf_of_note_wrap" class="hidden mt-2">
+      <input type="text" name="on_behalf_of_note" maxlength="200"
+        placeholder="{{$T.report_on_behalf_note_placeholder}}"
+        class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
+    </div>
   </div>
   <button type="submit" class="bg-[#028090] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#026e78]">
     {{$T.report_submit_anon}}

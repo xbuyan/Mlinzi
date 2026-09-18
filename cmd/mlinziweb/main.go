@@ -18,6 +18,7 @@ import (
 	"sync"
 
 	mlinziassets "github.com/xbuyan/mlinzi"
+	"github.com/xbuyan/mlinzi/internal/evidence"
 	"github.com/xbuyan/mlinzi/internal/guardian"
 	"github.com/xbuyan/mlinzi/internal/guide"
 	"github.com/xbuyan/mlinzi/internal/report"
@@ -42,6 +43,7 @@ type app struct {
 
 	mu            sync.Mutex
 	reports       *report.Store
+	evidence      *evidence.Store
 	cases         *guardian.Store
 	reportCase    map[string]string   // report ID -> case ID
 	pendingShares map[string][][]byte // case ID -> shares, deleted once shown
@@ -102,6 +104,7 @@ func newApp() (*app, error) {
 		pages:         pages,
 		strings:       strings,
 		reports:       report.NewStore(),
+		evidence:      evidence.NewStore(),
 		cases:         guardian.NewStore(),
 		reportCase:    make(map[string]string),
 		pendingShares: make(map[string][][]byte),
@@ -231,6 +234,7 @@ func main() {
 	mux.HandleFunc("POST /report", a.handleReportCreate)
 	mux.HandleFunc("GET /report/status", a.handleStatusForm)
 	mux.HandleFunc("POST /report/status", a.handleStatusResult)
+	mux.HandleFunc("GET /evidence/{hash}", a.handleEvidence)
 	mux.HandleFunc("POST /report/{id}/protect", a.handleProtectCreate)
 	mux.HandleFunc("GET /cases/{id}", a.handleCaseDashboard)
 	mux.HandleFunc("POST /cases/{id}/checkin", a.handleCaseCheckIn)
