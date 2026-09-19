@@ -40,9 +40,9 @@
     "fr": "Vous êtes hors ligne. Les guides déjà consultés restent disponibles. Déposer un signalement ou mettre à jour un dossier nécessite une connexion."
   },
   "footer_text": {
-    "en": "Mlinzi — a proof of concept built for the OSF × Andela hackathon. Reports, guardian cases and evidence survive restarts when a data directory is configured (MLINZI_DATA_DIR); otherwise data lives only for this server's uptime.",
-    "sw": "Mlinzi — mfano wa dhana uliojengwa kwa mashindano ya OSF × Andela. Ripoti, kesi za walinzi na ushahidi hudumu baada ya kuanzisha upya saraka ya data imewekwa (MLINZI_DATA_DIR); vinginevyo data inadumu tu wakati seva inafanya kazi.",
-    "fr": "Mlinzi — une preuve de concept réalisée pour le hackathon OSF × Andela. Les signalements, dossiers de gardiens et preuves survivent aux redémarrages lorsqu'un répertoire de données est configuré (MLINZI_DATA_DIR) ; sinon les données ne vivent que le temps de fonctionnement du serveur."
+    "en": "Mlinzi — a proof of concept built for the OSF × Andela hackathon. The institution portal is a demonstration, not a live connection to any real institution — no government body currently receives what is submitted here. Reports, guardian cases and evidence survive restarts when a data directory is configured (MLINZI_DATA_DIR); otherwise data lives only for this server's uptime.",
+    "sw": "Mlinzi — mfano wa dhana uliojengwa kwa mashindano ya OSF × Andela. Mlango wa taasisi ni onyesho tu, si muunganisho halisi na taasisi yoyote — hakuna chombo cha serikali kinachopokea kilichowasilishwa hapa kwa sasa. Ripoti, kesi za walinzi na ushahidi hudumu baada ya kuanzisha upya saraka ya data imewekwa (MLINZI_DATA_DIR); vinginevyo data inadumu tu wakati seva inafanya kazi.",
+    "fr": "Mlinzi — une preuve de concept réalisée pour le hackathon OSF × Andela. Le portail institutionnel est une démonstration, pas une connexion réelle à une institution — aucun organisme gouvernemental ne reçoit actuellement ce qui est soumis ici. Les signalements, dossiers de gardiens et preuves survivent aux redémarrages lorsqu'un répertoire de données est configuré (MLINZI_DATA_DIR) ; sinon les données ne vivent que le temps de fonctionnement du serveur."
   },
   "home_title": {
     "en": "Know your rights. Report safely.",
@@ -303,6 +303,16 @@
     "en": "About",
     "sw": "Kuhusu",
     "fr": "À propos de"
+  },
+  "safety_disclaimer_report": {
+    "en": "This is a hackathon prototype, not a connected reporting channel. No government body or civil-society organization currently receives or acts on what you submit here — it is stored only on this project's own server. If you are in immediate danger, contact your local emergency services or someone you trust directly. Do not rely on this app to reach help in real time.",
+    "sw": "Huu ni mfano wa awali uliojengwa kwa mashindano, si njia iliyounganishwa ya kutoa taarifa rasmi. Kwa sasa hakuna taasisi ya serikali au shirika la kiraia linalopokea au kuchukua hatua kwa lile unalowasilisha hapa — linahifadhiwa tu kwenye seva ya mradi huu. Ikiwa uko katika hatari ya haraka, wasiliana na huduma za dharura za eneo lako au mtu unayemwamini moja kwa moja. Usitegemee programu hii kupata msaada wa haraka.",
+    "fr": "Ceci est un prototype de hackathon, pas un canal de signalement connecté. Aucun organisme gouvernemental ni organisation de la société civile ne reçoit ni ne traite actuellement ce que vous soumettez ici — cela est stocké uniquement sur le serveur de ce projet. Si vous êtes en danger immédiat, contactez directement les services d'urgence locaux ou une personne de confiance. Ne comptez pas sur cette application pour obtenir de l'aide en temps réel."
+  },
+  "safety_disclaimer_protect": {
+    "en": "This is a hackathon prototype. The guardian threshold mechanism shown here is real and tested, but it is not yet connected to release your actual report content or evidence to your guardians, and this server is not monitored for real emergencies. Please do not rely on this as your only safety plan.",
+    "sw": "Huu ni mfano wa awali uliojengwa kwa mashindano. Mfumo wa kiwango cha walinzi ulioonyeshwa hapa ni halisi na umejaribiwa, lakini bado haujaunganishwa kutoa maandishi halisi ya ripoti au ushahidi wako kwa walinzi wako, na seva hii haifuatiliwi kwa dharura halisi. Tafadhali usitegemee hii kama mpango wako pekee wa usalama.",
+    "fr": "Ceci est un prototype de hackathon. Le mécanisme de seuil des gardiens présenté ici est réel et testé, mais il n'est pas encore relié pour transmettre à vos gardiens le contenu réel de votre signalement ou vos preuves, et ce serveur n'est pas surveillé pour de véritables urgences. Veuillez ne pas en faire votre seul plan de sécurité."
   },
   "report_privacy_note": {
     "en": "You do not need to give your name. Once submitted, this report is hash-chained — it cannot be quietly edited or deleted afterward.",

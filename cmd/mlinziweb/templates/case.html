@@ -5,6 +5,10 @@
 <h1 class="text-2xl font-bold text-[#0A2E36]">{{$T.case_title}} {{.ID}}</h1>
 <p class="mt-1 text-slate-600">{{$T.case_status}}: <span class="font-semibold uppercase">{{index $T (printf "status_%s" .Status)}}</span> · {{printf $T.case_threshold_of .Threshold (len .GuardianIDs)}}</p>
 
+<div class="mt-4 bg-red-50 border-2 border-red-300 rounded-lg p-4 text-sm text-red-900 font-medium">
+  {{$T.safety_disclaimer_protect}}
+</div>
+
 {{if $.Message}}
 <div class="mt-4 bg-[#E6F7F5] border border-[#02C39A] rounded-lg p-4 text-sm text-[#0A2E36]">{{$.Message}}</div>
 {{end}}
