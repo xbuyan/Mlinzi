@@ -37,9 +37,16 @@ creation, so you can later prove exactly what you submitted and when, and the
 receiving institution cannot quietly edit, backdate or delete it.
 
 **3. Protect.** Reporting carries risk. Set a check-in cadence and name
-guardians. If you go silent, your evidence escalates to them automatically.
-Release requires a threshold of guardians acting together — no single party,
-including whoever operates Mlinzi, can release it alone.
+guardians. If you go silent, the case escalates automatically, and a
+threshold of guardians acting together — no single party, including
+whoever operates Mlinzi, can act alone — reconstructs the release key tied
+to your case. **Stated limit:** that reconstructed key currently
+demonstrates the threshold mechanism itself; it is not yet wired to decrypt
+or hand guardians the reporter's actual report text or evidence files
+(both still stored unencrypted, same as everywhere else in this proof of
+concept). Making the key the thing that actually gates access to content
+is the next step, not this build — see [Persistence](#persistence) for the
+same honesty standard applied to storage.
 
 **4. Ask.** A retrieval-augmented assistant answers questions about rights,
 reporting procedures and the law **using only the sourced corpus this app
@@ -60,7 +67,7 @@ verification) — see `mlinzi demo-report`.
 Layer 3 complete: `internal/shamir` (Shamir's Secret Sharing over GF(256))
 and `internal/guardian` (check-in cadence, escalation on a missed check-in,
 threshold-based release — no single party, including whoever operates
-Mlinzi, can release evidence alone) — see `mlinzi demo-escalation`.
+Mlinzi, can reconstruct the release key alone) — see `mlinzi demo-escalation`.
 
 Layer 4 complete: `internal/rag` (retrieval-augmented answering over the
 corpus, cite-or-abstain) — see `mlinzi demo-rag` and the `/ask` page.
@@ -88,6 +95,11 @@ both are honest next steps, not claimed capabilities.
 — anyone with the URL can currently advance any report's status. It is fine
 for a hackathon proof of concept and would need to be fixed before any real
 deployment.
+
+**Known, stated gap:** guardian release reconstructs the split key, proving
+the threshold mechanism, but that key is not yet wired to decrypt or hand
+over the reporter's actual content — see the Protect layer note above and
+[Persistence](#persistence) for the same limit on encryption at rest.
 
 ## Scalability, demonstrated
 

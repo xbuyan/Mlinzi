@@ -656,6 +656,34 @@ byte-identity across restart). The round-trip tests boot a second app over
 the same directory and assert user-visible state — not bytes written.
 `go test ./...` is green across all packages.
 
+**A real gap found by using the app, not by a test: guardian release
+reconstructs a key that unlocks nothing.** `guardian.ReleaseKey()` generates
+32 random bytes at protection setup, with no cryptographic tie to the
+report or its evidence — Shamir splits and later reconstructs those same
+random bytes, correctly, but there was never anything on the other end for
+the reconstructed key to decrypt. Report text and evidence remain plaintext
+in their stores throughout, exactly as before protection was set up. This
+matters more than a typical scope cut because it's not a feature that was
+never started — it's a promise made explicitly on Day 2 ("encryption at
+rest is scoped out and deferred to Layer 3's guardian key-release
+mechanism") that Layer 3, as built, doesn't keep: it demonstrates the
+threshold-reconstruction math in isolation, not the mechanism the Day 2
+note implied. No test caught this because the guardian package's own tests
+correctly verify Shamir reconstruction against whatever key they're handed
+— they were never wrong about what they check, the gap is one layer up, in
+what the reconstructed key is connected to.
+
+Fixed the honest way rather than the fast way: encrypting content against
+this key and decrypting it on release would make the promise true, but it's
+real engineering work this close to a deadline, so instead every place that
+implied otherwise was corrected to say what actually happens — the case
+dashboard (a stated-scope note shown on release), the README (the Protect
+layer description, the Layer 3 status line, and a new stated-gap entry),
+and the demo video script, which said aloud that "evidence is split across
+guardians" and "guardians... release it" before a single frame was
+recorded. Wiring the key to actually gate access to content is recorded as
+the next step, not claimed as done.
+
 **A real gap caught in review, not by a test: `fly.toml` claimed
 persistence it didn't have.** Setting `MLINZI_DATA_DIR = "/data"` in
 `fly.toml` with no `[[mounts]]` volume attached means `/data` is just part

@@ -83,6 +83,10 @@ func main() {
 		cmdDemoEscalation()
 	case "demo-full":
 		cmdDemoFull()
+	case "demo-rag":
+		cmdDemoRAG()
+	case "demo-persistence":
+		cmdDemoPersistence()
 	default:
 		usage()
 		os.Exit(1)
@@ -103,6 +107,11 @@ Usage:
                                   chain verification, in one run
   mlinzi demo-escalation         Walk through Layer 3: check-ins, a missed
                                   check-in, and guardian-triggered release
+  mlinzi demo-rag                Walk through Ask Mlinzi: retrieval over the
+                                  sourced corpus, cited answers, and the
+                                  abstention when the corpus can't answer
+  mlinzi demo-persistence        File reports, save to disk, tamper with the
+                                  snapshot, and watch restore refuse it
   mlinzi demo-full               The complete story: know, report, protect`)
 }
 

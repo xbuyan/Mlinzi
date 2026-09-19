@@ -4,6 +4,21 @@
     "sw": "Kituo cha Nyenzo",
     "fr": "Centre de ressources"
   },
+  "nav_ask": {
+    "en": "Ask Mlinzi",
+    "sw": "Uliza Mlinzi",
+    "fr": "Demander à Mlinzi"
+  },
+  "ask_title": {
+    "en": "Ask Mlinzi",
+    "sw": "Uliza Mlinzi",
+    "fr": "Demander à Mlinzi"
+  },
+  "ask_subtitle": {
+    "en": "Ask a question about your rights, reporting, or the law. Every answer is built only from the sourced guides and legal documents in Mlinzi — and cites the ones it used. If the answer is not in them, it says so rather than guessing.",
+    "sw": "Uliza swali kuhusu haki zako, kuripoti, au sheria. Kila jibu limejengwa kutoka kwenye miongozo iliyo na vyanzo na hati za kisheria za Mlinzi pekee — na inanukuu zile ilizotumia. Kama jibu halipo ndani yake, inasema hivyo badala ya kutabiri.",
+    "fr": "Posez une question sur vos droits, le signalement ou la loi. Chaque réponse est construite uniquement à partir des guides sourcés et des documents juridiques de Mlinzi — et cite ceux qu'elle a utilisés. Si la réponse n'y figure pas, la page le dit au lieu de deviner."
+  },
   "nav_check_report": {
     "en": "Check a report",
     "sw": "Angalia ripoti",
@@ -25,9 +40,9 @@
     "fr": "Vous êtes hors ligne. Les guides déjà consultés restent disponibles. Déposer un signalement ou mettre à jour un dossier nécessite une connexion."
   },
   "footer_text": {
-    "en": "Mlinzi — a proof of concept built for the OSF × Andela hackathon. No persistence layer yet: data lives only for this server's uptime.",
-    "sw": "Mlinzi — mfano wa dhana uliojengwa kwa mashindano ya OSF × Andela. Hakuna hifadhi ya kudumu bado: data inadumu tu wakati seva inafanya kazi.",
-    "fr": "Mlinzi — une preuve de concept réalisée pour le hackathon OSF × Andela. Pas encore de persistance : les données ne vivent que le temps de fonctionnement du serveur."
+    "en": "Mlinzi — a proof of concept built for the OSF × Andela hackathon. Reports, guardian cases and evidence survive restarts when a data directory is configured (MLINZI_DATA_DIR); otherwise data lives only for this server's uptime.",
+    "sw": "Mlinzi — mfano wa dhana uliojengwa kwa mashindano ya OSF × Andela. Ripoti, kesi za walinzi na ushahidi hudumu baada ya kuanzisha upya saraka ya data imewekwa (MLINZI_DATA_DIR); vinginevyo data inadumu tu wakati seva inafanya kazi.",
+    "fr": "Mlinzi — une preuve de concept réalisée pour le hackathon OSF × Andela. Les signalements, dossiers de gardiens et preuves survivent aux redémarrages lorsqu'un répertoire de données est configuré (MLINZI_DATA_DIR) ; sinon les données ne vivent que le temps de fonctionnement du serveur."
   },
   "home_title": {
     "en": "Know your rights. Report safely.",
@@ -544,6 +559,11 @@
     "sw": "Kiwango kimefikiwa. Ufunguo wa kuachilia umeundwa upya",
     "fr": "Seuil atteint. Clé de libération reconstituée"
   },
+  "case_release_scope_note": {
+    "en": "This demonstrates the release mechanism itself — guardians reconstructing a key that no single party could produce alone. It is not yet wired to decrypt or hand over the reporter's actual report text or evidence; that connection is stated here as future work, not implied as done.",
+    "sw": "Hii inaonyesha jinsi mfumo wa kuachilia unavyofanya kazi — walinzi kuunda upya ufunguo ambao hakuna mhusika mmoja angeweza kuutengeneza peke yake. Bado haujaunganishwa kufungua au kutoa maandishi halisi ya ripoti au ushahidi wa mtoa taarifa; uunganisho huo umeandikwa hapa kama kazi ijayo, si kama tayari umefanyika.",
+    "fr": "Ceci démontre le mécanisme de libération lui-même — les gardiens reconstituant une clé qu'aucune partie seule n'aurait pu produire. Ce n'est pas encore relié pour déchiffrer ou remettre le texte réel du signalement ou les preuves du déclarant ; ce lien est indiqué ici comme travail futur, non comme déjà fait."
+  },
   "created_title": {
     "en": "Protection set up",
     "sw": "Ulinzi umewekwa",
@@ -768,5 +788,75 @@
     "en": "View file",
     "sw": "Ona faili",
     "fr": "Voir le fichier"
+  },
+  "ask_placeholder": {
+    "en": "e.g. Can I report a bribe without giving my name? What does the law say about freedom of expression?",
+    "sw": "mf. Naweza kuripoti rushwa bila kutoa jina langu? Sheria inasema nini kuhusu uhuru wa kujieleza?",
+    "fr": "ex. Puis-je signaler un pot-de-vin sans donner mon nom ? Que dit la loi sur la liberté d'expression ?"
+  },
+  "ask_button": {
+    "en": "Ask",
+    "sw": "Uliza",
+    "fr": "Demander"
+  },
+  "ask_error_empty": {
+    "en": "Type a question first.",
+    "sw": "Andika swali kwanza.",
+    "fr": "Posez d'abord une question."
+  },
+  "ask_error_too_long": {
+    "en": "That question is too long — please shorten it to a sentence or two.",
+    "sw": "Swali hilo ni refu mno — tafadhali lifupishe kuwa sentensi moja au mbili.",
+    "fr": "Cette question est trop longue — veuillez la raccourcir à une ou deux phrases."
+  },
+  "ask_answer_label": {
+    "en": "Answer, with sources",
+    "sw": "Jibu, lenye vyanzo",
+    "fr": "Réponse, avec sources"
+  },
+  "ask_unanswered_label": {
+    "en": "Not in the sourced guides",
+    "sw": "Halipo kwenye miongozo iliyo na vyanzo",
+    "fr": "Absent des guides sourcés"
+  },
+  "ask_method_llm": {
+    "en": "Phrased by a language model from the sourced passages above; every sentence was checked against them, and anything unsupported was dropped.",
+    "sw": "Imetungwa na modeli ya lugha kutoka kwenye vipengele vilivyotolewa hapo juu; kila sentensi ilithibitishwa dhidi yake, na yoyote isiyothibitishwa imeondolewa.",
+    "fr": "Rédigé par un modèle de langage à partir des passages sourcés ci-dessus ; chaque phrase a été vérifiée par rapport à eux, et toute phrase non étayée a été retirée."
+  },
+  "ask_method_extractive": {
+    "en": "Composed directly from the sourced passages — no language model involved, so every word above comes from the corpus.",
+    "sw": "Imetungwa moja kwa moja kutoka kwenye vipengele vilivyotolewa — hakuna modeli ya lugha iliyohusika, kwa hivyo kila neno hapo juu linatoka kwenye mkusanyiko.",
+    "fr": "Composé directement à partir des passages sourcés — aucun modèle de langage impliqué, donc chaque mot ci-dessus provient du corpus."
+  },
+  "ask_sources_heading": {
+    "en": "Sources used for this answer",
+    "sw": "Vyanzo vilivyotumika kwa jibu hili",
+    "fr": "Sources utilisées pour cette réponse"
+  },
+  "ask_sources_note": {
+    "en": "Every passage the answer was built from, with the provenance it carries. Follow the links to read each in full.",
+    "sw": "Kila kipengele jibu hili limejengwa nacho, pamoja na chanzo kinachokifunga. Fuata viungo kusoma kila kimoja kikamilifu.",
+    "fr": "Chaque passage ayant servi à construire la réponse, avec la provenance qui l'accompagne. Suivez les liens pour les lire intégralement."
+  },
+  "ask_kind_guide": {
+    "en": "guide",
+    "sw": "mwongozo",
+    "fr": "guide"
+  },
+  "ask_kind_provision": {
+    "en": "legal provision",
+    "sw": "kifungu cha sheria",
+    "fr": "disposition légale"
+  },
+  "ask_sources_disagree": {
+    "en": "sources disagree on this passage",
+    "sw": "vyanzo havikubaliani kuhusu kipengele hiki",
+    "fr": "les sources divergent sur ce passage"
+  },
+  "ask_honesty_note": {
+    "en": "How this works: Mlinzi searches its own sourced guides and legal documents, then builds the answer only from what it finds — citing each passage. It cannot improvise new numbers, laws or rights, and when the corpus has nothing relevant it refuses to answer instead. The guides and documents remain the authoritative pages to act on.",
+    "sw": "Jinsi hii inavyofanya kazi: Mlinzi hutafuta miongozo yake iliyo na vyanzo na hati za kisheria, kisha hujenga jibu kutoka kwa kilichopatikana tu — akikinukuu kila kipengele. Hawezi kutunga namba, sheria au haki mpya, na mkusanyiko usipokuwa na kitu kinachohusiana, hukataa kujibu badala ya kutabiri. Miongozo na hati zinazoonekana ndizo kurasa za mamlaka za kutegemea.",
+    "fr": "Comment cela fonctionne : Mlinzi cherche dans ses propres guides sourcés et documents juridiques, puis construit la réponse uniquement à partir de ce qu'il trouve — en citant chaque passage. Il ne peut pas inventer de numéros, de lois ou de droits, et quand le corpus ne contient rien de pertinent, il refuse de répondre au lieu de deviner. Les guides et documents restent les pages faisant foi."
   }
 }

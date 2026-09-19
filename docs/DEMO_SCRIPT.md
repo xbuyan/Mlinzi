@@ -49,14 +49,15 @@ scroll behind your voice rather than pausing for each block.
 
 **[1:05 – 1:20] — Let Step 3 print through case creation and escalation.**
 
-> "If reporting puts someone at risk, they set a dead man's switch. Their
-> evidence is split, cryptographically, across guardians. No single
-> guardian — and not us either — can unlock it alone."
+> "If reporting puts someone at risk, they set a dead man's switch. The
+> release key is split, cryptographically, across guardians. No single
+> guardian — and not us either — can reconstruct it alone."
 
 **[1:20 – 1:35] — Let the release lines print.**
 
 > "Go silent, and two guardians acting together — only together — can
-> release it. Silence stops being a way to make a report disappear."
+> reconstruct that key. Silence stops being a way to make a report
+> disappear."
 
 **[1:35 – 1:45] — Let the final chain-verification lines print.**
 
