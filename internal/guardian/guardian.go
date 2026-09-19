@@ -14,8 +14,10 @@ import (
 	"crypto/rand"
 	"crypto/sha256"
 	"encoding/hex"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"sort"
 	"time"
 
 	"github.com/xbuyan/mlinzi/internal/ledger"
@@ -64,6 +66,11 @@ type caseCreatedRecord struct {
 	GuardianID []string `json:"guardian_ids"`
 	Threshold  int      `json:"threshold"`
 	Interval   string   `json:"interval"`
+	// KeyLen is the length of the release key that was split. It is what a
+	// restore needs to reconstruct the expected share length (key + one
+	// x-coordinate byte) without ever seeing the key or a share — the length
+	// is metadata, the material is not.
+	KeyLen int `json:"key_len"`
 }
 
 type checkInRecord struct {
@@ -125,6 +132,109 @@ func NewStore() *Store {
 	}
 }
 
+// NewStoreFromLedger returns a store rebuilt from an already-restored
+// ledger, replaying every case's lifecycle from the entries it left there.
+//
+// What a restore deliberately does not bring back: pending shares. A share
+// submitted after escalation but before threshold is key material, and this
+// design never writes key material anywhere the platform keeps — not in the
+// Case (by the layer's founding rule) and not in the ledger (entries record
+// that a submission happened, never what was submitted). So a guardian whose
+// share was submitted before a restart simply submits it again; the ledger
+// will show two submissions by them, which is the honest record of what
+// occurred. Escalated and released statuses restore exactly: they are
+// derived from entries, which is the point of recording them.
+func NewStoreFromLedger(l *ledger.Ledger) (*Store, error) {
+	s := &Store{ledger: l, cases: make(map[string]*Case), now: time.Now}
+	for _, e := range l.Entries() {
+		switch e.Type {
+		case "guardian.case_created":
+			var rec caseCreatedRecord
+			if err := json.Unmarshal(e.Data, &rec); err != nil {
+				return nil, fmt.Errorf("guardian: restore: corrupt case_created at entry %d: %w", e.Seq, err)
+			}
+			if rec.CaseID == "" {
+				return nil, fmt.Errorf("guardian: restore: case_created at entry %d has no case id", e.Seq)
+			}
+			interval, err := time.ParseDuration(rec.Interval)
+			if err != nil {
+				return nil, fmt.Errorf("guardian: restore: case %s has unreadable interval %q", rec.CaseID, rec.Interval)
+			}
+			if rec.KeyLen <= 0 {
+				return nil, fmt.Errorf("guardian: restore: case %s has no key length recorded", rec.CaseID)
+			}
+			s.cases[rec.CaseID] = &Case{
+				ID:            rec.CaseID,
+				ReportID:      rec.ReportID,
+				GuardianIDs:   append([]string{}, rec.GuardianID...),
+				Threshold:     rec.Threshold,
+				Interval:      interval,
+				CreatedAt:     e.Timestamp,
+				LastCheckIn:   e.Timestamp,
+				Status:        Active,
+				pendingShares: make(map[string][]byte),
+				shareLen:      rec.KeyLen + 1, // shamir share = secret bytes + x-coordinate
+			}
+		case "guardian.check_in":
+			var rec checkInRecord
+			if err := json.Unmarshal(e.Data, &rec); err != nil {
+				return nil, fmt.Errorf("guardian: restore: corrupt check_in at entry %d: %w", e.Seq, err)
+			}
+			c, ok := s.cases[rec.CaseID]
+			if !ok {
+				return nil, fmt.Errorf("guardian: restore: check_in at entry %d references unknown case %q", e.Seq, rec.CaseID)
+			}
+			// The timestamp of the check-in is the entry's own — which is why
+			// check-ins were recorded to the ledger in the first place.
+			c.LastCheckIn = e.Timestamp
+		case "guardian.escalated":
+			var rec escalatedRecord
+			if err := json.Unmarshal(e.Data, &rec); err != nil {
+				return nil, fmt.Errorf("guardian: restore: corrupt escalated at entry %d: %w", e.Seq, err)
+			}
+			c, ok := s.cases[rec.CaseID]
+			if !ok {
+				return nil, fmt.Errorf("guardian: restore: escalated at entry %d references unknown case %q", e.Seq, rec.CaseID)
+			}
+			c.Status = Escalated
+		case "guardian.released":
+			var rec releasedRecord
+			if err := json.Unmarshal(e.Data, &rec); err != nil {
+				return nil, fmt.Errorf("guardian: restore: corrupt released at entry %d: %w", e.Seq, err)
+			}
+			c, ok := s.cases[rec.CaseID]
+			if !ok {
+				return nil, fmt.Errorf("guardian: restore: released at entry %d references unknown case %q", e.Seq, rec.CaseID)
+			}
+			c.Status = Released
+		}
+	}
+	return s, nil
+}
+
+// Ledger exposes the underlying chain for persistence, on the same terms as
+// report.Store's: Entries returns copies and Append remains the only way in.
+func (s *Store) Ledger() *ledger.Ledger { return s.ledger }
+
+// All returns every case, in creation order, as the same metadata-only view
+// Get returns. The institution-facing and guardian-facing views need to
+// enumerate cases; the store previously supported only lookup by ID, which
+// was the right shape for one reporter's dashboard and the wrong shape for
+// anything that has to show more than one.
+func (s *Store) All() []Case {
+	ordered := make([]*Case, 0, len(s.cases))
+	for _, c := range s.cases {
+		ordered = append(ordered, c)
+	}
+	sort.Slice(ordered, func(i, j int) bool { return ordered[i].CreatedAt.Before(ordered[j].CreatedAt) })
+	out := make([]Case, 0, len(ordered))
+	for _, c := range ordered {
+		v, _ := s.Get(c.ID)
+		out = append(out, v)
+	}
+	return out
+}
+
 // NewCase creates a dead-man's-switch case for a release key, splitting it
 // into shares immediately and returning them for out-of-band distribution to
 // guardians. The Case retains none of the shares — only which guardian IDs
@@ -162,6 +272,7 @@ func (s *Store) NewCase(reportID string, key []byte, guardianIDs []string, thres
 		GuardianID: guardianIDs,
 		Threshold:  threshold,
 		Interval:   interval.String(),
+		KeyLen:     len(key),
 	}); err != nil {
 		return nil, nil, err
 	}

@@ -115,3 +115,37 @@ func asErrTampered(err error, target *ErrTampered) bool {
 	}
 	return ok
 }
+
+// --- Shared helpers for the persistence restore paths ---
+//
+// These live in the ledger package — the layer that owns chain integrity —
+// so the store packages' restore tests can express "restore this history"
+// without each one re-implementing the load step. Keeping them here also
+// means the ledger's own restore behaviour is exercised next to the tests
+// that pin Verify.
+
+// restoreLedger is what every store's restore path calls before rebuilding
+// itself: the snapshot's entries go through NewFromEntries, which refuses
+// an altered chain.
+func restoreLedger(t *testing.T, entries []Entry) *Ledger {
+	t.Helper()
+	l, err := NewFromEntries(entries)
+	if err != nil {
+		t.Fatalf("NewFromEntries: %v", err)
+	}
+	return l
+}
+
+// rehashEntries recomputes each entry's hash from its own content, as a
+// tamperer with control of the snapshot file would. It exists so tests can
+// distinguish "the chain caught the edit" from "the record shape did".
+func rehashEntries(t *testing.T, entries []Entry) []Entry {
+	t.Helper()
+	prev := genesisHash
+	for i := range entries {
+		entries[i].PrevHash = prev
+		entries[i].Hash = entries[i].computeHash()
+		prev = entries[i].Hash
+	}
+	return entries
+}

@@ -133,6 +133,39 @@ func NewStore() *Store {
 	}
 }
 
+// NewStoreFromLedger returns a store backed by an already-restored ledger,
+// rebuilding the report-ID index by replaying the entries.
+//
+// The ledger is the only state that matters: a Report is a projection, so a
+// restore is not "reload some records" but "point the projection at the same
+// chain it was built from". The chain was verified before it got here (see
+// ledger.NewFromEntries), so what this rebuilds is provably the same history
+// that was snapshotted — a restored report keeps its verification code,
+// because the code is derived from the ledger entry's own hash.
+func NewStoreFromLedger(l *ledger.Ledger) (*Store, error) {
+	s := &Store{ledger: l, byID: make(map[string]int)}
+	for _, e := range l.Entries() {
+		if e.Type != "report.submitted" {
+			continue
+		}
+		var sub submittedRecord
+		if err := json.Unmarshal(e.Data, &sub); err != nil {
+			return nil, fmt.Errorf("report: restore: corrupt submitted record at entry %d: %w", e.Seq, err)
+		}
+		if sub.ReportID == "" {
+			return nil, fmt.Errorf("report: restore: submitted record at entry %d has no report id", e.Seq)
+		}
+		s.byID[sub.ReportID] = e.Seq
+	}
+	return s, nil
+}
+
+// Ledger exposes the underlying chain, for persistence: the snapshot that
+// goes to disk is the ledger's entries, and the ledger that comes back is
+// verified before a store is rebuilt on top of it. Handing out the chain is
+// safe — Entries returns copies, and Append remains the only way in.
+func (s *Store) Ledger() *ledger.Ledger { return s.ledger }
+
 // Submit files a new anonymous report with no evidence and no proxy
 // submitter. It is a thin call to SubmitWithEvidence kept for every existing
 // caller (the CLI demos, most tests) that has no reason to touch either of

@@ -52,6 +52,20 @@ func New() *Ledger {
 	return &Ledger{now: time.Now}
 }
 
+// NewFromEntries returns a ledger pre-loaded with entries, after verifying
+// the chain they form. This is the restore half of Snapshot: without it,
+// "persistence" would mean trusting whatever bytes were on disk — which is
+// exactly the trust this primitive exists to remove. A snapshot that was
+// edited, truncated, or reordered fails here rather than loading, so what
+// comes back from disk is proven unaltered, not assumed to be.
+func NewFromEntries(entries []Entry) (*Ledger, error) {
+	l := &Ledger{now: time.Now, entries: append([]Entry{}, entries...)}
+	if err := l.Verify(); err != nil {
+		return nil, err
+	}
+	return l, nil
+}
+
 // Append adds a new entry carrying data, marshalled to JSON, and returns the
 // committed entry including its computed hash.
 func (l *Ledger) Append(entryType string, data any) (Entry, error) {
