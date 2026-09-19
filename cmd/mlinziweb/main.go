@@ -21,6 +21,7 @@ import (
 	"github.com/xbuyan/mlinzi/internal/evidence"
 	"github.com/xbuyan/mlinzi/internal/guardian"
 	"github.com/xbuyan/mlinzi/internal/guide"
+	"github.com/xbuyan/mlinzi/internal/rag"
 	"github.com/xbuyan/mlinzi/internal/report"
 	"github.com/xbuyan/mlinzi/internal/resource"
 	"github.com/xbuyan/mlinzi/internal/ui"
@@ -33,13 +34,17 @@ var templateFS embed.FS
 var staticFS embed.FS
 
 // app holds every piece of shared server state. All fields except pages,
-// guides, resources and strings are mutated by handlers, so access goes
-// through mu.
+// guides, resources, strings, ask and dataDir are mutated by handlers, so
+// access goes through mu.
 type app struct {
 	guides    *guide.Store
 	resources *resource.Store
 	pages     map[string]*template.Template
 	strings   *ui.Catalog
+	// ask indexes the RAG corpus, one per supported language (the corpus is
+	// chunked in the guide languages; the legal provisions stay in English
+	// in every index, on purpose). Built once at startup; read-only after.
+	ask map[string]*rag.Builder
 
 	mu            sync.Mutex
 	reports       *report.Store
@@ -48,6 +53,11 @@ type app struct {
 	reportCase    map[string]string   // report ID -> case ID
 	pendingShares map[string][][]byte // case ID -> shares, deleted once shown
 	guardianOrder map[string][]string // case ID -> guardian IDs in share order
+	// dataDir is where state persists across restarts, or "" when the app
+	// runs memory-only (the default, and still the right mode for a
+	// throwaway demo). See persistence.go for exactly what is and is not
+	// written there.
+	dataDir string
 }
 
 // pageNames lists every content template that gets paired with layout.html.
@@ -59,7 +69,7 @@ type app struct {
 var pageNames = []string{
 	"home.html", "guide.html", "report_new.html", "report_result.html",
 	"case_created.html", "case.html", "status_form.html", "status_result.html",
-	"institution.html", "resources.html", "resource.html",
+	"institution.html", "resources.html", "resource.html", "ask.html",
 }
 
 var templateFuncs = template.FuncMap{
@@ -98,17 +108,53 @@ func newApp() (*app, error) {
 		pages[name] = t
 	}
 
+	// The RAG index is built per language once at startup — the corpus is
+	// small (hundreds of chunks), so this is milliseconds, and it keeps the
+	// request path free of any index-building cost. The legal provisions
+	// are indexed identically in every language, because the law is quoted
+	// in its authoritative English wording whatever language surrounds it.
+	askBuilders := make(map[string]*rag.Builder, len(langNames))
+	for lang := range langNames {
+		askBuilders[lang] = rag.Build(guides, resources, lang)
+	}
+
+	// Restore durable state before any request can touch it. A corrupt
+	// snapshot refuses to boot rather than starting empty: silently serving
+	// a world where every report vanished would be the exact failure
+	// persistence exists to prevent.
+	dir := dataDir()
+	reports, evid, cases, err := restoreStores(dir)
+	if err != nil {
+		return nil, fmt.Errorf("restore persisted state from %s: %w", dir, err)
+	}
+	if dir != "" {
+		log.Printf("persistence: enabled, data directory %s", dir)
+	}
+
+	// The report-to-case association is derived state, not primary state: a
+	// guardian case records the report it protects in its own ledger entry,
+	// so a restart rebuilds the map from there instead of persisting a
+	// second copy that could disagree with the first.
+	reportCase := make(map[string]string)
+	for _, c := range cases.All() {
+		if c.ReportID != "" {
+			reportCase[c.ReportID] = c.ID
+		}
+	}
+
 	return &app{
 		guides:        guides,
 		resources:     resources,
 		pages:         pages,
 		strings:       strings,
-		reports:       report.NewStore(),
-		evidence:      evidence.NewStore(),
-		cases:         guardian.NewStore(),
-		reportCase:    make(map[string]string),
+		ask:           askBuilders,
+		reports:       reports,
+		evidence:      evid,
+		cases:         cases,
+		reportCase:    reportCase,
 		pendingShares: make(map[string][][]byte),
 		guardianOrder: make(map[string][]string),
+		dataDir:       dir,
 	}, nil
 }
 
@@ -230,18 +276,22 @@ func main() {
 	mux.HandleFunc("GET /guides/{id}", a.handleGuideDetail)
 	mux.HandleFunc("GET /resources", a.handleResources)
 	mux.HandleFunc("GET /resources/{id}", a.handleResourceDetail)
+	mux.HandleFunc("GET /ask", a.handleAskForm)
+	mux.HandleFunc("POST /ask", a.handleAsk)
 	mux.HandleFunc("GET /report/new", a.handleReportNew)
-	mux.HandleFunc("POST /report", a.handleReportCreate)
+	// Every route that mutates durable state is wrapped so a snapshot is
+	// written when the handler completes. Read routes need no wrapper.
+	mux.HandleFunc("POST /report", a.snapshotHook(a.handleReportCreate))
 	mux.HandleFunc("GET /report/status", a.handleStatusForm)
 	mux.HandleFunc("POST /report/status", a.handleStatusResult)
 	mux.HandleFunc("GET /evidence/{hash}", a.handleEvidence)
-	mux.HandleFunc("POST /report/{id}/protect", a.handleProtectCreate)
+	mux.HandleFunc("POST /report/{id}/protect", a.snapshotHook(a.handleProtectCreate))
 	mux.HandleFunc("GET /cases/{id}", a.handleCaseDashboard)
-	mux.HandleFunc("POST /cases/{id}/checkin", a.handleCaseCheckIn)
-	mux.HandleFunc("POST /cases/{id}/escalate", a.handleCaseEscalate)
-	mux.HandleFunc("POST /cases/{id}/submit-share", a.handleCaseSubmitShare)
+	mux.HandleFunc("POST /cases/{id}/checkin", a.snapshotHook(a.handleCaseCheckIn))
+	mux.HandleFunc("POST /cases/{id}/escalate", a.snapshotHook(a.handleCaseEscalate))
+	mux.HandleFunc("POST /cases/{id}/submit-share", a.snapshotHook(a.handleCaseSubmitShare))
 	mux.HandleFunc("GET /institution", a.handleInstitutionList)
-	mux.HandleFunc("POST /institution/{id}/advance", a.handleInstitutionAdvance)
+	mux.HandleFunc("POST /institution/{id}/advance", a.snapshotHook(a.handleInstitutionAdvance))
 
 	// Serving static assets under /static/ is straightforward via
 	// http.FileServerFS. The service worker is the one exception: a service

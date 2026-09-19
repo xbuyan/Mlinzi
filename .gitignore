@@ -2,3 +2,4 @@ demo_main.go
 *.zip
 /mlinzi
 /mlinziweb
+mlinzi-data/

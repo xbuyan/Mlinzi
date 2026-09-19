@@ -571,3 +571,103 @@ say so rather than implying a protection that isn't there.
   cannot, get an appeal filed or a case heard — that would require a live
   integration with each country's legal aid and court systems that does not
   exist and was not built here.
+
+## Day 11 — RAG, and a persistence layer that keeps the tamper-evidence promise
+
+**Two features, one constraint.** The ask was a RAG system for the Resources
+Center plus a pitch-ready demo, and the second ask — "production ready" —
+pointed straight at the repo's own stated gap list, whose largest entry was
+the missing persistence layer. Both were built with the same rule: a feature
+that undermines the project's central claim is worse than a missing feature.
+
+**The RAG design decision was made before any code.** A chatbot over civic
+text is the opposite of what Mlinzi argues for — a fluent paragraph with no
+provenance, able to invent a hotline, a deadline, a right. So the package is
+cite-or-abstain by construction: chunks carry their provenance from the
+existing stores, the extractive synthesizer can only emit corpus sentences
+with citations, retrieval failures produce a visible refusal, and the
+optional LLM path is phrasing-with-verification, not free generation. BM25
+over an in-process index rather than embeddings: a few hundred chunks, zero
+network on the default path, and a scoring function a reviewer can read —
+an opaque similarity would have been the one unauditable part of the
+pipeline in a project about auditable claims.
+
+**Every retrieval gate in the shipped code was found by running the demo
+against the real corpus, not by design.** The fixture tests all passed
+while the live demo drifted — "lottery numbers for next week" retrieved a
+helpline schedule on one shared word; a bribery answer drifted into an
+article about judicial power on generic vocabulary; a Kiswahili question
+was fed the English index because the demo (and, initially, the test)
+built only one index. The fixes — a closed-class stopword list small
+enough to read at a glance, a term-coverage gate, a rare-term exemption
+so one-word queries still work, a vocabulary gate (at least half the
+question's meaningful terms must exist in the corpus), and a relative cut
+keeping only passages within 40% of the best hit — are each pinned by
+tests that run against the embedded corpus (`corpus_test.go`), because a
+fixture corpus of eight chunks cannot catch what 769 chunks of real legal
+text does.
+
+**A real bug found by instrumenting, in code I had just written.** Tracing
+the drift led to `meaningful := terms[:0]` — filtering a slice in place
+while another function still iterated the original backing array,
+silently re-weighting the query. Fixed with a fresh slice; the comment in
+`index.go` records why, because this is exactly the kind of subtle aliasing
+a later edit would reintroduce.
+
+**The persistence design decision mirrored the RAG one.** "We save to disk"
+is easy; the honest version is "persistence that keeps the tamper-evidence
+promise". Ledger snapshots verify through `NewFromEntries` before a store
+rebuilds on top of them; evidence files re-verify against their content
+hashes; key material is never persisted, so in-flight guardian shares are
+re-submitted after a restart rather than written down. The demo command
+(`mlinzi demo-persistence`) edits history on disk and shows the restore
+refusing it — the same shape as the ledger's own white-box tamper tests,
+extended to the disk boundary.
+
+**A test caught a bug the design missed, and it was the test that was
+right.** The first round-trip test failed with "ledger tampered at entry
+0" on an untampered chain: `SaveJSON` used `MarshalIndent`, which
+re-indents embedded `json.RawMessage`, so the bytes a ledger hash commits
+to changed across the snapshot round-trip. Snapshots are now compact JSON,
+with a comment explaining that this is an integrity requirement, not a
+formatting preference.
+
+**Process note, recorded because it cost an hour.** Early in the session I
+overwrote `internal/report/report_test.go` (247 lines of existing tests)
+with a new file containing only the persistence tests. Recovered from git
+history and merged rather than rewritten from memory — the originals
+include tests whose exact expectations I could not have reconstructed
+faithfully. All further test additions were made by appending to or
+ editing existing files.
+
+**What the LLM path is, stated so nobody oversells it.** Verification
+checks that each sentence's content words appear in the retrieved passages
+(a 60% coverage threshold), plus exact-match tokens for refs and numbers.
+That catches fabrication — invented statutes, invented hotlines — not
+subtle misparaphrasing, and it is phrasing support, not reasoning. The
+extractive path remains the floor in every failure mode: endpoint
+unreachable, slow, ill-formed, or quietly hallucinating. The page states
+which method produced the answer, in all three languages.
+
+**Testing.** New suites in `internal/persist`, `internal/rag` (fixtures +
+real-corpus), and `cmd/mlinziweb` (ask page, persistence round-trips
+through the real HTTP handlers, corrupt-snapshot boot refusal, evidence
+byte-identity across restart). The round-trip tests boot a second app over
+the same directory and assert user-visible state — not bytes written.
+`go test ./...` is green across all packages.
+
+**A real gap caught in review, not by a test: `fly.toml` claimed
+persistence it didn't have.** Setting `MLINZI_DATA_DIR = "/data"` in
+`fly.toml` with no `[[mounts]]` volume attached means `/data` is just part
+of the machine's own disk image — wiped on every `flyctl deploy`, since a
+deploy rebuilds the machine from the new image rather than reusing its old
+disk. The original comment said this survived "redeploys of the same
+machine," which was not true for Fly specifically; only restarts of an
+already-running machine would have survived. Go tests could not have caught
+this — it's a platform-behavior gap, not a code bug, and the round-trip
+tests all boot against a local directory. Fixed by adding a real Fly volume
+(`mlinzi_data`) mounted at `/data`, with the one-time `flyctl volumes
+create` step called out in the README so it isn't skipped. Recorded here
+because it's exactly the kind of claim this project's own principles say
+should be measured, not asserted — and this one very nearly shipped
+unverified.

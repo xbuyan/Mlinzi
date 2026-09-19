@@ -37,6 +37,7 @@ const LANGUAGES = ["en", "sw", "fr"];
 // problem the interface strings had.
 const SMALL_PAGES = [
   "/",
+  "/ask",
   "/guides/ke-bribery-public-service",
   "/guides/ke-police-misconduct",
   "/guides/ke-gender-based-violence",

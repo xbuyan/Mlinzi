@@ -41,18 +41,22 @@ func muxForTest(t *testing.T, a *app) http.Handler {
 	mux.HandleFunc("GET /guides/{id}", a.handleGuideDetail)
 	mux.HandleFunc("GET /resources", a.handleResources)
 	mux.HandleFunc("GET /resources/{id}", a.handleResourceDetail)
+	mux.HandleFunc("GET /ask", a.handleAskForm)
+	mux.HandleFunc("POST /ask", a.handleAsk)
 	mux.HandleFunc("GET /report/new", a.handleReportNew)
-	mux.HandleFunc("POST /report", a.handleReportCreate)
+	// Wrapped the same way main() wraps them, so the tests exercise the
+	// same persistence hook the deployed routes go through.
+	mux.HandleFunc("POST /report", a.snapshotHook(a.handleReportCreate))
 	mux.HandleFunc("GET /report/status", a.handleStatusForm)
 	mux.HandleFunc("POST /report/status", a.handleStatusResult)
 	mux.HandleFunc("GET /evidence/{hash}", a.handleEvidence)
-	mux.HandleFunc("POST /report/{id}/protect", a.handleProtectCreate)
+	mux.HandleFunc("POST /report/{id}/protect", a.snapshotHook(a.handleProtectCreate))
 	mux.HandleFunc("GET /cases/{id}", a.handleCaseDashboard)
-	mux.HandleFunc("POST /cases/{id}/checkin", a.handleCaseCheckIn)
-	mux.HandleFunc("POST /cases/{id}/escalate", a.handleCaseEscalate)
-	mux.HandleFunc("POST /cases/{id}/submit-share", a.handleCaseSubmitShare)
+	mux.HandleFunc("POST /cases/{id}/checkin", a.snapshotHook(a.handleCaseCheckIn))
+	mux.HandleFunc("POST /cases/{id}/escalate", a.snapshotHook(a.handleCaseEscalate))
+	mux.HandleFunc("POST /cases/{id}/submit-share", a.snapshotHook(a.handleCaseSubmitShare))
 	mux.HandleFunc("GET /institution", a.handleInstitutionList)
-	mux.HandleFunc("POST /institution/{id}/advance", a.handleInstitutionAdvance)
+	mux.HandleFunc("POST /institution/{id}/advance", a.snapshotHook(a.handleInstitutionAdvance))
 
 	staticSub, err := fs.Sub(staticFS, "static")
 	if err != nil {

@@ -29,7 +29,8 @@ themselves — the Kenyan, Ugandan and Nigerian constitutions, and Nigeria's
 ICPC Act — so that "you have a right to X" can point at the instrument that
 actually says so. Each provision is quoted with the source it was checked
 against, separately from the document as a whole, and every document links
-out to its custodian's authoritative full text.
+out to its custodian's authoritative full text. The Resources Center is also
+where **Ask Mlinzi** answers from — see [RAG: Ask Mlinzi](#rag-ask-mlinzi).
 
 **2. Report.** File anonymously. The report is hash-chained and timestamped at
 creation, so you can later prove exactly what you submitted and when, and the
@@ -39,6 +40,12 @@ receiving institution cannot quietly edit, backdate or delete it.
 guardians. If you go silent, your evidence escalates to them automatically.
 Release requires a threshold of guardians acting together — no single party,
 including whoever operates Mlinzi, can release it alone.
+
+**4. Ask.** A retrieval-augmented assistant answers questions about rights,
+reporting procedures and the law **using only the sourced corpus this app
+already publishes** — the guides and the legal documents — and cites the
+passages it used. When the corpus does not contain the answer, it says so
+rather than improvising. Details and limits below.
 
 ## Status
 
@@ -55,13 +62,16 @@ and `internal/guardian` (check-in cadence, escalation on a missed check-in,
 threshold-based release — no single party, including whoever operates
 Mlinzi, can release evidence alone) — see `mlinzi demo-escalation`.
 
-All three layers wired into one story via `mlinzi demo-full`, and into a
+Layer 4 complete: `internal/rag` (retrieval-augmented answering over the
+corpus, cite-or-abstain) — see `mlinzi demo-rag` and the `/ask` page.
+
+All layers wired into one story via `mlinzi demo-full`, and into a
 **web UI** (`cmd/mlinziweb`) covering the same flow: search and read a guide,
-file a report, optionally protect it with guardians, check in, and — for
-this demo — trigger an escalation and watch guardian release actually
-reconstruct the key. An **institution portal** (`/institution`) lets a
-reviewer acknowledge and resolve filed reports, proving the accountability
-mechanism works from both sides.
+ask the corpus a question, file a report, optionally protect it with
+guardians, check in, and — for this demo — trigger an escalation and watch
+guardian release actually reconstruct the key. An **institution portal**
+(`/institution`) lets a reviewer acknowledge and resolve filed reports,
+proving the accountability mechanism works from both sides.
 
 **How a report reaches a real institution — stated honestly:** Mlinzi does
 not have a live integration with EACC's, IPOA's, or any institution's actual
@@ -74,10 +84,10 @@ record; (2) a partner NGO relays reports into the institution's existing
 channel on the reporter's behalf and updates status here. Neither is built;
 both are honest next steps, not claimed capabilities.
 
-**Known, stated gap:** there is no persistence layer and no authentication
-on the institution portal — anyone with the URL can currently advance any
-report's status. Both are fine for a hackathon proof of concept and would
-need to be fixed before any real deployment.
+**Known, stated gap:** there is no authentication on the institution portal
+— anyone with the URL can currently advance any report's status. It is fine
+for a hackathon proof of concept and would need to be fixed before any real
+deployment.
 
 ## Scalability, demonstrated
 
@@ -143,6 +153,119 @@ PDF.
 Adding a constitution is adding a file there, the same way adding a country
 is adding a folder to `data/`.
 
+## RAG: Ask Mlinzi
+
+The `/ask` page answers questions about rights, procedures and the law. The
+design constraint comes from the project itself: an answer without its
+source is exactly what Mlinzi is against, so the assistant is built
+**cite-or-abstain**.
+
+The pipeline (`internal/rag`) has three stages, all in-process and
+offline by default:
+
+1. **Chunking.** Every guide section (summary, rights, steps, timeline,
+   each institution with its channels spelled out) and every legal provision
+   becomes a retrieval chunk carrying its provenance — publisher, URL,
+   confidence — and its language. Guides are chunked per language; the law
+   is chunked in its authoritative English in every index, the same rule
+   the Resources Center pages state.
+2. **Retrieval.** BM25 over those chunks with field boosts, an absolute
+   score floor, a term-coverage gate, and a relative cut keeping only
+   passages within 40% of the best hit. Each gate exists because of a real
+   failure the live corpus produced — a query about lotteries retrieving a
+   helpline schedule on one shared word, a bribery answer drifting into an
+   article about judicial power — and each is pinned by a test against the
+   real corpus (`internal/rag/corpus_test.go`), not only against fixtures.
+3. **Synthesis.** The default synthesizer is extractive: it composes the
+   answer from the retrieved passages' own text, each with its citation,
+   and cannot emit a sentence the corpus does not contain. When the corpus
+   has nothing relevant, it refuses: *"I could not find this in the sourced
+   guides or legal documents."* That refusal is a feature — it is what
+   makes the other answers worth acting on.
+
+**Optional LLM phrasing, verified.** Setting `RAG_LLM_ENDPOINT`,
+`RAG_LLM_API_KEY` and `RAG_LLM_MODEL` (any OpenAI-compatible endpoint —
+Groq, OpenAI, Together, Mistral) lets a language model phrase the answer
+against the same retrieved passages. Every sentence of its output is then
+verified against the passages it saw; anything unsupported is dropped, and
+if nothing survives, the extractive answer ships instead. The page states
+which method produced the answer you are reading. With no endpoint
+configured — the default — the binary stays fully offline, and the pitch
+demo cannot be broken by a third-party API having a bad minute.
+
+```
+# offline by default:
+go run ./cmd/mlinziweb
+
+# or with LLM phrasing (example: Groq's free tier):
+RAG_LLM_ENDPOINT=https://api.groq.com/openai/v1/chat/completions
+RAG_LLM_API_KEY=gsk_...
+RAG_LLM_MODEL=llama-3.3-70b-versatile
+go run ./cmd/mlinziweb
+```
+
+A CLI walkthrough of the whole pipeline, including the refusal case:
+
+```
+mlinzi demo-rag
+```
+
+**Stated limits:** retrieval is lexical (BM25), not semantic — it matches
+the words the corpus uses, which is why a Kiswahili question is answered
+from Kiswahili data and an out-of-domain question abstains; a query phrased
+in completely different words from the data may miss. The LLM path is
+phrasing with verification, not independent reasoning — it can only speak
+from the retrieved passages, same as the extractive path. The assistant
+cites sources but is not legal advice; the guides and documents it links to
+remain the authoritative pages.
+
+## Persistence
+
+The biggest stated gap is now closed. Setting `MLINZI_DATA_DIR` gives every
+store a durable home:
+
+- **The report and guardian ledgers** go to disk as snapshots and are
+  *verified on restore* — `ledger.NewFromEntries` re-walks the hash chain,
+  so a snapshot that was edited, truncated or reordered refuses to load
+  rather than serving altered history.
+- **Evidence files** go to disk one file per content hash and are
+  re-verified against that hash on restore — a swapped file is refused.
+- Reports keep their IDs, contents, status trails and verification codes
+  across restarts; verification codes are derived from the ledger hashes,
+  so they come back exactly. Guardian cases restore with their status,
+  check-in clocks and report links. (A guardian whose share was submitted
+  but not yet threshold-crossing at restart simply submits again — key
+  material is never persisted, by the layer's founding rule.)
+- Snapshots are written **atomically** (temp file, fsync, rename) after
+  every mutating request, so a crash mid-write leaves the previous
+  snapshot intact. The directory is created `0700`; files are `0600`.
+
+Without the variable set, the app runs memory-only exactly as before —
+the default for throwaway demos.
+
+`mlinzi demo-persistence` proves the property that makes this more than
+"we save to disk": it files reports, restores them, then edits history on
+disk and shows the restore refusing the altered snapshot.
+
+```
+MLINZI_DATA_DIR=./mlinzi-data go run ./cmd/mlinziweb
+mlinzi demo-persistence
+```
+
+**Stated limits:** this is single-instance disk persistence, and on Fly it
+depends on a Fly volume actually being attached at `/data` — without one,
+`MLINZI_DATA_DIR` still works locally (it's a real directory on your own
+disk), but on Fly it would just be part of the machine's own image, which
+`flyctl deploy` replaces from scratch. `fly.toml` now declares a
+`mlinzi_data` volume mounted at `/data`; that volume has to be created once
+before the first deploy that uses it (`flyctl volumes create mlinzi_data
+--region jnb --size 1`) — Fly does not create it for you. With the volume
+attached, data survives restarts and redeploys of this one machine; it does
+not survive loss of the machine's zone or a move to multi-machine/multi-region
+serving, since a Fly volume is single-zone and not replicated. Restores are
+verified but not encrypted at rest; disk access remains outside the threat
+model this proof of concept addresses.
+
 ## Evidence upload
 
 A reporter can attach photos, video, or documents to a report. The two
@@ -168,11 +291,10 @@ standard library has no EXIF support) and applied to the pixels before the
 tag carrying it is discarded. All 8 EXIF orientation values are checked
 against hand-derived pixel positions in `internal/evidence`.
 
-**Known, stated limits:** storage is in-memory, matching every other store
-in this app (see "Status" above — no persistence layer exists for anything
-yet) — evidence disappears on restart exactly like reports do, not because that was overlooked here but
-because giving files a persistence guarantee the rest of the data doesn't
-have would be inconsistent, not more honest. Files are capped at 8MB each,
+**Known, stated limits:** evidence files follow the app's persistence story
+(see [Persistence](#persistence)) — with `MLINZI_DATA_DIR` set they are
+restored after re-verifying their content hashes, and without it they are
+in-memory only. Files are capped at 8MB each,
 20MB and 4 files per report, 150MB across the whole process, sized for a
 small single-instance deployment rather than for what someone might
 reasonably want to upload. Video and PDF metadata is not stripped — Go's
@@ -309,19 +431,39 @@ go run ./cmd/mlinziweb
 
 Then open http://localhost:8080.
 
+With persistence (state survives restarts):
+
+```
+MLINZI_DATA_DIR=./mlinzi-data go run ./cmd/mlinziweb
+```
+
 ## Deploy (Fly.io)
 
 A `Dockerfile` and `fly.toml` are included.
 
+`fly.toml` mounts a Fly volume (`mlinzi_data`) at `/data` for persistence —
+create it once before the first deploy that references it, or the deploy
+fails looking for a volume that doesn't exist:
+
 ```
+flyctl volumes create mlinzi_data --region jnb --size 1
 flyctl launch    # first time — creates the app, uses fly.toml as-is
 flyctl deploy    # subsequent deploys
 ```
+
+If you deliberately want to run without persistence on Fly, remove the
+`[[mounts]]` block and the `MLINZI_DATA_DIR` line from `fly.toml` first —
+otherwise the app will point at a mount that isn't there.
 
 The Fly region defaults to Johannesburg (closest to East Africa). The app is
 kept at `min_machines_running = 1` so it stays warm through the hackathon's
 judging window rather than cold-starting on a judge's first click — safe to
 scale back to 0 afterward.
+
+**Verify it for real before the deadline:** deploy, submit a test report,
+redeploy (`flyctl deploy` again with no code change), and confirm the report
+is still there. That's the one thing that actually proves the persistence
+claim on Fly rather than just on your own machine.
 
 ## Design guarantees, enforced in code
 
@@ -330,6 +472,12 @@ scale back to 0 afterward.
   so `Load` fails the whole dataset rather than skipping bad entries.
 - **A guide without next steps will not load.** Information that does not tell
   you what to do next is what this project exists to replace.
+- **An answer cannot exist without its source.** The RAG pipeline retrieves
+  provenance-carrying chunks and refuses to answer outside them; a question
+  the corpus cannot support gets a refusal, not a guess.
+- **A tampered snapshot will not load.** Persistence restores through the
+  ledger's chain verification, so editing history on disk fails loudly
+  instead of loading quietly.
 - **Every guide is reachable on a basic handset.** Asserted by test.
 - **Multilingual by construction.** Every human-readable string is a
   language-keyed map with fallback; adding a language is a data change.

@@ -1,0 +1,71 @@
+{{define "content"}}
+<h1 class="text-3xl font-bold text-[#0A2E36]">{{.T.ask_title}}</h1>
+<p class="mt-2 text-slate-600">{{.T.ask_subtitle}}</p>
+
+<form method="post" action="/ask" class="mt-6">
+  <input type="hidden" name="lang" value="{{.Lang}}">
+  <textarea name="q" rows="3" required
+            placeholder="{{.T.ask_placeholder}}"
+            class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#028090]">{{.Query}}</textarea>
+  <button type="submit"
+          class="mt-3 bg-[#028090] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[#026e78]">
+    {{.T.ask_button}}
+  </button>
+</form>
+
+{{if .Error}}
+<div class="mt-6 bg-amber-100 border border-amber-200 text-amber-900 text-sm rounded-xl p-4">{{.Error}}</div>
+{{end}}
+
+{{if .Answer}}
+<div class="mt-8 bg-white border border-slate-200 rounded-xl p-6">
+  {{if .Grounded}}
+    <div class="text-xs uppercase tracking-wide font-semibold text-[#028090]">{{.T.ask_answer_label}}</div>
+  {{else}}
+    <div class="text-xs uppercase tracking-wide font-semibold text-amber-600">{{.T.ask_unanswered_label}}</div>
+  {{end}}
+
+  <p class="mt-3 text-slate-800 leading-relaxed">{{.Answer}}</p>
+
+  {{if .Grounded}}
+  <div class="mt-3 text-xs text-slate-400">
+    {{if .MethodLLM}}{{.T.ask_method_llm}}{{else}}{{.T.ask_method_extractive}}{{end}}
+  </div>
+  {{end}}
+</div>
+{{end}}
+
+{{if .Sources}}
+<section class="mt-6">
+  <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wide">{{.T.ask_sources_heading}}</h2>
+  <p class="mt-1 text-xs text-slate-400">{{.T.ask_sources_note}}</p>
+  <div class="mt-3 space-y-3">
+    {{$lang := .Lang}}
+    {{$T := .T}}
+    {{range .Sources}}
+    <div class="bg-white border border-slate-200 rounded-xl p-4">
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <div class="font-semibold text-[#0A2E36] text-sm">
+          <a href="{{.Link}}" class="hover:underline">{{.DocID}}</a>{{if .Ref}} &mdash; {{.Ref}}{{end}}
+        </div>
+        <div class="text-xs text-slate-400">
+          {{.Jurisdiction}} &middot; {{if eq .Kind "provision"}}{{$T.ask_kind_provision}}{{else}}{{$T.ask_kind_guide}}{{end}}
+        </div>
+      </div>
+      {{if .Section}}<div class="text-sm text-slate-600">{{.Section}}</div>{{end}}
+      {{if .Disputed}}
+        <div class="mt-2 text-xs bg-amber-100 text-amber-800 rounded px-2 py-1 inline-block font-semibold">{{$T.ask_sources_disagree}}</div>
+      {{end}}
+      <div class="mt-2 space-y-0.5 text-xs text-slate-400">
+        {{range .Sources}}<div>{{.Publisher}} ({{.Confidence}}) &mdash; {{.URL}}</div>{{end}}
+      </div>
+    </div>
+    {{end}}
+  </div>
+</section>
+{{end}}
+
+<div class="mt-8 bg-slate-100 border border-slate-200 text-slate-700 text-sm rounded-xl p-4">
+  {{.T.ask_honesty_note}}
+</div>
+{{end}}

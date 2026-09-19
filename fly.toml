@@ -1,10 +1,24 @@
 # Fly.io configuration for Mlinzi's web UI.
 # Deploy with: flyctl launch (first time) or flyctl deploy (subsequent)
 #
-# Note: there is no persistence layer yet (see README — a deliberate,
-# stated scope cut). Every report and guardian case lives in the process's
-# memory, so a restart or redeploy clears all data. Fine for demo purposes;
-# not a production data store.
+# Persistence: MLINZI_DATA_DIR points at /data, which is backed by the Fly
+# volume declared below (`mlinzi_data`). Without an attached volume, /data
+# would just be part of the machine's own disk image — wiped on every
+# `flyctl deploy`, since a deploy replaces the machine from the new image
+# rather than reusing its old disk. The volume is what makes the persistence
+# claim true across redeploys, not the environment variable by itself.
+#
+# The volume must exist before the first deploy that references it — it is
+# not created automatically:
+#   flyctl volumes create mlinzi_data --region jnb --size 1
+# (1GB; report/guardian ledgers and evidence are small text/media, so this
+# is generous, not tight.)
+#
+# This remains single-instance, single-volume state: a Fly volume lives in
+# one zone and is not replicated, so it survives restarts and redeploys of
+# this one machine but not the loss of that machine or region. Multi-machine
+# durability (replicated volumes or external storage) is the next step, not
+# taken here. Set MLINZI_DATA_DIR to an empty value to run memory-only.
 
 app = "mlinzi"
 primary_region = "jnb"  # Johannesburg — closest Fly region to East Africa
@@ -13,6 +27,7 @@ primary_region = "jnb"  # Johannesburg — closest Fly region to East Africa
 
 [env]
   PORT = "8080"
+  MLINZI_DATA_DIR = "/data"
 
 [http_service]
   internal_port = 8080
@@ -20,6 +35,10 @@ primary_region = "jnb"  # Johannesburg — closest Fly region to East Africa
   auto_stop_machines = "suspend"
   auto_start_machines = true
   min_machines_running = 1  # keep it warm during judging (Sept 22-24) so a judge's first click isn't a cold start
+
+[[mounts]]
+  source = "mlinzi_data"
+  destination = "/data"
 
 [[vm]]
   size = "shared-cpu-1x"
