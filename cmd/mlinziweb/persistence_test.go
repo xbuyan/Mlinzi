@@ -230,9 +230,18 @@ func TestPersistenceRoundTripKeepsGuardianCases(t *testing.T) {
 		t.Fatalf("report filing failed: %d", rec.Code)
 	}
 	reportID := extractReportID(t, rec.Body.String())
+	codeMatch := codePattern.FindStringSubmatch(rec.Body.String())
+	if len(codeMatch) < 2 {
+		t.Fatalf("could not extract verification code from response:\n%s", rec.Body.String())
+	}
+	code := codeMatch[1]
 
-	// Protect the report, exactly as the form does.
+	// Protect the report, exactly as the form does — including the
+	// verification code, which the real form now sends as a hidden field
+	// (see handleProtectCreate: protection setup requires proving you hold
+	// the reporter's own code, not just knowing the report ID).
 	rec = postForm(t, h, "/report/"+reportID+"/protect", url.Values{
+		"verification_code": {code},
 		"guardian1":      {"lawyer"},
 		"guardian2":      {"journalist"},
 		"guardian3":      {""},

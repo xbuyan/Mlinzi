@@ -243,8 +243,11 @@ func TestFullReportToProtectionFlow(t *testing.T) {
 		t.Error("a fabricated code must not return the report's status")
 	}
 
-	// Set up protection.
+	// Set up protection. Only the reporter, who holds the verification
+	// code, can do this — not anyone who merely knows the report ID (which
+	// the zero-auth institution portal displays for every report).
 	protectRec := postForm(t, h, "/report/"+reportID+"/protect", url.Values{
+		"verification_code": {code},
 		"guardian1": {"Lawyer"}, "guardian2": {"Journalist"}, "guardian3": {"Family"},
 		"threshold": {"2"}, "interval_hours": {"48"},
 	})
@@ -284,8 +287,14 @@ func TestWebSingleGuardianCannotRelease(t *testing.T) {
 		"content": {"content"},
 	})
 	reportID := reportIDPattern.FindString(submitRec.Body.String())
+	codeMatch := codePattern.FindStringSubmatch(submitRec.Body.String())
+	if reportID == "" || len(codeMatch) < 2 {
+		t.Fatalf("could not extract report ID or code from response:\n%s", submitRec.Body.String())
+	}
+	code := codeMatch[1]
 
 	protectRec := postForm(t, h, "/report/"+reportID+"/protect", url.Values{
+		"verification_code": {code},
 		"guardian1": {"A"}, "guardian2": {"B"}, "guardian3": {"C"},
 		"threshold": {"2"}, "interval_hours": {"1"},
 	})

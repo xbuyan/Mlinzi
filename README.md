@@ -94,7 +94,12 @@ both are honest next steps, not claimed capabilities.
 **Known, stated gap:** there is no authentication on the institution portal
 — anyone with the URL can currently advance any report's status. It is fine
 for a hackathon proof of concept and would need to be fixed before any real
-deployment.
+deployment. (This gap used to be worse than stated: setting up guardian
+protection on a report required only its ID, which the institution portal
+displays for every report, so anyone viewing it could attach their own
+guardians to someone else's report. That's now closed — protection setup
+requires the reporter's verification code, the same proof already required
+for status lookup, which the institution portal never displays.)
 
 **Known, stated gap:** guardian release reconstructs the split key, proving
 the threshold mechanism, but that key is not yet wired to decrypt or hand

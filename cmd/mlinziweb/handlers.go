@@ -263,6 +263,20 @@ func (a *app) handleProtectCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Without this check, anyone who merely sees a report's ID — which the
+	// zero-auth institution portal displays for every report — could attach
+	// their own "guardians" to someone else's report with no proof they
+	// filed it. The verification code is shown only once, on the
+	// reporter's own confirmation page (never on the institution portal),
+	// so requiring it here is what makes "your report, your guardians"
+	// actually true rather than merely implied by the UI's happy path.
+	code := r.FormValue("verification_code")
+	ok, err := a.reports.VerifyReceipt(reportID, code)
+	if err != nil || !ok {
+		http.Error(w, "report not found or verification code did not match", http.StatusForbidden)
+		return
+	}
+
 	guardianNames := []string{
 		strings.TrimSpace(r.FormValue("guardian1")),
 		strings.TrimSpace(r.FormValue("guardian2")),
