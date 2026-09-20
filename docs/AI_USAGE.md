@@ -656,6 +656,34 @@ byte-identity across restart). The round-trip tests boot a second app over
 the same directory and assert user-visible state — not bytes written.
 `go test ./...` is green across all packages.
 
+**A real limit found by reading the verification code, not by a test
+failing: `verifyAgainstChunks` cannot catch a negation flip.** It checks
+token overlap between each generated sentence and the retrieved source
+text — roughly 60% of a sentence's words need to appear in the corpus for
+it to pass. This reliably catches an invented number, name or citation,
+since the invented token is simply absent from the corpus. It does not
+catch a sentence whose polarity is wrong: "you do not need a lawyer to
+file this" and its true opposite score almost identically, because nearly
+every content word overlaps and small words like "not" barely move a
+60%-coverage ratio. Every test written for this function checks whether it
+rejects unsupported *content* (wrong numbers, fabricated institutions) —
+correctly — but none of them tests whether it rejects an inverted true
+statement, because that gap wasn't visible until the verification logic
+was read end to end looking specifically for what a bag-of-words check
+structurally cannot express. No amount of more fixture data would have
+caught this; it needed someone to ask what the check was actually
+comparing, not just whether it passed.
+
+Given the stakes — an inverted civic or legal right is close to the worst
+failure mode this project could produce — the honest fix within the time
+available wasn't to patch the verifier under deadline pressure, but to not
+carry the risk into the submission at all: `RAG_LLM_ENDPOINT` is left
+unset on the deployed instance, so `/ask` always answers extractively.
+Nothing is generated, so nothing can be inverted. A real fix — at minimum
+a negation/polarity check comparing each sentence's polarity against its
+best-matching chunk before counting it as supported — is recorded as
+future work, not shipped as solved.
+
 **A real gap found by re-reading the code, not by a test: anyone could attach guardians to anyone's report.** `handleProtectCreate` took only the report ID from the URL path and never checked that the caller actually held the reporter's verification code — the one piece of proof this whole app treats as "you are the reporter" everywhere else (status lookup already required it). Since the institution portal displays every report's ID in plain text and is itself zero-auth, this meant anyone who opened `/institution` could immediately POST their own guardian names onto someone else's real report, no proof of authorship required at all. That's a materially worse gap than the already-stated "institution portal has no auth" limit — it doesn't just let someone advance a status, it lets a stranger insert themselves into the trust mechanism the reporter is depending on for their own safety. No existing test caught it because every test that exercises this path is written by someone who already has the code in hand, the same way a real reporter does — the gap only shows up when you ask what a caller *without* the code could do, which nothing was asking.
 
 Fixed by requiring the verification code on `/report/{id}/protect`, checked via the same `VerifyReceipt` used for status lookup. The code is shown exactly once, on the reporter's own confirmation page, never on the institution portal — so the fix costs the legitimate reporter nothing (their own page now sends it as a hidden field) while actually closing the door for anyone else. Updated the three tests that exercise this path (`TestFullReportToProtectionFlow`, `TestWebSingleGuardianCannotRelease`, `TestPersistenceRoundTripKeepsGuardianCases`) to supply the code, since all three were, correctly, written as the legitimate reporter and so never exercised the missing check.

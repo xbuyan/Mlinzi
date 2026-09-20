@@ -33,8 +33,15 @@ out to its custodian's authoritative full text. The Resources Center is also
 where **Ask Mlinzi** answers from — see [RAG: Ask Mlinzi](#rag-ask-mlinzi).
 
 **2. Report.** File anonymously. The report is hash-chained and timestamped at
-creation, so you can later prove exactly what you submitted and when, and the
-receiving institution cannot quietly edit, backdate or delete it.
+creation, so an existing entry cannot be quietly edited, backdated or deleted
+— by the receiving institution or anyone else. **Stated limit:** that is not
+the same as verifying who is allowed to add a *new* entry. The institution
+portal has no authentication yet (see the "Known, stated gap" note further
+down), so today anyone with the link — including, worst case, the subject of
+a report — could add a fraudulent "resolved" entry. The chain would faithfully preserve
+that entry forever, which proves it happened and when, but does not prove it
+was legitimate. Tamper-evident and authenticity-verified are different
+guarantees; only the first is built yet.
 
 **3. Protect.** Reporting carries risk. Set a check-in cadence and name
 guardians. If you go silent, the case escalates automatically, and a
@@ -92,14 +99,22 @@ channel on the reporter's behalf and updates status here. Neither is built;
 both are honest next steps, not claimed capabilities.
 
 **Known, stated gap:** there is no authentication on the institution portal
-— anyone with the URL can currently advance any report's status. It is fine
-for a hackathon proof of concept and would need to be fixed before any real
-deployment. (This gap used to be worse than stated: setting up guardian
-protection on a report required only its ID, which the institution portal
-displays for every report, so anyone viewing it could attach their own
-guardians to someone else's report. That's now closed — protection setup
-requires the reporter's verification code, the same proof already required
-for status lookup, which the institution portal never displays.)
+— anyone with the URL can currently advance any report's status. This isn't
+only a missing-login inconvenience: the ledger stops history from being
+*edited*, but it cannot stop an unauthorized party from *adding* a new,
+legitimate-looking entry. Concretely, whoever a report is about could visit
+`/institution` today and mark it "resolved" — the tamper-evident chain would
+record that truthfully and permanently, which proves the entry exists and
+when it was made, but says nothing about whether whoever made it had any
+right to. That's the opposite of what this layer is meant to guarantee, and
+it needs real authentication before any real deployment — fine for a
+hackathon proof of concept, not fine beyond it. (This gap used to be worse
+than stated: setting up guardian protection on a report required only its
+ID, which the institution portal displays for every report, so anyone
+viewing it could attach their own guardians to someone else's report. That's
+now closed — protection setup requires the reporter's verification code, the
+same proof already required for status lookup, which the institution portal
+never displays.)
 
 **Known, stated gap:** guardian release reconstructs the split key, proving
 the threshold mechanism, but that key is not yet wired to decrypt or hand
@@ -232,9 +247,27 @@ the words the corpus uses, which is why a Kiswahili question is answered
 from Kiswahili data and an out-of-domain question abstains; a query phrased
 in completely different words from the data may miss. The LLM path is
 phrasing with verification, not independent reasoning — it can only speak
-from the retrieved passages, same as the extractive path. The assistant
-cites sources but is not legal advice; the guides and documents it links to
-remain the authoritative pages.
+from the retrieved passages, same as the extractive path. **The verification
+itself has a real limit worth naming plainly:** `verifyAgainstChunks` checks
+token overlap between each generated sentence and the retrieved passages —
+if roughly 60% of a sentence's words appear somewhere in the sourced text,
+it passes. That catches an invented number, name or citation reliably,
+because the invented token simply won't be in the corpus. It does **not**
+catch a negation flip — "you do not need a lawyer to file this" can score as
+supported as its true opposite would, since almost every content word
+overlaps and small words like "not" barely move a coverage ratio. For a
+tool whose entire premise is trustworthy civic and legal information, an
+inverted right is close to the worst failure mode there is, and this check
+does not structurally rule it out. Because of that, **the LLM phrasing path
+was deliberately left unconfigured for this submission** — no
+`RAG_LLM_ENDPOINT` is set on the deployed instance, so `/ask` always answers
+extractively: literal sourced excerpts, never generated prose, which carries
+no hallucination or inversion risk because nothing is being generated.
+Building a stronger check (at minimum, a negation/polarity guard comparing
+each sentence against its best-matching chunk) is recorded here as the next
+step before the LLM path should be turned on for anyone relying on this, not
+implied as already solved. The assistant cites sources but is not legal
+advice; the guides and documents it links to remain the authoritative pages.
 
 ## Persistence
 
