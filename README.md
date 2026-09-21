@@ -487,7 +487,7 @@ With persistence (state survives restarts):
 MLINZI_DATA_DIR=./mlinzi-data go run ./cmd/mlinziweb
 
 ```
-## Run the web UI locally
+## Run in the web browser
 
 http://mlinzi2.fly.dev
 
