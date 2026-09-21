@@ -485,7 +485,12 @@ With persistence (state survives restarts):
 
 ```
 MLINZI_DATA_DIR=./mlinzi-data go run ./cmd/mlinziweb
+
 ```
+## Run the web UI locally
+
+http://mlinzi2.fly.dev
+
 
 ## Deploy (Fly.io)
 
