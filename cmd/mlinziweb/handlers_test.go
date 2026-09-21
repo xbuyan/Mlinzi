@@ -231,7 +231,14 @@ func TestFullReportToProtectionFlow(t *testing.T) {
 	if statusRec.Code != http.StatusOK {
 		t.Fatalf("status lookup: expected 200, got %d", statusRec.Code)
 	}
-	if !strings.Contains(strings.ToLower(statusRec.Body.String()), "submitted") {
+	// "submitted" is asserted as a complete element text (">submitted<"):
+	// the bare word also occurs in the layout footer ("...no government body
+	// currently receives what is submitted here"), which renders on every
+	// page — including the error page for a wrong code — and made the old
+	// loose Contains match a page that had not revealed the report at all.
+	// In status_result.html the status renders inside its own span, so the
+	// word is bounded by tags there and nowhere in the footer prose.
+	if !strings.Contains(statusRec.Body.String(), ">submitted<") {
 		t.Error("expected the looked-up report to show submitted status")
 	}
 
@@ -239,7 +246,7 @@ func TestFullReportToProtectionFlow(t *testing.T) {
 	wrongRec := postForm(t, h, "/report/status", url.Values{
 		"report_id": {reportID}, "code": {"0000000000"},
 	})
-	if strings.Contains(strings.ToLower(wrongRec.Body.String()), "submitted") {
+	if strings.Contains(wrongRec.Body.String(), ">submitted<") {
 		t.Error("a fabricated code must not return the report's status")
 	}
 
