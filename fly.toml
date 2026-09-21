@@ -20,7 +20,7 @@
 # durability (replicated volumes or external storage) is the next step, not
 # taken here. Set MLINZI_DATA_DIR to an empty value to run memory-only.
 
-app = "mlinzi"
+app = "mlinzi2"
 primary_region = "jnb"  # Johannesburg — closest Fly region to East Africa
 
 [build]
